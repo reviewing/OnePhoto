@@ -83,6 +83,7 @@
 		1867EB6B1B8F5E6400C10219 /* OnePhoto */ = {
 			isa = PBXGroup;
 			children = (
+				1867EB961B8F693D00C10219 /* ViewControllers */,
 				1867EB701B8F5E6400C10219 /* AppDelegate.h */,
 				1867EB711B8F5E6400C10219 /* AppDelegate.m */,
 				1867EB761B8F5E6400C10219 /* RootViewController.h */,
@@ -120,6 +121,13 @@
 				1867EB8A1B8F5E6400C10219 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		1867EB961B8F693D00C10219 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewControllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -442,6 +450,7 @@
 				1867EB911B8F5E6400C10219 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		1867EB921B8F5E6400C10219 /* Build configuration list for PBXNativeTarget "OnePhotoTests" */ = {
 			isa = XCConfigurationList;
@@ -450,6 +459,7 @@
 				1867EB941B8F5E6400C10219 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 

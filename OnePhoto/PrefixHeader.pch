@@ -1,0 +1,37 @@
+//
+//  PrefixHeader.pch
+//  OnePhoto
+//
+//  Created by Hong Duan on 8/29/15.
+//  Copyright (c) 2015 Hong D. Empire. All rights reserved.
+//
+
+#ifndef OnePhoto_PrefixHeader_pch
+#define OnePhoto_PrefixHeader_pch
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+
+#ifdef __OBJC__
+
+#import "GlobalUtils.h"
+
+#define SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
+
+#define DOCUMENTS_FOLDER [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"]
+
+#define UIColorFromRGB(rgbValue) \
+    [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 \
+                    green:((float)((rgbValue & 0x00FF00) >>  8))/255.0 \
+                     blue:((float)((rgbValue & 0x0000FF) >>  0))/255.0 \
+                    alpha:1.0]
+
+#define UIColorFromRGBA(rgbaValue) \
+    [UIColor colorWithRed:((float)((rgbaValue & 0xFF000000) >> 24))/255.0 \
+                    green:((float)((rgbaValue & 0x00FF0000) >> 16))/255.0 \
+                     blue:((float)((rgbaValue & 0x0000FF00) >>  8))/255.0 \
+                    alpha:((float)((rgbaValue & 0x000000FF) >>  0))/255.0]
+
+#endif
+
+#endif

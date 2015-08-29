@@ -22,7 +22,7 @@
             </objects>
             <point key="canvasLocation" x="-742" y="763"/>
         </scene>
-        <!--弘's photos-->
+        <!--[USER]-->
         <scene sceneID="Rwd-h1-Q4z">
             <objects>
                 <viewController id="ko1-v8-1hz" customClass="RootViewController" sceneMemberID="viewController">
@@ -35,11 +35,18 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="弘's photos" id="XEn-Bc-qdu"/>
+                    <navigationItem key="navigationItem" title="[USER]" id="XEn-Bc-qdu">
+                        <barButtonItem key="leftBarButtonItem" image="Setting" id="t4s-oY-ALX"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="camera" id="cAC-RD-rTJ"/>
+                    </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tr2-cf-i7G" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-39" y="763"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Setting" width="25" height="25"/>
+    </resources>
+    <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
 </document>

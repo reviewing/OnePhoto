@@ -9,6 +9,10 @@
 #import "RootViewController.h"
 
 @interface RootViewController ()
+@property (weak, nonatomic) IBOutlet JTCalendarMenuView *calendarMenuView;
+@property (weak, nonatomic) IBOutlet JTHorizontalCalendarView *calendarContentView;
+
+@property (strong, nonatomic) JTCalendarManager *calendarManager;
 
 @end
 
@@ -16,7 +20,13 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
+
+    _calendarManager = [JTCalendarManager new];
+    _calendarManager.delegate = self;
+    
+    [_calendarManager setMenuView:_calendarMenuView];
+    [_calendarManager setContentView:_calendarContentView];
+    [_calendarManager setDate:[NSDate date]];
 }
 
 - (void)didReceiveMemoryWarning {

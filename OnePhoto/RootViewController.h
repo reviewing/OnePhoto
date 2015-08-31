@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-#import <JTCalendar.h>
+#import <JTCalendar/JTCalendar.h>
 
 @interface RootViewController : UIViewController <JTCalendarDelegate>
 

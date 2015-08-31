@@ -7,7 +7,8 @@
 //
 
 #import "RootViewController.h"
-#import "DHCalendarDayView.h"
+#import "OPCalendarWeekDayView.h"
+#import "OPCalendarDayView.h"
 
 @interface RootViewController ()
 @property (weak, nonatomic) IBOutlet JTCalendarMenuView *calendarMenuView;
@@ -23,7 +24,6 @@
     [super viewDidLoad];
 
     _calendarManager = [JTCalendarManager new];
-    _calendarManager.settings.weekModeEnabled = YES;
     _calendarManager.delegate = self;
 
     [_calendarManager setMenuView:_calendarMenuView];
@@ -38,18 +38,30 @@
 
 #pragma mark - CalendarManager delegate
 
+- (UIView *)calendarBuildMenuItemView:(JTCalendarManager *)calendar {
+    UILabel *label = [UILabel new];
+    label.textColor = [GlobalUtils appBaseColor];
+    label.textAlignment = NSTextAlignmentCenter;
+    
+    return label;
+}
+
+- (UIView<JTCalendarWeekDay> *)calendarBuildWeekDayView:(JTCalendarManager *)calendar {
+    return [OPCalendarWeekDayView new];
+}
+
 - (void)calendar:(JTCalendarManager *)calendar prepareDayView:(UIView<JTCalendarDay> *)dayView
 {
     // Today
     if([_calendarManager.dateHelper date:[NSDate date] isTheSameDayThan:dayView.date]){
         dayView.backgroundColor = [GlobalUtils appBaseColor];
-        if ([dayView isKindOfClass:[DHCalendarDayView class]]) {
-            ((DHCalendarDayView *)dayView).textLabel.textColor = [UIColor whiteColor];
+        if ([dayView isKindOfClass:[OPCalendarDayView class]]) {
+            ((OPCalendarDayView *)dayView).textLabel.textColor = [UIColor whiteColor];
         }
     } else {
         dayView.backgroundColor = [UIColor clearColor];
-        if ([dayView isKindOfClass:[DHCalendarDayView class]]) {
-            ((DHCalendarDayView *)dayView).textLabel.textColor = [UIColor blackColor];
+        if ([dayView isKindOfClass:[OPCalendarDayView class]]) {
+            ((OPCalendarDayView *)dayView).textLabel.textColor = [GlobalUtils appBaseColor];
         }
     }
 }
@@ -59,7 +71,7 @@
 }
 
 - (UIView<JTCalendarDay> *)calendarBuildDayView:(JTCalendarManager *)calendar {
-    return [DHCalendarDayView new];
+    return [OPCalendarDayView new];
 }
 
 @end

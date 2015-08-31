@@ -13,6 +13,10 @@
 
 + (UIColor *)appBaseColor;
 
++ (UIColor *)appBaseLighterColor;
+
++ (UIColor *)appBaseDarkerColor;
+
 + (void)setAppBaseColor:(UIColor *)color;
 
 @end

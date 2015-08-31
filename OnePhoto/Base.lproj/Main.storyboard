@@ -22,7 +22,7 @@
             </objects>
             <point key="canvasLocation" x="-742" y="763"/>
         </scene>
-        <!--[USER]-->
+        <!--1 Photo-->
         <scene sceneID="Rwd-h1-Q4z">
             <objects>
                 <viewController id="ko1-v8-1hz" customClass="RootViewController" sceneMemberID="viewController">
@@ -57,7 +57,7 @@
                             <constraint firstItem="RQa-45-ApC" firstAttribute="top" secondItem="vGy-FG-YKT" secondAttribute="bottom" id="s5l-dG-pPk"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="[USER]" id="XEn-Bc-qdu">
+                    <navigationItem key="navigationItem" title="1 Photo" id="XEn-Bc-qdu">
                         <barButtonItem key="leftBarButtonItem" image="Setting" id="t4s-oY-ALX"/>
                         <barButtonItem key="rightBarButtonItem" systemItem="camera" id="cAC-RD-rTJ"/>
                     </navigationItem>

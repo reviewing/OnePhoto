@@ -7,6 +7,7 @@
 //
 
 #import "GlobalUtils.h"
+#import "UIColor+Remix.h"
 
 static UIColor *appBaseColor = nil;
 
@@ -17,6 +18,14 @@ static UIColor *appBaseColor = nil;
         appBaseColor = UIColorFromRGB(0x0DBEB2);
     }
     return appBaseColor;
+}
+
++ (UIColor *)appBaseLighterColor {
+    return [appBaseColor lighterColor];
+}
+
++ (UIColor *)appBaseDarkerColor {
+    return [appBaseColor darkerColor];
 }
 
 + (void)setAppBaseColor:(UIColor *)color {

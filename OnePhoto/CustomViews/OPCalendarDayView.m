@@ -1,14 +1,14 @@
 //
-//  DHCalendarDayView.m
+//  OPCalendarDayView.m
 //  OnePhoto
 //
 //  Created by Hong Duan on 8/31/15.
 //  Copyright (c) 2015 Hong D. Empire. All rights reserved.
 //
 
-#import "DHCalendarDayView.h"
+#import "OPCalendarDayView.h"
 
-@implementation DHCalendarDayView
+@implementation OPCalendarDayView
 
 - (instancetype)initWithFrame:(CGRect)frame
 {

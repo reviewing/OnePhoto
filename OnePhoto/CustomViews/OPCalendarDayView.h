@@ -1,5 +1,5 @@
 //
-//  DHCalendarDayView.h
+//  OPCalendarDayView.h
 //  OnePhoto
 //
 //  Created by Hong Duan on 8/31/15.
@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <JTCalendar/JTCalendar.h>
 
-@interface DHCalendarDayView : UIView <JTCalendarDay>
+@interface OPCalendarDayView : UIView <JTCalendarDay>
 
 @property (nonatomic, weak) JTCalendarManager *manager;
 

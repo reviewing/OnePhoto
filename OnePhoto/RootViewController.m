@@ -23,8 +23,9 @@
     [super viewDidLoad];
 
     _calendarManager = [JTCalendarManager new];
+    _calendarManager.settings.weekModeEnabled = YES;
     _calendarManager.delegate = self;
-    
+
     [_calendarManager setMenuView:_calendarMenuView];
     [_calendarManager setContentView:_calendarContentView];
     [_calendarManager setDate:[NSDate date]];
@@ -44,6 +45,11 @@
         dayView.backgroundColor = [GlobalUtils appBaseColor];
         if ([dayView isKindOfClass:[DHCalendarDayView class]]) {
             ((DHCalendarDayView *)dayView).textLabel.textColor = [UIColor whiteColor];
+        }
+    } else {
+        dayView.backgroundColor = [UIColor clearColor];
+        if ([dayView isKindOfClass:[DHCalendarDayView class]]) {
+            ((DHCalendarDayView *)dayView).textLabel.textColor = [UIColor blackColor];
         }
     }
 }

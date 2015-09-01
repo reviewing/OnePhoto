@@ -25,4 +25,6 @@ extern CGSize const OPPhotoPixelImageSize;
 @property (nonatomic, retain) NSString * source_image_url;
 @property (nonatomic, retain) OPUser *user;
 
+- (UIImage *)sourceImage;
+
 @end

@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="2bH-Lm-3Us">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
         <!--Navigation Controller-->
@@ -35,35 +36,59 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="u3T-eo-bEd" customClass="JTCalendarMenuView">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="33"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="44" id="67o-t3-MGs"/>
+                                    <constraint firstAttribute="height" constant="33" id="67o-t3-MGs"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vGy-FG-YKT" customClass="JTHorizontalCalendarView">
-                                <rect key="frame" x="0.0" y="44" width="600" height="492"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vGy-FG-YKT" customClass="JTVerticalCalendarView">
+                                <rect key="frame" x="0.0" y="60" width="600" height="476"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="vGy-FG-YKT" secondAttribute="height" multiplier="7:6" priority="500" id="TPI-os-IrA"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9nj-7F-fXS" customClass="OPCalendarWeekDayView">
+                                <rect key="frame" x="0.0" y="33" width="600" height="27"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="27" id="K4v-77-cUk"/>
+                                </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="vGy-FG-YKT" firstAttribute="top" secondItem="9nj-7F-fXS" secondAttribute="bottom" id="4Kf-cf-UD6"/>
+                            <constraint firstAttribute="trailing" secondItem="9nj-7F-fXS" secondAttribute="trailing" id="BjN-yP-vcx"/>
                             <constraint firstAttribute="trailing" secondItem="u3T-eo-bEd" secondAttribute="trailing" id="MHh-v2-k0m"/>
+                            <constraint firstItem="RQa-45-ApC" firstAttribute="top" relation="greaterThanOrEqual" secondItem="vGy-FG-YKT" secondAttribute="bottom" id="Q9h-rd-uIc"/>
+                            <constraint firstItem="vGy-FG-YKT" firstAttribute="top" secondItem="9nj-7F-fXS" secondAttribute="bottom" id="Rqq-4l-Dm0"/>
                             <constraint firstItem="vGy-FG-YKT" firstAttribute="leading" secondItem="L8m-tF-FRZ" secondAttribute="leading" id="X9i-Bv-TK4"/>
                             <constraint firstAttribute="trailing" secondItem="vGy-FG-YKT" secondAttribute="trailing" id="YVY-XN-rv2"/>
+                            <constraint firstItem="9nj-7F-fXS" firstAttribute="top" secondItem="u3T-eo-bEd" secondAttribute="bottom" id="Zp4-Nb-lyT"/>
                             <constraint firstItem="u3T-eo-bEd" firstAttribute="leading" secondItem="L8m-tF-FRZ" secondAttribute="leading" id="bGC-Vb-zAf"/>
-                            <constraint firstItem="vGy-FG-YKT" firstAttribute="top" secondItem="u3T-eo-bEd" secondAttribute="bottom" id="d3s-AL-B4s"/>
                             <constraint firstItem="u3T-eo-bEd" firstAttribute="top" secondItem="nqw-1u-gQh" secondAttribute="bottom" id="h28-TM-BOU"/>
-                            <constraint firstItem="RQa-45-ApC" firstAttribute="top" secondItem="vGy-FG-YKT" secondAttribute="bottom" id="s5l-dG-pPk"/>
+                            <constraint firstItem="9nj-7F-fXS" firstAttribute="leading" secondItem="L8m-tF-FRZ" secondAttribute="leading" id="t2l-Ae-3Bd"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="1 Photo" id="XEn-Bc-qdu">
-                        <barButtonItem key="leftBarButtonItem" image="Setting" id="t4s-oY-ALX"/>
-                        <barButtonItem key="rightBarButtonItem" systemItem="camera" id="cAC-RD-rTJ"/>
+                        <barButtonItem key="leftBarButtonItem" image="Setting" id="t4s-oY-ALX">
+                            <connections>
+                                <action selector="setting:" destination="ko1-v8-1hz" id="Fj8-Fk-8jd"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="camera" id="cAC-RD-rTJ">
+                            <connections>
+                                <action selector="takePhoto:" destination="ko1-v8-1hz" id="IB1-4q-WRB"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="calendarContentView" destination="vGy-FG-YKT" id="l2s-Re-YHZ"/>
+                        <outlet property="calendarContentViewAspectRatio" destination="TPI-os-IrA" id="87Y-4T-2PJ"/>
                         <outlet property="calendarMenuView" destination="u3T-eo-bEd" id="GiX-jt-vgo"/>
+                        <outlet property="weekDayView" destination="9nj-7F-fXS" id="zHI-cc-gMP"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tr2-cf-i7G" userLabel="First Responder" sceneMemberID="firstResponder"/>

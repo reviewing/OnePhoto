@@ -7,15 +7,42 @@
 //
 
 #import "AppDelegate.h"
+#import <FastImageCache/FICImageCache.h>
+#import "OPPhoto.h"
 
-@interface AppDelegate ()
+@interface AppDelegate () <FICImageCacheDelegate>
 
 @end
 
 @implementation AppDelegate
 
-
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    NSMutableArray *mutableImageFormats = [NSMutableArray array];
+    
+    // Square image formats...
+    NSInteger squareImageFormatMaximumCount = 400;
+    FICImageFormatDevices squareImageFormatDevices = FICImageFormatDevicePhone | FICImageFormatDevicePad;
+    
+    // ...32-bit BGR
+    FICImageFormat *squareImageFormat32BitBGR = [FICImageFormat formatWithName:OPPhotoSquareImage32BitBGRFormatName family:OPPhotoImageFormatFamily imageSize:OPPhotoSquareImageSize style:FICImageFormatStyle32BitBGR maximumCount:squareImageFormatMaximumCount devices:squareImageFormatDevices protectionMode:FICImageFormatProtectionModeNone];
+    
+    [mutableImageFormats addObject:squareImageFormat32BitBGR];
+    
+    if ([UIViewController instancesRespondToSelector:@selector(preferredStatusBarStyle)]) {
+        // Pixel image format
+        NSInteger pixelImageFormatMaximumCount = 1000;
+        FICImageFormatDevices pixelImageFormatDevices = FICImageFormatDevicePhone | FICImageFormatDevicePad;
+        
+        FICImageFormat *pixelImageFormat = [FICImageFormat formatWithName:OPPhotoPixelImageFormatName family:OPPhotoImageFormatFamily imageSize:OPPhotoPixelImageSize style:FICImageFormatStyle32BitBGR maximumCount:pixelImageFormatMaximumCount devices:pixelImageFormatDevices protectionMode:FICImageFormatProtectionModeNone];
+        
+        [mutableImageFormats addObject:pixelImageFormat];
+    }
+    
+    // Configure the image cache
+    FICImageCache *sharedImageCache = [FICImageCache sharedImageCache];
+    [sharedImageCache setDelegate:self];
+    [sharedImageCache setFormats:mutableImageFormats];
+
     return YES;
 }
 
@@ -121,6 +148,27 @@
             abort();
         }
     }
+}
+
+#pragma mark - FICImageCacheDelegate
+
+- (void)imageCache:(FICImageCache *)imageCache wantsSourceImageForEntity:(id<FICEntity>)entity withFormatName:(NSString *)formatName completionBlock:(FICImageRequestCompletionBlock)completionBlock {
+    // Images typically come from the Internet rather than from the app bundle directly, so this would be the place to fire off a network request to download the image.
+    // For the purposes of this demo app, we'll just access images stored locally on disk.
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        UIImage *sourceImage = [(OPPhoto *)entity sourceImage];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            completionBlock(sourceImage);
+        });
+    });
+}
+
+- (BOOL)imageCache:(FICImageCache *)imageCache shouldProcessAllFormatsInFamily:(NSString *)formatFamily forEntity:(id<FICEntity>)entity {
+    return NO;
+}
+
+- (void)imageCache:(FICImageCache *)imageCache errorDidOccurWithMessage:(NSString *)errorMessage {
+    DHLogError(@"%@", errorMessage);
 }
 
 @end

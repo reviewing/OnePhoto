@@ -32,6 +32,11 @@ CGSize const OPPhotoPixelImageSize = {1, 1};
 @dynamic source_image_url;
 @dynamic user;
 
+- (UIImage *)sourceImage {
+    UIImage *sourceImage = [UIImage imageWithContentsOfFile:self.source_image_url];
+    return sourceImage;
+}
+
 #pragma mark - Image Helper Functions
 
 static CGMutablePathRef _OPCreateRoundedRectPath(CGRect rect, CGFloat cornerRadius) {

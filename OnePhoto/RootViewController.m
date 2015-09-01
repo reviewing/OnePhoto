@@ -9,6 +9,7 @@
 #import "RootViewController.h"
 #import "OPCalendarWeekDayView.h"
 #import "OPCalendarDayView.h"
+#import "AppDelegate.h"
 
 @interface RootViewController ()
 @property (weak, nonatomic) IBOutlet JTCalendarMenuView *calendarMenuView;
@@ -29,6 +30,9 @@
     [_calendarManager setMenuView:_calendarMenuView];
     [_calendarManager setContentView:_calendarContentView];
     [_calendarManager setDate:[NSDate date]];
+    
+    AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
+    NSManagedObjectContext *context = [appDelegate managedObjectContext];
 }
 
 - (void)didReceiveMemoryWarning {

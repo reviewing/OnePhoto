@@ -1,4 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model name="Test1.xcdatamodel" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1" systemVersion="11A491" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
-    <elements/>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="7701" systemVersion="14F27" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="OPPhoto" representedClassName="OPPhoto" syncable="YES">
+        <attribute name="source_image_url" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="user" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="OPUser" inverseName="photos" inverseEntity="OPUser" syncable="YES"/>
+    </entity>
+    <entity name="OPUser" representedClassName="OPUser" syncable="YES">
+        <attribute name="display_name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="user_id" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <relationship name="photos" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="OPPhoto" inverseName="user" inverseEntity="OPPhoto" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="OPUser" positionX="-63" positionY="-18" width="128" height="88"/>
+        <element name="OPPhoto" positionX="160" positionY="-16" width="128" height="73"/>
+    </elements>
 </model>

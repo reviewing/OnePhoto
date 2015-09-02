@@ -52,7 +52,9 @@
         _textLabel = [UILabel new];
         [self addSubview:_textLabel];
         
-        _textLabel.textColor = [UIColor blackColor];
+        _textLabel.textColor = [GlobalUtils appBaseColor];
+        _textLabel.shadowColor = [UIColor whiteColor];
+        _textLabel.shadowOffset = CGSizeMake(1.0, 1.0);
         _textLabel.textAlignment = NSTextAlignmentCenter;
         _textLabel.font = [UIFont systemFontOfSize:[UIFont systemFontSize]];
     }
@@ -68,7 +70,7 @@
 - (void)layoutSubviews
 {
     [_textLabel sizeToFit];
-    _textLabel.frame = CGRectMake(_textLabel.frame.origin.x, _textLabel.frame.origin.y, self.bounds.size.width, _textLabel.frame.size.height);
+    _textLabel.frame = CGRectMake((self.frame.size.width - _textLabel.frame.size.width) / 2, 0, _textLabel.frame.size.width, _textLabel.frame.size.height);
     
     CGFloat sizeDot = MIN(self.frame.size.width, self.frame.size.height);
     
@@ -94,7 +96,7 @@
     static NSDateFormatter *dateFormatter = nil;
     if(!dateFormatter){
         dateFormatter = [_manager.dateHelper createDateFormatter];
-        [dateFormatter setDateFormat:@"dd"];
+        [dateFormatter setDateFormat:@"M.dd"];
     }
     
     _textLabel.text = [dateFormatter stringFromDate:_date];

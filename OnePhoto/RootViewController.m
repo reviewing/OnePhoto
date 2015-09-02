@@ -8,7 +8,9 @@
 
 #import "RootViewController.h"
 #import "OPVerticalCalendarView.h"
+#import "OPCalendarPageView.h"
 #import "OPCalendarWeekDayView.h"
+#import "OPCalendarWeekView.h"
 #import "OPCalendarDayView.h"
 #import "AppDelegate.h"
 
@@ -56,23 +58,11 @@
 }
 
 - (void)viewDidLayoutSubviews {
-    // resize before scroll
-    _calendarContentView.maxHeight = self.calendarContentView.frame.size.height;
-    if ([_calendarManager.dateHelper numberOfWeeks:_calendarContentView.date] != 6) {
-        NSLayoutConstraint *constraint = [NSLayoutConstraint constraintWithItem:self.calendarContentViewAspectRatio.firstItem
-                                                                      attribute:self.calendarContentViewAspectRatio.firstAttribute
-                                                                      relatedBy:self.calendarContentViewAspectRatio.relation
-                                                                         toItem:self.calendarContentViewAspectRatio.secondItem
-                                                                      attribute:self.calendarContentViewAspectRatio.secondAttribute
-                                                                     multiplier:7.f / [_calendarManager.dateHelper numberOfWeeks:_calendarContentView.date]
-                                                                       constant:self.calendarContentViewAspectRatio.constant];
-        [self.calendarContentView removeConstraint: self.calendarContentViewAspectRatio];
-        self.calendarContentViewAspectRatio = constraint;
-        [self.calendarContentView addConstraint: self.calendarContentViewAspectRatio];
-    }
+
 }
 
 - (void)viewDidAppear:(BOOL)animated {
+    
 }
 
 #pragma mark - Actions
@@ -150,6 +140,10 @@
     return label;
 }
 
+- (UIView<JTCalendarPage> *)calendarBuildPageView:(JTCalendarManager *)calendar {
+    return [OPCalendarPageView new];
+}
+
 - (BOOL)calendar:(JTCalendarManager *)calendar canDisplayPageWithDate:(NSDate *)date {
     if (![calendar.dateHelper date:date isTheSameDayThan:[NSDate date]] && [calendar.dateHelper date:date isEqualOrAfter:[NSDate date]]) {
         return NO;
@@ -160,6 +154,10 @@
     return YES;
 }
 
+- (UIView<JTCalendarWeek> *)calendarBuildWeekView:(JTCalendarManager *)calendar {
+    return [OPCalendarWeekView new];
+}
+
 - (void)calendar:(JTCalendarManager *)calendar prepareDayView:(UIView<JTCalendarDay> *)dayView {
     dayView.hidden = NO;
 
@@ -168,15 +166,12 @@
     }
     // Today
     else if([_calendarManager.dateHelper date:[NSDate date] isTheSameDayThan:dayView.date]){
-        dayView.backgroundColor = [GlobalUtils appBaseColor];
-        if ([dayView isKindOfClass:[OPCalendarDayView class]]) {
-            ((OPCalendarDayView *)dayView).textLabel.textColor = [UIColor whiteColor];
-        }
+        dayView.layer.borderColor = [[GlobalUtils appBaseColor] CGColor];
+        dayView.layer.borderWidth = 1;
+        dayView.layer.cornerRadius = 4;
     } else {
-        dayView.backgroundColor = [UIColor clearColor];
-        if ([dayView isKindOfClass:[OPCalendarDayView class]]) {
-            ((OPCalendarDayView *)dayView).textLabel.textColor = [GlobalUtils appBaseColor];
-        }
+        dayView.layer.borderColor = [[UIColor clearColor] CGColor];
+        dayView.layer.borderWidth = 0;
     }
 }
 

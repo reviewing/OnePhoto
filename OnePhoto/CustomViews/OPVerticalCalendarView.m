@@ -59,7 +59,6 @@ typedef NS_ENUM(NSInteger, JTCalendarPageMode) {
 {
     self.showsHorizontalScrollIndicator = NO;
     self.showsVerticalScrollIndicator = NO;
-    self.pagingEnabled = YES;
     self.clipsToBounds = YES;
 }
 
@@ -99,10 +98,10 @@ typedef NS_ENUM(NSInteger, JTCalendarPageMode) {
     switch (_pageMode) {
         case JTCalendarPageModeFull:
             
-            if(self.contentOffset.y < size.height / 2.){
+            if(self.contentOffset.y < size.height){
                 [self loadPreviousPage];
             }
-            else if(self.contentOffset.y > size.height * 1.5){
+            else if(self.contentOffset.y > size.height){
                 [self loadNextPage];
             }
             
@@ -112,14 +111,14 @@ typedef NS_ENUM(NSInteger, JTCalendarPageMode) {
             break;
         case JTCalendarPageModeCenterLeft:
             
-            if(self.contentOffset.y < size.height / 2.){
+            if(self.contentOffset.y < size.height){
                 [self loadPreviousPage];
             }
             
             break;
         case JTCalendarPageModeCenterRight:
             
-            if(self.contentOffset.y > size.height / 2.){
+            if(self.contentOffset.y > size.height){
                 [self loadNextPage];
             }
             

@@ -35,22 +35,15 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="536"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="u3T-eo-bEd" customClass="JTCalendarMenuView">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="33"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="33" id="67o-t3-MGs"/>
-                                </constraints>
-                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vGy-FG-YKT" customClass="OPVerticalCalendarView">
-                                <rect key="frame" x="0.0" y="60" width="600" height="476"/>
+                                <rect key="frame" x="0.0" y="27" width="600" height="429"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" secondItem="vGy-FG-YKT" secondAttribute="height" multiplier="7:6" priority="500" id="TPI-os-IrA"/>
+                                    <constraint firstAttribute="width" secondItem="vGy-FG-YKT" secondAttribute="height" multiplier="7:5" id="Rgb-tG-KtX"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9nj-7F-fXS" customClass="OPCalendarWeekDayView">
-                                <rect key="frame" x="0.0" y="33" width="600" height="27"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="27"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="27" id="K4v-77-cUk"/>
@@ -59,16 +52,11 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="vGy-FG-YKT" firstAttribute="top" secondItem="9nj-7F-fXS" secondAttribute="bottom" id="4Kf-cf-UD6"/>
                             <constraint firstAttribute="trailing" secondItem="9nj-7F-fXS" secondAttribute="trailing" id="BjN-yP-vcx"/>
-                            <constraint firstAttribute="trailing" secondItem="u3T-eo-bEd" secondAttribute="trailing" id="MHh-v2-k0m"/>
-                            <constraint firstItem="RQa-45-ApC" firstAttribute="top" relation="greaterThanOrEqual" secondItem="vGy-FG-YKT" secondAttribute="bottom" id="Q9h-rd-uIc"/>
                             <constraint firstItem="vGy-FG-YKT" firstAttribute="top" secondItem="9nj-7F-fXS" secondAttribute="bottom" id="Rqq-4l-Dm0"/>
+                            <constraint firstItem="9nj-7F-fXS" firstAttribute="top" secondItem="nqw-1u-gQh" secondAttribute="bottom" id="VXC-1K-ZMZ"/>
                             <constraint firstItem="vGy-FG-YKT" firstAttribute="leading" secondItem="L8m-tF-FRZ" secondAttribute="leading" id="X9i-Bv-TK4"/>
                             <constraint firstAttribute="trailing" secondItem="vGy-FG-YKT" secondAttribute="trailing" id="YVY-XN-rv2"/>
-                            <constraint firstItem="9nj-7F-fXS" firstAttribute="top" secondItem="u3T-eo-bEd" secondAttribute="bottom" id="Zp4-Nb-lyT"/>
-                            <constraint firstItem="u3T-eo-bEd" firstAttribute="leading" secondItem="L8m-tF-FRZ" secondAttribute="leading" id="bGC-Vb-zAf"/>
-                            <constraint firstItem="u3T-eo-bEd" firstAttribute="top" secondItem="nqw-1u-gQh" secondAttribute="bottom" id="h28-TM-BOU"/>
                             <constraint firstItem="9nj-7F-fXS" firstAttribute="leading" secondItem="L8m-tF-FRZ" secondAttribute="leading" id="t2l-Ae-3Bd"/>
                         </constraints>
                     </view>
@@ -86,8 +74,6 @@
                     </navigationItem>
                     <connections>
                         <outlet property="calendarContentView" destination="vGy-FG-YKT" id="l2s-Re-YHZ"/>
-                        <outlet property="calendarContentViewAspectRatio" destination="TPI-os-IrA" id="87Y-4T-2PJ"/>
-                        <outlet property="calendarMenuView" destination="u3T-eo-bEd" id="GiX-jt-vgo"/>
                         <outlet property="weekDayView" destination="9nj-7F-fXS" id="zHI-cc-gMP"/>
                     </connections>
                 </viewController>

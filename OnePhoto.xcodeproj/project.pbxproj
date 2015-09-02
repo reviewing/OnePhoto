@@ -16,6 +16,8 @@
 		1867EB801B8F5E6400C10219 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1867EB7E1B8F5E6400C10219 /* LaunchScreen.xib */; };
 		1867EB8C1B8F5E6400C10219 /* OnePhotoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1867EB8B1B8F5E6400C10219 /* OnePhotoTests.m */; };
 		1867EBB41B91F1CC00C10219 /* GlobalUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 1867EBB31B91F1CC00C10219 /* GlobalUtils.m */; };
+		187412ED1B96D27B0089CEFF /* OPCalendarWeekView.m in Sources */ = {isa = PBXBuildFile; fileRef = 187412EC1B96D27B0089CEFF /* OPCalendarWeekView.m */; };
+		187412F01B96D3790089CEFF /* OPCalendarPageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 187412EF1B96D3790089CEFF /* OPCalendarPageView.m */; };
 		18F405621B93683700E97458 /* OPCalendarDayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F405611B93683700E97458 /* OPCalendarDayView.m */; };
 		18F406341B94414C00E97458 /* UIColor+Remix.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F406331B94414C00E97458 /* UIColor+Remix.m */; };
 		18F406371B94461D00E97458 /* OPCalendarWeekDayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F406361B94461D00E97458 /* OPCalendarWeekDayView.m */; };
@@ -55,6 +57,10 @@
 		1867EBAF1B91F14600C10219 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		1867EBB21B91F1CC00C10219 /* GlobalUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GlobalUtils.h; sourceTree = "<group>"; };
 		1867EBB31B91F1CC00C10219 /* GlobalUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GlobalUtils.m; sourceTree = "<group>"; };
+		187412EB1B96D27B0089CEFF /* OPCalendarWeekView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPCalendarWeekView.h; sourceTree = "<group>"; };
+		187412EC1B96D27B0089CEFF /* OPCalendarWeekView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPCalendarWeekView.m; sourceTree = "<group>"; };
+		187412EE1B96D3790089CEFF /* OPCalendarPageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPCalendarPageView.h; sourceTree = "<group>"; };
+		187412EF1B96D3790089CEFF /* OPCalendarPageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPCalendarPageView.m; sourceTree = "<group>"; };
 		18F405601B93683700E97458 /* OPCalendarDayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPCalendarDayView.h; sourceTree = "<group>"; };
 		18F405611B93683700E97458 /* OPCalendarDayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPCalendarDayView.m; sourceTree = "<group>"; };
 		18F406321B94414C00E97458 /* UIColor+Remix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Remix.h"; sourceTree = "<group>"; };
@@ -183,6 +189,10 @@
 				18F406361B94461D00E97458 /* OPCalendarWeekDayView.m */,
 				18F4064C1B968D7B00E97458 /* OPVerticalCalendarView.h */,
 				18F4064D1B968D7B00E97458 /* OPVerticalCalendarView.m */,
+				187412EB1B96D27B0089CEFF /* OPCalendarWeekView.h */,
+				187412EC1B96D27B0089CEFF /* OPCalendarWeekView.m */,
+				187412EE1B96D3790089CEFF /* OPCalendarPageView.h */,
+				187412EF1B96D3790089CEFF /* OPCalendarPageView.m */,
 			);
 			path = CustomViews;
 			sourceTree = "<group>";
@@ -388,11 +398,13 @@
 				18F4064E1B968D7B00E97458 /* OPVerticalCalendarView.m in Sources */,
 				1867EB721B8F5E6400C10219 /* AppDelegate.m in Sources */,
 				18F405621B93683700E97458 /* OPCalendarDayView.m in Sources */,
+				187412F01B96D3790089CEFF /* OPCalendarPageView.m in Sources */,
 				1867EB6F1B8F5E6400C10219 /* main.m in Sources */,
 				18F406421B95492A00E97458 /* OPUser.m in Sources */,
 				1867EBB41B91F1CC00C10219 /* GlobalUtils.m in Sources */,
 				1867EB781B8F5E6400C10219 /* RootViewController.m in Sources */,
 				18F4063B1B944EF600E97458 /* DHLogger.m in Sources */,
+				187412ED1B96D27B0089CEFF /* OPCalendarWeekView.m in Sources */,
 				18F406451B954A0C00E97458 /* OPPhoto.m in Sources */,
 				1867EB751B8F5E6400C10219 /* OnePhoto.xcdatamodeld in Sources */,
 				18F406341B94414C00E97458 /* UIColor+Remix.m in Sources */,

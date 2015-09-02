@@ -7,19 +7,18 @@
 //
 
 #import "RootViewController.h"
+#import "OPVerticalCalendarView.h"
 #import "OPCalendarWeekDayView.h"
 #import "OPCalendarDayView.h"
 #import "AppDelegate.h"
 
 #import <MobileCoreServices/MobileCoreServices.h>
 
-@interface RootViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate> {
-    CGFloat _calendarContentViewMaxHeight;
-}
+@interface RootViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet JTCalendarMenuView *calendarMenuView;
 @property (weak, nonatomic) IBOutlet OPCalendarWeekDayView *weekDayView;
-@property (weak, nonatomic) IBOutlet JTVerticalCalendarView *calendarContentView;
+@property (weak, nonatomic) IBOutlet OPVerticalCalendarView *calendarContentView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *calendarContentViewAspectRatio;
 
 @property (strong, nonatomic) JTCalendarManager *calendarManager;
@@ -58,7 +57,7 @@
 
 - (void)viewDidLayoutSubviews {
     // resize before scroll
-    _calendarContentViewMaxHeight = self.calendarContentView.frame.size.height;
+    _calendarContentView.maxHeight = self.calendarContentView.frame.size.height;
     if ([_calendarManager.dateHelper numberOfWeeks:_calendarContentView.date] != 6) {
         NSLayoutConstraint *constraint = [NSLayoutConstraint constraintWithItem:self.calendarContentViewAspectRatio.firstItem
                                                                       attribute:self.calendarContentViewAspectRatio.firstAttribute
@@ -152,16 +151,23 @@
 }
 
 - (BOOL)calendar:(JTCalendarManager *)calendar canDisplayPageWithDate:(NSDate *)date {
-    if ([calendar.dateHelper date:date isEqualOrAfter:[NSDate date]]) {
+    if (![calendar.dateHelper date:date isTheSameDayThan:[NSDate date]] && [calendar.dateHelper date:date isEqualOrAfter:[NSDate date]]) {
         return NO;
+    }
+    if ([calendar.dateHelper date:date isEqualOrBefore:calendar.contentView.date]) {
+        
     }
     return YES;
 }
 
-- (void)calendar:(JTCalendarManager *)calendar prepareDayView:(UIView<JTCalendarDay> *)dayView
-{
+- (void)calendar:(JTCalendarManager *)calendar prepareDayView:(UIView<JTCalendarDay> *)dayView {
+    dayView.hidden = NO;
+
+    if ([dayView isFromAnotherMonth]) {
+        dayView.hidden = YES;
+    }
     // Today
-    if([_calendarManager.dateHelper date:[NSDate date] isTheSameDayThan:dayView.date]){
+    else if([_calendarManager.dateHelper date:[NSDate date] isTheSameDayThan:dayView.date]){
         dayView.backgroundColor = [GlobalUtils appBaseColor];
         if ([dayView isKindOfClass:[OPCalendarDayView class]]) {
             ((OPCalendarDayView *)dayView).textLabel.textColor = [UIColor whiteColor];

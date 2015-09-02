@@ -42,7 +42,7 @@
                                     <constraint firstAttribute="height" constant="33" id="67o-t3-MGs"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vGy-FG-YKT" customClass="JTVerticalCalendarView">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vGy-FG-YKT" customClass="OPVerticalCalendarView">
                                 <rect key="frame" x="0.0" y="60" width="600" height="476"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>

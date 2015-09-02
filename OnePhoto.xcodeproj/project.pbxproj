@@ -23,6 +23,7 @@
 		18F406421B95492A00E97458 /* OPUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F406411B95492A00E97458 /* OPUser.m */; };
 		18F406451B954A0C00E97458 /* OPPhoto.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F406441B954A0C00E97458 /* OPPhoto.m */; };
 		18F406471B957F1900E97458 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18F406461B957F1900E97458 /* MobileCoreServices.framework */; };
+		18F4064E1B968D7B00E97458 /* OPVerticalCalendarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F4064D1B968D7B00E97458 /* OPVerticalCalendarView.m */; };
 		9F3ABF2846EB01A22A2D960C /* libPods-OnePhoto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FEC1568EF312A8929D22A563 /* libPods-OnePhoto.a */; };
 /* End PBXBuildFile section */
 
@@ -69,6 +70,8 @@
 		18F406461B957F1900E97458 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		18F406481B9582B300E97458 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
 		18F406491B9582B300E97458 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
+		18F4064C1B968D7B00E97458 /* OPVerticalCalendarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPVerticalCalendarView.h; sourceTree = "<group>"; };
+		18F4064D1B968D7B00E97458 /* OPVerticalCalendarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPVerticalCalendarView.m; sourceTree = "<group>"; };
 		40B983C60B6C941DF886CF4B /* Pods-OnePhoto.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OnePhoto.debug.xcconfig"; path = "Pods/Target Support Files/Pods-OnePhoto/Pods-OnePhoto.debug.xcconfig"; sourceTree = "<group>"; };
 		995CA079F330BCA2BF9CBD4D /* Pods-OnePhoto.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OnePhoto.release.xcconfig"; path = "Pods/Target Support Files/Pods-OnePhoto/Pods-OnePhoto.release.xcconfig"; sourceTree = "<group>"; };
 		FEC1568EF312A8929D22A563 /* libPods-OnePhoto.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-OnePhoto.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -178,6 +181,8 @@
 				18F405611B93683700E97458 /* OPCalendarDayView.m */,
 				18F406351B94461D00E97458 /* OPCalendarWeekDayView.h */,
 				18F406361B94461D00E97458 /* OPCalendarWeekDayView.m */,
+				18F4064C1B968D7B00E97458 /* OPVerticalCalendarView.h */,
+				18F4064D1B968D7B00E97458 /* OPVerticalCalendarView.m */,
 			);
 			path = CustomViews;
 			sourceTree = "<group>";
@@ -380,6 +385,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				18F406371B94461D00E97458 /* OPCalendarWeekDayView.m in Sources */,
+				18F4064E1B968D7B00E97458 /* OPVerticalCalendarView.m in Sources */,
 				1867EB721B8F5E6400C10219 /* AppDelegate.m in Sources */,
 				18F405621B93683700E97458 /* OPCalendarDayView.m in Sources */,
 				1867EB6F1B8F5E6400C10219 /* main.m in Sources */,

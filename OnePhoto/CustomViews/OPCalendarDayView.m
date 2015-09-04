@@ -52,7 +52,7 @@
         _textLabel = [UILabel new];
         [self addSubview:_textLabel];
         
-        _textLabel.textColor = [GlobalUtils appBaseColor];
+        _textLabel.textColor = [UIColor blackColor];
         _textLabel.shadowColor = [UIColor whiteColor];
         _textLabel.shadowOffset = CGSizeMake(1.0, 1.0);
         _textLabel.textAlignment = NSTextAlignmentCenter;
@@ -70,7 +70,7 @@
 - (void)layoutSubviews
 {
     [_textLabel sizeToFit];
-    _textLabel.frame = CGRectMake((self.frame.size.width - _textLabel.frame.size.width) / 2, 0, _textLabel.frame.size.width, _textLabel.frame.size.height);
+    _textLabel.frame = CGRectMake((self.frame.size.width - _textLabel.frame.size.width - 4) / 2, 0, _textLabel.frame.size.width + 8, _textLabel.frame.size.height);
     
     CGFloat sizeDot = MIN(self.frame.size.width, self.frame.size.height);
     
@@ -96,10 +96,21 @@
     static NSDateFormatter *dateFormatter = nil;
     if(!dateFormatter){
         dateFormatter = [_manager.dateHelper createDateFormatter];
-        [dateFormatter setDateFormat:@"M.dd"];
+        [dateFormatter setDateFormat:@"dd"];
     }
     
     _textLabel.text = [dateFormatter stringFromDate:_date];
+    
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    NSRange weekdayRange = [calendar maximumRangeOfUnit:NSCalendarUnitWeekday];
+    NSDateComponents *components = [calendar components:NSCalendarUnitWeekday fromDate:_date];
+    NSUInteger weekdayOfDate = [components weekday];
+    
+    if (weekdayOfDate == weekdayRange.location) {
+        _textLabel.textColor = [UIColor lightGrayColor];
+    } else {
+        _textLabel.textColor = [UIColor blackColor];
+    }
     
     [_manager.delegateManager prepareDayView:self];
 }

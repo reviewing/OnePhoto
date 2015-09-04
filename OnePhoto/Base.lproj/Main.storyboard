@@ -2,7 +2,6 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="2bH-Lm-3Us">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
-        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
         <!--Navigation Controller-->
@@ -35,13 +34,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="536"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vGy-FG-YKT" customClass="OPVerticalCalendarView">
-                                <rect key="frame" x="0.0" y="27" width="600" height="429"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="vGy-FG-YKT" secondAttribute="height" multiplier="7:5" id="Rgb-tG-KtX"/>
-                                </constraints>
-                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9nj-7F-fXS" customClass="OPCalendarWeekDayView">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="27"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -49,15 +41,29 @@
                                     <constraint firstAttribute="height" constant="27" id="K4v-77-cUk"/>
                                 </constraints>
                             </view>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="YFV-3n-8GL" customClass="OPVerticalCalendarView">
+                                <rect key="frame" x="0.0" y="27" width="600" height="509"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="MonthCell" id="pFM-XS-ITF" customClass="OPCalendarPageView">
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="pFM-XS-ITF" id="S9p-7d-S5X">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstAttribute="trailing" secondItem="YFV-3n-8GL" secondAttribute="trailing" id="6Qa-g4-6OH"/>
                             <constraint firstAttribute="trailing" secondItem="9nj-7F-fXS" secondAttribute="trailing" id="BjN-yP-vcx"/>
-                            <constraint firstItem="vGy-FG-YKT" firstAttribute="top" secondItem="9nj-7F-fXS" secondAttribute="bottom" id="Rqq-4l-Dm0"/>
+                            <constraint firstItem="YFV-3n-8GL" firstAttribute="top" secondItem="9nj-7F-fXS" secondAttribute="bottom" id="Nsg-D3-cbd"/>
                             <constraint firstItem="9nj-7F-fXS" firstAttribute="top" secondItem="nqw-1u-gQh" secondAttribute="bottom" id="VXC-1K-ZMZ"/>
-                            <constraint firstItem="vGy-FG-YKT" firstAttribute="leading" secondItem="L8m-tF-FRZ" secondAttribute="leading" id="X9i-Bv-TK4"/>
-                            <constraint firstAttribute="trailing" secondItem="vGy-FG-YKT" secondAttribute="trailing" id="YVY-XN-rv2"/>
+                            <constraint firstItem="YFV-3n-8GL" firstAttribute="leading" secondItem="L8m-tF-FRZ" secondAttribute="leading" id="Yks-5O-AIL"/>
                             <constraint firstItem="9nj-7F-fXS" firstAttribute="leading" secondItem="L8m-tF-FRZ" secondAttribute="leading" id="t2l-Ae-3Bd"/>
+                            <constraint firstAttribute="bottom" secondItem="YFV-3n-8GL" secondAttribute="bottom" id="wmE-fi-vKV"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="1 Photo" id="XEn-Bc-qdu">
@@ -73,7 +79,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="calendarContentView" destination="vGy-FG-YKT" id="l2s-Re-YHZ"/>
+                        <outlet property="calendarContentView" destination="YFV-3n-8GL" id="gMF-Ck-xiU"/>
                         <outlet property="weekDayView" destination="9nj-7F-fXS" id="zHI-cc-gMP"/>
                     </connections>
                 </viewController>

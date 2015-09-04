@@ -17,6 +17,8 @@
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    [DHLogger setLogLevel:DH_LOG_DEBUG];
+    
     NSMutableArray *mutableImageFormats = [NSMutableArray array];
     
     // Square image formats...

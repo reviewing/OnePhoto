@@ -10,10 +10,11 @@
 
 #import "JTContent.h"
 
-@interface OPVerticalCalendarView : UIScrollView<JTContent>
+@interface OPVerticalCalendarView : UITableView <JTContent, UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, weak) JTCalendarManager *manager;
 @property (nonatomic) NSDate *date;
-@property (nonatomic) CGFloat maxHeight;
+
+- (void)scrollToCurrentMonth;
 
 @end

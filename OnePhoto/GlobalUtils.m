@@ -32,4 +32,8 @@ static UIColor *_appBaseColor = nil;
     _appBaseColor = color;
 }
 
++ (CGFloat)monthLabelSize {
+    return 17.0f;
+}
+
 @end

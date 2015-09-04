@@ -10,7 +10,7 @@
 
 #import "JTCalendarPage.h"
 
-@interface OPCalendarPageView : UIView<JTCalendarPage>
+@interface OPCalendarPageView : UITableViewCell <JTCalendarPage>
 
 @property (nonatomic, weak) JTCalendarManager *manager;
 @property (nonatomic) NSDate *date;

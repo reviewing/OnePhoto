@@ -19,4 +19,6 @@
 
 + (void)setAppBaseColor:(UIColor *)color;
 
++ (CGFloat)monthLabelSize;
+
 @end

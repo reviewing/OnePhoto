@@ -21,7 +21,6 @@
 @property (weak, nonatomic) IBOutlet JTCalendarMenuView *calendarMenuView;
 @property (weak, nonatomic) IBOutlet OPCalendarWeekDayView *weekDayView;
 @property (weak, nonatomic) IBOutlet OPVerticalCalendarView *calendarContentView;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *calendarContentViewAspectRatio;
 
 @property (strong, nonatomic) JTCalendarManager *calendarManager;
 
@@ -58,16 +57,14 @@
 }
 
 - (void)viewDidLayoutSubviews {
-
 }
 
 - (void)viewDidAppear:(BOOL)animated {
-    
+    [_calendarContentView scrollToCurrentMonth];
 }
 
 #pragma mark - Actions
 - (IBAction)setting:(id)sender {
-
 }
 
 - (IBAction)takePhoto:(id)sender {
@@ -77,20 +74,15 @@
 - (BOOL) startCameraControllerFromViewController:(UIViewController*) controller
                                    usingDelegate:(id <UIImagePickerControllerDelegate, UINavigationControllerDelegate>) delegate {
     
-    if (([UIImagePickerController isSourceTypeAvailable: UIImagePickerControllerSourceTypeCamera] == NO)
-        || (delegate == nil)
-        || (controller == nil))
+    if (([UIImagePickerController isSourceTypeAvailable: UIImagePickerControllerSourceTypeCamera] == NO) || (delegate == nil) || (controller == nil)) {
         return NO;
-    
+    }
     
     UIImagePickerController *cameraUI = [[UIImagePickerController alloc] init];
     cameraUI.sourceType = UIImagePickerControllerSourceTypeCamera;
-    
-//    cameraUI.mediaTypes = [UIImagePickerController availableMediaTypesForSourceType: UIImagePickerControllerSourceTypeCamera];
+    cameraUI.cameraDevice = UIImagePickerControllerCameraDeviceFront;
     cameraUI.mediaTypes = [[NSArray alloc] initWithObjects:(NSString *) kUTTypeImage, nil];
-    
     cameraUI.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-    
     cameraUI.allowsEditing = YES;
     cameraUI.delegate = delegate;
     
@@ -106,7 +98,7 @@
 }
 
 // For responding to the user accepting a newly-captured picture or movie
-- (void) imagePickerController:(UIImagePickerController *) picker didFinishPickingMediaWithInfo:(NSDictionary *) info {
+- (void)imagePickerController:(UIImagePickerController *) picker didFinishPickingMediaWithInfo:(NSDictionary *) info {
     
     NSString *mediaType = [info objectForKey: UIImagePickerControllerMediaType];
     UIImage *originalImage, *editedImage, *imageToSave;
@@ -146,9 +138,9 @@
 
 - (BOOL)calendar:(JTCalendarManager *)calendar canDisplayPageWithDate:(NSDate *)date {
     if (![calendar.dateHelper date:date isTheSameDayThan:[NSDate date]] && [calendar.dateHelper date:date isEqualOrAfter:[NSDate date]]) {
-        return NO;
+//        return NO;
     }
-    if ([calendar.dateHelper date:date isEqualOrBefore:calendar.contentView.date]) {
+    if (![calendar.dateHelper date:date isTheSameDayThan:[NSDate date]] && [calendar.dateHelper date:date isEqualOrBefore:calendar.contentView.date]) {
         
     }
     return YES;

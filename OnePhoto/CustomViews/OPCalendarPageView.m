@@ -13,7 +13,7 @@
 #define MAX_WEEKS_BY_MONTH 6
 
 @interface OPCalendarPageView (){
-    UIView<JTCalendarWeekDay> *_weekDayView;
+    UILabel *_monthLabel;
     NSMutableArray *_weeksViews;
     NSUInteger _numberOfWeeksDisplayed;
 }
@@ -63,12 +63,33 @@
 
 - (void)reload
 {
-    if(_manager.settings.pageViewHaveWeekDaysView && !_weekDayView){
-        _weekDayView = [_manager.delegateManager buildWeekDayView];
-        [self addSubview:_weekDayView];
+    if (!_monthLabel) {
+        _monthLabel = [UILabel new];
+        _monthLabel.textColor = [GlobalUtils appBaseColor];
+        _monthLabel.textAlignment = NSTextAlignmentCenter;
+        _monthLabel.font = [UIFont systemFontOfSize:[GlobalUtils monthLabelSize]];
+    }
+
+    {
+        NSString *monthText = nil;
         
-        _weekDayView.manager = _manager;
-        [_weekDayView reload];
+        NSCalendar *calendar = _manager.dateHelper.calendar;
+        NSDateComponents *comps = [calendar components:NSCalendarUnitYear|NSCalendarUnitMonth fromDate:_date];
+        NSInteger currentMonthIndex = comps.month;
+        
+        static NSDateFormatter *dateFormatter = nil;
+        if (!dateFormatter) {
+            dateFormatter = [_manager.dateHelper createDateFormatter];
+        }
+        
+        while (currentMonthIndex <= 0) {
+            currentMonthIndex += 12;
+        }
+        
+        monthText = [dateFormatter shortMonthSymbols][currentMonthIndex - 1];
+        [_monthLabel setText:monthText];
+        
+        [self addSubview:_monthLabel];
     }
     
     if(!_weeksViews){
@@ -85,36 +106,34 @@
     
     NSDate *weekDate = nil;
     
-    if(_manager.settings.weekModeEnabled){
+    if (_manager.settings.weekModeEnabled) {
         _numberOfWeeksDisplayed = MIN(MAX(_manager.settings.pageViewWeekModeNumberOfWeeks, 1), MAX_WEEKS_BY_MONTH);
         weekDate = [_manager.dateHelper firstWeekDayOfWeek:_date];
-    }
-    else{
+    } else {
         _numberOfWeeksDisplayed = MIN(_manager.settings.pageViewNumberOfWeeks, MAX_WEEKS_BY_MONTH);
-        if(_numberOfWeeksDisplayed == 0){
+        if (_numberOfWeeksDisplayed == 0) {
             _numberOfWeeksDisplayed = [_manager.dateHelper numberOfWeeks:_date];
         }
         
         weekDate = [_manager.dateHelper firstWeekDayOfMonth:_date];
     }
     
-    for(NSUInteger i = 0; i < _numberOfWeeksDisplayed; i++){
+    for (NSUInteger i = 0; i < _numberOfWeeksDisplayed; i++) {
         UIView<JTCalendarWeek> *weekView = _weeksViews[i];
         
         weekView.hidden = NO;
         
         // Process the check on another month for the 1st, 4th and 5th weeks
-        if(i == 0 || i >= 4){
+        if (i == 0 || i >= 4) {
             [weekView setStartDate:weekDate updateAnotherMonth:YES monthDate:_date];
-        }
-        else{
+        } else {
             [weekView setStartDate:weekDate updateAnotherMonth:NO monthDate:_date];
         }
         
         weekDate = [_manager.dateHelper addToDate:weekDate weeks:1];
     }
     
-    for(NSUInteger i = _numberOfWeeksDisplayed; i < MAX_WEEKS_BY_MONTH; i++){
+    for (NSUInteger i = _numberOfWeeksDisplayed; i < MAX_WEEKS_BY_MONTH; i++) {
         UIView<JTCalendarWeek> *weekView = _weeksViews[i];
         
         weekView.hidden = YES;
@@ -123,27 +142,22 @@
 
 - (void)layoutSubviews
 {
-    if(!_weeksViews){
+    [super layoutSubviews];
+    
+    if (!_weeksViews) {
         return;
     }
     
     CGFloat y = 0;
     CGFloat weekWidth = self.frame.size.width;
     
-    if(_manager.settings.pageViewHaveWeekDaysView){
-        CGFloat weekDayHeight = _weekDayView.frame.size.height; // Force use default height
-        
-        if(weekDayHeight == 0){ // Or use the same height than weeksViews
-            weekDayHeight = self.frame.size.height / (_numberOfWeeksDisplayed + 1);
-        }
-        
-        _weekDayView.frame = CGRectMake(0, 0, weekWidth, weekDayHeight);
-        y = weekDayHeight;
-    }
+    CGFloat monthLabelHeight = _monthLabel.font.pointSize + 16;
+    _monthLabel.frame = CGRectMake(0, 0, weekWidth, monthLabelHeight);
+    y = monthLabelHeight;
     
     CGFloat weekHeight = weekWidth / 7.f;
     
-    for(UIView *weekView in _weeksViews){
+    for (UIView *weekView in _weeksViews) {
         weekView.frame = CGRectMake(0, y, weekWidth, weekHeight);
         y += weekHeight;
     }

@@ -86,6 +86,16 @@
     }
 }
 
+- (NSUInteger)columnIndexOfFirstDay {
+    for (NSUInteger index = 0; index < [_daysViews count]; index++) {
+        if (((UIView<JTCalendarDay> *)[_daysViews objectAtIndex:index]).isFromAnotherMonth) {
+            continue;
+        }
+        return index;
+    }
+    return 3;
+}
+
 - (void)createDayViews
 {
     if(!_daysViews){

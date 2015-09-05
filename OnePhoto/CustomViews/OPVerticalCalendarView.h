@@ -10,11 +10,11 @@
 
 #import "JTContent.h"
 
-@interface OPVerticalCalendarView : UITableView <JTContent, UITableViewDataSource, UITableViewDelegate>
+@interface OPVerticalCalendarView : UITableView <JTContent>
 
 @property (nonatomic, weak) JTCalendarManager *manager;
 @property (nonatomic) NSDate *date;
 
-- (void)scrollToCurrentMonth;
+- (void)scrollToCurrentMonth:(BOOL)animated;
 
 @end

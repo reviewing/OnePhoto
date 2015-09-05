@@ -11,7 +11,7 @@
 #import "JTCalendarManager.h"
 #import "OPCalendarPageView.h"
 
-@interface OPVerticalCalendarView (){
+@interface OPVerticalCalendarView () <UIScrollViewDelegate, UITableViewDataSource, UITableViewDelegate>{
     NSDate *_startDate;
     CGSize _lastSize;
     NSUInteger _numOfRows;
@@ -44,7 +44,6 @@
 }
 
 - (void)commonInit {
-    _numOfRows = 100;
     self.delegate = self;
     self.dataSource = self;
 }
@@ -70,6 +69,7 @@
     NSAssert(_manager != nil, @"manager cannot be nil");
     
     self->_date = date;
+    _numOfRows = [self monthsBetweenDate:_startDate with:_date] + 1;
     [self reloadData];
 }
 
@@ -78,10 +78,9 @@
     static NSDateFormatter *dateFormatter = nil;
     if (!dateFormatter) {
         dateFormatter = [_manager.dateHelper createDateFormatter];
-        [dateFormatter setDateFormat:@"yyyyMM"];
-        [dateFormatter setTimeZone:[NSTimeZone timeZoneWithName:@"UTC"]];
+        [dateFormatter setDateFormat:@"yyyyMMdd"];
     }
-    _startDate = [dateFormatter dateFromString:@"201509"];
+    _startDate = [dateFormatter dateFromString:@"20150701"];
 }
 
 #pragma mark - Table View Data Source
@@ -121,9 +120,9 @@
     return width * (numberOfWeeks / 7.f) + [GlobalUtils monthLabelSize];
 }
 
-- (void)scrollToCurrentMonth {
+- (void)scrollToCurrentMonth:(BOOL)animated {
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:[self monthsBetweenDate:_startDate with:_date] inSection:0];
-    [self scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionTop animated:NO];
+    [self scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionTop animated:animated];
 }
 
 - (NSInteger)monthsBetweenDate:(NSDate *)date1 with:(NSDate *)date2 {
@@ -144,6 +143,11 @@
     }
 
     return (yearOfDate2 - yearOfDate1) * 12 + (monthOfDate2 - monthOfDate1);
+}
+
+- (BOOL)scrollViewShouldScrollToTop:(UIScrollView *)scrollView {
+    [self scrollToCurrentMonth:YES];
+    return NO;
 }
 
 @end

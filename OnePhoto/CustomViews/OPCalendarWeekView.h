@@ -15,4 +15,6 @@
 @property (nonatomic, weak) JTCalendarManager *manager;
 @property (nonatomic, readonly) NSDate *startDate;
 
+- (NSUInteger)columnIndexOfFirstDay;
+
 @end

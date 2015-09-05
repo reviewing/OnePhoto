@@ -96,7 +96,7 @@
     static NSDateFormatter *dateFormatter = nil;
     if(!dateFormatter){
         dateFormatter = [_manager.dateHelper createDateFormatter];
-        [dateFormatter setDateFormat:@"dd"];
+        [dateFormatter setDateFormat:@"d"];
     }
     
     _textLabel.text = [dateFormatter stringFromDate:_date];
@@ -106,7 +106,7 @@
     NSDateComponents *components = [calendar components:NSCalendarUnitWeekday fromDate:_date];
     NSUInteger weekdayOfDate = [components weekday];
     
-    if (weekdayOfDate == weekdayRange.location) {
+    if (weekdayOfDate == weekdayRange.location || weekdayOfDate == weekdayRange.length) {
         _textLabel.textColor = [UIColor lightGrayColor];
     } else {
         _textLabel.textColor = [UIColor blackColor];

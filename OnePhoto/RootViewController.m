@@ -16,7 +16,9 @@
 
 #import <MobileCoreServices/MobileCoreServices.h>
 
-@interface RootViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+@interface RootViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate> {
+    NSDate *_startDate;
+}
 
 @property (weak, nonatomic) IBOutlet JTCalendarMenuView *calendarMenuView;
 @property (weak, nonatomic) IBOutlet OPCalendarWeekDayView *weekDayView;
@@ -57,10 +59,17 @@
 }
 
 - (void)viewDidLayoutSubviews {
+    static NSDateFormatter *dateFormatter = nil;
+    if (!dateFormatter) {
+        dateFormatter = [_calendarManager.dateHelper createDateFormatter];
+        [dateFormatter setDateFormat:@"yyyyMMdd"];
+//        [dateFormatter setTimeZone:[NSTimeZone timeZoneWithName:@"UTC"]];
+    }
+    _startDate = [dateFormatter dateFromString:@"20150706"];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
-    [_calendarContentView scrollToCurrentMonth];
+    [_calendarContentView scrollToCurrentMonth:NO];
 }
 
 #pragma mark - Actions
@@ -154,6 +163,8 @@
     dayView.hidden = NO;
 
     if ([dayView isFromAnotherMonth]) {
+        dayView.hidden = YES;
+    } else if ([dayView.date compare:[NSDate date]] == NSOrderedDescending) {
         dayView.hidden = YES;
     }
     // Today

@@ -46,7 +46,7 @@
         [dayViews addObject:label];
         
         label.textAlignment = NSTextAlignmentCenter;
-        if (i == 0) {
+        if (i == 0 || i == NUMBER_OF_DAY_BY_WEEK - 1) {
             label.textColor = [UIColor lightGrayColor];
         } else {
             label.textColor = [GlobalUtils appBaseDarkerColor];

@@ -9,6 +9,7 @@
 #import "OPCalendarPageView.h"
 
 #import "JTCalendarManager.h"
+#import "OPCalendarWeekView.h"
 
 #define MAX_WEEKS_BY_MONTH 6
 
@@ -150,16 +151,23 @@
     
     CGFloat y = 0;
     CGFloat weekWidth = self.frame.size.width;
-    
+    CGFloat dayHeight = weekWidth / 7.f;
+
     CGFloat monthLabelHeight = _monthLabel.font.pointSize + 16;
-    _monthLabel.frame = CGRectMake(0, 0, weekWidth, monthLabelHeight);
+    
+    NSUInteger columnIndexOfFirstDay = 3;
+    
+    if ([[_weeksViews objectAtIndex:0] isKindOfClass:[OPCalendarWeekView class]]) {
+        columnIndexOfFirstDay = [((OPCalendarWeekView *)[_weeksViews objectAtIndex:0]) columnIndexOfFirstDay];
+    }
+    
+    _monthLabel.frame = CGRectMake(columnIndexOfFirstDay * dayHeight, 0, dayHeight, monthLabelHeight);
     y = monthLabelHeight;
     
-    CGFloat weekHeight = weekWidth / 7.f;
     
     for (UIView *weekView in _weeksViews) {
-        weekView.frame = CGRectMake(0, y, weekWidth, weekHeight);
-        y += weekHeight;
+        weekView.frame = CGRectMake(0, y, weekWidth, dayHeight);
+        y += dayHeight;
     }
 }
 

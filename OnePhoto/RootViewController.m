@@ -125,7 +125,7 @@
             imageToSave = originalImage;
         }
         
-        NSString *dateString = [[GlobalUtils dateFormatter] stringFromDate:[NSDate date]];
+        NSString *dateString = [GlobalUtils stringFromDate:[NSDate date]];
         
         NSString *photoDocumentsDirPath = [NSString stringWithFormat:@"users/%@/photos", [[NSUserDefaults standardUserDefaults] stringForKey:@"current.user"]];
         NSString *photoDirPath = [DOCUMENTS_FOLDER stringByAppendingPathComponent:photoDocumentsDirPath];

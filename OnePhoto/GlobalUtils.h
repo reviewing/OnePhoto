@@ -23,4 +23,6 @@
 
 + (NSDateFormatter *)dateFormatter;
 
++ (NSString *)stringFromDate:(NSDate *)date;
+
 @end

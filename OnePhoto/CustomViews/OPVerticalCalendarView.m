@@ -117,7 +117,7 @@
 
 - (CGFloat)calculateRowHeightAtIndexPath:(NSIndexPath *)indexPath width:(CGFloat)width {
     NSUInteger numberOfWeeks = [self.manager.dateHelper numberOfWeeks:[self dateForIndexPath:indexPath]];
-    return width * (numberOfWeeks / 7.f) + [GlobalUtils monthLabelSize];
+    return width * (numberOfWeeks / 7.f) + [GlobalUtils monthLabelSize] + 16;
 }
 
 - (void)scrollToCurrentMonth:(BOOL)animated {

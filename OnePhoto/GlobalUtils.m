@@ -48,4 +48,8 @@ static NSDateFormatter *_dateFormatter = nil;
     return _dateFormatter;
 }
 
++ (NSString *)stringFromDate:(NSDate *)date {
+    return [[self dateFormatter] stringFromDate:date];
+}
+
 @end

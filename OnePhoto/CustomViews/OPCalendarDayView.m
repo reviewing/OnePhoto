@@ -50,6 +50,10 @@
     self.clipsToBounds = YES;
     
     {
+        self.layer.cornerRadius = 5.0;
+    }
+    
+    {
         _photoView = [UIImageView new];
         [self addSubview:_photoView];
     }
@@ -85,7 +89,7 @@
 
 - (void)layoutSubviews
 {
-    _photoView.frame = self.frame;
+    _photoView.frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height);
     
     [_textLabel sizeToFit];
     _textLabel.frame = CGRectMake((self.frame.size.width - _textLabel.frame.size.width - 4) / 2, 0, _textLabel.frame.size.width + 8, _textLabel.frame.size.height);
@@ -131,13 +135,15 @@
     }
     
     __block NSDate *date = [_date copy];
-    OPPhoto *photo = [[CoreDataHelper sharedHelper] getPhotoAt:[[GlobalUtils dateFormatter] stringFromDate:date] ofUser:[[NSUserDefaults standardUserDefaults] stringForKey:@"current.user"]];
+    OPPhoto *photo = [[CoreDataHelper sharedHelper] getPhotoAt:[GlobalUtils stringFromDate:date] ofUser:[[NSUserDefaults standardUserDefaults] stringForKey:@"current.user"]];
     if (photo) {
         [[FICImageCache sharedImageCache] retrieveImageForEntity:photo withFormatName:OPPhotoSquareImage32BitBGRFormatName completionBlock:^(id<FICEntity> entity, NSString *formatName, UIImage *image) {
             if (date == _date) {
                 [_photoView setImage:image];
             }
         }];
+    } else {
+        [_photoView setImage:nil];
     }
     
     [_manager.delegateManager prepareDayView:self];

@@ -21,4 +21,6 @@
 
 + (CGFloat)monthLabelSize;
 
++ (NSDateFormatter *)dateFormatter;
+
 @end

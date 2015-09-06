@@ -12,7 +12,7 @@
 #import "OPCalendarWeekDayView.h"
 #import "OPCalendarWeekView.h"
 #import "OPCalendarDayView.h"
-#import "AppDelegate.h"
+#import "CoreDataHelper.h"
 
 #import <MobileCoreServices/MobileCoreServices.h>
 
@@ -48,9 +48,6 @@
     [_calendarManager setDate:[NSDate date]];
     
     _calendarMenuView.scrollView.scrollEnabled = NO;
-
-//    AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
-//    NSManagedObjectContext *context = [appDelegate managedObjectContext];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -124,8 +121,20 @@
             imageToSave = originalImage;
         }
         
-        // Save the new image (original or edited) to the Camera Roll
-        UIImageWriteToSavedPhotosAlbum(imageToSave, nil, nil , nil);
+        NSString *dateString = [[GlobalUtils dateFormatter] stringFromDate:[NSDate date]];
+        
+        NSString *photoDirPath = [DOCUMENTS_FOLDER stringByAppendingPathComponent:[NSString stringWithFormat:@"users/%@/photos", [[NSUserDefaults standardUserDefaults] stringForKey:@"current.user"]]];
+        if (![[NSFileManager defaultManager] fileExistsAtPath:photoDirPath]) {
+            NSError *error;
+            [[NSFileManager defaultManager] createDirectoryAtPath:photoDirPath withIntermediateDirectories:YES attributes:nil error:&error];
+            if (error) {
+                DHLogError(@"create folder failed! Error: %@", [error localizedDescription]);
+            }
+        }
+        
+        NSString *photoPath = [photoDirPath stringByAppendingPathComponent: [dateString stringByAppendingPathExtension:@"jpg"]];
+        [[CoreDataHelper sharedHelper] insertPhoto:photoPath toUser:[[NSUserDefaults standardUserDefaults] stringForKey:@"current.user"]];
+        [UIImageJPEGRepresentation(imageToSave, 0.8) writeToFile:photoPath atomically:YES];
     }
     
     [self dismissViewControllerAnimated:YES completion:nil];
@@ -143,16 +152,6 @@
 
 - (UIView<JTCalendarPage> *)calendarBuildPageView:(JTCalendarManager *)calendar {
     return [OPCalendarPageView new];
-}
-
-- (BOOL)calendar:(JTCalendarManager *)calendar canDisplayPageWithDate:(NSDate *)date {
-    if (![calendar.dateHelper date:date isTheSameDayThan:[NSDate date]] && [calendar.dateHelper date:date isEqualOrAfter:[NSDate date]]) {
-//        return NO;
-    }
-    if (![calendar.dateHelper date:date isTheSameDayThan:[NSDate date]] && [calendar.dateHelper date:date isEqualOrBefore:calendar.contentView.date]) {
-        
-    }
-    return YES;
 }
 
 - (UIView<JTCalendarWeek> *)calendarBuildWeekView:(JTCalendarManager *)calendar {

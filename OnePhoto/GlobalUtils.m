@@ -11,6 +11,8 @@
 
 static UIColor *_appBaseColor = nil;
 
+static NSDateFormatter *_dateFormatter = nil;
+
 @implementation GlobalUtils
 
 + (UIColor *)appBaseColor {
@@ -34,6 +36,16 @@ static UIColor *_appBaseColor = nil;
 
 + (CGFloat)monthLabelSize {
     return 17.0f;
+}
+
++ (NSDateFormatter *)dateFormatter {
+    if (_dateFormatter == nil) {
+        _dateFormatter = [NSDateFormatter new];
+        _dateFormatter.timeZone = [NSTimeZone systemTimeZone];
+        _dateFormatter.locale = [NSLocale currentLocale];
+        [_dateFormatter setDateFormat:@"yyyyMMdd"];
+    }
+    return _dateFormatter;
 }
 
 @end

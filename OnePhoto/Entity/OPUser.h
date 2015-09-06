@@ -14,14 +14,16 @@
 @interface OPUser : NSManagedObject
 
 @property (nonatomic, retain) NSString * display_name;
-@property (nonatomic, retain) NSNumber * user_id;
+@property (nonatomic, retain) NSString * user_id;
 @property (nonatomic, retain) NSSet *photos;
 @end
 
+@class OPPhoto;
+
 @interface OPUser (CoreDataGeneratedAccessors)
 
-- (void)addPhotosObject:(NSManagedObject *)value;
-- (void)removePhotosObject:(NSManagedObject *)value;
+- (void)addPhotosObject:(OPPhoto *)value;
+- (void)removePhotosObject:(OPPhoto *)value;
 - (void)addPhotos:(NSSet *)values;
 - (void)removePhotos:(NSSet *)values;
 

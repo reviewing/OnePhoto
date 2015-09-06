@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 #import <FastImageCache/FICImageCache.h>
 #import "OPPhoto.h"
+#import "CoreDataHelper.h"
 
 @interface AppDelegate () <FICImageCacheDelegate>
 
@@ -45,6 +46,16 @@
     [sharedImageCache setDelegate:self];
     [sharedImageCache setFormats:mutableImageFormats];
 
+    if (![[CoreDataHelper sharedHelper] fetchUserByID:@"512775199"]) {
+        [[CoreDataHelper sharedHelper] insertUser:@"段弘" withID:@"512775199"];
+    }
+    
+    if (![[CoreDataHelper sharedHelper] fetchUserByID:@"415509312"]) {
+        [[CoreDataHelper sharedHelper] insertUser:@"毛丹" withID:@"415509312"];
+    }
+    
+    [[NSUserDefaults standardUserDefaults] setObject:@"512775199" forKey:@"current.user"];
+    
     return YES;
 }
 
@@ -105,7 +116,8 @@
     NSURL *storeURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"OnePhoto.sqlite"];
     NSError *error = nil;
     NSString *failureReason = @"There was an error creating or loading the application's saved data.";
-    if (![_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:nil error:&error]) {
+    NSDictionary *options = [NSDictionary dictionaryWithObjectsAndKeys: [NSNumber numberWithBool:YES], NSMigratePersistentStoresAutomaticallyOption, [NSNumber numberWithBool:YES], NSInferMappingModelAutomaticallyOption, nil];
+    if (![_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:options error:&error]) {
         // Report any error we got.
         NSMutableDictionary *dict = [NSMutableDictionary dictionary];
         dict[NSLocalizedDescriptionKey] = @"Failed to initialize the application's saved data";

@@ -23,7 +23,7 @@
 #else
         _calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
 #endif
-        _calendar.timeZone = [NSTimeZone localTimeZone];
+        _calendar.timeZone = [NSTimeZone systemTimeZone];
         _calendar.locale = [NSLocale currentLocale];
     }
     

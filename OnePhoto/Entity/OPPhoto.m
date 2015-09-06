@@ -30,6 +30,7 @@ CGSize const OPPhotoPixelImageSize = {1, 1};
 @implementation OPPhoto
 
 @dynamic source_image_url;
+@dynamic dateString;
 @dynamic user;
 
 - (UIImage *)sourceImage {

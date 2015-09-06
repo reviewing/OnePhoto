@@ -36,6 +36,7 @@
 
 - (void)commonInit
 {
+    self.opaque = NO;
     self.clipsToBounds = YES;
     
     _dotRatio = 1. / 9.;
@@ -119,5 +120,18 @@
 {
     [_manager.delegateManager didTouchDayView:self];
 }
+
+//- (void)drawRect:(CGRect)rect {
+//    [super drawRect:rect];
+//    
+//    CGContextRef context = UIGraphicsGetCurrentContext();
+//    CGContextSetStrokeColorWithColor(context, [UIColor redColor].CGColor);
+//    
+//    CGContextSetLineWidth(context, 1.0f);
+//    CGContextMoveToPoint(context, 0.0f, 0.0f);
+//    CGContextAddLineToPoint(context, self.frame.size.width, 0.0f);
+//    
+//    CGContextStrokePath(context);
+//}
 
 @end

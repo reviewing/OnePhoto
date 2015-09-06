@@ -29,7 +29,6 @@
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>
-		<string>camera-flash</string>
 		<string>front-facing-camera</string>
 		<string>still-camera</string>
 		<string>video-camera</string>

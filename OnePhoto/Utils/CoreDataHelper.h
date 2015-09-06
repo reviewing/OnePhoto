@@ -15,10 +15,16 @@
 
 + (instancetype)sharedHelper;
 
+- (BOOL)isPhotoOfDateExists:(NSString *)date ofUser:(NSString *)user_id;
+
 - (void)insertUser:(NSString *)display_name withID:(NSString *)user_id;
 
 - (void)insertPhoto:(NSString *)source_image_url toUser:(NSString *)user_id;
 
 - (OPUser *)fetchUserByID:(NSString *)user_id;
+
+- (OPPhoto *)getPhotoAt:(NSString *)date ofUser:(NSString *)user_id;
+
+- (NSSet *)allPhotos;
 
 @end

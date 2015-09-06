@@ -10,6 +10,7 @@
 #import "OPUser.h"
 #import "OPPhoto.h"
 #import "AppDelegate.h"
+#import <FastImageCache/FICImageCache.h>
 
 @interface CoreDataHelper () {
     NSManagedObjectContext *_context;
@@ -26,7 +27,6 @@
         sharedInstance = [[CoreDataHelper alloc] init];
         AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
         sharedInstance->_context = [appDelegate managedObjectContext];
-
     });
     return sharedInstance;
 }
@@ -42,7 +42,16 @@
 }
 
 - (BOOL)isPhotoOfDateExists:(NSString *)date ofUser:(NSString *)user_id {
-    return YES;
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    [request setEntity:[NSEntityDescription entityForName:@"OPPhoto" inManagedObjectContext:_context]];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"user.user_id == %@ AND dateString == %@", user_id, date];
+    [request setPredicate:predicate];
+    NSError *error;
+    NSArray *photos = [_context executeFetchRequest:request error:&error];
+    if (error) {
+        DHLogError(@"couldn't fetch: %@", [error localizedDescription]);
+    }
+    return [photos count] > 0;
 }
 
 - (void)insertPhoto:(NSString *)source_image_url toUser:(NSString *)user_id {
@@ -51,10 +60,18 @@
         DHLogError(@"user not exists! id: %@", user_id);
         return;
     }
+    NSString *photoFileName = [source_image_url lastPathComponent];
+    NSString *dateString = [photoFileName substringToIndex:[photoFileName length] - 4];
+    
+    // 删除老照片
+    for (OPPhoto *photo in user.photos) {
+        [_context deleteObject:photo];
+        [self deleteImageCache:photo];
+    }
+    
     OPPhoto *photo = [NSEntityDescription insertNewObjectForEntityForName:@"OPPhoto" inManagedObjectContext:_context];
     photo.source_image_url = source_image_url;
-    NSString *photoFileName = [source_image_url lastPathComponent];
-    photo.dateString = [photoFileName substringToIndex:[photoFileName length] - 4];
+    photo.dateString = dateString;
     photo.user = user;
     [user addPhotosObject:photo];
     NSError *error;
@@ -79,6 +96,39 @@
         return user;
     }
     return nil;
+}
+
+- (OPPhoto *)getPhotoAt:(NSString *)date ofUser:(NSString *)user_id {
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    [request setEntity:[NSEntityDescription entityForName:@"OPPhoto" inManagedObjectContext:_context]];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"user.user_id == %@ AND dateString == %@", user_id, date];
+    [request setPredicate:predicate];
+    NSError *error;
+    NSArray *photos = [_context executeFetchRequest:request error:&error];
+    if (error) {
+        DHLogError(@"couldn't fetch: %@", [error localizedDescription]);
+    }
+    
+    if ([photos count] > 0) {
+        return [photos objectAtIndex:0];
+    }
+    return nil;
+}
+
+- (NSSet *)allPhotos {
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    [request setEntity:[NSEntityDescription entityForName:@"OPPhoto" inManagedObjectContext:_context]];
+    NSError *error;
+    NSArray *photos = [_context executeFetchRequest:request error:&error];
+    if (error) {
+        DHLogError(@"couldn't fetch: %@", [error localizedDescription]);
+    }
+    return [NSSet setWithArray:photos];
+}
+
+- (void)deleteImageCache:(OPPhoto *)photo {
+    FICImageCache *sharedImageCache = [FICImageCache sharedImageCache];
+    [sharedImageCache deleteImageForEntity:photo withFormatName:OPPhotoSquareImage32BitBGRFormatName];
 }
 
 @end

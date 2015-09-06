@@ -15,14 +15,11 @@ NSString *const OPPhotoImageFormatFamily = @"OPPhotoImageFormatFamily";
 NSString *const OPPhotoSquareImage32BitBGRFormatName = @"top.defaults.OnePhoto.OPPhotoSquareImage32BitBGRFormatName";
 NSString *const OPPhotoPixelImageFormatName = @"top.defaults.OnePhoto.OPPhotoPixelImageFormatName";
 
-CGSize const OPPhotoSquareImageSize = {75, 75};
+CGSize OPPhotoSquareImageSize = {375.f/7.f, 375.f/7.f};
 CGSize const OPPhotoPixelImageSize = {1, 1};
 
 @interface OPPhoto () {
     NSString *_UUID;
-    NSString *_thumbnailFilePath;
-    BOOL _thumbnailFileExists;
-    BOOL _didCheckForThumbnailFile;
 }
 
 @end
@@ -34,7 +31,8 @@ CGSize const OPPhotoPixelImageSize = {1, 1};
 @dynamic user;
 
 - (UIImage *)sourceImage {
-    UIImage *sourceImage = [UIImage imageWithContentsOfFile:self.source_image_url];
+    UIImage *sourceImage = [UIImage imageWithContentsOfFile:[DOCUMENTS_FOLDER stringByAppendingPathComponent:self.source_image_url]];
+    DHLogDebug(@"%@/%@", DOCUMENTS_FOLDER, self.source_image_url);
     return sourceImage;
 }
 
@@ -135,7 +133,7 @@ static UIImage * _OPStatusBarImageFromImage(UIImage *image) {
             UIImage *squareImage = _OPSquareImageFromImage(image);
             
             // Clip to a rounded rect
-            CGPathRef path = _OPCreateRoundedRectPath(contextBounds, 12);
+            CGPathRef path = _OPCreateRoundedRectPath(contextBounds, 4);
             CGContextAddPath(contextRef, path);
             CFRelease(path);
             CGContextEOClip(contextRef);

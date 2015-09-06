@@ -20,6 +20,8 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     [DHLogger setLogLevel:DH_LOG_DEBUG];
     
+    OPPhotoSquareImageSize = CGSizeMake([UIScreen mainScreen].bounds.size.width / 7.f, [UIScreen mainScreen].bounds.size.width / 7.f);
+    
     NSMutableArray *mutableImageFormats = [NSMutableArray array];
     
     // Square image formats...

@@ -15,7 +15,7 @@ extern NSString *const OPPhotoImageFormatFamily;
 extern NSString *const OPPhotoSquareImage32BitBGRFormatName;
 extern NSString *const OPPhotoPixelImageFormatName;
 
-extern CGSize const OPPhotoSquareImageSize;
+extern CGSize OPPhotoSquareImageSize;
 extern CGSize const OPPhotoPixelImageSize;
 
 @class OPUser;

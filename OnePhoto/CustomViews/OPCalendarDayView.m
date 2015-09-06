@@ -7,6 +7,16 @@
 //
 
 #import "OPCalendarDayView.h"
+#import "CoreDataHelper.h"
+#import "OPPhoto.h"
+
+#import <FastImageCache/FICImageCache.h>
+
+@interface OPCalendarDayView () {
+    UIImageView *_photoView;
+}
+
+@end
 
 @implementation OPCalendarDayView
 
@@ -39,6 +49,11 @@
     self.opaque = NO;
     self.clipsToBounds = YES;
     
+    {
+        _photoView = [UIImageView new];
+        [self addSubview:_photoView];
+    }
+    
     _dotRatio = 1. / 9.;
     
     {
@@ -70,6 +85,8 @@
 
 - (void)layoutSubviews
 {
+    _photoView.frame = self.frame;
+    
     [_textLabel sizeToFit];
     _textLabel.frame = CGRectMake((self.frame.size.width - _textLabel.frame.size.width - 4) / 2, 0, _textLabel.frame.size.width + 8, _textLabel.frame.size.height);
     
@@ -111,6 +128,16 @@
         _textLabel.textColor = [UIColor lightGrayColor];
     } else {
         _textLabel.textColor = [UIColor blackColor];
+    }
+    
+    __block NSDate *date = [_date copy];
+    OPPhoto *photo = [[CoreDataHelper sharedHelper] getPhotoAt:[[GlobalUtils dateFormatter] stringFromDate:date] ofUser:[[NSUserDefaults standardUserDefaults] stringForKey:@"current.user"]];
+    if (photo) {
+        [[FICImageCache sharedImageCache] retrieveImageForEntity:photo withFormatName:OPPhotoSquareImage32BitBGRFormatName completionBlock:^(id<FICEntity> entity, NSString *formatName, UIImage *image) {
+            if (date == _date) {
+                [_photoView setImage:image];
+            }
+        }];
     }
     
     [_manager.delegateManager prepareDayView:self];

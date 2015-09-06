@@ -12,12 +12,15 @@
 #import "OPCalendarWeekDayView.h"
 #import "OPCalendarWeekView.h"
 #import "OPCalendarDayView.h"
+#import "OPPhoto.h"
 #import "CoreDataHelper.h"
+#import <FastImageCache/FICImageCache.h>
 
 #import <MobileCoreServices/MobileCoreServices.h>
 
 @interface RootViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate> {
     NSDate *_startDate;
+    NSInteger _callbackCount;
 }
 
 @property (weak, nonatomic) IBOutlet JTCalendarMenuView *calendarMenuView;
@@ -67,6 +70,7 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     [_calendarContentView scrollToCurrentMonth:NO];
+    [self buildFastImageCache];
 }
 
 #pragma mark - Actions
@@ -123,7 +127,8 @@
         
         NSString *dateString = [[GlobalUtils dateFormatter] stringFromDate:[NSDate date]];
         
-        NSString *photoDirPath = [DOCUMENTS_FOLDER stringByAppendingPathComponent:[NSString stringWithFormat:@"users/%@/photos", [[NSUserDefaults standardUserDefaults] stringForKey:@"current.user"]]];
+        NSString *photoDocumentsDirPath = [NSString stringWithFormat:@"users/%@/photos", [[NSUserDefaults standardUserDefaults] stringForKey:@"current.user"]];
+        NSString *photoDirPath = [DOCUMENTS_FOLDER stringByAppendingPathComponent:photoDocumentsDirPath];
         if (![[NSFileManager defaultManager] fileExistsAtPath:photoDirPath]) {
             NSError *error;
             [[NSFileManager defaultManager] createDirectoryAtPath:photoDirPath withIntermediateDirectories:YES attributes:nil error:&error];
@@ -132,8 +137,9 @@
             }
         }
         
-        NSString *photoPath = [photoDirPath stringByAppendingPathComponent: [dateString stringByAppendingPathExtension:@"jpg"]];
-        [[CoreDataHelper sharedHelper] insertPhoto:photoPath toUser:[[NSUserDefaults standardUserDefaults] stringForKey:@"current.user"]];
+        NSString *photoPath = [photoDirPath stringByAppendingPathComponent:[dateString stringByAppendingPathExtension:@"jpg"]];
+        NSString *photoDocumentsPath = [photoDocumentsDirPath stringByAppendingPathComponent:[dateString stringByAppendingPathExtension:@"jpg"]];
+        [[CoreDataHelper sharedHelper] insertPhoto:photoDocumentsPath toUser:[[NSUserDefaults standardUserDefaults] stringForKey:@"current.user"]];
         [UIImageJPEGRepresentation(imageToSave, 0.8) writeToFile:photoPath atomically:YES];
     }
     
@@ -183,6 +189,29 @@
 
 - (UIView<JTCalendarDay> *)calendarBuildDayView:(JTCalendarManager *)calendar {
     return [OPCalendarDayView new];
+}
+
+#pragma mark - Fast Image Cache
+
+- (void)buildFastImageCache {
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^() {
+        _callbackCount = 0;
+        FICImageCache *sharedImageCache = [FICImageCache sharedImageCache];
+        for (OPPhoto *photo in [[CoreDataHelper sharedHelper] allPhotos]) {
+            if (![sharedImageCache imageExistsForEntity:photo withFormatName:OPPhotoSquareImage32BitBGRFormatName]) {
+                _callbackCount++;
+                [sharedImageCache asynchronouslyRetrieveImageForEntity:photo withFormatName:OPPhotoSquareImage32BitBGRFormatName completionBlock:^(id<FICEntity> entity, NSString *formatName, UIImage *image) {
+                    _callbackCount--;
+                    if (_callbackCount == 0) {
+                        DHLogDebug(@"Fast Image Cache build finished.");
+                        dispatch_async(dispatch_get_main_queue(), ^(){
+                            [self.calendarContentView reloadData];
+                        });
+                    }
+                }];
+            }
+        }
+    });
 }
 
 @end

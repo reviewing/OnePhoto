@@ -69,6 +69,7 @@
         _monthLabel.textColor = [GlobalUtils appBaseColor];
         _monthLabel.textAlignment = NSTextAlignmentCenter;
         _monthLabel.font = [UIFont systemFontOfSize:[GlobalUtils monthLabelSize]];
+        [self addSubview:_monthLabel];
     }
 
     {
@@ -89,8 +90,6 @@
         
         monthText = [dateFormatter shortMonthSymbols][currentMonthIndex - 1];
         [_monthLabel setText:monthText];
-        
-        [self addSubview:_monthLabel];
     }
     
     if(!_weeksViews){

@@ -50,7 +50,8 @@
     self.clipsToBounds = YES;
     
     {
-        self.layer.cornerRadius = 5.0;
+        // This will stuck the scrolling
+//        self.layer.cornerRadius = 5.0;
     }
     
     {
@@ -113,6 +114,19 @@
     [self reload];
 }
 
+- (void)setPhoto:(OPPhoto *)photo {
+    __block NSDate *date = [_date copy];
+    if (photo) {
+        [[FICImageCache sharedImageCache] retrieveImageForEntity:photo withFormatName:OPPhotoSquareImage32BitBGRFormatName completionBlock:^(id<FICEntity> entity, NSString *formatName, UIImage *image) {
+            if (date == _date) {
+                [_photoView setImage:image];
+            }
+        }];
+    } else {
+        [_photoView setImage:nil];
+    }
+}
+
 - (void)reload
 {
     static NSDateFormatter *dateFormatter = nil;
@@ -122,6 +136,7 @@
     }
     
     _textLabel.text = [dateFormatter stringFromDate:_date];
+    [_textLabel sizeToFit];
     
     NSCalendar *calendar = [NSCalendar currentCalendar];
     NSRange weekdayRange = [calendar maximumRangeOfUnit:NSCalendarUnitWeekday];
@@ -132,20 +147,7 @@
         _textLabel.textColor = [UIColor lightGrayColor];
     } else {
         _textLabel.textColor = [UIColor blackColor];
-    }
-    
-    __block NSDate *date = [_date copy];
-    OPPhoto *photo = [[CoreDataHelper sharedHelper] getPhotoAt:[GlobalUtils stringFromDate:date] ofUser:[[NSUserDefaults standardUserDefaults] stringForKey:@"current.user"]];
-    if (photo) {
-        [[FICImageCache sharedImageCache] retrieveImageForEntity:photo withFormatName:OPPhotoSquareImage32BitBGRFormatName completionBlock:^(id<FICEntity> entity, NSString *formatName, UIImage *image) {
-            if (date == _date) {
-                [_photoView setImage:image];
-            }
-        }];
-    } else {
-        [_photoView setImage:nil];
-    }
-    
+    }    
     [_manager.delegateManager prepareDayView:self];
 }
 

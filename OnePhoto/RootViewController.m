@@ -23,7 +23,6 @@
     NSInteger _callbackCount;
 }
 
-@property (weak, nonatomic) IBOutlet JTCalendarMenuView *calendarMenuView;
 @property (weak, nonatomic) IBOutlet OPCalendarWeekDayView *weekDayView;
 @property (weak, nonatomic) IBOutlet OPVerticalCalendarView *calendarContentView;
 
@@ -46,11 +45,8 @@
     _weekDayView.manager = _calendarManager;
     [_weekDayView reload];
     
-    [_calendarManager setMenuView:_calendarMenuView];
     [_calendarManager setContentView:_calendarContentView];
     [_calendarManager setDate:[NSDate date]];
-    
-    _calendarMenuView.scrollView.scrollEnabled = NO;
 }
 
 - (void)didReceiveMemoryWarning {

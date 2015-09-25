@@ -131,13 +131,7 @@ static UIImage * _OPStatusBarImageFromImage(UIImage *image) {
             UIGraphicsPopContext();
         } else {
             UIImage *squareImage = _OPSquareImageFromImage(image);
-            
-            // Clip to a rounded rect
-            CGPathRef path = _OPCreateRoundedRectPath(contextBounds, 4);
-            CGContextAddPath(contextRef, path);
-            CFRelease(path);
-            CGContextEOClip(contextRef);
-            
+                        
             UIGraphicsPushContext(contextRef);
             [squareImage drawInRect:contextBounds];
             UIGraphicsPopContext();

@@ -172,7 +172,6 @@
     else if([_calendarManager.dateHelper date:[NSDate date] isTheSameDayThan:dayView.date]){
         dayView.layer.borderColor = [[GlobalUtils appBaseColor] CGColor];
         dayView.layer.borderWidth = 1;
-        dayView.layer.cornerRadius = 4;
     } else {
         dayView.layer.borderColor = [[UIColor clearColor] CGColor];
         dayView.layer.borderWidth = 0;

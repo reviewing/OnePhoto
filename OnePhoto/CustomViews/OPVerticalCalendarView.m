@@ -80,7 +80,7 @@
         dateFormatter = [_manager.dateHelper createDateFormatter];
         [dateFormatter setDateFormat:@"yyyyMMdd"];
     }
-    _startDate = [dateFormatter dateFromString:@"20150701"];
+    _startDate = [dateFormatter dateFromString:@"20150101"];
 }
 
 #pragma mark - Table View Data Source

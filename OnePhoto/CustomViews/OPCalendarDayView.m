@@ -147,7 +147,20 @@
         _textLabel.textColor = [UIColor lightGrayColor];
     } else {
         _textLabel.textColor = [UIColor blackColor];
-    }    
+    }
+    
+    [_photoView setImage:nil];
+
+    __block NSDate *date = [_date copy];
+    OPPhoto *photo = [[CoreDataHelper sharedHelper] getPhotoAt:[GlobalUtils stringFromDate:date] ofUser:[[NSUserDefaults standardUserDefaults] stringForKey:@"current.user"]];
+    if (photo) {
+        [[FICImageCache sharedImageCache] asynchronouslyRetrieveImageForEntity:photo withFormatName:OPPhotoSquareImage32BitBGRFormatName completionBlock:^(id<FICEntity> entity, NSString *formatName, UIImage *image) {
+            if (date == _date) {
+                [_photoView setImage:image];
+            }
+        }];
+    }
+    
     [_manager.delegateManager prepareDayView:self];
 }
 

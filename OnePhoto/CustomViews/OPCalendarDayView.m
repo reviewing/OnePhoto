@@ -51,7 +51,9 @@
     
     {
         // This will stuck the scrolling
-//        self.layer.cornerRadius = 5.0;
+        self.layer.cornerRadius = 5.0;
+        // This solved the problem above
+        self.layer.masksToBounds = NO;
     }
     
     {

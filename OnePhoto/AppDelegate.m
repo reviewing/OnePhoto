@@ -64,6 +64,7 @@
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
     // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application {
@@ -77,6 +78,40 @@
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    [[NSNotificationCenter defaultCenter] addObserverForName:NSPersistentStoreCoordinatorStoresWillChangeNotification
+                                                      object:self.managedObjectContext.persistentStoreCoordinator
+                                                       queue:[NSOperationQueue mainQueue]
+                                                  usingBlock:^(NSNotification *note) {
+                                                      DHLogDebug(@"NSPersistentStoreCoordinatorStoresWillChangeNotification");
+                                                      [self.managedObjectContext performBlock:^{
+                                                          if ([self.managedObjectContext hasChanges]) {
+                                                              NSError *saveError;
+                                                              if (![self.managedObjectContext save:&saveError]) {
+                                                                  NSLog(@"Save error: %@", saveError);
+                                                              }
+                                                          } else {
+                                                              // drop any managed object references
+                                                              [self.managedObjectContext reset];
+                                                          }
+                                                      }];
+                                                      // drop any managed object references
+                                                      // disable user interface with setEnabled: or an overlay
+                                                  }];
+    [[NSNotificationCenter defaultCenter] addObserverForName:NSPersistentStoreCoordinatorStoresDidChangeNotification
+                                                      object:self.managedObjectContext.persistentStoreCoordinator
+                                                       queue:[NSOperationQueue mainQueue]
+                                                  usingBlock:^(NSNotification *note) {
+                                                      DHLogDebug(@"NSPersistentStoreCoordinatorStoresDidChangeNotification: %@", [note.userInfo objectForKey:NSAddedPersistentStoresKey]);
+                                                  }];
+    [[NSNotificationCenter defaultCenter] addObserverForName:NSPersistentStoreDidImportUbiquitousContentChangesNotification
+                                                      object:self.managedObjectContext.persistentStoreCoordinator
+                                                       queue:[NSOperationQueue mainQueue]
+                                                  usingBlock:^(NSNotification *note) {
+                                                      DHLogDebug(@"NSPersistentStoreDidImportUbiquitousContentChangesNotification");
+                                                      [self.managedObjectContext performBlock:^{
+                                                          [self.managedObjectContext mergeChangesFromContextDidSaveNotification:note];
+                                                      }];
+                                                  }];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {
@@ -118,7 +153,7 @@
     NSURL *storeURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"OnePhoto.sqlite"];
     NSError *error = nil;
     NSString *failureReason = @"There was an error creating or loading the application's saved data.";
-    NSDictionary *options = [NSDictionary dictionaryWithObjectsAndKeys: [NSNumber numberWithBool:YES], NSMigratePersistentStoresAutomaticallyOption, [NSNumber numberWithBool:YES], NSInferMappingModelAutomaticallyOption, nil];
+    NSDictionary *options = [NSDictionary dictionaryWithObjectsAndKeys: [NSNumber numberWithBool:YES], NSMigratePersistentStoresAutomaticallyOption, [NSNumber numberWithBool:YES], NSInferMappingModelAutomaticallyOption, @"OnePhotoCloudStore", NSPersistentStoreUbiquitousContentNameKey, nil];
     if (![_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:options error:&error]) {
         // Report any error we got.
         NSMutableDictionary *dict = [NSMutableDictionary dictionary];
@@ -146,7 +181,7 @@
     if (!coordinator) {
         return nil;
     }
-    _managedObjectContext = [[NSManagedObjectContext alloc] init];
+    _managedObjectContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
     [_managedObjectContext setPersistentStoreCoordinator:coordinator];
     return _managedObjectContext;
 }

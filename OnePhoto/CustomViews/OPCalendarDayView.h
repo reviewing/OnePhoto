@@ -14,6 +14,7 @@
 @property (nonatomic, weak) JTCalendarManager *manager;
 
 @property (nonatomic) NSDate *date;
+@property (nonatomic, strong) UIImageView *photoView;
 
 @property (nonatomic, readonly) UIView *dotView;
 @property (nonatomic, readonly) UILabel *textLabel;

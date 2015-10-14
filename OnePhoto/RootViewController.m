@@ -14,6 +14,7 @@
 #import "OPCalendarDayView.h"
 #import "OPPhoto.h"
 #import "CoreDataHelper.h"
+#import "OPFullscreenPhotoDisplayController.h"
 #import <FastImageCache/FICImageCache.h>
 
 #import <MobileCoreServices/MobileCoreServices.h>
@@ -77,7 +78,7 @@
     [self startCameraControllerFromViewController:self usingDelegate:self];
 }
 
-- (BOOL) startCameraControllerFromViewController:(UIViewController*) controller
+- (BOOL)startCameraControllerFromViewController:(UIViewController*) controller
                                    usingDelegate:(id <UIImagePickerControllerDelegate, UINavigationControllerDelegate>) delegate {
     
     if (([UIImagePickerController isSourceTypeAvailable: UIImagePickerControllerSourceTypeCamera] == NO) || (delegate == nil) || (controller == nil)) {
@@ -179,7 +180,9 @@
 }
 
 - (void)calendar:(JTCalendarManager *)calendar didTouchDayView:(UIView<JTCalendarDay> *)dayView {
-
+    OPCalendarDayView *lOPDayView = (OPCalendarDayView *)dayView;
+    OPPhoto *photo = [[CoreDataHelper sharedHelper] getPhotoAt:[GlobalUtils stringFromDate:lOPDayView.date] ofUser:[[NSUserDefaults standardUserDefaults] stringForKey:@"current.user"]];
+    [[OPFullscreenPhotoDisplayController sharedDisplayController] showPhoto:photo withThumbnailImageView:lOPDayView.photoView];
 }
 
 - (UIView<JTCalendarDay> *)calendarBuildDayView:(JTCalendarManager *)calendar {
@@ -207,6 +210,16 @@
             }
         }
     });
+}
+
+#pragma mark - OPFullscreenPhotoDisplayControllerDelegate
+
+- (void)photoDisplayController:(OPFullscreenPhotoDisplayController *)photoDisplayController willShowSourceImage:(UIImage *)sourceImage forPhoto:(OPPhoto *)photo withThumbnailImageView:(UIImageView *)thumbnailImageView {
+    
+}
+
+- (void)photoDisplayController:(OPFullscreenPhotoDisplayController *)photoDisplayController willHideSourceImage:(UIImage *)sourceImage forPhoto:(OPPhoto *)photo withThumbnailImageView:(UIImageView *)thumbnailImageView {
+    
 }
 
 @end

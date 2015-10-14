@@ -12,9 +12,7 @@
 
 #import <FastImageCache/FICImageCache.h>
 
-@interface OPCalendarDayView () {
-    UIImageView *_photoView;
-}
+@interface OPCalendarDayView ()
 
 @end
 

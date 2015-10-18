@@ -9,6 +9,7 @@
 #import "OPCalendarWeekView.h"
 
 #import "JTCalendarManager.h"
+#import "OPCalendarDayView.h"
 
 #define NUMBER_OF_DAY_BY_WEEK 7.
 
@@ -61,6 +62,14 @@
     
     [self createDayViews];
     [self reloadAndUpdateAnotherMonth:enable monthDate:monthDate];
+}
+
+- (void)setPhotos:(NSArray *)photos {
+    for (OPCalendarDayView *dayView in _daysViews) {
+        if (!dayView.hidden) {
+            [dayView setPhoto:[photos objectAtIndex:[[[[GlobalUtils dateFormatter] stringFromDate:dayView.date] substringFromIndex:6] integerValue] - 1]];
+        }
+    }
 }
 
 - (void)reloadAndUpdateAnotherMonth:(BOOL)enable monthDate:(NSDate *)monthDate

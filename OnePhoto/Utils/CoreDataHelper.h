@@ -25,6 +25,8 @@
 
 - (OPPhoto *)getPhotoAt:(NSString *)date ofUser:(NSString *)user_id;
 
+- (NSArray *)getPhotosInMonth:(NSString *)month ofUser:(NSString *)user_id;
+
 - (NSSet *)allPhotos;
 
 @end

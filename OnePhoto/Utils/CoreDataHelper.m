@@ -107,6 +107,27 @@
     return nil;
 }
 
+- (NSArray *)getPhotosInMonth:(NSString *)month ofUser:(NSString *)user_id {
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    [request setEntity:[NSEntityDescription entityForName:@"OPPhoto" inManagedObjectContext:_context]];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"user.user_id == %@ AND dateString BEGINSWITH[c] %@", user_id, month];
+    [request setPredicate:predicate];
+    NSError *error;
+    NSArray *photos = [_context executeFetchRequest:request error:&error];
+    NSUInteger daysInMonth = [GlobalUtils daysOfMonthByDate:[[GlobalUtils dateFormatter] dateFromString:[NSString stringWithFormat:@"%@01", month]]];
+    NSMutableArray *sortedPhotos = [NSMutableArray array];
+    for (int i = 0; i < daysInMonth; i++) {
+        [sortedPhotos addObject:[NSNull null]];
+    }
+    for (OPPhoto *photo in photos) {
+        [sortedPhotos insertObject:photo atIndex:[[photo.dateString substringFromIndex:6] integerValue] - 1];
+    }
+    if (error) {
+        DHLogError(@"couldn't fetch: %@", [error localizedDescription]);
+    }
+    return sortedPhotos;
+}
+
 - (NSSet *)allPhotos {
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
     [request setEntity:[NSEntityDescription entityForName:@"OPPhoto" inManagedObjectContext:_context]];

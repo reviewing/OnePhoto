@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 #import <JTCalendar/JTCalendar.h>
 
+@class OPPhoto;
+
 @interface OPCalendarDayView : UIView <JTCalendarDay>
 
 @property (nonatomic, weak) JTCalendarManager *manager;
@@ -19,8 +21,8 @@
 @property (nonatomic, readonly) UIView *dotView;
 @property (nonatomic, readonly) UILabel *textLabel;
 
-@property (nonatomic) CGFloat dotRatio;
-
 @property (nonatomic) BOOL isFromAnotherMonth;
+
+- (void)setPhoto:(OPPhoto *)photo;
 
 @end

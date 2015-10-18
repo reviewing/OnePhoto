@@ -10,6 +10,7 @@
 
 #import "JTCalendarManager.h"
 #import "OPCalendarWeekView.h"
+#import "CoreDataHelper.h"
 
 #define MAX_WEEKS_BY_MONTH 6
 
@@ -58,8 +59,21 @@
     NSAssert(date != nil, @"date cannot be nil");
     
     self->_date = date;
-    
     [self reload];
+    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(){
+        __block NSDate *date = [self.date copy];
+        __block NSArray *photos = [[CoreDataHelper sharedHelper] getPhotosInMonth:[[GlobalUtils stringFromDate:date] substringToIndex:6] ofUser:[[NSUserDefaults standardUserDefaults] stringForKey:@"current.user"]];
+        dispatch_async(dispatch_get_main_queue(), ^(){
+            if ([self.manager.dateHelper date:date isTheSameDayThan:self.date]) {
+                for (OPCalendarWeekView *weekView in _weeksViews) {
+                    if (!weekView.hidden) {
+                        weekView.photos = photos;
+                    }
+                }
+            }
+        });
+    });
 }
 
 - (void)reload
@@ -162,7 +176,6 @@
     
     _monthLabel.frame = CGRectMake(columnIndexOfFirstDay * dayHeight, 0, dayHeight, monthLabelHeight);
     y = monthLabelHeight;
-    
     
     for (UIView *weekView in _weeksViews) {
         weekView.frame = CGRectMake(0, y, weekWidth, dayHeight);

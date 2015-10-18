@@ -25,4 +25,8 @@
 
 + (NSString *)stringFromDate:(NSDate *)date;
 
++ (NSUInteger)daysOfMonthByDate:(NSDate *)date;
+
++ (NSInteger)dayOfMonth:(NSDate *)date;
+
 @end

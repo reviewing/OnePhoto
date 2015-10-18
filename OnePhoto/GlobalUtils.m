@@ -52,4 +52,17 @@ static NSDateFormatter *_dateFormatter = nil;
     return [[self dateFormatter] stringFromDate:date];
 }
 
++ (NSUInteger)daysOfMonthByDate:(NSDate *)date {
+    NSCalendar *c = [NSCalendar currentCalendar];
+    NSRange days = [c rangeOfUnit:NSCalendarUnitDay
+                           inUnit:NSCalendarUnitMonth
+                          forDate:date];
+    return days.length;
+}
+
++ (NSInteger)dayOfMonth:(NSDate *)date {
+    NSDateComponents *components = [[NSCalendar currentCalendar] components:NSCalendarUnitDay fromDate:date];
+    return components.day;
+}
+
 @end

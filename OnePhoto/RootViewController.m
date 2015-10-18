@@ -22,6 +22,8 @@
 @interface RootViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate> {
     NSDate *_startDate;
     NSInteger _callbackCount;
+    
+    BOOL _isFirstAppear;
 }
 
 @property (weak, nonatomic) IBOutlet OPCalendarWeekDayView *weekDayView;
@@ -48,6 +50,8 @@
     
     [_calendarManager setContentView:_calendarContentView];
     [_calendarManager setDate:[NSDate date]];
+    
+    _isFirstAppear = YES;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -60,13 +64,17 @@
     if (!dateFormatter) {
         dateFormatter = [_calendarManager.dateHelper createDateFormatter];
         [dateFormatter setDateFormat:@"yyyyMMdd"];
-//        [dateFormatter setTimeZone:[NSTimeZone timeZoneWithName:@"UTC"]];
     }
     _startDate = [dateFormatter dateFromString:@"20150706"];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
-    [_calendarContentView scrollToCurrentMonth:NO];
+    if (_isFirstAppear) {
+        _isFirstAppear = NO;
+        [_calendarContentView scrollToCurrentMonth:NO];
+    } else {
+        [_calendarContentView scrollToCurrentMonth:YES];
+    }
     [self buildFastImageCache];
 }
 
@@ -182,7 +190,9 @@
 - (void)calendar:(JTCalendarManager *)calendar didTouchDayView:(UIView<JTCalendarDay> *)dayView {
     OPCalendarDayView *lOPDayView = (OPCalendarDayView *)dayView;
     OPPhoto *photo = [[CoreDataHelper sharedHelper] getPhotoAt:[GlobalUtils stringFromDate:lOPDayView.date] ofUser:[[NSUserDefaults standardUserDefaults] stringForKey:@"current.user"]];
-    [[OPFullscreenPhotoDisplayController sharedDisplayController] showPhoto:photo withThumbnailImageView:lOPDayView.photoView];
+    if (photo) {
+        [[OPFullscreenPhotoDisplayController sharedDisplayController] showPhoto:photo withThumbnailImageView:lOPDayView.photoView];        
+    }
 }
 
 - (UIView<JTCalendarDay> *)calendarBuildDayView:(JTCalendarManager *)calendar {

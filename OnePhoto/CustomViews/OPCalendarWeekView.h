@@ -14,6 +14,7 @@
 
 @property (nonatomic, weak) JTCalendarManager *manager;
 @property (nonatomic, readonly) NSDate *startDate;
+@property (nonatomic, strong) NSArray *photos;
 
 - (NSUInteger)columnIndexOfFirstDay;
 

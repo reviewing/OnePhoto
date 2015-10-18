@@ -116,13 +116,24 @@
 }
 
 - (CGFloat)calculateRowHeightAtIndexPath:(NSIndexPath *)indexPath width:(CGFloat)width {
+    if ([_manager.dateHelper date:[self dateForIndexPath:indexPath] isTheSameMonthThan:_date]) {
+        NSDateComponents *components = [[NSCalendar currentCalendar] components:NSCalendarUnitWeekday fromDate:[_manager.dateHelper firstDayOfMonth:_date]];
+        NSInteger columnIndexOfFirstDay = [components weekday];
+        components = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear fromDate:_date];
+        NSInteger day = [components day];
+        if (day > 0) {
+            NSUInteger numberOfWeeks = (day - (7 - columnIndexOfFirstDay + 1)) / 7 + 1 + ((day - (7 - columnIndexOfFirstDay + 1)) % 7 == 0 ? 0 : 1);
+            return width * (numberOfWeeks / 7.f) + [GlobalUtils monthLabelSize] + 16;
+        }
+    }
+
     NSUInteger numberOfWeeks = [self.manager.dateHelper numberOfWeeks:[self dateForIndexPath:indexPath]];
     return width * (numberOfWeeks / 7.f) + [GlobalUtils monthLabelSize] + 16;
 }
 
 - (void)scrollToCurrentMonth:(BOOL)animated {
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:[self monthsBetweenDate:_startDate with:_date] inSection:0];
-    [self scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionTop animated:animated];
+    [self scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionBottom animated:animated];
 }
 
 - (NSInteger)monthsBetweenDate:(NSDate *)date1 with:(NSDate *)date2 {

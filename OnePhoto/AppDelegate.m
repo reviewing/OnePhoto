@@ -52,11 +52,21 @@
         [[CoreDataHelper sharedHelper] initUser:@"弘哥保护你"];
     }
 
-    NSURL *ubiq = [[NSFileManager defaultManager]
-                   URLForUbiquityContainerIdentifier:nil];
+    NSURL *ubiq = [[NSFileManager defaultManager] URLForUbiquityContainerIdentifier:nil];
     if (ubiq) {
         DHLogDebug(@"iCloud access at %@", ubiq);
-        // TODO: Load document...
+        NSURL *photoFolder = [[ubiq URLByAppendingPathComponent:@"Documents"] URLByAppendingPathComponent:@"photos"];
+        
+        if (![[NSUserDefaults standardUserDefaults] boolForKey:@"photos.dir.created"]) {
+            NSError *error;
+            [[NSFileManager defaultManager] createDirectoryAtURL:photoFolder withIntermediateDirectories:YES attributes:nil error:&error];
+            if(error) {
+                DHLogError(@"Error createDirectoryAtURL");
+            } else {
+                DHLogDebug(@"createDirectoryAtURL succeed");
+                [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:YES] forKey:@"photos.dir.created"];
+            }            
+        }
     } else {
         DHLogError(@"No iCloud access");
     }

@@ -132,7 +132,7 @@
         }
         
         NSString *dateString = [GlobalUtils stringFromDate:[NSDate date]];
-        NSString *photoPath = [dateString stringByAppendingPathExtension:@"jpg"];//[@"photos" stringByAppendingPathComponent:[dateString stringByAppendingPathExtension:@"jpg"]];
+        NSString *photoPath = [@"photos" stringByAppendingPathComponent:[dateString stringByAppendingPathExtension:@"jpg"]];
         
         NSURL *ubiq = [[NSFileManager defaultManager] URLForUbiquityContainerIdentifier:nil];
         NSURL *ubiquitousURL = [[ubiq URLByAppendingPathComponent:@"Documents"] URLByAppendingPathComponent:photoPath];

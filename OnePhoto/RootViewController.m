@@ -143,9 +143,7 @@
         photoCloud.imageData = UIImageJPEGRepresentation(imageToSave, 0.8);
         [photoCloud saveToURL:[photoCloud fileURL] forSaveOperation:UIDocumentSaveForCreating completionHandler:^(BOOL success) {
             if (success) {
-                [photoCloud openWithCompletionHandler:^(BOOL success) {
-                    DHLogDebug(@"new document opened from iCloud");
-                }];
+                DHLogDebug(@"document saved successfully");
             }
         }];
     }

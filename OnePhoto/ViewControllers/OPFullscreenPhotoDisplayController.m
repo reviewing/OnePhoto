@@ -8,6 +8,7 @@
 
 #import "OPFullscreenPhotoDisplayController.h"
 #import "OPPhoto.h"
+#import "OPPhotoCloud.h"
 
 @interface OPFullscreenPhotoDisplayController () <UIGestureRecognizerDelegate> {
     OPPhoto *_photo;
@@ -86,27 +87,37 @@
 
     CGRect convertedThumbnailImageViewFrame = [_originalThumbnailImageViewSuperview convertRect:_originalThumbnailImageViewFrame toView:_fullscreenView];
     [_thumbnailImageView setFrame:convertedThumbnailImageViewFrame];
-
-    UIImage *sourceImage = [photo sourceImage];
-    [_sourceImageView setImage:sourceImage];
-    [_sourceImageView setFrame:convertedThumbnailImageViewFrame];
-    [_sourceImageView setAlpha:0];
-    [_fullscreenView addSubview:_sourceImageView];
     
-    if ([_delegate respondsToSelector:@selector(photoDisplayController:willShowSourceImage:forPhoto:withThumbnailImageView:)]) {
-        [_delegate photoDisplayController:self willShowSourceImage:sourceImage forPhoto:_photo withThumbnailImageView:_thumbnailImageView];
-    }
+    NSURL *ubiq = [[NSFileManager defaultManager] URLForUbiquityContainerIdentifier:nil];
+    NSURL *ubiquitousURL = [[ubiq URLByAppendingPathComponent:@"Documents"] URLByAppendingPathComponent:photo.source_image_url];
+    OPPhotoCloud *photoCloud = [[OPPhotoCloud alloc] initWithFileURL:ubiquitousURL];
+    [photoCloud openWithCompletionHandler:^(BOOL success) {
+        if (success) {
+            DHLogDebug(@"iCloud document opened");
+            UIImage *sourceImage = [UIImage imageWithData:photoCloud.imageData];
 
-    [UIView animateWithDuration:0.3 animations:^{
-        [_backgroundView setAlpha:1];
-        [_sourceImageView setAlpha:1];
-        [_sourceImageView setFrame:[_fullscreenView bounds]];
-    } completion:^(BOOL finished) {
-        if ([_delegate respondsToSelector:@selector(photoDisplayController:didShowSourceImage:forPhoto:withThumbnailImageView:)]) {
-            [_delegate photoDisplayController:self didShowSourceImage:sourceImage forPhoto:_photo withThumbnailImageView:_thumbnailImageView];
+            [_sourceImageView setImage:sourceImage];
+            [_sourceImageView setFrame:convertedThumbnailImageViewFrame];
+            [_sourceImageView setAlpha:0];
+            [_fullscreenView addSubview:_sourceImageView];
+            
+            if ([_delegate respondsToSelector:@selector(photoDisplayController:willShowSourceImage:forPhoto:withThumbnailImageView:)]) {
+                [_delegate photoDisplayController:self willShowSourceImage:sourceImage forPhoto:_photo withThumbnailImageView:_thumbnailImageView];
+            }
+            
+            [UIView animateWithDuration:0.3 animations:^{
+                [_backgroundView setAlpha:1];
+                [_sourceImageView setAlpha:1];
+                [_sourceImageView setFrame:[_fullscreenView bounds]];
+            } completion:^(BOOL finished) {
+                if ([_delegate respondsToSelector:@selector(photoDisplayController:didShowSourceImage:forPhoto:withThumbnailImageView:)]) {
+                    [_delegate photoDisplayController:self didShowSourceImage:sourceImage forPhoto:_photo withThumbnailImageView:_thumbnailImageView];
+                }
+            }];
+        } else {
+            DHLogDebug(@"failed opening document from iCloud");
         }
     }];
-
 }
 
 - (void)hidePhoto {

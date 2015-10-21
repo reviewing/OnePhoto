@@ -13,6 +13,7 @@
 #import "OPCalendarWeekView.h"
 #import "OPCalendarDayView.h"
 #import "OPPhoto.h"
+#import "OPPhotoCloud.h"
 #import "CoreDataHelper.h"
 #import "OPFullscreenPhotoDisplayController.h"
 #import <FastImageCache/FICImageCache.h>
@@ -131,21 +132,22 @@
         }
         
         NSString *dateString = [GlobalUtils stringFromDate:[NSDate date]];
+        NSString *photoPath = [dateString stringByAppendingPathExtension:@"jpg"];//[@"photos" stringByAppendingPathComponent:[dateString stringByAppendingPathExtension:@"jpg"]];
         
-        NSString *photoDocumentsDirPath = [NSString stringWithFormat:@"users/%@/photos", [[NSUserDefaults standardUserDefaults] stringForKey:@"current.user"]];
-        NSString *photoDirPath = [DOCUMENTS_FOLDER stringByAppendingPathComponent:photoDocumentsDirPath];
-        if (![[NSFileManager defaultManager] fileExistsAtPath:photoDirPath]) {
-            NSError *error;
-            [[NSFileManager defaultManager] createDirectoryAtPath:photoDirPath withIntermediateDirectories:YES attributes:nil error:&error];
-            if (error) {
-                DHLogError(@"create folder failed! Error: %@", [error localizedDescription]);
+        NSURL *ubiq = [[NSFileManager defaultManager] URLForUbiquityContainerIdentifier:nil];
+        NSURL *ubiquitousURL = [[ubiq URLByAppendingPathComponent:@"Documents"] URLByAppendingPathComponent:photoPath];
+
+        [[CoreDataHelper sharedHelper] insertPhoto:photoPath];
+        
+        OPPhotoCloud *photoCloud = [[OPPhotoCloud alloc] initWithFileURL:ubiquitousURL];
+        photoCloud.imageData = UIImageJPEGRepresentation(imageToSave, 0.8);
+        [photoCloud saveToURL:[photoCloud fileURL] forSaveOperation:UIDocumentSaveForCreating completionHandler:^(BOOL success) {
+            if (success) {
+                [photoCloud openWithCompletionHandler:^(BOOL success) {
+                    DHLogDebug(@"new document opened from iCloud");
+                }];
             }
-        }
-        
-        NSString *photoPath = [photoDirPath stringByAppendingPathComponent:[dateString stringByAppendingPathExtension:@"jpg"]];
-        NSString *photoDocumentsPath = [photoDocumentsDirPath stringByAppendingPathComponent:[dateString stringByAppendingPathExtension:@"jpg"]];
-        [[CoreDataHelper sharedHelper] insertPhoto:photoDocumentsPath toUser:[[NSUserDefaults standardUserDefaults] stringForKey:@"current.user"]];
-        [UIImageJPEGRepresentation(imageToSave, 0.8) writeToFile:photoPath atomically:YES];
+        }];
     }
     
     [self dismissViewControllerAnimated:YES completion:nil];
@@ -189,7 +191,7 @@
 
 - (void)calendar:(JTCalendarManager *)calendar didTouchDayView:(UIView<JTCalendarDay> *)dayView {
     OPCalendarDayView *lOPDayView = (OPCalendarDayView *)dayView;
-    OPPhoto *photo = [[CoreDataHelper sharedHelper] getPhotoAt:[GlobalUtils stringFromDate:lOPDayView.date] ofUser:[[NSUserDefaults standardUserDefaults] stringForKey:@"current.user"]];
+    OPPhoto *photo = [[CoreDataHelper sharedHelper] getPhotoAt:[GlobalUtils stringFromDate:lOPDayView.date]];
     if (photo) {
         [[OPFullscreenPhotoDisplayController sharedDisplayController] showPhoto:photo withThumbnailImageView:lOPDayView.photoView];        
     }

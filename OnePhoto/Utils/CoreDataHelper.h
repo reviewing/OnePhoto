@@ -15,17 +15,17 @@
 
 + (instancetype)sharedHelper;
 
-- (BOOL)isPhotoOfDateExists:(NSString *)date ofUser:(NSString *)user_id;
+- (void)initUser:(NSString *)display_name;
 
-- (void)insertUser:(NSString *)display_name withID:(NSString *)user_id;
+- (OPUser *)currentUser;
 
-- (void)insertPhoto:(NSString *)source_image_url toUser:(NSString *)user_id;
+- (BOOL)isPhotoOfDateExists:(NSString *)date;
 
-- (OPUser *)fetchUserByID:(NSString *)user_id;
+- (void)insertPhoto:(NSString *)source_image_url;
 
-- (OPPhoto *)getPhotoAt:(NSString *)date ofUser:(NSString *)user_id;
+- (OPPhoto *)getPhotoAt:(NSString *)date;
 
-- (NSArray *)getPhotosInMonth:(NSString *)month ofUser:(NSString *)user_id;
+- (NSArray *)getPhotosInMonth:(NSString *)month;
 
 - (NSSet *)allPhotos;
 

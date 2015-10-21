@@ -47,17 +47,20 @@
     FICImageCache *sharedImageCache = [FICImageCache sharedImageCache];
     [sharedImageCache setDelegate:self];
     [sharedImageCache setFormats:mutableImageFormats];
+    
+    if (![[CoreDataHelper sharedHelper] currentUser]) {
+        [[CoreDataHelper sharedHelper] initUser:@"弘哥保护你"];
+    }
 
-    if (![[CoreDataHelper sharedHelper] fetchUserByID:@"512775199"]) {
-        [[CoreDataHelper sharedHelper] insertUser:@"段弘" withID:@"512775199"];
+    NSURL *ubiq = [[NSFileManager defaultManager]
+                   URLForUbiquityContainerIdentifier:nil];
+    if (ubiq) {
+        DHLogDebug(@"iCloud access at %@", ubiq);
+        // TODO: Load document...
+    } else {
+        DHLogError(@"No iCloud access");
     }
-    
-    if (![[CoreDataHelper sharedHelper] fetchUserByID:@"415509312"]) {
-        [[CoreDataHelper sharedHelper] insertUser:@"毛丹" withID:@"415509312"];
-    }
-    
-    [[NSUserDefaults standardUserDefaults] setObject:@"512775199" forKey:@"current.user"];
-    
+
     return YES;
 }
 

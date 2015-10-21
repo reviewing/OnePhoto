@@ -20,6 +20,7 @@
 		187412ED1B96D27B0089CEFF /* OPCalendarWeekView.m in Sources */ = {isa = PBXBuildFile; fileRef = 187412EC1B96D27B0089CEFF /* OPCalendarWeekView.m */; };
 		187412F01B96D3790089CEFF /* OPCalendarPageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 187412EF1B96D3790089CEFF /* OPCalendarPageView.m */; };
 		187412F81B9BE3BB0089CEFF /* CoreDataHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 187412F71B9BE3BB0089CEFF /* CoreDataHelper.m */; };
+		18E894421BD4EF6200AA460A /* OPPhotoCloud.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E894411BD4EF6200AA460A /* OPPhotoCloud.m */; settings = {ASSET_TAGS = (); }; };
 		18F405621B93683700E97458 /* OPCalendarDayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F405611B93683700E97458 /* OPCalendarDayView.m */; };
 		18F406341B94414C00E97458 /* UIColor+Remix.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F406331B94414C00E97458 /* UIColor+Remix.m */; };
 		18F406371B94461D00E97458 /* OPCalendarWeekDayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F406361B94461D00E97458 /* OPCalendarWeekDayView.m */; };
@@ -69,6 +70,8 @@
 		187412F61B9BE3BB0089CEFF /* CoreDataHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreDataHelper.h; sourceTree = "<group>"; };
 		187412F71B9BE3BB0089CEFF /* CoreDataHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreDataHelper.m; sourceTree = "<group>"; };
 		187413021B9C2A670089CEFF /* OnePhoto 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "OnePhoto 2.xcdatamodel"; sourceTree = "<group>"; };
+		18E894401BD4EF6200AA460A /* OPPhotoCloud.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPPhotoCloud.h; sourceTree = "<group>"; };
+		18E894411BD4EF6200AA460A /* OPPhotoCloud.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPPhotoCloud.m; sourceTree = "<group>"; };
 		18F405601B93683700E97458 /* OPCalendarDayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPCalendarDayView.h; sourceTree = "<group>"; };
 		18F405611B93683700E97458 /* OPCalendarDayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPCalendarDayView.m; sourceTree = "<group>"; };
 		18F406321B94414C00E97458 /* UIColor+Remix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Remix.h"; sourceTree = "<group>"; };
@@ -137,6 +140,7 @@
 		1867EB6B1B8F5E6400C10219 /* OnePhoto */ = {
 			isa = PBXGroup;
 			children = (
+				18E8943F1BD4EF2F00AA460A /* iCloud */,
 				18F7501B1BC8B2EC00B0BEB7 /* OnePhoto.entitlements */,
 				18F406311B94411300E97458 /* Categories */,
 				18F4055F1B9367F100E97458 /* CustomViews */,
@@ -192,6 +196,15 @@
 				1854ED381BCE480D00F4A397 /* OPFullscreenPhotoDisplayController.m */,
 			);
 			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		18E8943F1BD4EF2F00AA460A /* iCloud */ = {
+			isa = PBXGroup;
+			children = (
+				18E894401BD4EF6200AA460A /* OPPhotoCloud.h */,
+				18E894411BD4EF6200AA460A /* OPPhotoCloud.m */,
+			);
+			path = iCloud;
 			sourceTree = "<group>";
 		};
 		18F4055F1B9367F100E97458 /* CustomViews */ = {
@@ -419,6 +432,7 @@
 				18F406371B94461D00E97458 /* OPCalendarWeekDayView.m in Sources */,
 				18F4064E1B968D7B00E97458 /* OPVerticalCalendarView.m in Sources */,
 				1867EB721B8F5E6400C10219 /* AppDelegate.m in Sources */,
+				18E894421BD4EF6200AA460A /* OPPhotoCloud.m in Sources */,
 				187412F81B9BE3BB0089CEFF /* CoreDataHelper.m in Sources */,
 				18F405621B93683700E97458 /* OPCalendarDayView.m in Sources */,
 				1854ED391BCE480D00F4A397 /* OPFullscreenPhotoDisplayController.m in Sources */,

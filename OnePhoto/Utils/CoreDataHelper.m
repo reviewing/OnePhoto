@@ -31,31 +31,47 @@
     return sharedInstance;
 }
 
-- (void)insertUser:(NSString *)display_name withID:(NSString *)user_id {
+- (BOOL)isPhotoOfDateExists:(NSString *)date {
+    return [self getPhotoAt:date] != nil;
+}
+
+- (void)initUser:(NSString *)display_name {
     OPUser *user = [NSEntityDescription insertNewObjectForEntityForName:@"OPUser" inManagedObjectContext:_context];
     user.display_name = display_name;
-    user.user_id = user_id;
+    user.user_id = @"1photo@icloud";
     NSError *error;
     if (_context.hasChanges && ![_context save:&error]) {
         DHLogError(@"couldn't save: %@", [error localizedDescription]);
     }
 }
 
-- (BOOL)isPhotoOfDateExists:(NSString *)date ofUser:(NSString *)user_id {
-    return [self getPhotoAt:date ofUser:user_id] != nil;
+- (OPUser *)currentUser {
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    [request setEntity:[NSEntityDescription entityForName:@"OPUser" inManagedObjectContext:_context]];
+    NSError *error;
+    NSArray *users = [_context executeFetchRequest:request error:&error];
+    if (error) {
+        DHLogError(@"couldn't fetch: %@", [error localizedDescription]);
+    }
+    if ([users count] > 0) {
+        OPUser *user = [users objectAtIndex:0];
+        DHLogDebug(@"user: id(%@) name(%@)", user.user_id, user.display_name);
+        return user;
+    }
+    return nil;
 }
 
-- (void)insertPhoto:(NSString *)source_image_url toUser:(NSString *)user_id {
-    OPUser *user = [self fetchUserByID:user_id];
+- (void)insertPhoto:(NSString *)source_image_url {
+    OPUser *user = [self currentUser];
     if (user == nil) {
-        DHLogError(@"user not exists! id: %@", user_id);
+        DHLogError(@"user not exists!");
         return;
     }
     NSString *photoFileName = [source_image_url lastPathComponent];
     NSString *dateString = [photoFileName substringToIndex:[photoFileName length] - 4];
     
     // 删除老照片
-    OPPhoto *oldPhoto = [self getPhotoAt:dateString ofUser:user_id];
+    OPPhoto *oldPhoto = [self getPhotoAt:dateString];
     if (oldPhoto) {
         [_context deleteObject:oldPhoto];
         [self deleteImageCache:oldPhoto];
@@ -72,28 +88,10 @@
     }
 }
 
-- (OPUser *)fetchUserByID:(NSString *)user_id {
-    NSFetchRequest *request = [[NSFetchRequest alloc] init];
-    [request setEntity:[NSEntityDescription entityForName:@"OPUser" inManagedObjectContext:_context]];
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"user_id == %@", user_id];
-    [request setPredicate:predicate];
-    NSError *error;
-    NSArray *users = [_context executeFetchRequest:request error:&error];
-    if (error) {
-        DHLogError(@"couldn't fetch: %@", [error localizedDescription]);
-    }
-    if ([users count] > 0) {
-        OPUser *user = [users objectAtIndex:0];
-        DHLogDebug(@"user: id(%@) name(%@)", user.user_id, user.display_name);
-        return user;
-    }
-    return nil;
-}
-
-- (OPPhoto *)getPhotoAt:(NSString *)date ofUser:(NSString *)user_id {
+- (OPPhoto *)getPhotoAt:(NSString *)date {
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
     [request setEntity:[NSEntityDescription entityForName:@"OPPhoto" inManagedObjectContext:_context]];
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"user.user_id == %@ AND dateString == %@", user_id, date];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"dateString == %@", date];
     [request setPredicate:predicate];
     NSError *error;
     NSArray *photos = [_context executeFetchRequest:request error:&error];
@@ -107,10 +105,10 @@
     return nil;
 }
 
-- (NSArray *)getPhotosInMonth:(NSString *)month ofUser:(NSString *)user_id {
+- (NSArray *)getPhotosInMonth:(NSString *)month {
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
     [request setEntity:[NSEntityDescription entityForName:@"OPPhoto" inManagedObjectContext:_context]];
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"user.user_id == %@ AND dateString BEGINSWITH[c] %@", user_id, month];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"dateString BEGINSWITH[c] %@", month];
     [request setPredicate:predicate];
     NSError *error;
     NSArray *photos = [_context executeFetchRequest:request error:&error];

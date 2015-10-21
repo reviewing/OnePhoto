@@ -8,6 +8,7 @@
 
 #import "OPPhoto.h"
 #import "OPUser.h"
+#import "OPPhotoCloud.h"
 #import <FastImageCache/FICUtilities.h>
 
 NSString *const OPPhotoImageFormatFamily = @"OPPhotoImageFormatFamily";
@@ -31,8 +32,22 @@ CGSize const OPPhotoPixelImageSize = {1, 1};
 @dynamic user;
 
 - (UIImage *)sourceImage {
-    UIImage *sourceImage = [UIImage imageWithContentsOfFile:[DOCUMENTS_FOLDER stringByAppendingPathComponent:self.source_image_url]];
-    DHLogDebug(@"%@/%@", DOCUMENTS_FOLDER, self.source_image_url);
+    NSURL *ubiq = [[NSFileManager defaultManager] URLForUbiquityContainerIdentifier:nil];
+    NSURL *ubiquitousURL = [[ubiq URLByAppendingPathComponent:@"Documents"] URLByAppendingPathComponent:self.source_image_url];
+    OPPhotoCloud *photoCloud = [[OPPhotoCloud alloc] initWithFileURL:ubiquitousURL];
+    dispatch_semaphore_t waitForICloud = dispatch_semaphore_create(0);
+    [photoCloud openWithCompletionHandler:^(BOOL success) {
+        if (success) {
+            DHLogDebug(@"iCloud document opened");
+        } else {
+            DHLogDebug(@"failed opening document from iCloud");
+        }
+        dispatch_semaphore_signal(waitForICloud);
+    }];
+
+    dispatch_semaphore_wait(waitForICloud, DISPATCH_TIME_FOREVER);
+    UIImage *sourceImage = [UIImage imageWithData:photoCloud.imageData];
+    DHLogDebug(@"%@", [ubiquitousURL absoluteString]);
     return sourceImage;
 }
 

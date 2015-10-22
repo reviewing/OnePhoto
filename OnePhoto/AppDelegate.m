@@ -115,6 +115,12 @@
                                                        queue:[NSOperationQueue mainQueue]
                                                   usingBlock:^(NSNotification *note) {
                                                       DHLogDebug(@"NSPersistentStoreCoordinatorStoresDidChangeNotification: %@", [note.userInfo objectForKey:NSAddedPersistentStoresKey]);
+                                                      [self.managedObjectContext performBlock:^{
+                                                          [self.managedObjectContext mergeChangesFromContextDidSaveNotification:note];
+                                                          dispatch_async(dispatch_get_main_queue(), ^(){
+                                                              [[NSNotificationCenter defaultCenter] postNotificationName:OPCoreDataStoreMerged object:nil];
+                                                          });
+                                                      }];
                                                   }];
     [[NSNotificationCenter defaultCenter] addObserverForName:NSPersistentStoreDidImportUbiquitousContentChangesNotification
                                                       object:self.managedObjectContext.persistentStoreCoordinator

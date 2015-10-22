@@ -10,6 +10,7 @@
 
 #import "JTCalendarManager.h"
 #import "OPCalendarPageView.h"
+#import "CoreDataHelper.h"
 
 @interface OPVerticalCalendarView () <UIScrollViewDelegate, UITableViewDataSource, UITableViewDelegate>{
     NSDate *_startDate;
@@ -75,12 +76,7 @@
 
 - (void)setManager:(JTCalendarManager *)manager {
     self->_manager = manager;
-    static NSDateFormatter *dateFormatter = nil;
-    if (!dateFormatter) {
-        dateFormatter = [_manager.dateHelper createDateFormatter];
-        [dateFormatter setDateFormat:@"yyyyMMdd"];
-    }
-    _startDate = [dateFormatter dateFromString:@"20150101"];
+    _startDate = [[CoreDataHelper sharedHelper] firstDayIn1Photo];
 }
 
 #pragma mark - Table View Data Source

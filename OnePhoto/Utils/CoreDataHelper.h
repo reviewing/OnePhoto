@@ -27,6 +27,8 @@
 
 - (NSArray *)getPhotosInMonth:(NSString *)month;
 
+- (NSDate *)firstDayIn1Photo;
+
 - (NSSet *)allPhotos;
 
 @end

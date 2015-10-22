@@ -21,7 +21,6 @@
 #import <MobileCoreServices/MobileCoreServices.h>
 
 @interface RootViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate> {
-    NSDate *_startDate;
     NSInteger _callbackCount;
     
     BOOL _isFirstAppear;
@@ -61,12 +60,6 @@
 }
 
 - (void)viewDidLayoutSubviews {
-    static NSDateFormatter *dateFormatter = nil;
-    if (!dateFormatter) {
-        dateFormatter = [_calendarManager.dateHelper createDateFormatter];
-        [dateFormatter setDateFormat:@"yyyyMMdd"];
-    }
-    _startDate = [dateFormatter dateFromString:@"20150706"];
 }
 
 - (void)viewWillAppear:(BOOL)animated {

@@ -126,6 +126,18 @@
     return sortedPhotos;
 }
 
+- (NSDate *)firstDayIn1Photo {
+    NSSet *photos = [self allPhotos];
+    NSDate *firstDay = [NSDate date];
+    for (OPPhoto *photo in photos) {
+        NSDate *date = [[GlobalUtils dateFormatter] dateFromString:photo.dateString];
+        if ([firstDay compare:date] == NSOrderedDescending) {
+            firstDay = date;
+        }
+    }
+    return firstDay;
+}
+
 - (NSSet *)allPhotos {
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
     [request setEntity:[NSEntityDescription entityForName:@"OPPhoto" inManagedObjectContext:_context]];

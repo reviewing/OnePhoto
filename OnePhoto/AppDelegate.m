@@ -19,6 +19,13 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     [DHLogger setLogLevel:DH_LOG_DEBUG];
+
+    if ((DHLogLevel)[[NSUserDefaults standardUserDefaults] integerForKey:@"debug.level"] == DH_LOG_VERBOSE) {
+        [MobClick setLogEnabled:YES];
+    } else {
+        [MobClick setLogEnabled:NO];
+    }
+    [MobClick startWithAppkey:@"5628a669e0f55a25c5000386" reportPolicy:BATCH channelId:@"iOS"];
     
     OPPhotoSquareImageSize = CGSizeMake([UIScreen mainScreen].bounds.size.width / 7.f, [UIScreen mainScreen].bounds.size.width / 7.f);
     

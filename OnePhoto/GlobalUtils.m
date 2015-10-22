@@ -67,4 +67,52 @@ static NSDateFormatter *_dateFormatter = nil;
     return components.day;
 }
 
+#pragma mark - Stats
+
++ (void)newEvent:(NSString *)eventId {
+    [self newEvent:eventId attributes:[NSDictionary dictionaryWithObject:@"null" forKey:@"type"]];
+}
+
++ (void)newEvent:(NSString *)eventId type:(NSString *)type {
+    if ([type length] > 0) {
+        [self newEvent:eventId attributes:[NSDictionary dictionaryWithObject:type forKey:@"type"]];
+    } else {
+        [self newEvent:eventId attributes:[NSDictionary dictionaryWithObject:@"null" forKey:@"type"]];
+    }
+}
+
++ (void)newEvent:(NSString *)eventId attributes:(NSDictionary *)attrs {
+    [MobClick event:eventId attributes:attrs == nil ? [NSDictionary dictionaryWithObject:@"null" forKey:@"type"] : attrs];
+}
+
+#pragma mark - UI Utils
+
++ (void)alertMessage:(NSString *)message {
+#warning TODO: fix this later - memory leak here, don't know why
+    UIAlertView *toast = [[UIAlertView alloc] initWithTitle:@"发生错误"
+                                                    message:message
+                                                   delegate:self
+                                          cancelButtonTitle:@"确认"
+                                          otherButtonTitles:nil, nil];
+    [toast show];
+}
+
++ (void)alertError:(NSError *)error {
+    [self alertMessage:[NSString stringWithFormat:@"%@(code: %ld)", error.localizedDescription, (long)error.code]];
+}
+
++ (UIImage *)imageWithColor:(UIColor *)color {
+    CGRect rect = CGRectMake(0.0f, 0.0f, 1.0f, 1.0f);
+    UIGraphicsBeginImageContext(rect.size);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    
+    CGContextSetFillColorWithColor(context, [color CGColor]);
+    CGContextFillRect(context, rect);
+    
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return image;
+}
+
 @end

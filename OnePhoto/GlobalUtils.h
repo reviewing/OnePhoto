@@ -31,4 +31,16 @@ FOUNDATION_EXPORT NSString * const OPCoreDataStoreMerged;
 
 + (NSInteger)dayOfMonth:(NSDate *)date;
 
++ (void)alertMessage:(NSString *)message;
+
++ (void)alertError:(NSError *)error;
+
++ (void)newEvent:(NSString *)eventId;
+
++ (void)newEvent:(NSString *)eventId type:(NSString *)type;
+
++ (void)newEvent:(NSString *)eventId attributes:(NSDictionary *)attrs;
+
++ (UIImage *)imageWithColor:(UIColor *)color;
+
 @end

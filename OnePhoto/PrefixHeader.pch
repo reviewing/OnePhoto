@@ -16,6 +16,7 @@
 
 #import "DHLogger.h"
 #import "GlobalUtils.h"
+#import "MobClick.h"
 
 #define SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
 
@@ -34,5 +35,13 @@
                     alpha:((float)((rgbaValue & 0x000000FF) >>  0))/255.0]
 
 #endif
+
+#define SuppressPerformSelectorLeakWarning(Stuff) \
+    do { \
+        _Pragma("clang diagnostic push") \
+        _Pragma("clang diagnostic ignored \"-Warc-performSelector-leaks\"") \
+        Stuff; \
+        _Pragma("clang diagnostic pop") \
+    } while (0)
 
 #endif

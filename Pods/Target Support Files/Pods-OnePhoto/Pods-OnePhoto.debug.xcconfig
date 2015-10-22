@@ -1,5 +1,6 @@
 GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
-HEADER_SEARCH_PATHS = $(inherited) "${PODS_ROOT}/Headers/Public" "${PODS_ROOT}/Headers/Public/FastImageCache" "${PODS_ROOT}/Headers/Public/JTCalendar"
-OTHER_CFLAGS = $(inherited) -isystem "${PODS_ROOT}/Headers/Public" -isystem "${PODS_ROOT}/Headers/Public/FastImageCache" -isystem "${PODS_ROOT}/Headers/Public/JTCalendar"
-OTHER_LDFLAGS = $(inherited) -ObjC -l"FastImageCache" -l"JTCalendar"
+HEADER_SEARCH_PATHS = $(inherited) "${PODS_ROOT}/Headers/Public" "${PODS_ROOT}/Headers/Public/FastImageCache" "${PODS_ROOT}/Headers/Public/JTCalendar" "${PODS_ROOT}/Headers/Public/UMengAnalytics-NO-IDFA"
+LIBRARY_SEARCH_PATHS = "$(PODS_ROOT)/UMengAnalytics-NO-IDFA/**"
+OTHER_CFLAGS = $(inherited) -isystem "${PODS_ROOT}/Headers/Public" -isystem "${PODS_ROOT}/Headers/Public/FastImageCache" -isystem "${PODS_ROOT}/Headers/Public/JTCalendar" -isystem "${PODS_ROOT}/Headers/Public/UMengAnalytics-NO-IDFA"
+OTHER_LDFLAGS = $(inherited) -ObjC -l"FastImageCache" -l"JTCalendar" -l"MobClickLibrary" -l"z"
 PODS_ROOT = ${SRCROOT}/Pods

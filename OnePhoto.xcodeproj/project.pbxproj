@@ -7,7 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		184300591BD8EAEB00FDB147 /* Settings.plist in Resources */ = {isa = PBXBuildFile; fileRef = 184300581BD8EAEB00FDB147 /* Settings.plist */; settings = {ASSET_TAGS = (); }; };
 		1844F40A1BD764F200F65D26 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 1844F4091BD764F200F65D26 /* Settings.bundle */; settings = {ASSET_TAGS = (); }; };
+		1850F6EC1BD8DB0900818142 /* EditTextViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1850F6E71BD8DB0900818142 /* EditTextViewController.m */; settings = {ASSET_TAGS = (); }; };
+		1850F6ED1BD8DB0900818142 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1850F6E91BD8DB0900818142 /* SettingsViewController.m */; settings = {ASSET_TAGS = (); }; };
+		1850F6EE1BD8DB0900818142 /* ValueSelectorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1850F6EB1BD8DB0900818142 /* ValueSelectorViewController.m */; settings = {ASSET_TAGS = (); }; };
 		1854ED391BCE480D00F4A397 /* OPFullscreenPhotoDisplayController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1854ED381BCE480D00F4A397 /* OPFullscreenPhotoDisplayController.m */; settings = {ASSET_TAGS = (); }; };
 		1867EB6F1B8F5E6400C10219 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 1867EB6E1B8F5E6400C10219 /* main.m */; };
 		1867EB721B8F5E6400C10219 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1867EB711B8F5E6400C10219 /* AppDelegate.m */; };
@@ -45,7 +49,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		184300581BD8EAEB00FDB147 /* Settings.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Settings.plist; sourceTree = "<group>"; };
 		1844F4091BD764F200F65D26 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = Settings.bundle; path = OnePhoto/Settings.bundle; sourceTree = "<group>"; };
+		1850F6E61BD8DB0900818142 /* EditTextViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditTextViewController.h; sourceTree = "<group>"; };
+		1850F6E71BD8DB0900818142 /* EditTextViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditTextViewController.m; sourceTree = "<group>"; };
+		1850F6E81BD8DB0900818142 /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
+		1850F6E91BD8DB0900818142 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
+		1850F6EA1BD8DB0900818142 /* ValueSelectorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ValueSelectorViewController.h; sourceTree = "<group>"; };
+		1850F6EB1BD8DB0900818142 /* ValueSelectorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ValueSelectorViewController.m; sourceTree = "<group>"; };
 		1854ED371BCE480D00F4A397 /* OPFullscreenPhotoDisplayController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPFullscreenPhotoDisplayController.h; sourceTree = "<group>"; };
 		1854ED381BCE480D00F4A397 /* OPFullscreenPhotoDisplayController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPFullscreenPhotoDisplayController.m; sourceTree = "<group>"; };
 		1867EB691B8F5E6400C10219 /* OnePhoto.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OnePhoto.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -119,6 +130,27 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		184300571BD8EAEB00FDB147 /* PropertyList */ = {
+			isa = PBXGroup;
+			children = (
+				184300581BD8EAEB00FDB147 /* Settings.plist */,
+			);
+			path = PropertyList;
+			sourceTree = "<group>";
+		};
+		1850F6E51BD8DB0900818142 /* SettingViews */ = {
+			isa = PBXGroup;
+			children = (
+				1850F6E61BD8DB0900818142 /* EditTextViewController.h */,
+				1850F6E71BD8DB0900818142 /* EditTextViewController.m */,
+				1850F6E81BD8DB0900818142 /* SettingsViewController.h */,
+				1850F6E91BD8DB0900818142 /* SettingsViewController.m */,
+				1850F6EA1BD8DB0900818142 /* ValueSelectorViewController.h */,
+				1850F6EB1BD8DB0900818142 /* ValueSelectorViewController.m */,
+			);
+			path = SettingViews;
+			sourceTree = "<group>";
+		};
 		1867EB601B8F5E6400C10219 = {
 			isa = PBXGroup;
 			children = (
@@ -150,6 +182,8 @@
 				18F4063C1B95468400E97458 /* Entity */,
 				18F406381B944EAA00E97458 /* Utils */,
 				1867EB961B8F693D00C10219 /* ViewControllers */,
+				1850F6E51BD8DB0900818142 /* SettingViews */,
+				184300571BD8EAEB00FDB147 /* PropertyList */,
 				1867EB701B8F5E6400C10219 /* AppDelegate.h */,
 				1867EB711B8F5E6400C10219 /* AppDelegate.m */,
 				1867EB761B8F5E6400C10219 /* RootViewController.h */,
@@ -290,6 +324,7 @@
 				1867EB671B8F5E6400C10219 /* Resources */,
 				1867EB951B8F5F5A00C10219 /* ShellScript */,
 				83552204FD9E73FBABA4F304 /* Copy Pods Resources */,
+				ECFA10706851C01288A96F9A /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -370,6 +405,7 @@
 				1867EB7B1B8F5E6400C10219 /* Main.storyboard in Resources */,
 				1867EB801B8F5E6400C10219 /* LaunchScreen.xib in Resources */,
 				1867EB7D1B8F5E6400C10219 /* Images.xcassets in Resources */,
+				184300591BD8EAEB00FDB147 /* Settings.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -426,6 +462,21 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-OnePhoto/Pods-OnePhoto-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		ECFA10706851C01288A96F9A /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-OnePhoto/Pods-OnePhoto-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -444,12 +495,15 @@
 				1867EB6F1B8F5E6400C10219 /* main.m in Sources */,
 				18F406421B95492A00E97458 /* OPUser.m in Sources */,
 				1867EBB41B91F1CC00C10219 /* GlobalUtils.m in Sources */,
+				1850F6ED1BD8DB0900818142 /* SettingsViewController.m in Sources */,
 				1867EB781B8F5E6400C10219 /* RootViewController.m in Sources */,
 				18F4063B1B944EF600E97458 /* DHLogger.m in Sources */,
 				187412ED1B96D27B0089CEFF /* OPCalendarWeekView.m in Sources */,
 				18F406451B954A0C00E97458 /* OPPhoto.m in Sources */,
 				1867EB751B8F5E6400C10219 /* OnePhoto.xcdatamodeld in Sources */,
+				1850F6EE1BD8DB0900818142 /* ValueSelectorViewController.m in Sources */,
 				18F406341B94414C00E97458 /* UIColor+Remix.m in Sources */,
+				1850F6EC1BD8DB0900818142 /* EditTextViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

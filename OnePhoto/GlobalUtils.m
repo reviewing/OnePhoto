@@ -9,6 +9,8 @@
 #import "GlobalUtils.h"
 #import "UIColor+Remix.h"
 
+NSString * const OPCoreDataStoreMerged = @"OPCoreDataStoreMerged";
+
 static UIColor *_appBaseColor = nil;
 
 static NSDateFormatter *_dateFormatter = nil;

@@ -123,6 +123,9 @@
                                                       DHLogDebug(@"NSPersistentStoreDidImportUbiquitousContentChangesNotification");
                                                       [self.managedObjectContext performBlock:^{
                                                           [self.managedObjectContext mergeChangesFromContextDidSaveNotification:note];
+                                                          dispatch_async(dispatch_get_main_queue(), ^(){
+                                                              [[NSNotificationCenter defaultCenter] postNotificationName:OPCoreDataStoreMerged object:nil];
+                                                          });
                                                       }];
                                                   }];
 }

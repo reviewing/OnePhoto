@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
+FOUNDATION_EXPORT NSString * const OPCoreDataStoreMerged;
+
 @interface GlobalUtils : NSObject
 
 + (UIColor *)appBaseColor;

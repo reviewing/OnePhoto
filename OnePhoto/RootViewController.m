@@ -69,6 +69,15 @@
     _startDate = [dateFormatter dateFromString:@"20150706"];
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [[NSNotificationCenter defaultCenter] addObserverForName:OPCoreDataStoreMerged
+                                                      object:nil
+                                                       queue:[NSOperationQueue mainQueue]
+                                                  usingBlock:^(NSNotification *note) {
+                                                      [self.calendarContentView reloadData];
+                                                  }];
+}
+
 - (void)viewDidAppear:(BOOL)animated {
     if (_isFirstAppear) {
         _isFirstAppear = NO;

@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="2bH-Lm-3Us">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9059" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="2bH-Lm-3Us">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
-        <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
     </dependencies>
     <scenes>
         <!--Navigation Controller-->
@@ -76,19 +75,17 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="1 Photo" id="XEn-Bc-qdu">
-                        <rightBarButtonItems>
-                            <barButtonItem image="Setting" id="t4s-oY-ALX">
-                                <connections>
-                                    <action selector="setting:" destination="ko1-v8-1hz" id="Fj8-Fk-8jd"/>
-                                    <segue destination="mP5-ng-8Tp" kind="show" id="dVf-Rr-x69"/>
-                                </connections>
-                            </barButtonItem>
-                            <barButtonItem systemItem="camera" id="cAC-RD-rTJ">
-                                <connections>
-                                    <action selector="takePhoto:" destination="ko1-v8-1hz" id="IB1-4q-WRB"/>
-                                </connections>
-                            </barButtonItem>
-                        </rightBarButtonItems>
+                        <barButtonItem key="leftBarButtonItem" image="Setting" id="t4s-oY-ALX">
+                            <connections>
+                                <action selector="setting:" destination="ko1-v8-1hz" id="Fj8-Fk-8jd"/>
+                                <segue destination="WnY-ZZ-5uP" kind="presentation" id="BKv-8t-S32"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="camera" id="cAC-RD-rTJ">
+                            <connections>
+                                <action selector="takePhoto:" destination="ko1-v8-1hz" id="IB1-4q-WRB"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="calendarContentView" destination="YFV-3n-8GL" id="gMF-Ck-xiU"/>
@@ -99,18 +96,36 @@
             </objects>
             <point key="canvasLocation" x="-39" y="763"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="AYR-Ug-oPn">
+            <objects>
+                <navigationController id="WnY-ZZ-5uP" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" id="fE7-77-2uH">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <animations/>
+                        <color key="barTintColor" red="0.050980392159999999" green="0.74509803919999995" blue="0.69803921570000005" alpha="1" colorSpace="calibratedRGB"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="mP5-ng-8Tp" kind="relationship" relationship="rootViewController" id="owd-B0-3MY"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dtN-K9-lac" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-39" y="1462"/>
+        </scene>
         <!--设置-->
         <scene sceneID="ZqH-6N-WWM">
             <objects>
                 <tableViewController id="mP5-ng-8Tp" customClass="SettingsViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="Tn8-Yc-Gd7">
-                        <rect key="frame" x="0.0" y="64" width="600" height="536"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <animations/>
                         <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ActionCell" textLabel="tb6-zs-4Oy" style="IBUITableViewCellStyleDefault" id="eaB-1g-sFk">
-                                <rect key="frame" x="0.0" y="50" width="600" height="44"/>
+                                <rect key="frame" x="0.0" y="114" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="eaB-1g-sFk" id="GpO-Qx-FHb">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
@@ -130,7 +145,7 @@
                                 <animations/>
                             </tableViewCell>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="UserCell" textLabel="ADf-Yy-oEc" detailTextLabel="x2x-Iw-V8n" style="IBUITableViewCellStyleValue1" id="epH-GZ-Phf">
-                                <rect key="frame" x="0.0" y="94" width="600" height="44"/>
+                                <rect key="frame" x="0.0" y="158" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="epH-GZ-Phf" id="uVH-38-aJ0">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
@@ -158,7 +173,7 @@
                                 <animations/>
                             </tableViewCell>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="ArrayCell" textLabel="ys7-BY-FZn" detailTextLabel="DbQ-s5-BFe" style="IBUITableViewCellStyleValue1" id="A8X-yo-12G">
-                                <rect key="frame" x="0.0" y="138" width="600" height="44"/>
+                                <rect key="frame" x="0.0" y="202" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="A8X-yo-12G" id="Bvk-b7-PMr">
                                     <rect key="frame" x="0.0" y="0.0" width="567" height="43.5"/>
@@ -186,7 +201,7 @@
                                 <animations/>
                             </tableViewCell>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="TextCell" textLabel="9cb-PN-gVd" detailTextLabel="TaQ-Md-mkP" style="IBUITableViewCellStyleValue1" id="yAO-GT-4YO">
-                                <rect key="frame" x="0.0" y="182" width="600" height="44"/>
+                                <rect key="frame" x="0.0" y="246" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="yAO-GT-4YO" id="biY-sU-kxF">
                                     <rect key="frame" x="0.0" y="0.0" width="567" height="43.5"/>
@@ -214,7 +229,7 @@
                                 <animations/>
                             </tableViewCell>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ConstantCell" textLabel="KlU-al-lWC" detailTextLabel="7hn-5f-cH6" style="IBUITableViewCellStyleValue1" id="h4N-Vz-Djf">
-                                <rect key="frame" x="0.0" y="226" width="600" height="44"/>
+                                <rect key="frame" x="0.0" y="290" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="h4N-Vz-Djf" id="Zc0-p8-hAY">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
@@ -242,7 +257,7 @@
                                 <animations/>
                             </tableViewCell>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="BOOLCell" textLabel="y8O-5s-CPm" style="IBUITableViewCellStyleDefault" id="W4x-mo-N1U">
-                                <rect key="frame" x="0.0" y="270" width="600" height="44"/>
+                                <rect key="frame" x="0.0" y="334" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="W4x-mo-N1U" id="4rg-Hh-V8d">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
@@ -262,7 +277,7 @@
                                 <animations/>
                             </tableViewCell>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="DefaultCell" textLabel="PhO-bu-qnN" style="IBUITableViewCellStyleDefault" id="umD-U1-JDc">
-                                <rect key="frame" x="0.0" y="314" width="600" height="44"/>
+                                <rect key="frame" x="0.0" y="378" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="umD-U1-JDc" id="oAQ-5y-f3J">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
@@ -287,11 +302,17 @@
                             <outlet property="delegate" destination="mP5-ng-8Tp" id="LGU-yC-ZgG"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="设置" id="gOo-ib-Dpy"/>
+                    <navigationItem key="navigationItem" title="设置" id="gOo-ib-Dpy">
+                        <barButtonItem key="rightBarButtonItem" title="完成" id="mPU-oW-puD">
+                            <connections>
+                                <action selector="back:" destination="mP5-ng-8Tp" id="SOG-Dg-VtB"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5ng-Pd-hT7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-39" y="1450"/>
+            <point key="canvasLocation" x="659" y="1462"/>
         </scene>
     </scenes>
     <resources>

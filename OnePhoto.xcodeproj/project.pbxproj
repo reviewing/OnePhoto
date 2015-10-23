@@ -636,6 +636,7 @@
 				CODE_SIGN_ENTITLEMENTS = OnePhoto/OnePhoto.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				ENABLE_BITCODE = NO;
 				GCC_PREFIX_HEADER = OnePhoto/PrefixHeader.pch;
 				INFOPLIST_FILE = OnePhoto/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -655,6 +656,7 @@
 				CODE_SIGN_ENTITLEMENTS = OnePhoto/OnePhoto.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				ENABLE_BITCODE = NO;
 				GCC_PREFIX_HEADER = OnePhoto/PrefixHeader.pch;
 				INFOPLIST_FILE = OnePhoto/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;

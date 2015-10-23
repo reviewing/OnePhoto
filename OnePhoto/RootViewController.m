@@ -69,7 +69,36 @@
                                                   usingBlock:^(NSNotification *note) {
                                                       [self.calendarContentView reloadData];
                                                   }];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(applicationDidBecomeActive:)
+                                                 name:UIApplicationDidBecomeActiveNotification
+                                               object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(applicationWillResignActive:)
+                                                 name:UIApplicationWillResignActiveNotification
+                                               object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(applicationSignificantTimeChange:)
+                                                 name:UIApplicationSignificantTimeChangeNotification
+                                               object:nil];
 }
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+- (void)applicationDidBecomeActive:(NSNotification *)notification {
+    [self.calendarContentView reloadData];
+}
+
+- (void)applicationWillResignActive:(NSNotification *)notification {
+
+}
+
+- (void)applicationSignificantTimeChange:(NSNotification *)notification {
+    [self.calendarContentView reloadData];
+}
+
 
 - (void)viewDidAppear:(BOOL)animated {
     if (_isFirstAppear) {

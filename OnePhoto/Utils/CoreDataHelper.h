@@ -8,20 +8,17 @@
 
 #import <Foundation/Foundation.h>
 
-@class OPUser;
 @class OPPhoto;
 
 @interface CoreDataHelper : NSObject
 
 + (instancetype)sharedHelper;
 
-- (void)initUser:(NSString *)display_name;
-
-- (OPUser *)currentUser;
-
 - (BOOL)isPhotoOfDateExists:(NSString *)date;
 
 - (void)insertPhoto:(NSString *)source_image_url;
+
+- (void)deletePhoto:(OPPhoto *)photo;
 
 - (OPPhoto *)getPhotoAt:(NSString *)date;
 

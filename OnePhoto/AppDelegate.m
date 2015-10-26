@@ -54,17 +54,13 @@
     FICImageCache *sharedImageCache = [FICImageCache sharedImageCache];
     [sharedImageCache setDelegate:self];
     [sharedImageCache setFormats:mutableImageFormats];
-    
-    if (![[CoreDataHelper sharedHelper] currentUser]) {
-        [[CoreDataHelper sharedHelper] initUser:@"弘哥保护你"];
-    }
-
+        
     NSURL *ubiq = [[NSFileManager defaultManager] URLForUbiquityContainerIdentifier:nil];
     if (ubiq) {
         DHLogDebug(@"iCloud access at %@", ubiq);
         NSURL *photoFolder = [[ubiq URLByAppendingPathComponent:@"Documents"] URLByAppendingPathComponent:@"photos"];
         
-        if (![[NSUserDefaults standardUserDefaults] boolForKey:@"photos.dir.created"]) {
+//        if (![[NSUserDefaults standardUserDefaults] boolForKey:@"photos.dir.created"]) {
             NSError *error;
             [[NSFileManager defaultManager] createDirectoryAtURL:photoFolder withIntermediateDirectories:YES attributes:nil error:&error];
             if(error) {
@@ -73,7 +69,7 @@
                 DHLogDebug(@"createDirectoryAtURL succeed");
                 [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:YES] forKey:@"photos.dir.created"];
             }            
-        }
+//        }
     } else {
         DHLogError(@"No iCloud access");
     }

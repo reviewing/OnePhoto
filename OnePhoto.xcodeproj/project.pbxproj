@@ -7,12 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		184300591BD8EAEB00FDB147 /* Settings.plist in Resources */ = {isa = PBXBuildFile; fileRef = 184300581BD8EAEB00FDB147 /* Settings.plist */; settings = {ASSET_TAGS = (); }; };
-		1844F40A1BD764F200F65D26 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 1844F4091BD764F200F65D26 /* Settings.bundle */; settings = {ASSET_TAGS = (); }; };
-		1850F6EC1BD8DB0900818142 /* EditTextViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1850F6E71BD8DB0900818142 /* EditTextViewController.m */; settings = {ASSET_TAGS = (); }; };
-		1850F6ED1BD8DB0900818142 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1850F6E91BD8DB0900818142 /* SettingsViewController.m */; settings = {ASSET_TAGS = (); }; };
-		1850F6EE1BD8DB0900818142 /* ValueSelectorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1850F6EB1BD8DB0900818142 /* ValueSelectorViewController.m */; settings = {ASSET_TAGS = (); }; };
-		1854ED391BCE480D00F4A397 /* OPFullscreenPhotoDisplayController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1854ED381BCE480D00F4A397 /* OPFullscreenPhotoDisplayController.m */; settings = {ASSET_TAGS = (); }; };
+		184300591BD8EAEB00FDB147 /* Settings.plist in Resources */ = {isa = PBXBuildFile; fileRef = 184300581BD8EAEB00FDB147 /* Settings.plist */; };
+		1844F40A1BD764F200F65D26 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 1844F4091BD764F200F65D26 /* Settings.bundle */; };
+		1850F6EC1BD8DB0900818142 /* EditTextViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1850F6E71BD8DB0900818142 /* EditTextViewController.m */; };
+		1850F6ED1BD8DB0900818142 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1850F6E91BD8DB0900818142 /* SettingsViewController.m */; };
+		1850F6EE1BD8DB0900818142 /* ValueSelectorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1850F6EB1BD8DB0900818142 /* ValueSelectorViewController.m */; };
+		1854ED391BCE480D00F4A397 /* OPFullscreenPhotoDisplayController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1854ED381BCE480D00F4A397 /* OPFullscreenPhotoDisplayController.m */; };
 		1867EB6F1B8F5E6400C10219 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 1867EB6E1B8F5E6400C10219 /* main.m */; };
 		1867EB721B8F5E6400C10219 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1867EB711B8F5E6400C10219 /* AppDelegate.m */; };
 		1867EB751B8F5E6400C10219 /* OnePhoto.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1867EB731B8F5E6400C10219 /* OnePhoto.xcdatamodeld */; };
@@ -25,12 +25,11 @@
 		187412ED1B96D27B0089CEFF /* OPCalendarWeekView.m in Sources */ = {isa = PBXBuildFile; fileRef = 187412EC1B96D27B0089CEFF /* OPCalendarWeekView.m */; };
 		187412F01B96D3790089CEFF /* OPCalendarPageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 187412EF1B96D3790089CEFF /* OPCalendarPageView.m */; };
 		187412F81B9BE3BB0089CEFF /* CoreDataHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 187412F71B9BE3BB0089CEFF /* CoreDataHelper.m */; };
-		18E894421BD4EF6200AA460A /* OPPhotoCloud.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E894411BD4EF6200AA460A /* OPPhotoCloud.m */; settings = {ASSET_TAGS = (); }; };
+		18E894421BD4EF6200AA460A /* OPPhotoCloud.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E894411BD4EF6200AA460A /* OPPhotoCloud.m */; };
 		18F405621B93683700E97458 /* OPCalendarDayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F405611B93683700E97458 /* OPCalendarDayView.m */; };
 		18F406341B94414C00E97458 /* UIColor+Remix.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F406331B94414C00E97458 /* UIColor+Remix.m */; };
 		18F406371B94461D00E97458 /* OPCalendarWeekDayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F406361B94461D00E97458 /* OPCalendarWeekDayView.m */; };
 		18F4063B1B944EF600E97458 /* DHLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F4063A1B944EF600E97458 /* DHLogger.m */; };
-		18F406421B95492A00E97458 /* OPUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F406411B95492A00E97458 /* OPUser.m */; };
 		18F406451B954A0C00E97458 /* OPPhoto.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F406441B954A0C00E97458 /* OPPhoto.m */; };
 		18F406471B957F1900E97458 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18F406461B957F1900E97458 /* MobileCoreServices.framework */; };
 		18F4064E1B968D7B00E97458 /* OPVerticalCalendarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F4064D1B968D7B00E97458 /* OPVerticalCalendarView.m */; };
@@ -93,8 +92,6 @@
 		18F406361B94461D00E97458 /* OPCalendarWeekDayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPCalendarWeekDayView.m; sourceTree = "<group>"; };
 		18F406391B944EF600E97458 /* DHLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DHLogger.h; sourceTree = "<group>"; };
 		18F4063A1B944EF600E97458 /* DHLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DHLogger.m; sourceTree = "<group>"; };
-		18F406401B95492A00E97458 /* OPUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPUser.h; sourceTree = "<group>"; };
-		18F406411B95492A00E97458 /* OPUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPUser.m; sourceTree = "<group>"; };
 		18F406431B954A0C00E97458 /* OPPhoto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPPhoto.h; sourceTree = "<group>"; };
 		18F406441B954A0C00E97458 /* OPPhoto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPPhoto.m; sourceTree = "<group>"; };
 		18F406461B957F1900E97458 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
@@ -284,8 +281,6 @@
 		18F4063C1B95468400E97458 /* Entity */ = {
 			isa = PBXGroup;
 			children = (
-				18F406401B95492A00E97458 /* OPUser.h */,
-				18F406411B95492A00E97458 /* OPUser.m */,
 				18F406431B954A0C00E97458 /* OPPhoto.h */,
 				18F406441B954A0C00E97458 /* OPPhoto.m */,
 			);
@@ -493,7 +488,6 @@
 				1854ED391BCE480D00F4A397 /* OPFullscreenPhotoDisplayController.m in Sources */,
 				187412F01B96D3790089CEFF /* OPCalendarPageView.m in Sources */,
 				1867EB6F1B8F5E6400C10219 /* main.m in Sources */,
-				18F406421B95492A00E97458 /* OPUser.m in Sources */,
 				1867EBB41B91F1CC00C10219 /* GlobalUtils.m in Sources */,
 				1850F6ED1BD8DB0900818142 /* SettingsViewController.m in Sources */,
 				1867EB781B8F5E6400C10219 /* RootViewController.m in Sources */,

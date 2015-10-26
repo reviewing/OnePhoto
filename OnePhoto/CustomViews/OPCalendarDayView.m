@@ -109,10 +109,10 @@
 }
 
 - (void)setPhoto:(OPPhoto *)photo {
-    __block NSDate *date = [_date copy];
+    __block NSString *date = [[GlobalUtils dateFormatter] stringFromDate:_date];
     if (photo && ![photo isEqual:[NSNull null]]) {
         [[FICImageCache sharedImageCache] asynchronouslyRetrieveImageForEntity:photo withFormatName:OPPhotoSquareImage32BitBGRFormatName completionBlock:^(id<FICEntity> entity, NSString *formatName, UIImage *image) {
-            if (date == _date) {
+            if ([date isEqualToString:[[GlobalUtils dateFormatter] stringFromDate:_date]]) {
                 [_photoView setImage:image];
             }
         }];

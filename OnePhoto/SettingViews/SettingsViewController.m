@@ -88,6 +88,7 @@
     static NSString *arrayCellIdentifier = @"ArrayCell";
     static NSString *userCellIdentifier = @"UserCell";
     static NSString *actionCellIdentifier = @"ActionCell";
+    static NSString *rightDetailCellIdentifier = @"RightDetailCell";
 
     NSString *type = [self objectForKey:@"type" atIndexPath:indexPath];
     NSString *cellIdentifier = @"DefaultCell";
@@ -103,6 +104,8 @@
         cellIdentifier = userCellIdentifier;
     } else if ([type isEqualToString:@"Action"]) {
         cellIdentifier = actionCellIdentifier;
+    } else if ([type isEqualToString:@"SubPage"]) {
+        cellIdentifier = rightDetailCellIdentifier;
     }
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
@@ -139,6 +142,8 @@
         cell.detailTextLabel.text = user;
     } else if ([type isEqualToString:@"Action"]) {
         // NOTHING
+    } else if ([type isEqualToString:@"SubPage"]) {
+        cell.detailTextLabel.text = [self getDetailForSubPage:[self objectForKey:@"key" atIndexPath:indexPath]];
     }
     
     cell.textLabel.text = [self objectForKey:@"name" atIndexPath:indexPath];
@@ -179,6 +184,10 @@
         [[NSUserDefaults standardUserDefaults] synchronize];
         [self.navigationController popToRootViewControllerAnimated:YES];
     }
+}
+
+- (NSString *)getDetailForSubPage:(NSString *)key {
+    return key;
 }
 
 #pragma mark - Access Defaults

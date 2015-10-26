@@ -7,7 +7,6 @@
 //
 
 #import "OPPhoto.h"
-#import "OPUser.h"
 #import "OPPhotoCloud.h"
 #import <FastImageCache/FICUtilities.h>
 
@@ -29,7 +28,6 @@ CGSize const OPPhotoPixelImageSize = {1, 1};
 
 @dynamic source_image_url;
 @dynamic dateString;
-@dynamic user;
 
 - (UIImage *)sourceImage {
     NSURL *ubiq = [[NSFileManager defaultManager] URLForUbiquityContainerIdentifier:nil];

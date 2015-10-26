@@ -7,7 +7,6 @@
 //
 
 #import "CoreDataHelper.h"
-#import "OPUser.h"
 #import "OPPhoto.h"
 #import "AppDelegate.h"
 #import <FastImageCache/FICImageCache.h>
@@ -35,38 +34,7 @@
     return [self getPhotoAt:date] != nil;
 }
 
-- (void)initUser:(NSString *)display_name {
-    OPUser *user = [NSEntityDescription insertNewObjectForEntityForName:@"OPUser" inManagedObjectContext:_context];
-    user.display_name = display_name;
-    user.user_id = @"1photo@icloud";
-    NSError *error;
-    if (_context.hasChanges && ![_context save:&error]) {
-        DHLogError(@"couldn't save: %@", [error localizedDescription]);
-    }
-}
-
-- (OPUser *)currentUser {
-    NSFetchRequest *request = [[NSFetchRequest alloc] init];
-    [request setEntity:[NSEntityDescription entityForName:@"OPUser" inManagedObjectContext:_context]];
-    NSError *error;
-    NSArray *users = [_context executeFetchRequest:request error:&error];
-    if (error) {
-        DHLogError(@"couldn't fetch: %@", [error localizedDescription]);
-    }
-    if ([users count] > 0) {
-        OPUser *user = [users objectAtIndex:0];
-        DHLogDebug(@"user: id(%@) name(%@)", user.user_id, user.display_name);
-        return user;
-    }
-    return nil;
-}
-
 - (void)insertPhoto:(NSString *)source_image_url {
-    OPUser *user = [self currentUser];
-    if (user == nil) {
-        DHLogError(@"user not exists!");
-        return;
-    }
     NSString *photoFileName = [source_image_url lastPathComponent];
     NSString *dateString = [photoFileName substringToIndex:[photoFileName length] - 4];
     
@@ -80,12 +48,25 @@
     OPPhoto *photo = [NSEntityDescription insertNewObjectForEntityForName:@"OPPhoto" inManagedObjectContext:_context];
     photo.source_image_url = source_image_url;
     photo.dateString = dateString;
-    photo.user = user;
-    [user addPhotosObject:photo];
     NSError *error;
     if (_context.hasChanges && ![_context save:&error]) {
         DHLogError(@"couldn't save: %@", [error localizedDescription]);
     }
+}
+
+- (void)deletePhoto:(OPPhoto *)photo {
+    [_context deleteObject:photo];
+    [self deleteImageCache:photo];
+    NSURL *ubiq = [[NSFileManager defaultManager] URLForUbiquityContainerIdentifier:nil];
+    NSURL *ubiquitousURL = [[ubiq URLByAppendingPathComponent:@"Documents"] URLByAppendingPathComponent:photo.source_image_url];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
+        NSFileCoordinator* fileCoordinator = [[NSFileCoordinator alloc] initWithFilePresenter:nil];
+        [fileCoordinator coordinateWritingItemAtURL:ubiquitousURL options:NSFileCoordinatorWritingForDeleting
+                                              error:nil byAccessor:^(NSURL* writingURL) {
+                                                  NSFileManager* fileManager = [[NSFileManager alloc] init];
+                                                  [fileManager removeItemAtURL:writingURL error:nil];
+                                              }];
+    });
 }
 
 - (OPPhoto *)getPhotoAt:(NSString *)date {
@@ -118,6 +99,7 @@
         [sortedPhotos addObject:[NSNull null]];
     }
     for (OPPhoto *photo in photos) {
+        [sortedPhotos removeObjectAtIndex:[[photo.dateString substringFromIndex:6] integerValue] - 1];
         [sortedPhotos insertObject:photo atIndex:[[photo.dateString substringFromIndex:6] integerValue] - 1];
     }
     if (error) {

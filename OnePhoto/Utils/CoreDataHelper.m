@@ -55,7 +55,6 @@
 }
 
 - (void)deletePhoto:(OPPhoto *)photo {
-    [_context deleteObject:photo];
     [self deleteImageCache:photo];
     NSURL *ubiq = [[NSFileManager defaultManager] URLForUbiquityContainerIdentifier:nil];
     NSURL *ubiquitousURL = [[ubiq URLByAppendingPathComponent:@"Documents"] URLByAppendingPathComponent:photo.source_image_url];
@@ -67,6 +66,11 @@
                                                   [fileManager removeItemAtURL:writingURL error:nil];
                                               }];
     });
+    [_context deleteObject:photo];
+    NSError *error;
+    if (_context.hasChanges && ![_context save:&error]) {
+        DHLogError(@"couldn't save: %@", [error localizedDescription]);
+    }
 }
 
 - (OPPhoto *)getPhotoAt:(NSString *)date {

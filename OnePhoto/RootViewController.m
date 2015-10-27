@@ -183,6 +183,8 @@
         [photoCloud saveToURL:[photoCloud fileURL] forSaveOperation:UIDocumentSaveForCreating completionHandler:^(BOOL success) {
             if (success) {
                 DHLogDebug(@"document saved successfully");
+            } else {
+                [GlobalUtils alertMessage:@"保存图片失败，请检查iCloud账户设置后重试"];
             }
         }];
     }
@@ -230,28 +232,44 @@
 - (void)calendar:(JTCalendarManager *)calendar didTouchDayView:(UIView<JTCalendarDay> *)dayView {
     OPCalendarDayView *lOPDayView = (OPCalendarDayView *)dayView;
     OPPhoto *photo = [[CoreDataHelper sharedHelper] getPhotoAt:[GlobalUtils stringFromDate:lOPDayView.date]];
-    if (photo) {
-        _photos = [[CoreDataHelper sharedHelper] allPhotosSorted];
-        
-        MWPhotoBrowser *browser = [[MWPhotoBrowser alloc] initWithDelegate:self];
-        browser.displayActionButton = YES;
-        browser.displayNavArrows = YES;
-        browser.alwaysShowControls = YES;
-        browser.zoomPhotosToFill = YES;
-
-        [browser showNextPhotoAnimated:YES];
-        [browser showPreviousPhotoAnimated:YES];
-        [browser setCurrentPhotoIndex:[_photos indexOfObject:photo]];
-        
-        UINavigationController *nc = [[UINavigationController alloc] initWithRootViewController:browser];
-        nc.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-        [self presentViewController:nc animated:YES completion:nil];
-    } else {
-        if ([calendar.dateHelper date:lOPDayView.date isTheSameDayThan:[NSDate date]]) {
-            [self startCameraControllerFromViewController:self usingDelegate:self];
-        } else {
-//            _specifiedDate = lOPDayView.date;
-//            [self startCameraControllerFromViewController:self usingDelegate:self];
+    
+    switch (lOPDayView.touchEvent) {
+        case OP_DAY_TOUCH_UP: {
+            if (photo) {
+                _photos = [[CoreDataHelper sharedHelper] allPhotosSorted];
+                
+                MWPhotoBrowser *browser = [[MWPhotoBrowser alloc] initWithDelegate:self];
+                browser.displayActionButton = YES;
+                browser.displayNavArrows = YES;
+                browser.alwaysShowControls = YES;
+                browser.zoomPhotosToFill = YES;
+                
+                [browser showNextPhotoAnimated:YES];
+                [browser showPreviousPhotoAnimated:YES];
+                [browser setCurrentPhotoIndex:[_photos indexOfObject:photo]];
+                
+                UINavigationController *nc = [[UINavigationController alloc] initWithRootViewController:browser];
+                nc.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+                [self presentViewController:nc animated:YES completion:nil];
+            } else {
+                if ([calendar.dateHelper date:lOPDayView.date isTheSameDayThan:[NSDate date]]) {
+                    [self startCameraControllerFromViewController:self usingDelegate:self];
+                } else {
+//                    _specifiedDate = lOPDayView.date;
+//                    [self startCameraControllerFromViewController:self usingDelegate:self];
+                }
+            }
+            break;
+        }
+        case OP_DAY_TOUCH_DELETE: {
+            if (photo) {
+                [[CoreDataHelper sharedHelper] deletePhoto:photo];
+                [lOPDayView setPhoto:nil];
+            }
+            break;
+        }
+        default: {
+            break;
         }
     }
 }

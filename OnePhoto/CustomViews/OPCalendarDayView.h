@@ -11,6 +11,11 @@
 
 @class OPPhoto;
 
+typedef NS_ENUM(NSInteger, OP_DAY_TOUCH_EVENT) {
+    OP_DAY_TOUCH_UP = 1,
+    OP_DAY_TOUCH_DELETE = 2,
+};
+
 @interface OPCalendarDayView : UIView <JTCalendarDay>
 
 @property (nonatomic, weak) JTCalendarManager *manager;
@@ -24,5 +29,7 @@
 @property (nonatomic) BOOL isFromAnotherMonth;
 
 - (void)setPhoto:(OPPhoto *)photo;
+
+@property (nonatomic) OP_DAY_TOUCH_EVENT touchEvent;
 
 @end

@@ -14,6 +14,8 @@
 
 @interface OPCalendarDayView ()
 
+@property (nonatomic, strong) OPPhoto *photo;
+
 @end
 
 @implementation OPCalendarDayView
@@ -76,10 +78,12 @@
     }
     
     {
-        UITapGestureRecognizer *gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didTouch)];
-        
         self.userInteractionEnabled = YES;
-        [self addGestureRecognizer:gesture];
+
+        UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didTouch)];
+        [self addGestureRecognizer:tapGesture];
+        UILongPressGestureRecognizer *longPressGesture = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPressGesture:)];
+        [self addGestureRecognizer:longPressGesture];
     }
 }
 
@@ -111,6 +115,7 @@
 - (void)setPhoto:(OPPhoto *)photo {
     __block NSString *date = [[GlobalUtils dateFormatter] stringFromDate:_date];
     if (photo && ![photo isEqual:[NSNull null]]) {
+        _photo = photo;
         [[FICImageCache sharedImageCache] asynchronouslyRetrieveImageForEntity:photo withFormatName:OPPhotoSquareImage32BitBGRFormatName completionBlock:^(id<FICEntity> entity, NSString *formatName, UIImage *image) {
             if ([date isEqualToString:[[GlobalUtils dateFormatter] stringFromDate:_date]]) {
                 [_photoView setImage:image];
@@ -142,6 +147,32 @@
 
 - (void)didTouch
 {
+    self.touchEvent = OP_DAY_TOUCH_UP;
+    [_manager.delegateManager didTouchDayView:self];
+}
+
+- (void)handleLongPressGesture:(UIGestureRecognizer *)recognizer  {
+    if (recognizer.state == UIGestureRecognizerStateRecognized) {
+        [self becomeFirstResponder];
+        UIMenuController *menuController = [UIMenuController sharedMenuController];
+        [menuController setTargetRect:recognizer.view.frame inView:recognizer.view.superview];
+        [menuController setMenuVisible:YES animated:YES];
+    }
+}
+
+- (BOOL)canBecomeFirstResponder {
+    return YES;
+}
+
+- (BOOL)canPerformAction:(SEL)action withSender:(id)sender {
+    if (!self.photo) {
+        return NO;
+    }
+    return (action == @selector(delete:));
+}
+
+- (void)delete:(id)sender {
+    self.touchEvent = OP_DAY_TOUCH_DELETE;
     [_manager.delegateManager didTouchDayView:self];
 }
 

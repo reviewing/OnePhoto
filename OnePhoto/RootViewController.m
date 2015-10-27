@@ -81,6 +81,7 @@
                                              selector:@selector(applicationSignificantTimeChange:)
                                                  name:UIApplicationSignificantTimeChangeNotification
                                                object:nil];
+    [self.calendarContentView reloadData];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -134,6 +135,8 @@
     cameraUI.delegate = delegate;
     
     [controller presentViewController:cameraUI animated:YES completion:nil];
+    
+    [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
     return YES;
 }
 

@@ -7,7 +7,7 @@
 		<array>
 			<dict>
 				<key>key</key>
-				<string>reminders</string>
+				<string>reminder.time</string>
 				<key>name</key>
 				<string>提醒</string>
 				<key>type</key>

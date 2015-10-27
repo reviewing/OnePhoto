@@ -38,7 +38,27 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated {
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(applicationDidBecomeActive:)
+                                                 name:UIApplicationDidBecomeActiveNotification
+                                               object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(applicationWillResignActive:)
+                                                 name:UIApplicationWillResignActiveNotification
+                                               object:nil];
     [self.tableView reloadData];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+- (void)applicationDidBecomeActive:(NSNotification *)notification {
+    [self.tableView reloadData];
+}
+
+- (void)applicationWillResignActive:(NSNotification *)notification {
+    
 }
 
 #pragma mark - Navigation
@@ -157,8 +177,8 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     NSString *type = [self objectForKey:@"type" atIndexPath:indexPath];
+    NSString *key = [self objectForKey:@"key" atIndexPath:indexPath];
     if ([type isEqualToString:@"User"]) {
-        NSString *key = [self objectForKey:@"key" atIndexPath:indexPath];
         NSString *user = [[NSUserDefaults standardUserDefaults] stringForKey:key];
         if (!user) {
             [self.navigationController popToRootViewControllerAnimated:YES];
@@ -167,6 +187,14 @@
         }
     } else if ([type isEqualToString:@"Action"]) {
         [self signOutAction];
+    } else if ([type isEqualToString:@"SubPage"]) {
+        if ([key isEqualToString:REMINDER_TIME_KEY]) {
+            if ([[UIApplication sharedApplication] currentUserNotificationSettings].types != UIUserNotificationTypeNone) {
+                [self performSegueWithIdentifier:@"ReminderSegue" sender:nil];
+            } else {
+                [GlobalUtils alertMessage:@"1 Photo的通知已被禁用，请于iOS设置中打开"];
+            }
+        }
     }
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
@@ -187,6 +215,17 @@
 }
 
 - (NSString *)getDetailForSubPage:(NSString *)key {
+    if ([key isEqualToString:REMINDER_TIME_KEY]) {
+        if ([[UIApplication sharedApplication] currentUserNotificationSettings].types != UIUserNotificationTypeNone) {
+            if ([[NSUserDefaults standardUserDefaults] objectForKey:key]) {
+                return [[GlobalUtils HHmmFormatter] stringFromDate:[[NSUserDefaults standardUserDefaults] objectForKey:key]];
+            } else {
+                return @"未设置";
+            }
+        } else {
+            return @"未设置";
+        }
+    }
     return key;
 }
 

@@ -15,6 +15,8 @@ static UIColor *_appBaseColor = nil;
 
 static NSDateFormatter *_dateFormatter = nil;
 
+static NSDateFormatter *_HHmmFormatter = nil;
+
 @implementation GlobalUtils
 
 + (UIColor *)appBaseColor {
@@ -54,6 +56,16 @@ static NSDateFormatter *_dateFormatter = nil;
     return [[self dateFormatter] stringFromDate:date];
 }
 
++ (NSDateFormatter *)HHmmFormatter {
+    if (_HHmmFormatter == nil) {
+        _HHmmFormatter = [NSDateFormatter new];
+        _HHmmFormatter.timeZone = [NSTimeZone systemTimeZone];
+        _HHmmFormatter.locale = [NSLocale currentLocale];
+        [_HHmmFormatter setDateFormat:@"HH:mm"];
+    }
+    return _HHmmFormatter;
+}
+
 + (NSUInteger)daysOfMonthByDate:(NSDate *)date {
     NSCalendar *c = [NSCalendar currentCalendar];
     NSRange days = [c rangeOfUnit:NSCalendarUnitDay
@@ -89,7 +101,7 @@ static NSDateFormatter *_dateFormatter = nil;
 
 + (void)alertMessage:(NSString *)message {
 #warning TODO: fix this later - memory leak here, don't know why
-    UIAlertView *toast = [[UIAlertView alloc] initWithTitle:@"发生错误"
+    UIAlertView *toast = [[UIAlertView alloc] initWithTitle:@"提示"
                                                     message:message
                                                    delegate:self
                                           cancelButtonTitle:@"确认"

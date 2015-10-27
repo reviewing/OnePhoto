@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		183C69FC1BDE0DDB008E93AB /* ReminderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 183C69FB1BDE0DDB008E93AB /* ReminderViewController.m */; };
 		184300591BD8EAEB00FDB147 /* Settings.plist in Resources */ = {isa = PBXBuildFile; fileRef = 184300581BD8EAEB00FDB147 /* Settings.plist */; };
 		1844F40A1BD764F200F65D26 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 1844F4091BD764F200F65D26 /* Settings.bundle */; };
 		1850F6EC1BD8DB0900818142 /* EditTextViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1850F6E71BD8DB0900818142 /* EditTextViewController.m */; };
@@ -48,6 +49,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		183C69FA1BDE0DDB008E93AB /* ReminderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReminderViewController.h; sourceTree = "<group>"; };
+		183C69FB1BDE0DDB008E93AB /* ReminderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReminderViewController.m; sourceTree = "<group>"; };
 		184300581BD8EAEB00FDB147 /* Settings.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Settings.plist; sourceTree = "<group>"; };
 		1844F4091BD764F200F65D26 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = Settings.bundle; path = OnePhoto/Settings.bundle; sourceTree = "<group>"; };
 		1850F6E61BD8DB0900818142 /* EditTextViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditTextViewController.h; sourceTree = "<group>"; };
@@ -144,6 +147,8 @@
 				1850F6E91BD8DB0900818142 /* SettingsViewController.m */,
 				1850F6EA1BD8DB0900818142 /* ValueSelectorViewController.h */,
 				1850F6EB1BD8DB0900818142 /* ValueSelectorViewController.m */,
+				183C69FA1BDE0DDB008E93AB /* ReminderViewController.h */,
+				183C69FB1BDE0DDB008E93AB /* ReminderViewController.m */,
 			);
 			path = SettingViews;
 			sourceTree = "<group>";
@@ -483,6 +488,7 @@
 				18F4064E1B968D7B00E97458 /* OPVerticalCalendarView.m in Sources */,
 				1867EB721B8F5E6400C10219 /* AppDelegate.m in Sources */,
 				18E894421BD4EF6200AA460A /* OPPhotoCloud.m in Sources */,
+				183C69FC1BDE0DDB008E93AB /* ReminderViewController.m in Sources */,
 				187412F81B9BE3BB0089CEFF /* CoreDataHelper.m in Sources */,
 				18F405621B93683700E97458 /* OPCalendarDayView.m in Sources */,
 				1854ED391BCE480D00F4A397 /* OPFullscreenPhotoDisplayController.m in Sources */,

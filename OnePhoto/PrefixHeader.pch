@@ -44,4 +44,6 @@
         _Pragma("clang diagnostic pop") \
     } while (0)
 
+#define REMINDER_TIME_KEY @"reminder.time"
+
 #endif

@@ -298,6 +298,14 @@
     return nil;
 }
 
+- (NSString *)photoBrowser:(MWPhotoBrowser *)photoBrowser titleForPhotoAtIndex:(NSUInteger)index {
+    if (index < _photos.count) {
+        OPPhoto *photo = [_photos objectAtIndex:index];
+        return [[GlobalUtils chineseFormatter] stringFromDate:[[GlobalUtils dateFormatter] dateFromString:photo.dateString]];
+    }
+    return @"";
+}
+
 - (void)photoBrowser:(MWPhotoBrowser *)photoBrowser didDisplayPhotoAtIndex:(NSUInteger)index {
 
 }

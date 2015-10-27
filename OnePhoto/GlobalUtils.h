@@ -29,6 +29,8 @@ FOUNDATION_EXPORT NSString * const OPCoreDataStoreMerged;
 
 + (NSDateFormatter *)HHmmFormatter;
 
++ (NSDateFormatter *)chineseFormatter;
+
 + (NSUInteger)daysOfMonthByDate:(NSDate *)date;
 
 + (NSInteger)dayOfMonth:(NSDate *)date;

@@ -17,6 +17,8 @@ static NSDateFormatter *_dateFormatter = nil;
 
 static NSDateFormatter *_HHmmFormatter = nil;
 
+static NSDateFormatter *_chineseFormatter = nil;
+
 @implementation GlobalUtils
 
 + (UIColor *)appBaseColor {
@@ -64,6 +66,16 @@ static NSDateFormatter *_HHmmFormatter = nil;
         [_HHmmFormatter setDateFormat:@"HH:mm"];
     }
     return _HHmmFormatter;
+}
+
++ (NSDateFormatter *)chineseFormatter {
+    if (_chineseFormatter == nil) {
+        _chineseFormatter = [NSDateFormatter new];
+        _chineseFormatter.timeZone = [NSTimeZone systemTimeZone];
+        _chineseFormatter.locale = [NSLocale currentLocale];
+        [_chineseFormatter setDateFormat:@"yyyy年MM月dd日"];
+    }
+    return _chineseFormatter;
 }
 
 + (NSUInteger)daysOfMonthByDate:(NSDate *)date {

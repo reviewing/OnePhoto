@@ -25,6 +25,7 @@
 		187412ED1B96D27B0089CEFF /* OPCalendarWeekView.m in Sources */ = {isa = PBXBuildFile; fileRef = 187412EC1B96D27B0089CEFF /* OPCalendarWeekView.m */; };
 		187412F01B96D3790089CEFF /* OPCalendarPageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 187412EF1B96D3790089CEFF /* OPCalendarPageView.m */; };
 		187412F81B9BE3BB0089CEFF /* CoreDataHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 187412F71B9BE3BB0089CEFF /* CoreDataHelper.m */; };
+		1886BD761BDF59BA006FCDD5 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1886BD781BDF59BA006FCDD5 /* Localizable.strings */; };
 		18E894421BD4EF6200AA460A /* OPPhotoCloud.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E894411BD4EF6200AA460A /* OPPhotoCloud.m */; };
 		18F405621B93683700E97458 /* OPCalendarDayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F405611B93683700E97458 /* OPCalendarDayView.m */; };
 		18F406341B94414C00E97458 /* UIColor+Remix.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F406331B94414C00E97458 /* UIColor+Remix.m */; };
@@ -82,6 +83,7 @@
 		187412F61B9BE3BB0089CEFF /* CoreDataHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreDataHelper.h; sourceTree = "<group>"; };
 		187412F71B9BE3BB0089CEFF /* CoreDataHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreDataHelper.m; sourceTree = "<group>"; };
 		187413021B9C2A670089CEFF /* OnePhoto 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "OnePhoto 2.xcdatamodel"; sourceTree = "<group>"; };
+		1886BD771BDF59BA006FCDD5 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		18E894401BD4EF6200AA460A /* OPPhotoCloud.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPPhotoCloud.h; sourceTree = "<group>"; };
 		18E894411BD4EF6200AA460A /* OPPhotoCloud.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPPhotoCloud.m; sourceTree = "<group>"; };
 		18F405601B93683700E97458 /* OPCalendarDayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPCalendarDayView.h; sourceTree = "<group>"; };
@@ -204,6 +206,7 @@
 				1867EBAF1B91F14600C10219 /* PrefixHeader.pch */,
 				1867EBB21B91F1CC00C10219 /* GlobalUtils.h */,
 				1867EBB31B91F1CC00C10219 /* GlobalUtils.m */,
+				1886BD781BDF59BA006FCDD5 /* Localizable.strings */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -397,6 +400,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1844F40A1BD764F200F65D26 /* Settings.bundle in Resources */,
+				1886BD761BDF59BA006FCDD5 /* Localizable.strings in Resources */,
 				1867EB7B1B8F5E6400C10219 /* Main.storyboard in Resources */,
 				1867EB801B8F5E6400C10219 /* LaunchScreen.xib in Resources */,
 				1867EB7D1B8F5E6400C10219 /* Images.xcassets in Resources */,
@@ -536,6 +540,14 @@
 				18F406491B9582B300E97458 /* zh-Hans */,
 			);
 			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+		1886BD781BDF59BA006FCDD5 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1886BD771BDF59BA006FCDD5 /* zh-Hans */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

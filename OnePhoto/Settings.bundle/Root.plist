@@ -10,11 +10,11 @@
 			<key>Type</key>
 			<string>PSToggleSwitchSpecifier</string>
 			<key>Title</key>
-			<string>启用iCloud（暂时不支持禁用iCloud）</string>
+			<string>显示广告</string>
 			<key>Key</key>
-			<string>enabled_icloud</string>
+			<string>enabled_ads</string>
 			<key>DefaultValue</key>
-			<true/>
+			<false/>
 		</dict>
 	</array>
 </dict>

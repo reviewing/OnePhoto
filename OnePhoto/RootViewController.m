@@ -235,6 +235,7 @@
         
         MWPhotoBrowser *browser = [[MWPhotoBrowser alloc] initWithDelegate:self];
         browser.displayActionButton = YES;
+        browser.displayNavArrows = YES;
         browser.alwaysShowControls = YES;
         browser.zoomPhotosToFill = YES;
 
@@ -293,7 +294,8 @@
         OPPhoto *photo = [_photos objectAtIndex:index];
         NSURL *ubiq = [[NSFileManager defaultManager] URLForUbiquityContainerIdentifier:nil];
         NSURL *ubiquitousURL = [[ubiq URLByAppendingPathComponent:@"Documents"] URLByAppendingPathComponent:photo.source_image_url];
-        return [MWPhoto photoWithURL:ubiquitousURL];
+        MWPhoto *mwPhoto = [MWPhoto photoWithURL:ubiquitousURL];
+        return mwPhoto;
     }
     return nil;
 }

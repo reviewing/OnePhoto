@@ -36,7 +36,7 @@
 
 - (void)insertPhoto:(NSString *)source_image_url {
     NSString *photoFileName = [source_image_url lastPathComponent];
-    NSString *dateString = [photoFileName substringToIndex:[photoFileName length] - 4];
+    NSString *dateString = [photoFileName substringToIndex:8];
     
     // 删除老照片
     OPPhoto *oldPhoto = [self getPhotoAt:dateString];
@@ -76,7 +76,7 @@
 - (OPPhoto *)getPhotoAt:(NSString *)date {
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
     [request setEntity:[NSEntityDescription entityForName:@"OPPhoto" inManagedObjectContext:_context]];
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"dateString == %@", date];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"dateString BEGINSWITH[c] %@", date];
     [request setPredicate:predicate];
     NSError *error;
     NSArray *photos = [_context executeFetchRequest:request error:&error];
@@ -85,6 +85,15 @@
     }
     
     if ([photos count] > 0) {
+        if ([photos count] > 1) {
+            for (int i = 1; i < [photos count]; i++) {
+                [_context deleteObject:[photos objectAtIndex:i]];
+            }
+            NSError *error;
+            if (_context.hasChanges && ![_context save:&error]) {
+                DHLogError(@"couldn't save: %@", [error localizedDescription]);
+            }
+        }
         return [photos objectAtIndex:0];
     }
     return nil;

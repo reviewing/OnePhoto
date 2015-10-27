@@ -2,8 +2,8 @@
 //  SettingsViewController.m
 //  VoiceDemo
 //
-//  Created by bj-duanhong on 7/15/15.
-//  Copyright (c) 2015 FoSafer. All rights reserved.
+//  Created by Hong Duan on 7/15/15.
+//  Copyright (c) 2015 1 Photo. All rights reserved.
 //
 
 #import "SettingsViewController.h"

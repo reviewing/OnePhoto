@@ -13,7 +13,6 @@
 		1850F6EC1BD8DB0900818142 /* EditTextViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1850F6E71BD8DB0900818142 /* EditTextViewController.m */; };
 		1850F6ED1BD8DB0900818142 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1850F6E91BD8DB0900818142 /* SettingsViewController.m */; };
 		1850F6EE1BD8DB0900818142 /* ValueSelectorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1850F6EB1BD8DB0900818142 /* ValueSelectorViewController.m */; };
-		1854ED391BCE480D00F4A397 /* OPFullscreenPhotoDisplayController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1854ED381BCE480D00F4A397 /* OPFullscreenPhotoDisplayController.m */; };
 		1867EB6F1B8F5E6400C10219 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 1867EB6E1B8F5E6400C10219 /* main.m */; };
 		1867EB721B8F5E6400C10219 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1867EB711B8F5E6400C10219 /* AppDelegate.m */; };
 		1867EB751B8F5E6400C10219 /* OnePhoto.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1867EB731B8F5E6400C10219 /* OnePhoto.xcdatamodeld */; };
@@ -59,8 +58,6 @@
 		1850F6E91BD8DB0900818142 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
 		1850F6EA1BD8DB0900818142 /* ValueSelectorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ValueSelectorViewController.h; sourceTree = "<group>"; };
 		1850F6EB1BD8DB0900818142 /* ValueSelectorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ValueSelectorViewController.m; sourceTree = "<group>"; };
-		1854ED371BCE480D00F4A397 /* OPFullscreenPhotoDisplayController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPFullscreenPhotoDisplayController.h; sourceTree = "<group>"; };
-		1854ED381BCE480D00F4A397 /* OPFullscreenPhotoDisplayController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPFullscreenPhotoDisplayController.m; sourceTree = "<group>"; };
 		1867EB691B8F5E6400C10219 /* OnePhoto.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OnePhoto.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1867EB6D1B8F5E6400C10219 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1867EB6E1B8F5E6400C10219 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -231,8 +228,6 @@
 		1867EB961B8F693D00C10219 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				1854ED371BCE480D00F4A397 /* OPFullscreenPhotoDisplayController.h */,
-				1854ED381BCE480D00F4A397 /* OPFullscreenPhotoDisplayController.m */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -491,7 +486,6 @@
 				183C69FC1BDE0DDB008E93AB /* ReminderViewController.m in Sources */,
 				187412F81B9BE3BB0089CEFF /* CoreDataHelper.m in Sources */,
 				18F405621B93683700E97458 /* OPCalendarDayView.m in Sources */,
-				1854ED391BCE480D00F4A397 /* OPFullscreenPhotoDisplayController.m in Sources */,
 				187412F01B96D3790089CEFF /* OPCalendarPageView.m in Sources */,
 				1867EB6F1B8F5E6400C10219 /* main.m in Sources */,
 				1867EBB41B91F1CC00C10219 /* GlobalUtils.m in Sources */,
@@ -641,7 +635,7 @@
 				INFOPLIST_FILE = OnePhoto/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "top.defaults.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = top.defaults.OnePhoto;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -661,7 +655,7 @@
 				INFOPLIST_FILE = OnePhoto/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "top.defaults.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = top.defaults.OnePhoto;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";

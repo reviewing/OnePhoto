@@ -131,6 +131,10 @@
     return [NSSet setWithArray:photos];
 }
 
+- (NSArray *)allPhotosSorted {
+    return [[NSOrderedSet orderedSetWithSet:[self allPhotos]] sortedArrayUsingDescriptors:[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"dateString" ascending:YES]]];
+}
+
 - (void)deleteImageCache:(OPPhoto *)photo {
     FICImageCache *sharedImageCache = [FICImageCache sharedImageCache];
     [sharedImageCache deleteImageForEntity:photo withFormatName:OPPhotoSquareImage32BitBGRFormatName];

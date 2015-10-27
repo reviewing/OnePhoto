@@ -28,4 +28,6 @@
 
 - (NSSet *)allPhotos;
 
+- (NSArray *)allPhotosSorted;
+
 @end

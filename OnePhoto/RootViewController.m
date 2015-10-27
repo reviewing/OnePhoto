@@ -15,15 +15,19 @@
 #import "OPPhoto.h"
 #import "OPPhotoCloud.h"
 #import "CoreDataHelper.h"
-#import "OPFullscreenPhotoDisplayController.h"
 #import <FastImageCache/FICImageCache.h>
+#import <MWPhotoBrowser/MWPhotoBrowser.h>
+#import <MWPhotoBrowser/MWPhoto.h>
 
 #import <MobileCoreServices/MobileCoreServices.h>
 
-@interface RootViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate> {
+@interface RootViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate, MWPhotoBrowserDelegate> {
     NSInteger _callbackCount;
     
     BOOL _isFirstAppear;
+    NSArray *_photos;
+    
+    NSDate *_specifiedDate;
 }
 
 @property (weak, nonatomic) IBOutlet OPCalendarWeekDayView *weekDayView;
@@ -144,6 +148,7 @@
 
 // For responding to the user tapping Cancel.
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *) picker {
+    _specifiedDate = nil;
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -165,7 +170,7 @@
             imageToSave = originalImage;
         }
         
-        NSString *dateString = [GlobalUtils stringFromDate:[NSDate date]];
+        NSString *dateString = [GlobalUtils stringFromDate:_specifiedDate ? _specifiedDate : [NSDate date]];
         NSString *photoPath = [@"photos" stringByAppendingPathComponent:[dateString stringByAppendingPathExtension:@"jpg"]];
         
         NSURL *ubiq = [[NSFileManager defaultManager] URLForUbiquityContainerIdentifier:nil];
@@ -182,6 +187,7 @@
         }];
     }
     
+    _specifiedDate = nil;
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -225,7 +231,27 @@
     OPCalendarDayView *lOPDayView = (OPCalendarDayView *)dayView;
     OPPhoto *photo = [[CoreDataHelper sharedHelper] getPhotoAt:[GlobalUtils stringFromDate:lOPDayView.date]];
     if (photo) {
-        [[OPFullscreenPhotoDisplayController sharedDisplayController] showPhoto:photo withThumbnailImageView:lOPDayView.photoView];        
+        _photos = [[CoreDataHelper sharedHelper] allPhotosSorted];
+        
+        MWPhotoBrowser *browser = [[MWPhotoBrowser alloc] initWithDelegate:self];
+        browser.displayActionButton = YES;
+        browser.alwaysShowControls = YES;
+        browser.zoomPhotosToFill = YES;
+
+        [browser showNextPhotoAnimated:YES];
+        [browser showPreviousPhotoAnimated:YES];
+        [browser setCurrentPhotoIndex:[_photos indexOfObject:photo]];
+        
+        UINavigationController *nc = [[UINavigationController alloc] initWithRootViewController:browser];
+        nc.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+        [self presentViewController:nc animated:YES completion:nil];
+    } else {
+        if ([calendar.dateHelper date:lOPDayView.date isTheSameDayThan:[NSDate date]]) {
+            [self startCameraControllerFromViewController:self usingDelegate:self];
+        } else {
+//            _specifiedDate = lOPDayView.date;
+//            [self startCameraControllerFromViewController:self usingDelegate:self];
+        }
     }
 }
 
@@ -256,14 +282,28 @@
     });
 }
 
-#pragma mark - OPFullscreenPhotoDisplayControllerDelegate
+#pragma mark - MWPhotoBrowserDelegate
 
-- (void)photoDisplayController:(OPFullscreenPhotoDisplayController *)photoDisplayController willShowSourceImage:(UIImage *)sourceImage forPhoto:(OPPhoto *)photo withThumbnailImageView:(UIImageView *)thumbnailImageView {
-    
+- (NSUInteger)numberOfPhotosInPhotoBrowser:(MWPhotoBrowser *)photoBrowser {
+    return _photos.count;
 }
 
-- (void)photoDisplayController:(OPFullscreenPhotoDisplayController *)photoDisplayController willHideSourceImage:(UIImage *)sourceImage forPhoto:(OPPhoto *)photo withThumbnailImageView:(UIImageView *)thumbnailImageView {
-    
+- (id <MWPhoto>)photoBrowser:(MWPhotoBrowser *)photoBrowser photoAtIndex:(NSUInteger)index {
+    if (index < _photos.count) {
+        OPPhoto *photo = [_photos objectAtIndex:index];
+        NSURL *ubiq = [[NSFileManager defaultManager] URLForUbiquityContainerIdentifier:nil];
+        NSURL *ubiquitousURL = [[ubiq URLByAppendingPathComponent:@"Documents"] URLByAppendingPathComponent:photo.source_image_url];
+        return [MWPhoto photoWithURL:ubiquitousURL];
+    }
+    return nil;
+}
+
+- (void)photoBrowser:(MWPhotoBrowser *)photoBrowser didDisplayPhotoAtIndex:(NSUInteger)index {
+
+}
+
+- (void)photoBrowserDidFinishModalPresentation:(MWPhotoBrowser *)photoBrowser {
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end

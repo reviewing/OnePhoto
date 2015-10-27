@@ -4,5 +4,6 @@ target 'OnePhoto' do
     pod 'JTCalendar', '~> 2.1.1'
     pod 'FastImageCache', '~> 1.3'
     pod 'UMengAnalytics-NO-IDFA'
+    pod "MWPhotoBrowser"
 end
 

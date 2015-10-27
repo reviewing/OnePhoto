@@ -7,145 +7,416 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0528C3367FCA3B4AAEDC555C96520FD3 /* JTCalendarDayView.h in Headers */ = {isa = PBXBuildFile; fileRef = 23EEC825FCB7AB692506F0588EDE139C /* JTCalendarDayView.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		066A24F4CA712AEE58C3EF11D834E141 /* FastImageCache-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FAB918F23D6C3694E21E2F8A1ACF44F /* FastImageCache-dummy.m */; };
-		09EF9593BEFE8076642BDAF465470F89 /* JTCalendarSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = B3A757EDC46CB9A140B57EAB97C4BCF0 /* JTCalendarSettings.m */; };
-		0E330EE7DC1E1266DAC29510C553CF55 /* JTCalendarManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FACD9BAB67F8D516920DBD56C2221629 /* JTCalendarManager.m */; };
-		0FB0AF668D6FCCACCD066E3C19618288 /* JTVerticalCalendarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 85B37A4BBB53CA813518BCD52AED1EB5 /* JTVerticalCalendarView.m */; };
-		10CD137E4CDFCD5819F196C6FD3485D4 /* JTHorizontalCalendarView.m in Sources */ = {isa = PBXBuildFile; fileRef = BFC159236B65E18F5B4CEF8E3D5DF32B /* JTHorizontalCalendarView.m */; };
-		1D1147AEC7E665BED21D80587C63EA71 /* JTCalendarWeekDay.h in Headers */ = {isa = PBXBuildFile; fileRef = A45BFB4EC104763C3406A1598DC85AD8 /* JTCalendarWeekDay.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		1F1FE08B1A94FCC6FA9ABE61581F243A /* JTCalendarPageView.h in Headers */ = {isa = PBXBuildFile; fileRef = C6D3F5E58C84CAD3271F5723FAE7AD32 /* JTCalendarPageView.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		382C4C19629155EDA7D0186475BCC04A /* JTCalendar-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 13E6E9648B50F2E9995E5225F1713F5D /* JTCalendar-dummy.m */; };
-		3B0937526EF2C2D45E292C73CD7EBC42 /* JTCalendarDay.h in Headers */ = {isa = PBXBuildFile; fileRef = 7DF5A66053E10ADA99D70416BF1C52C7 /* JTCalendarDay.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3D9BE6CEC4FB2B6CCFC06769CD18E3CC /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E4E89230EF59BC255123B67864ACF77 /* Foundation.framework */; };
-		3E0FD51A1522DEA316D2AC75704460D0 /* JTVerticalCalendarView.h in Headers */ = {isa = PBXBuildFile; fileRef = 86EA50C1C273345B53E8FFCC2256FE2F /* JTVerticalCalendarView.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		402F8EAECDAE49559719916DBA19E291 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E4E89230EF59BC255123B67864ACF77 /* Foundation.framework */; };
-		4DCEE102AAEF72CE38E475188BA7CE47 /* JTCalendarPage.h in Headers */ = {isa = PBXBuildFile; fileRef = A404F016B3F06A3B1BDF7082D4D62819 /* JTCalendarPage.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		4FC25108739F9E0C7259776D97A1336A /* JTCalendarWeekView.m in Sources */ = {isa = PBXBuildFile; fileRef = 49C77BD92C65C7C3E9FBA8499519E932 /* JTCalendarWeekView.m */; };
-		5024EBF49DB8B3446750936B5E9AA3CB /* FICImageFormat.h in Headers */ = {isa = PBXBuildFile; fileRef = D3951509172CA711A807E51E665C0295 /* FICImageFormat.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		50B5320A8060BAFF68DEA0AEAD09DDE0 /* JTCalendarWeekDayView.h in Headers */ = {isa = PBXBuildFile; fileRef = 05567E2557A1A3A03F2FE17B34F2F680 /* JTCalendarWeekDayView.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		52DC668B0B68A66B0FA6187EAB904AF2 /* JTCalendarWeekView.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FCACC0B2C1DC08322F99C0758A013D6 /* JTCalendarWeekView.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		56817EDF817762843F04249DB39FBEDC /* JTCalendarMenuView.h in Headers */ = {isa = PBXBuildFile; fileRef = 63ACA9F7DC46D4B39A0A60099ED79464 /* JTCalendarMenuView.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		56E57075B7E9918AAE1FC3C152BB4124 /* JTHorizontalCalendarView.h in Headers */ = {isa = PBXBuildFile; fileRef = 37BAB6CA12D41FA6ABDAA7E63A783BE6 /* JTHorizontalCalendarView.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		5939FA30BD11B334E75DE208F89482C2 /* JTCalendar.h in Headers */ = {isa = PBXBuildFile; fileRef = A17E5A08C6215D0DDCA2D7D8115B6206 /* JTCalendar.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		5C378E9457D6A5632634E072AD14CECD /* JTCalendarWeek.h in Headers */ = {isa = PBXBuildFile; fileRef = C73E79EC02A666D2159B47DE804B0D0D /* JTCalendarWeek.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		65D13D4E0D034836C35C629BED24DB25 /* JTDateHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 651ECF791389D5969F6028FCF1279A85 /* JTDateHelper.m */; };
-		67CF939ADF7F27345C861D28E57EB29E /* JTCalendarMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B721AA1ACA72F587DDD01D524B67415 /* JTCalendarMenuView.m */; };
-		6D797980E69D19629DC395537E245912 /* JTCalendarScrollManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 7EA83B999D26EACBF2164FADCEA0EB99 /* JTCalendarScrollManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		70C850235C2C4E7D46EC096EED77DAB2 /* FICImageTableEntry.h in Headers */ = {isa = PBXBuildFile; fileRef = BDADEAAF48D845B3C8AFBA643F9F346B /* FICImageTableEntry.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		71C0D0094A799BC387C6F579826349EE /* JTContent.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A4D49B7ED264D19E4796ABBC41C8A18 /* JTContent.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		78108C0C0349E286C4DBD1F0F8158820 /* JTCalendarScrollManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 77317CD4291496CA4F7A02440865D607 /* JTCalendarScrollManager.m */; };
-		8416DA19ED228A27A48517017CE12956 /* FICImageCache+FICErrorLogging.h in Headers */ = {isa = PBXBuildFile; fileRef = 326269940F51C4739D77CB26984BB621 /* FICImageCache+FICErrorLogging.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		85A33D486B9C51FCBD8653FD28A53F09 /* JTCalendarDelegateManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 37D383FE492F00301D2B97702BA64C0A /* JTCalendarDelegateManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		866EFF3DE1CF427EDF63AFA4AB58787A /* FICUtilities.h in Headers */ = {isa = PBXBuildFile; fileRef = 28A367198F4412F622D954BB2BEB14F4 /* FICUtilities.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		86B4453FD5BAD4BD4E9CA41A66464BDC /* FICImports.h in Headers */ = {isa = PBXBuildFile; fileRef = CFBAF8B466CC8965776FCEE7E050A94B /* FICImports.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		8DDDA12A4DB4B647F2F15ADA76E25677 /* JTCalendarSettings.h in Headers */ = {isa = PBXBuildFile; fileRef = 02E135AC397DD578CF9398D82177CB89 /* JTCalendarSettings.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		931DA617C8268FAD916C0EC04C99CA5E /* FICEntity.h in Headers */ = {isa = PBXBuildFile; fileRef = 2CC131D41225664491594EE94EA3D066 /* FICEntity.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		956B84B617EBEE98DF3F709A1F2CC56D /* FICImageFormat.m in Sources */ = {isa = PBXBuildFile; fileRef = 53ED2566D1D72C8EC52F8E3580D45F3E /* FICImageFormat.m */; };
-		99253DC7829CA8D9874F0E0AA7A9AE2F /* JTCalendarDayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D8048121FBB2219CC5FCFBD5081FDCB /* JTCalendarDayView.m */; };
-		9DF62941835564E020D8F29F1865D542 /* Pods-OnePhoto-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = C5BEC0F15E3D3591B80EDDEC9D622E44 /* Pods-OnePhoto-dummy.m */; };
-		9F36CD7020BC171943165A9BCA36E2BB /* FICImageTableEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = C3F70203D8AE0E64B9F0D30F5E0F61FE /* FICImageTableEntry.m */; };
-		A54F14447F9A26EEBBC08FAD71F60D05 /* JTCalendarDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 1C1E766C100EFFFB46B5CE36FB3D407F /* JTCalendarDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		A61D96D89F1DE6FCE162C38DB51C22F3 /* JTCalendarPageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B3556A0883C66F2BF18C6299DF1B55F /* JTCalendarPageView.m */; };
-		AA41C6AD136CA0438F9924E41334E9DE /* JTMenu.h in Headers */ = {isa = PBXBuildFile; fileRef = 85FA5A12C77D2853A69912D487C1B739 /* JTMenu.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		AE9E9628A26B050FB6F0B10C79237356 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E4E89230EF59BC255123B67864ACF77 /* Foundation.framework */; };
-		C7A68641A6946885A5884955838B7DFF /* JTCalendarManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 0BD0666257DE2F0020A7B6DAEA7B3054 /* JTCalendarManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		C90EE1294D67CEDB600443216116E1AF /* FICImageTable.m in Sources */ = {isa = PBXBuildFile; fileRef = 3450646FE5D9B4388273D58C49B7FDFB /* FICImageTable.m */; };
-		CCBE87E0CB2D23CDF5CD42D33B0B738B /* FICImageTable.h in Headers */ = {isa = PBXBuildFile; fileRef = 06B93EFD942C80913352EBE5BEEF3E3F /* FICImageTable.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		CF601320495828DC3A2D18B5149222F8 /* FICImageTableChunk.h in Headers */ = {isa = PBXBuildFile; fileRef = 42442972C42E3A7C3A3D8BD002128113 /* FICImageTableChunk.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		D0D1D8260732EFA47EA8F3F6DFFA518F /* JTDateHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = 1E78D0A7F2B9634AC4412F5AFEA62453 /* JTDateHelper.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		D2D33F741B20BCA3C1C3AA4DB77AD03B /* FICImageTableChunk.m in Sources */ = {isa = PBXBuildFile; fileRef = D4A7FF1062D8812723857D77F16CCE01 /* FICImageTableChunk.m */; };
-		D3D29E390B4B407CCD220B4F0842AD14 /* JTCalendarDelegateManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EAF63B276ED18B0F5557521F4FFA502 /* JTCalendarDelegateManager.m */; };
-		E3E7D19189C510CE442AB89574EC698C /* FICImageCache.h in Headers */ = {isa = PBXBuildFile; fileRef = 1060ED42D0314C6F1B6931C3D58C9020 /* FICImageCache.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		E9FAC505FF7179568191A4FD7E6C65D9 /* FICUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 98BBCEFC28F27B373DAB658ADD34AB3D /* FICUtilities.m */; };
-		EB244A1717AE69784B9B2E0E45EFED77 /* JTCalendarWeekDayView.m in Sources */ = {isa = PBXBuildFile; fileRef = C407192A394AB759EBF5D7A822FE8F29 /* JTCalendarWeekDayView.m */; };
-		F0CAAAB0A0A5BA9513C0E4BEFD1467D3 /* FICImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 4956EDBAD51C53073C2A18393D091D7A /* FICImageCache.m */; };
+		00518063767430EDC47FCC49F4409458 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDEEDF2EAFDC22393821AE45FA07A5AC /* MediaPlayer.framework */; };
+		023B8C388E74C4FC1DB3EC5E1773C4DF /* ImageError@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C0A593EEEC7B18B9BDF4478F789CA54 /* ImageError@3x.png */; };
+		0498B98EB393D71314953683060EFD58 /* SDWebImagePrefetcher.h in Headers */ = {isa = PBXBuildFile; fileRef = 69360E408ACAF41F0BE992F148B14FC0 /* SDWebImagePrefetcher.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		0528C3367FCA3B4AAEDC555C96520FD3 /* JTCalendarDayView.h in Headers */ = {isa = PBXBuildFile; fileRef = 67A7D902DA0855E0E75CD5C508FA3085 /* JTCalendarDayView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		066A24F4CA712AEE58C3EF11D834E141 /* FastImageCache-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 9631822B01E74FE77AC7354CE5E6F1A3 /* FastImageCache-dummy.m */; };
+		072C184628072EDE522629576F1716DE /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A43CC8C5FD3E2BF8F64BF6B9086FC43 /* QuartzCore.framework */; };
+		09EF9593BEFE8076642BDAF465470F89 /* JTCalendarSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = FB2C9F1B88C0B05F3A3C8495479E5EFF /* JTCalendarSettings.m */; };
+		0C1A29BFF65C6F2801B1BE0058718A19 /* DACircularProgressView.h in Headers */ = {isa = PBXBuildFile; fileRef = 0101E7D86535CE7DAB513BE8BA5928E1 /* DACircularProgressView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		0D989089128ABE346A442B7168B6F99E /* MWTapDetectingView.m in Sources */ = {isa = PBXBuildFile; fileRef = D85CE28B8278A37FA4F98D5092CCE324 /* MWTapDetectingView.m */; };
+		0DC4183837552F23710F86F9A032C574 /* UIImageView+HighlightedWebCache.h in Headers */ = {isa = PBXBuildFile; fileRef = 29DA9A0582FBCA96F4183C5A289D5A2A /* UIImageView+HighlightedWebCache.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		0E330EE7DC1E1266DAC29510C553CF55 /* JTCalendarManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8758D01A35F8AD71E3CB1D6A6C7DA915 /* JTCalendarManager.m */; };
+		0EF1CB072B5DE5D0A4EE7053EB0E2364 /* SDWebImageDownloader.h in Headers */ = {isa = PBXBuildFile; fileRef = 51C8BF960855B9745E10827A230B4A49 /* SDWebImageDownloader.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		0F43FEACB0C18DD4C724B1655AF47728 /* DALabeledCircularProgressView.h in Headers */ = {isa = PBXBuildFile; fileRef = 27D64BEBC2A166B93A4B1D1812FDEFCA /* DALabeledCircularProgressView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		0FB0AF668D6FCCACCD066E3C19618288 /* JTVerticalCalendarView.m in Sources */ = {isa = PBXBuildFile; fileRef = C8ABCF1CD93B1FF115BEA2487DBE444D /* JTVerticalCalendarView.m */; };
+		10CD137E4CDFCD5819F196C6FD3485D4 /* JTHorizontalCalendarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 23C3468BE88E4C6F87F48FB6F63630B2 /* JTHorizontalCalendarView.m */; };
+		1181CB6FC2D63C42F19EAB56C604A71E /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E5A11D711B70020D54DF1D42AC745267 /* ImageIO.framework */; };
+		11E0CA492A59E5D435F73FFCCD489357 /* MWPhoto.m in Sources */ = {isa = PBXBuildFile; fileRef = 873401813951F3DAE210775400802BBC /* MWPhoto.m */; };
+		12EDA57341C456632A6291D58D966BD6 /* ImageSelectedSmallOff@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D78EE4A33573C0DA4B5F8DE961B20E2 /* ImageSelectedSmallOff@3x.png */; };
+		1D1147AEC7E665BED21D80587C63EA71 /* JTCalendarWeekDay.h in Headers */ = {isa = PBXBuildFile; fileRef = A9CE223E8A5C922D970BD8EC751CC856 /* JTCalendarWeekDay.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1F1FE08B1A94FCC6FA9ABE61581F243A /* JTCalendarPageView.h in Headers */ = {isa = PBXBuildFile; fileRef = 3D239471008B20B14DB13183FBEE763B /* JTCalendarPageView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		207958F4A5DCEAED53A2B0565170EC0E /* MWZoomingScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = B59E164163C2F5C107F654952A56115B /* MWZoomingScrollView.m */; };
+		2495B01293932815D36CECAF6D0D41C4 /* ImageSelectedOff@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1C95DDD8CD748F62C2C243CC4ECDAB57 /* ImageSelectedOff@2x.png */; };
+		24EA96827204BCCBF8162D12753DA166 /* UIBarButtonItemArrowRight@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = B29650A88A55272274B45DC008D9BA99 /* UIBarButtonItemArrowRight@3x.png */; };
+		261C284D8C8498314B5394EF0EB756D8 /* MWPhotoBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = 579ACA83BC22917223777A1205394AD1 /* MWPhotoBrowser.m */; };
+		2989492A1A182744E36FD61DF1746D94 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5A34B59027760E4FEF5419DAA6A00C9 /* Foundation.framework */; };
+		29B6CC3E1560257A444A209D97AC271E /* SDWebImageDownloaderOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 04321FA9C1EA040AF8AFFA47FC4D3827 /* SDWebImageDownloaderOperation.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		29E4E0528D088AE8B2EE6D38E19D375E /* SDWebImageDecoder.m in Sources */ = {isa = PBXBuildFile; fileRef = C88D41667FDC2603C3702F873893FEAB /* SDWebImageDecoder.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		2B6066637145116D118CAA5E557DDBE2 /* VideoOverlay@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5E04389DA019E1F80BC7E152605B7148 /* VideoOverlay@3x.png */; };
+		2BFB267A4274D5D4B277138F9D4EEDA1 /* SDWebImageManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E651905C937AFAE160E59C4D04B7BEA5 /* SDWebImageManager.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		311D5C7B166178CCB79CFD7E8DD4F641 /* UIView+WebCacheOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B1585B3EA8C7DB2E7EB70724FE4759E /* UIView+WebCacheOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		319D6926D1261EB1150D83F672CCA35E /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E5A11D711B70020D54DF1D42AC745267 /* ImageIO.framework */; };
+		33985216BF501EDD56E784D7CAD32FE7 /* SDWebImage-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 69412C9FC0C8A27959FE953213656405 /* SDWebImage-dummy.m */; };
+		34B2272FAB199A0B69B898BFB9E733E1 /* SDImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CBADEA2AB27D9DD71C76033D97DB28F /* SDImageCache.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		34F30E1314EC4C287E6B89477C2D0FB4 /* NSData+ImageContentType.h in Headers */ = {isa = PBXBuildFile; fileRef = 38FDD50CD431E296F2EB61D4F8C5D607 /* NSData+ImageContentType.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		382C4C19629155EDA7D0186475BCC04A /* JTCalendar-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = CD0CD815CEDE5531992AD0A7FFB03D04 /* JTCalendar-dummy.m */; };
+		3936D1AA08B9C1C008599DD7A6CB5FC4 /* UIBarButtonItemArrowLeft@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F4945DD1D9DEFE293CBFA77FDE1C997 /* UIBarButtonItemArrowLeft@3x.png */; };
+		3939EE53B37025D6F0E05FF8A4C7DCF0 /* UIImageView+WebCache.h in Headers */ = {isa = PBXBuildFile; fileRef = 413D8091F921ED11097F31596F8C7025 /* UIImageView+WebCache.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3B0937526EF2C2D45E292C73CD7EBC42 /* JTCalendarDay.h in Headers */ = {isa = PBXBuildFile; fileRef = 2D26B03A1ECFFC855344853CD33647DA /* JTCalendarDay.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3B332CC633C291A7A96AD0922CFD8AB0 /* SDImageCache.h in Headers */ = {isa = PBXBuildFile; fileRef = C007F5D17E65A48472F4E31AD7B5D86B /* SDImageCache.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3E0FD51A1522DEA316D2AC75704460D0 /* JTVerticalCalendarView.h in Headers */ = {isa = PBXBuildFile; fileRef = 23123FF239B1DD532DFC6E20ABCF93C7 /* JTVerticalCalendarView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3F14A3DC0EFDE2703E26428A8B9567D5 /* PlayButtonOverlayLarge@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9FE8E5EEB08044776BB04A0D80BBC563 /* PlayButtonOverlayLarge@2x.png */; };
+		3F1E0CB31108E6E996D2E7418FE21D2E /* UIButton+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DB8736F72240B37ECA436BB7D3349C4 /* UIButton+WebCache.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		402F8EAECDAE49559719916DBA19E291 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5A34B59027760E4FEF5419DAA6A00C9 /* Foundation.framework */; };
+		459CB44A75A5D68C89D9DBEE137FBD5C /* VideoOverlay@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 67DEF460025502017BA2E3D7663F14A2 /* VideoOverlay@2x.png */; };
+		4C47B6FE29B46B575855064610122926 /* MWPhotoBrowser-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = C31BCC46D5407733FC5CAA5F1081820C /* MWPhotoBrowser-dummy.m */; };
+		4CFCAA497A77475D017F781F8241A4C0 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A43CC8C5FD3E2BF8F64BF6B9086FC43 /* QuartzCore.framework */; };
+		4DCEE102AAEF72CE38E475188BA7CE47 /* JTCalendarPage.h in Headers */ = {isa = PBXBuildFile; fileRef = B20C9586AC9E173562F889AC35176A7C /* JTCalendarPage.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4FC25108739F9E0C7259776D97A1336A /* JTCalendarWeekView.m in Sources */ = {isa = PBXBuildFile; fileRef = 574971B81D8FF780A8FF2F622DD2A618 /* JTCalendarWeekView.m */; };
+		5024EBF49DB8B3446750936B5E9AA3CB /* FICImageFormat.h in Headers */ = {isa = PBXBuildFile; fileRef = 77EA0323AF0686303587DFDBB473B27E /* FICImageFormat.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5059298C5F1E9513B994F3DA166B71D3 /* ImageSelectedOff@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = CB3E4FD33A28565EB2D4058D46464C84 /* ImageSelectedOff@3x.png */; };
+		50B5320A8060BAFF68DEA0AEAD09DDE0 /* JTCalendarWeekDayView.h in Headers */ = {isa = PBXBuildFile; fileRef = 22A617A1A82E97BA642A4209A3C8A537 /* JTCalendarWeekDayView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		518937C0924DA3A3DD216697CED9205F /* SDWebImageOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = E0065086D0DED0386F0F9AB51388BD48 /* SDWebImageOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		52DC668B0B68A66B0FA6187EAB904AF2 /* JTCalendarWeekView.h in Headers */ = {isa = PBXBuildFile; fileRef = D6791D94842F28E3148103EB8358D748 /* JTCalendarWeekView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		53A65E3DDAAB4288F448625574686617 /* SDWebImageDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D8765E6BA8247A6510212060F5B7ED /* SDWebImageDownloader.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		53FB0CBA14BE53F79F4EB4E7B46C523B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5A34B59027760E4FEF5419DAA6A00C9 /* Foundation.framework */; };
+		54B79A8FA7CDA1ABFD60BA1D5DDED418 /* ImageSelectedSmallOn.png in Resources */ = {isa = PBXBuildFile; fileRef = 4FC1525CE18A2D77C5C333E94E378266 /* ImageSelectedSmallOn.png */; };
+		5562B2A33DCCDD28A596EE579024C7AD /* ImageError.png in Resources */ = {isa = PBXBuildFile; fileRef = DB4EFED5B36FA63CC2F99BEBE8E0C458 /* ImageError.png */; };
+		56817EDF817762843F04249DB39FBEDC /* JTCalendarMenuView.h in Headers */ = {isa = PBXBuildFile; fileRef = 17DDEB8F74BE7F7C158B4649678CFFA0 /* JTCalendarMenuView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		56E57075B7E9918AAE1FC3C152BB4124 /* JTHorizontalCalendarView.h in Headers */ = {isa = PBXBuildFile; fileRef = DAB3EC1B6BD36FB1AED0F6BC72B199CE /* JTHorizontalCalendarView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		589CDFB90C98BF58F34B688A2BEF2D04 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5A34B59027760E4FEF5419DAA6A00C9 /* Foundation.framework */; };
+		5939FA30BD11B334E75DE208F89482C2 /* JTCalendar.h in Headers */ = {isa = PBXBuildFile; fileRef = C88804A6506D394B879171BD694CE071 /* JTCalendar.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		59DA6D130464A9F97CD181877DD36CB7 /* UIImage+GIF.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DFE7F5A86253F14FF401978D579E16C /* UIImage+GIF.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		5AC73809CEEDD22841ACDDE568D6A873 /* UIBarButtonItemArrowLeft@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5583875071E929FC4A21CD458B1C59AA /* UIBarButtonItemArrowLeft@2x.png */; };
+		5C1EA3A4B2D74A23245225A2DEB0C35F /* ImageSelectedSmallOff@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 80F77A0AE22E002CE7EA1A7CA40E1F6F /* ImageSelectedSmallOff@2x.png */; };
+		5C378E9457D6A5632634E072AD14CECD /* JTCalendarWeek.h in Headers */ = {isa = PBXBuildFile; fileRef = A742C23FC8190578DB8F876543A9AA48 /* JTCalendarWeek.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5C9F59A178C237BD347C5D059E73A2A8 /* MWPhotoBrowser.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F883E7DB9B03AA4948D6CE36C8C5BB5 /* MWPhotoBrowser.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5E42CD90C7EE9A72C64E0B437874A75F /* MWCaptionView.h in Headers */ = {isa = PBXBuildFile; fileRef = C862BECA78DB8BD52EB768156B9C9C63 /* MWCaptionView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5EB4F27B76513AE918BA5AE0868E87C8 /* MBProgressHUD.h in Headers */ = {isa = PBXBuildFile; fileRef = 5F874FA83827E879CADFB55E7CC8BC63 /* MBProgressHUD.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5F4AECEF356E35995112F9167B219AD6 /* DACircularProgress-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 3552AC97DCED1228ACF4CB143A46BDEF /* DACircularProgress-dummy.m */; };
+		60262C4B68C1B0EF7D3E4FADACB10CD7 /* SDWebImageManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F52935626E4F18B8E2BE3839D2FF1DD /* SDWebImageManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6330FE4E426526E83B9D7067FEF6077F /* MWTapDetectingImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = C54E0DD3CA44573554B2B198DC3DB2C4 /* MWTapDetectingImageView.m */; };
+		63B3276116DCC036DC3FF64871C5B34A /* NSData+ImageContentType.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D4FB20C9E5E47DD0C8D170D45670B9C /* NSData+ImageContentType.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		65D13D4E0D034836C35C629BED24DB25 /* JTDateHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = E81E197CCF3C078A28DD8FD92A2232E4 /* JTDateHelper.m */; };
+		67CF939ADF7F27345C861D28E57EB29E /* JTCalendarMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5F74F4D6EE3ED47794A49D8E10E82 /* JTCalendarMenuView.m */; };
+		68F869F425A902C39C39BF0D9E173FE9 /* UIBarButtonItemArrowRight@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 17A67E132B58739DC8C32B05EE6C4FA5 /* UIBarButtonItemArrowRight@2x.png */; };
+		69DC2FB163EAB23712D9C3C13C72518E /* SDWebImageDecoder.h in Headers */ = {isa = PBXBuildFile; fileRef = 69FE033F11E6CA0689E30803856BC7DC /* SDWebImageDecoder.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6B6A25433F14C5C71405A4162F76DD12 /* ImageSelectedOn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 21DCDC7523D77975B8E23BC3685E4B40 /* ImageSelectedOn@2x.png */; };
+		6D797980E69D19629DC395537E245912 /* JTCalendarScrollManager.h in Headers */ = {isa = PBXBuildFile; fileRef = DBA569B7341D9DBFED5318E0DF3041D5 /* JTCalendarScrollManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6FCC438B6D6426ADCB5A12FC9C0F40B7 /* ImageSelectedSmallOff.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E63E242009444126172B4D9EA3F5B5F /* ImageSelectedSmallOff.png */; };
+		6FF59A4FB6AB15C1DDA10DA26046AE4F /* MWPhoto.h in Headers */ = {isa = PBXBuildFile; fileRef = 2A85FCAF2DCC9F02BD6516525FFCD00F /* MWPhoto.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		70C850235C2C4E7D46EC096EED77DAB2 /* FICImageTableEntry.h in Headers */ = {isa = PBXBuildFile; fileRef = A4A2EBBAE7E95C103D7D4F3722BA1F0F /* FICImageTableEntry.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		70D801E0B95C23BCC270E4EC8659D463 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 74ABFB71A54D04E18F5036F5834BCF7E /* CoreGraphics.framework */; };
+		71C0D0094A799BC387C6F579826349EE /* JTContent.h in Headers */ = {isa = PBXBuildFile; fileRef = E10D9894F35E69A74E0A09ACED9D85B9 /* JTContent.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		72F94970D0A9699E47E0B002FCC5AB34 /* VideoOverlay.png in Resources */ = {isa = PBXBuildFile; fileRef = A13A12AB1523F12DA6BDBFFFE6CAE2CB /* VideoOverlay.png */; };
+		73911EAFDAC3170AFEC2FA28A9860DBB /* MWTapDetectingImageView.h in Headers */ = {isa = PBXBuildFile; fileRef = F7A251CD5893D93CBDBCBDDD68D2F9D4 /* MWTapDetectingImageView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		74A9CCFEBE692130454C41959EBA5254 /* SDWebImageCompat.h in Headers */ = {isa = PBXBuildFile; fileRef = 1D96C8B73177F5D2AF02EBF90D321AEC /* SDWebImageCompat.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		78108C0C0349E286C4DBD1F0F8158820 /* JTCalendarScrollManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F5FA2154EB8FEE789FEE81230571BCF8 /* JTCalendarScrollManager.m */; };
+		7869FBC2EE6BD425E485CBDBA76ED408 /* UIImage+MWPhotoBrowser.h in Headers */ = {isa = PBXBuildFile; fileRef = 904870983B7D1200068F055DAA59255A /* UIImage+MWPhotoBrowser.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7D3B3786F1D6CED2CE141B2B1BDAE012 /* UIImageView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = D156513DF0B550C686A62FFF994D12E6 /* UIImageView+WebCache.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		81C068C19F529211E6A0709F67F0339C /* MWGridCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 6C117F0DBFE5BF82D9D59FE5FAB65796 /* MWGridCell.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		82AC9861A9FE0BEFEC04D31C3B05ABB2 /* DACircularProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = AEFF0891421ACDFD08B4C4ADF6F62F03 /* DACircularProgressView.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		82FC12F67E83874B93592218E9FB4CA0 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = E1AC91885DB2CDEE790AF4AA0B427EDE /* MBProgressHUD.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		8416DA19ED228A27A48517017CE12956 /* FICImageCache+FICErrorLogging.h in Headers */ = {isa = PBXBuildFile; fileRef = 0D82E4C5762A2DBFAA99639552985631 /* FICImageCache+FICErrorLogging.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		85A33D486B9C51FCBD8653FD28A53F09 /* JTCalendarDelegateManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 315B4DD6FD36F6E68DA496FC4122BE10 /* JTCalendarDelegateManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		866EFF3DE1CF427EDF63AFA4AB58787A /* FICUtilities.h in Headers */ = {isa = PBXBuildFile; fileRef = 3DBE55D30ABA4E83F05EB19D4F42AF6A /* FICUtilities.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		86B4453FD5BAD4BD4E9CA41A66464BDC /* FICImports.h in Headers */ = {isa = PBXBuildFile; fileRef = 9A99996B2F333CD714C1D8AC418E8288 /* FICImports.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		89207F18D908E68CBF43ECC32E65C30B /* UIBarButtonItemArrowRight.png in Resources */ = {isa = PBXBuildFile; fileRef = B9325737CB2485BB36A403C49C81D6DB /* UIBarButtonItemArrowRight.png */; };
+		8B3EE8DFDC215B3ECD04085AD4C2ED4A /* MWCommon.h in Headers */ = {isa = PBXBuildFile; fileRef = DBFFA92D3B17ABB76D098220B1FC6D8F /* MWCommon.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8DDDA12A4DB4B647F2F15ADA76E25677 /* JTCalendarSettings.h in Headers */ = {isa = PBXBuildFile; fileRef = D1EF728507099BC5C622E0E3976B23A9 /* JTCalendarSettings.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8EF8EB8E5D4F2474B8FD4C1E4A851A68 /* ImageSelectedOn.png in Resources */ = {isa = PBXBuildFile; fileRef = B9DC2228C92F5C000F5C26FD956C78E0 /* ImageSelectedOn.png */; };
+		931DA617C8268FAD916C0EC04C99CA5E /* FICEntity.h in Headers */ = {isa = PBXBuildFile; fileRef = B0B437395A3361D86EC3C53F9E5BEAD4 /* FICEntity.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		93A841B8DB950B43DF5F0996B4B6C3D2 /* PlayButtonOverlayLargeTap@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = B65DB898F103A82D2168F9BDCD1EFD6B /* PlayButtonOverlayLargeTap@3x.png */; };
+		943FE6144EBB219A1D48EB5BE9903A24 /* MWGridViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = AB7C9D130C13C06B0A85B60B32BD578A /* MWGridViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		956B84B617EBEE98DF3F709A1F2CC56D /* FICImageFormat.m in Sources */ = {isa = PBXBuildFile; fileRef = 478660C5117BA014E1D5D744B13C8687 /* FICImageFormat.m */; };
+		99253DC7829CA8D9874F0E0AA7A9AE2F /* JTCalendarDayView.m in Sources */ = {isa = PBXBuildFile; fileRef = D15A4B1E8473334066C0F6348F34D6D1 /* JTCalendarDayView.m */; };
+		9BAE4E703E810B8268248936C17F6CE5 /* MWZoomingScrollView.h in Headers */ = {isa = PBXBuildFile; fileRef = B6064C5C1C8F8441063ED340EC1E1979 /* MWZoomingScrollView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9E99791DAA8AA0153606F51758EA9D8B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5A34B59027760E4FEF5419DAA6A00C9 /* Foundation.framework */; };
+		9EB8F6E166DF1CB0B107B35CBD6CCA8D /* ImageSelectedOff.png in Resources */ = {isa = PBXBuildFile; fileRef = 751719E44344493532ECB31318C7C26C /* ImageSelectedOff.png */; };
+		9F36CD7020BC171943165A9BCA36E2BB /* FICImageTableEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ED08B20B09EC845C3ED21755113C1A6 /* FICImageTableEntry.m */; };
+		A13F5FD2F55D05333AA45D54EEBCCA24 /* UIBarButtonItemGrid.png in Resources */ = {isa = PBXBuildFile; fileRef = BC227E01C06FE9CDC28600BB60E808CC /* UIBarButtonItemGrid.png */; };
+		A14B4E9F94C0A0EC1EE0AE8BFE030787 /* UIImage+GIF.h in Headers */ = {isa = PBXBuildFile; fileRef = D70DA9BE19362DF313A62AAFF856CB6B /* UIImage+GIF.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A54F14447F9A26EEBBC08FAD71F60D05 /* JTCalendarDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = A5250979F44258B32DC10EE19E878F94 /* JTCalendarDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A61D96D89F1DE6FCE162C38DB51C22F3 /* JTCalendarPageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04E6ABF54370EB3AFC472053A0C37EDC /* JTCalendarPageView.m */; };
+		A8A43895BA91CE7F3CDEB8B72FE3A5F9 /* PlayButtonOverlayLargeTap@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F3322647279933849D4578769808024 /* PlayButtonOverlayLargeTap@2x.png */; };
+		AA41C6AD136CA0438F9924E41334E9DE /* JTMenu.h in Headers */ = {isa = PBXBuildFile; fileRef = 13CCAFD2115FB9246B250B3D85A626CF /* JTMenu.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AC54AE865785D292AF188627CC373732 /* PlayButtonOverlayLargeTap.png in Resources */ = {isa = PBXBuildFile; fileRef = 09EA23086DA5D32E68E39A1F9E7A2500 /* PlayButtonOverlayLargeTap.png */; };
+		AD3C6FA77BBE58E858D579BF813566B7 /* ImageError@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A5F8B56BA5D56C854EDC8E83B91AF111 /* ImageError@2x.png */; };
+		AE9E9628A26B050FB6F0B10C79237356 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5A34B59027760E4FEF5419DAA6A00C9 /* Foundation.framework */; };
+		AEE26E40C45DB6A4D13E084331742770 /* ImageSelectedSmallOn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BE7D05544E8FAB1CE3D9C62658179CEE /* ImageSelectedSmallOn@2x.png */; };
+		AF7404A4462C49837386BE45E07C646D /* PlayButtonOverlayLarge@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = F825E1C2F5E95839218BFE89270EF13A /* PlayButtonOverlayLarge@3x.png */; };
+		B28719F6B1978267C407032A2AE646F8 /* UIImage+MultiFormat.m in Sources */ = {isa = PBXBuildFile; fileRef = D5C1619C0F616ADA833957947CAF4594 /* UIImage+MultiFormat.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		B6CB1D947CABAFFCEFC7F94006CB7AD4 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5A34B59027760E4FEF5419DAA6A00C9 /* Foundation.framework */; };
+		C16C9E56CBDDE2AD1FCF3EFFF3127C20 /* SDWebImageDownloaderOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = A428D7D1B582CA6878F3288A4B49598E /* SDWebImageDownloaderOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C4ECADBB9BA0C2744C1E591BB5E72FF2 /* MWCaptionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D82FD3E3233F1951CB8E5B430AE1871 /* MWCaptionView.m */; };
+		C73BE5B7DF22A3F423A4627C31916BC6 /* MWTapDetectingView.h in Headers */ = {isa = PBXBuildFile; fileRef = 71D95211BE02539D7DDEAE6D1983F377 /* MWTapDetectingView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C7A68641A6946885A5884955838B7DFF /* JTCalendarManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 7BC6F077EE9F14147BF630A2256EABA9 /* JTCalendarManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C90EE1294D67CEDB600443216116E1AF /* FICImageTable.m in Sources */ = {isa = PBXBuildFile; fileRef = 15584EC2F9DDC885669A1F07934FAC7E /* FICImageTable.m */; };
+		CCBE87E0CB2D23CDF5CD42D33B0B738B /* FICImageTable.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A487638A19F8E00B2BD4A3DE4401F9B /* FICImageTable.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		CF601320495828DC3A2D18B5149222F8 /* FICImageTableChunk.h in Headers */ = {isa = PBXBuildFile; fileRef = 899A2CCEF5FB9546B401CDB3AE84FFF5 /* FICImageTableChunk.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D0D1D8260732EFA47EA8F3F6DFFA518F /* JTDateHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = B14CDE9DC2F42E15E6730119B2F57B98 /* JTDateHelper.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D2D33F741B20BCA3C1C3AA4DB77AD03B /* FICImageTableChunk.m in Sources */ = {isa = PBXBuildFile; fileRef = EB4B0D0C8239C6B7E51E8539AA8DF65C /* FICImageTableChunk.m */; };
+		D3D29E390B4B407CCD220B4F0842AD14 /* JTCalendarDelegateManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F5356B86C3581F123F066AFFABD7587 /* JTCalendarDelegateManager.m */; };
+		D642DC1BEB515E4D0458DC5FF48A33F3 /* UIBarButtonItemGrid@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 577D0362222311A870B6CE0B839A78D8 /* UIBarButtonItemGrid@2x.png */; };
+		D761EE9B5D106050E75596579B4F9313 /* ImageSelectedSmallOn@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BAB6387CBEC27E377EC31EA79873162F /* ImageSelectedSmallOn@3x.png */; };
+		D791C7B718024D8AED15BE84AA2FAAD0 /* UIButton+WebCache.h in Headers */ = {isa = PBXBuildFile; fileRef = F9B4521D722A9D2B317C956E01E5B245 /* UIButton+WebCache.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DB4290A45C35377BF5D50992EA5D9D16 /* UIBarButtonItemArrowLeft.png in Resources */ = {isa = PBXBuildFile; fileRef = AF8D0CA0CA1FB9E1CBE931F33C13B04E /* UIBarButtonItemArrowLeft.png */; };
+		DC1F1DBD53679CB78C5967BA9DEC08CA /* SDWebImagePrefetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 9427748D8564CA31EDC0A022BACAF3AA /* SDWebImagePrefetcher.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		DFAB389ECAD69BF8BE6357CFADABBF5C /* UIImageView+HighlightedWebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = B7868C005B8FA4BE69044ECC174A33BE /* UIImageView+HighlightedWebCache.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		E20E28FD4A1BFA49377C4252BBC4BA7F /* UIImage+MWPhotoBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = 248F64F660101F71511DE7D6A563B42E /* UIImage+MWPhotoBrowser.m */; };
+		E3E7D19189C510CE442AB89574EC698C /* FICImageCache.h in Headers */ = {isa = PBXBuildFile; fileRef = 088273B2C195A2624CD8FED9180D2080 /* FICImageCache.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E6A4723559EB41D738936E766830752E /* ImageSelectedOn@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 50351B2EA7FEB5A34D26A5AC27A6E298 /* ImageSelectedOn@3x.png */; };
+		E71C7BD65B5516EB64EA0ECA799929DC /* UIBarButtonItemGrid@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = FA8CD2261B072933A1DA4AD350EC4699 /* UIBarButtonItemGrid@3x.png */; };
+		E9034A1F3C5127803852C6D1B26BBA22 /* MWGridCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E63B67CD031C935DFCB7C40AD1FF86AD /* MWGridCell.m */; };
+		E93ED599FDA455D7FC17F25DBD3FA084 /* PlayButtonOverlayLarge.png in Resources */ = {isa = PBXBuildFile; fileRef = 2BA55379EB82C9320AD4C04C20E2F880 /* PlayButtonOverlayLarge.png */; };
+		E9FAC505FF7179568191A4FD7E6C65D9 /* FICUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = F1E8A92825D41B0022963A7AFC49C417 /* FICUtilities.m */; };
+		EB244A1717AE69784B9B2E0E45EFED77 /* JTCalendarWeekDayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 209ACA0D6A778C51E9D7ECD51484507B /* JTCalendarWeekDayView.m */; };
+		EDDE097EFD40E9A4E32E4B44C97CE44B /* SDWebImageCompat.m in Sources */ = {isa = PBXBuildFile; fileRef = 3694E6D60D93A0103FCDAA449CF065F3 /* SDWebImageCompat.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		EF9006327AFFDBED3FD589DA04E2D36A /* DALabeledCircularProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = D39FA0EDAD239AED517C08DE3EFD4948 /* DALabeledCircularProgressView.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		EFE77B95F063C96D9B07BC2A988AB403 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 81E905F620EAFE16FADE074D4BD2CCB6 /* AssetsLibrary.framework */; };
+		F0CAAAB0A0A5BA9513C0E4BEFD1467D3 /* FICImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EBE756B1140F1F68CEF879341EE476D /* FICImageCache.m */; };
+		F3BB0A963277282C6BF73E81250B6943 /* UIView+WebCacheOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B6CD3362B70BF4B3ECED7B4208E2BA7 /* UIView+WebCacheOperation.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		F6ED470E8B9510EBF932330ECEADF0D6 /* MWPhotoBrowserPrivate.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FCF5F769B06CCCBF6114D00D61AE21B /* MWPhotoBrowserPrivate.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F8BEF9300F44F8774D7D66CE5EE3E370 /* MWGridViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F43D408D14B282C4D474582D6C79BAB /* MWGridViewController.m */; };
+		F95139D6C036CA3F3E7857138341E1DB /* MWPhotoProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = 34A17A32F3A2E076941F7639A9DFF7AF /* MWPhotoProtocol.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F9B0A541E338684F945B7539D802CF64 /* UIImage+MultiFormat.h in Headers */ = {isa = PBXBuildFile; fileRef = D6C579E979796FF46866F1F8631C0A4F /* UIImage+MultiFormat.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		FBEE4EC74FD5B331DBCC218F9C9D7D67 /* Pods-OnePhoto-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = C5BEC0F15E3D3591B80EDDEC9D622E44 /* Pods-OnePhoto-dummy.m */; };
+		FC214077677D4F02E03C6C85F774E028 /* MBProgressHUD-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1524DE3336EA1777B7975CFFB2B9FB /* MBProgressHUD-dummy.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		66316F23E08EE65DA1B0C631C3F88CE8 /* PBXContainerItemProxy */ = {
+		386634C7797B60DF71C8AD13DAAD315D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = F05E9B69C8FD64F0322D968C18D00A3D;
-			remoteInfo = FastImageCache;
+			remoteGlobalIDString = 9775596B3CA16905FC8F66DA8E2A3C67;
+			remoteInfo = DACircularProgress;
 		};
-		F3368E38924C14A6E6AA1871945B53A8 /* PBXContainerItemProxy */ = {
+		4682D20C40729FBF5D71C61413D92771 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = FE2F1D7B9D9FCEA148517E4657B243F4;
+			remoteInfo = MBProgressHUD;
+		};
+		493D8904DFD072504E32E0A4352AB78D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DE3B07ED7FF04F506B0C5E00F4973589;
+			remoteInfo = SDWebImage;
+		};
+		8AAC30EDE95F8195978C38566B850989 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 9775596B3CA16905FC8F66DA8E2A3C67;
+			remoteInfo = DACircularProgress;
+		};
+		90C5595E0565CBEBB42EFEBB157FF619 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DE3B07ED7FF04F506B0C5E00F4973589;
+			remoteInfo = SDWebImage;
+		};
+		999D9522F4AD2757D76E2BC0D6606B4A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 5813251FEA21E4AEE97385709F1912DE;
+			remoteInfo = "MWPhotoBrowser-MWPhotoBrowser";
+		};
+		B04EEF3AAB9B69C77552CA58944F2837 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E2FE87384A67337831E53490EEA8BF11;
+			remoteInfo = MWPhotoBrowser;
+		};
+		D6E74E4650053971D2438A88B4AADCDA /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = C3AD7E342840A1BEA026D1D3A2D9C1A7;
 			remoteInfo = JTCalendar;
 		};
+		D7B59E66FA2C765426650ADECEF955EF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = FE2F1D7B9D9FCEA148517E4657B243F4;
+			remoteInfo = MBProgressHUD;
+		};
+		EB2C5EB2DF44CFB02449BFC444A06E6E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F05E9B69C8FD64F0322D968C18D00A3D;
+			remoteInfo = FastImageCache;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		02E135AC397DD578CF9398D82177CB89 /* JTCalendarSettings.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = JTCalendarSettings.h; path = JTCalendar/JTCalendarSettings.h; sourceTree = "<group>"; };
-		05567E2557A1A3A03F2FE17B34F2F680 /* JTCalendarWeekDayView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = JTCalendarWeekDayView.h; path = JTCalendar/Views/JTCalendarWeekDayView.h; sourceTree = "<group>"; };
-		06B93EFD942C80913352EBE5BEEF3E3F /* FICImageTable.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FICImageTable.h; path = FastImageCache/FICImageTable.h; sourceTree = "<group>"; };
+		0101E7D86535CE7DAB513BE8BA5928E1 /* DACircularProgressView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DACircularProgressView.h; path = DACircularProgress/DACircularProgressView.h; sourceTree = "<group>"; };
+		04321FA9C1EA040AF8AFFA47FC4D3827 /* SDWebImageDownloaderOperation.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SDWebImageDownloaderOperation.m; path = SDWebImage/SDWebImageDownloaderOperation.m; sourceTree = "<group>"; };
+		04E6ABF54370EB3AFC472053A0C37EDC /* JTCalendarPageView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = JTCalendarPageView.m; path = JTCalendar/Views/JTCalendarPageView.m; sourceTree = "<group>"; };
+		088273B2C195A2624CD8FED9180D2080 /* FICImageCache.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FICImageCache.h; path = FastImageCache/FICImageCache.h; sourceTree = "<group>"; };
 		09DCD0C3133FD3CABDE0B122260DDB9D /* Pods-OnePhoto.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-OnePhoto.release.xcconfig"; sourceTree = "<group>"; };
-		0BD0666257DE2F0020A7B6DAEA7B3054 /* JTCalendarManager.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = JTCalendarManager.h; path = JTCalendar/JTCalendarManager.h; sourceTree = "<group>"; };
-		0C255C421225D1BD5D510212A54F76A1 /* JTCalendar-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "JTCalendar-prefix.pch"; sourceTree = "<group>"; };
-		1060ED42D0314C6F1B6931C3D58C9020 /* FICImageCache.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FICImageCache.h; path = FastImageCache/FICImageCache.h; sourceTree = "<group>"; };
-		13E6E9648B50F2E9995E5225F1713F5D /* JTCalendar-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "JTCalendar-dummy.m"; sourceTree = "<group>"; };
-		180DB915D60972BD6B1B13B2CF25E63A /* libFastImageCache.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libFastImageCache.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		1C1E766C100EFFFB46B5CE36FB3D407F /* JTCalendarDelegate.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = JTCalendarDelegate.h; path = JTCalendar/JTCalendarDelegate.h; sourceTree = "<group>"; };
-		1E78D0A7F2B9634AC4412F5AFEA62453 /* JTDateHelper.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = JTDateHelper.h; path = JTCalendar/JTDateHelper.h; sourceTree = "<group>"; };
-		21E56E9A1763470718144D19DE9663F2 /* MobClick.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MobClick.h; path = "umsdk_IOS_analytics_no-idfa_v3.5.11/UMAnalytics_Sdk_3.5.11/MobClick.h"; sourceTree = "<group>"; };
-		23EEC825FCB7AB692506F0588EDE139C /* JTCalendarDayView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = JTCalendarDayView.h; path = JTCalendar/Views/JTCalendarDayView.h; sourceTree = "<group>"; };
-		28A367198F4412F622D954BB2BEB14F4 /* FICUtilities.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FICUtilities.h; path = FastImageCache/FICUtilities.h; sourceTree = "<group>"; };
-		2CC131D41225664491594EE94EA3D066 /* FICEntity.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FICEntity.h; path = FastImageCache/FICEntity.h; sourceTree = "<group>"; };
-		2FAB918F23D6C3694E21E2F8A1ACF44F /* FastImageCache-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "FastImageCache-dummy.m"; sourceTree = "<group>"; };
+		09EA23086DA5D32E68E39A1F9E7A2500 /* PlayButtonOverlayLargeTap.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = PlayButtonOverlayLargeTap.png; path = Pod/Assets/PlayButtonOverlayLargeTap.png; sourceTree = "<group>"; };
+		0D82E4C5762A2DBFAA99639552985631 /* FICImageCache+FICErrorLogging.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "FICImageCache+FICErrorLogging.h"; path = "FastImageCache/FICImageCache+FICErrorLogging.h"; sourceTree = "<group>"; };
+		0ED08B20B09EC845C3ED21755113C1A6 /* FICImageTableEntry.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FICImageTableEntry.m; path = FastImageCache/FICImageTableEntry.m; sourceTree = "<group>"; };
+		0F43D408D14B282C4D474582D6C79BAB /* MWGridViewController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MWGridViewController.m; path = Pod/Classes/MWGridViewController.m; sourceTree = "<group>"; };
+		0F906AA42A1FBED3513E3DE307FC28B2 /* SDWebImage.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SDWebImage.xcconfig; sourceTree = "<group>"; };
+		13CCAFD2115FB9246B250B3D85A626CF /* JTMenu.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = JTMenu.h; path = JTCalendar/Protocols/JTMenu.h; sourceTree = "<group>"; };
+		15584EC2F9DDC885669A1F07934FAC7E /* FICImageTable.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FICImageTable.m; path = FastImageCache/FICImageTable.m; sourceTree = "<group>"; };
+		16E7C8EC8EA913F0EFEA3948A36915A9 /* MobClick.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MobClick.h; path = "umsdk_IOS_analytics_no-idfa_v3.5.11/UMAnalytics_Sdk_3.5.11/MobClick.h"; sourceTree = "<group>"; };
+		17A67E132B58739DC8C32B05EE6C4FA5 /* UIBarButtonItemArrowRight@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "UIBarButtonItemArrowRight@2x.png"; path = "Pod/Assets/UIBarButtonItemArrowRight@2x.png"; sourceTree = "<group>"; };
+		17DDEB8F74BE7F7C158B4649678CFFA0 /* JTCalendarMenuView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = JTCalendarMenuView.h; path = JTCalendar/Views/JTCalendarMenuView.h; sourceTree = "<group>"; };
+		18D8765E6BA8247A6510212060F5B7ED /* SDWebImageDownloader.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SDWebImageDownloader.m; path = SDWebImage/SDWebImageDownloader.m; sourceTree = "<group>"; };
+		1A43CC8C5FD3E2BF8F64BF6B9086FC43 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.0.sdk/System/Library/Frameworks/QuartzCore.framework; sourceTree = DEVELOPER_DIR; };
+		1B1585B3EA8C7DB2E7EB70724FE4759E /* UIView+WebCacheOperation.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIView+WebCacheOperation.h"; path = "SDWebImage/UIView+WebCacheOperation.h"; sourceTree = "<group>"; };
+		1C95DDD8CD748F62C2C243CC4ECDAB57 /* ImageSelectedOff@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "ImageSelectedOff@2x.png"; path = "Pod/Assets/ImageSelectedOff@2x.png"; sourceTree = "<group>"; };
+		1D96C8B73177F5D2AF02EBF90D321AEC /* SDWebImageCompat.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SDWebImageCompat.h; path = SDWebImage/SDWebImageCompat.h; sourceTree = "<group>"; };
+		1DB8736F72240B37ECA436BB7D3349C4 /* UIButton+WebCache.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIButton+WebCache.m"; path = "SDWebImage/UIButton+WebCache.m"; sourceTree = "<group>"; };
+		1DFE7F5A86253F14FF401978D579E16C /* UIImage+GIF.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIImage+GIF.m"; path = "SDWebImage/UIImage+GIF.m"; sourceTree = "<group>"; };
+		209ACA0D6A778C51E9D7ECD51484507B /* JTCalendarWeekDayView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = JTCalendarWeekDayView.m; path = JTCalendar/Views/JTCalendarWeekDayView.m; sourceTree = "<group>"; };
+		21DCDC7523D77975B8E23BC3685E4B40 /* ImageSelectedOn@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "ImageSelectedOn@2x.png"; path = "Pod/Assets/ImageSelectedOn@2x.png"; sourceTree = "<group>"; };
+		22A617A1A82E97BA642A4209A3C8A537 /* JTCalendarWeekDayView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = JTCalendarWeekDayView.h; path = JTCalendar/Views/JTCalendarWeekDayView.h; sourceTree = "<group>"; };
+		23123FF239B1DD532DFC6E20ABCF93C7 /* JTVerticalCalendarView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = JTVerticalCalendarView.h; path = JTCalendar/Views/JTVerticalCalendarView.h; sourceTree = "<group>"; };
+		23C3468BE88E4C6F87F48FB6F63630B2 /* JTHorizontalCalendarView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = JTHorizontalCalendarView.m; path = JTCalendar/Views/JTHorizontalCalendarView.m; sourceTree = "<group>"; };
+		248F64F660101F71511DE7D6A563B42E /* UIImage+MWPhotoBrowser.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIImage+MWPhotoBrowser.m"; path = "Pod/Classes/UIImage+MWPhotoBrowser.m"; sourceTree = "<group>"; };
+		27D64BEBC2A166B93A4B1D1812FDEFCA /* DALabeledCircularProgressView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DALabeledCircularProgressView.h; path = DACircularProgress/DALabeledCircularProgressView.h; sourceTree = "<group>"; };
+		29DA9A0582FBCA96F4183C5A289D5A2A /* UIImageView+HighlightedWebCache.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIImageView+HighlightedWebCache.h"; path = "SDWebImage/UIImageView+HighlightedWebCache.h"; sourceTree = "<group>"; };
+		2A85FCAF2DCC9F02BD6516525FFCD00F /* MWPhoto.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MWPhoto.h; path = Pod/Classes/MWPhoto.h; sourceTree = "<group>"; };
+		2B6CD3362B70BF4B3ECED7B4208E2BA7 /* UIView+WebCacheOperation.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIView+WebCacheOperation.m"; path = "SDWebImage/UIView+WebCacheOperation.m"; sourceTree = "<group>"; };
+		2BA55379EB82C9320AD4C04C20E2F880 /* PlayButtonOverlayLarge.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = PlayButtonOverlayLarge.png; path = Pod/Assets/PlayButtonOverlayLarge.png; sourceTree = "<group>"; };
+		2BDAE58420959D864056DA000B492474 /* FastImageCache.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = FastImageCache.xcconfig; sourceTree = "<group>"; };
+		2D26B03A1ECFFC855344853CD33647DA /* JTCalendarDay.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = JTCalendarDay.h; path = JTCalendar/Protocols/JTCalendarDay.h; sourceTree = "<group>"; };
+		2F5356B86C3581F123F066AFFABD7587 /* JTCalendarDelegateManager.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = JTCalendarDelegateManager.m; path = JTCalendar/Managers/JTCalendarDelegateManager.m; sourceTree = "<group>"; };
 		3043D67673882944FB38F391E1B765B6 /* Pods-OnePhoto-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-OnePhoto-acknowledgements.plist"; sourceTree = "<group>"; };
-		326269940F51C4739D77CB26984BB621 /* FICImageCache+FICErrorLogging.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "FICImageCache+FICErrorLogging.h"; path = "FastImageCache/FICImageCache+FICErrorLogging.h"; sourceTree = "<group>"; };
-		3450646FE5D9B4388273D58C49B7FDFB /* FICImageTable.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FICImageTable.m; path = FastImageCache/FICImageTable.m; sourceTree = "<group>"; };
-		37BAB6CA12D41FA6ABDAA7E63A783BE6 /* JTHorizontalCalendarView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = JTHorizontalCalendarView.h; path = JTCalendar/Views/JTHorizontalCalendarView.h; sourceTree = "<group>"; };
-		37D383FE492F00301D2B97702BA64C0A /* JTCalendarDelegateManager.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = JTCalendarDelegateManager.h; path = JTCalendar/Managers/JTCalendarDelegateManager.h; sourceTree = "<group>"; };
-		3A4D49B7ED264D19E4796ABBC41C8A18 /* JTContent.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = JTContent.h; path = JTCalendar/Protocols/JTContent.h; sourceTree = "<group>"; };
-		3E4E89230EF59BC255123B67864ACF77 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
-		42442972C42E3A7C3A3D8BD002128113 /* FICImageTableChunk.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FICImageTableChunk.h; path = FastImageCache/FICImageTableChunk.h; sourceTree = "<group>"; };
-		4956EDBAD51C53073C2A18393D091D7A /* FICImageCache.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FICImageCache.m; path = FastImageCache/FICImageCache.m; sourceTree = "<group>"; };
-		49C77BD92C65C7C3E9FBA8499519E932 /* JTCalendarWeekView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = JTCalendarWeekView.m; path = JTCalendar/Views/JTCalendarWeekView.m; sourceTree = "<group>"; };
-		4B3556A0883C66F2BF18C6299DF1B55F /* JTCalendarPageView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = JTCalendarPageView.m; path = JTCalendar/Views/JTCalendarPageView.m; sourceTree = "<group>"; };
-		4D8048121FBB2219CC5FCFBD5081FDCB /* JTCalendarDayView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = JTCalendarDayView.m; path = JTCalendar/Views/JTCalendarDayView.m; sourceTree = "<group>"; };
-		53ED2566D1D72C8EC52F8E3580D45F3E /* FICImageFormat.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FICImageFormat.m; path = FastImageCache/FICImageFormat.m; sourceTree = "<group>"; };
-		5EAF63B276ED18B0F5557521F4FFA502 /* JTCalendarDelegateManager.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = JTCalendarDelegateManager.m; path = JTCalendar/Managers/JTCalendarDelegateManager.m; sourceTree = "<group>"; };
-		63ACA9F7DC46D4B39A0A60099ED79464 /* JTCalendarMenuView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = JTCalendarMenuView.h; path = JTCalendar/Views/JTCalendarMenuView.h; sourceTree = "<group>"; };
-		651ECF791389D5969F6028FCF1279A85 /* JTDateHelper.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = JTDateHelper.m; path = JTCalendar/JTDateHelper.m; sourceTree = "<group>"; };
-		6FCACC0B2C1DC08322F99C0758A013D6 /* JTCalendarWeekView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = JTCalendarWeekView.h; path = JTCalendar/Views/JTCalendarWeekView.h; sourceTree = "<group>"; };
-		77317CD4291496CA4F7A02440865D607 /* JTCalendarScrollManager.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = JTCalendarScrollManager.m; path = JTCalendar/Managers/JTCalendarScrollManager.m; sourceTree = "<group>"; };
-		7B1265F9765DB5F2EE15B4CBC3DCEF9A /* libPods-OnePhoto.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-OnePhoto.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		7B721AA1ACA72F587DDD01D524B67415 /* JTCalendarMenuView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = JTCalendarMenuView.m; path = JTCalendar/Views/JTCalendarMenuView.m; sourceTree = "<group>"; };
-		7DF5A66053E10ADA99D70416BF1C52C7 /* JTCalendarDay.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = JTCalendarDay.h; path = JTCalendar/Protocols/JTCalendarDay.h; sourceTree = "<group>"; };
-		7EA83B999D26EACBF2164FADCEA0EB99 /* JTCalendarScrollManager.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = JTCalendarScrollManager.h; path = JTCalendar/Managers/JTCalendarScrollManager.h; sourceTree = "<group>"; };
-		85B37A4BBB53CA813518BCD52AED1EB5 /* JTVerticalCalendarView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = JTVerticalCalendarView.m; path = JTCalendar/Views/JTVerticalCalendarView.m; sourceTree = "<group>"; };
-		85FA5A12C77D2853A69912D487C1B739 /* JTMenu.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = JTMenu.h; path = JTCalendar/Protocols/JTMenu.h; sourceTree = "<group>"; };
-		86EA50C1C273345B53E8FFCC2256FE2F /* JTVerticalCalendarView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = JTVerticalCalendarView.h; path = JTCalendar/Views/JTVerticalCalendarView.h; sourceTree = "<group>"; };
+		315B4DD6FD36F6E68DA496FC4122BE10 /* JTCalendarDelegateManager.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = JTCalendarDelegateManager.h; path = JTCalendar/Managers/JTCalendarDelegateManager.h; sourceTree = "<group>"; };
+		34A17A32F3A2E076941F7639A9DFF7AF /* MWPhotoProtocol.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MWPhotoProtocol.h; path = Pod/Classes/MWPhotoProtocol.h; sourceTree = "<group>"; };
+		3552AC97DCED1228ACF4CB143A46BDEF /* DACircularProgress-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "DACircularProgress-dummy.m"; sourceTree = "<group>"; };
+		3694E6D60D93A0103FCDAA449CF065F3 /* SDWebImageCompat.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SDWebImageCompat.m; path = SDWebImage/SDWebImageCompat.m; sourceTree = "<group>"; };
+		38FDD50CD431E296F2EB61D4F8C5D607 /* NSData+ImageContentType.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "NSData+ImageContentType.h"; path = "SDWebImage/NSData+ImageContentType.h"; sourceTree = "<group>"; };
+		39936E719BA8F0EC2E0784598E53EEDD /* MWPhotoBrowser.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MWPhotoBrowser.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
+		3BB5F74F4D6EE3ED47794A49D8E10E82 /* JTCalendarMenuView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = JTCalendarMenuView.m; path = JTCalendar/Views/JTCalendarMenuView.m; sourceTree = "<group>"; };
+		3D239471008B20B14DB13183FBEE763B /* JTCalendarPageView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = JTCalendarPageView.h; path = JTCalendar/Views/JTCalendarPageView.h; sourceTree = "<group>"; };
+		3DBE55D30ABA4E83F05EB19D4F42AF6A /* FICUtilities.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FICUtilities.h; path = FastImageCache/FICUtilities.h; sourceTree = "<group>"; };
+		413D8091F921ED11097F31596F8C7025 /* UIImageView+WebCache.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIImageView+WebCache.h"; path = "SDWebImage/UIImageView+WebCache.h"; sourceTree = "<group>"; };
+		478660C5117BA014E1D5D744B13C8687 /* FICImageFormat.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FICImageFormat.m; path = FastImageCache/FICImageFormat.m; sourceTree = "<group>"; };
+		4D4FB20C9E5E47DD0C8D170D45670B9C /* NSData+ImageContentType.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "NSData+ImageContentType.m"; path = "SDWebImage/NSData+ImageContentType.m"; sourceTree = "<group>"; };
+		4D78EE4A33573C0DA4B5F8DE961B20E2 /* ImageSelectedSmallOff@3x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "ImageSelectedSmallOff@3x.png"; path = "Pod/Assets/ImageSelectedSmallOff@3x.png"; sourceTree = "<group>"; };
+		4F46B93623E1E4EF00C88874F49A8068 /* libPods-OnePhoto.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-OnePhoto.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		4FC1525CE18A2D77C5C333E94E378266 /* ImageSelectedSmallOn.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = ImageSelectedSmallOn.png; path = Pod/Assets/ImageSelectedSmallOn.png; sourceTree = "<group>"; };
+		50351B2EA7FEB5A34D26A5AC27A6E298 /* ImageSelectedOn@3x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "ImageSelectedOn@3x.png"; path = "Pod/Assets/ImageSelectedOn@3x.png"; sourceTree = "<group>"; };
+		51C8BF960855B9745E10827A230B4A49 /* SDWebImageDownloader.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SDWebImageDownloader.h; path = SDWebImage/SDWebImageDownloader.h; sourceTree = "<group>"; };
+		5583875071E929FC4A21CD458B1C59AA /* UIBarButtonItemArrowLeft@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "UIBarButtonItemArrowLeft@2x.png"; path = "Pod/Assets/UIBarButtonItemArrowLeft@2x.png"; sourceTree = "<group>"; };
+		574971B81D8FF780A8FF2F622DD2A618 /* JTCalendarWeekView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = JTCalendarWeekView.m; path = JTCalendar/Views/JTCalendarWeekView.m; sourceTree = "<group>"; };
+		577D0362222311A870B6CE0B839A78D8 /* UIBarButtonItemGrid@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "UIBarButtonItemGrid@2x.png"; path = "Pod/Assets/UIBarButtonItemGrid@2x.png"; sourceTree = "<group>"; };
+		579ACA83BC22917223777A1205394AD1 /* MWPhotoBrowser.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MWPhotoBrowser.m; path = Pod/Classes/MWPhotoBrowser.m; sourceTree = "<group>"; };
+		5E04389DA019E1F80BC7E152605B7148 /* VideoOverlay@3x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "VideoOverlay@3x.png"; path = "Pod/Assets/VideoOverlay@3x.png"; sourceTree = "<group>"; };
+		5F874FA83827E879CADFB55E7CC8BC63 /* MBProgressHUD.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
+		60EE8D93311BDCF4ED25DBB95F2D9545 /* libMWPhotoBrowser.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libMWPhotoBrowser.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		67A7D902DA0855E0E75CD5C508FA3085 /* JTCalendarDayView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = JTCalendarDayView.h; path = JTCalendar/Views/JTCalendarDayView.h; sourceTree = "<group>"; };
+		67DEF460025502017BA2E3D7663F14A2 /* VideoOverlay@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "VideoOverlay@2x.png"; path = "Pod/Assets/VideoOverlay@2x.png"; sourceTree = "<group>"; };
+		69360E408ACAF41F0BE992F148B14FC0 /* SDWebImagePrefetcher.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SDWebImagePrefetcher.h; path = SDWebImage/SDWebImagePrefetcher.h; sourceTree = "<group>"; };
+		69412C9FC0C8A27959FE953213656405 /* SDWebImage-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "SDWebImage-dummy.m"; sourceTree = "<group>"; };
+		69FE033F11E6CA0689E30803856BC7DC /* SDWebImageDecoder.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SDWebImageDecoder.h; path = SDWebImage/SDWebImageDecoder.h; sourceTree = "<group>"; };
+		6A487638A19F8E00B2BD4A3DE4401F9B /* FICImageTable.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FICImageTable.h; path = FastImageCache/FICImageTable.h; sourceTree = "<group>"; };
+		6C0A593EEEC7B18B9BDF4478F789CA54 /* ImageError@3x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "ImageError@3x.png"; path = "Pod/Assets/ImageError@3x.png"; sourceTree = "<group>"; };
+		6C117F0DBFE5BF82D9D59FE5FAB65796 /* MWGridCell.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MWGridCell.h; path = Pod/Classes/MWGridCell.h; sourceTree = "<group>"; };
+		6E63E242009444126172B4D9EA3F5B5F /* ImageSelectedSmallOff.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = ImageSelectedSmallOff.png; path = Pod/Assets/ImageSelectedSmallOff.png; sourceTree = "<group>"; };
+		6F4945DD1D9DEFE293CBFA77FDE1C997 /* UIBarButtonItemArrowLeft@3x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "UIBarButtonItemArrowLeft@3x.png"; path = "Pod/Assets/UIBarButtonItemArrowLeft@3x.png"; sourceTree = "<group>"; };
+		6F52935626E4F18B8E2BE3839D2FF1DD /* SDWebImageManager.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SDWebImageManager.h; path = SDWebImage/SDWebImageManager.h; sourceTree = "<group>"; };
+		6F883E7DB9B03AA4948D6CE36C8C5BB5 /* MWPhotoBrowser.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MWPhotoBrowser.h; path = Pod/Classes/MWPhotoBrowser.h; sourceTree = "<group>"; };
+		6FCF5F769B06CCCBF6114D00D61AE21B /* MWPhotoBrowserPrivate.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MWPhotoBrowserPrivate.h; path = Pod/Classes/MWPhotoBrowserPrivate.h; sourceTree = "<group>"; };
+		7180B77BF870B5256A4332420B7432EB /* SDWebImage-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SDWebImage-prefix.pch"; sourceTree = "<group>"; };
+		71D95211BE02539D7DDEAE6D1983F377 /* MWTapDetectingView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MWTapDetectingView.h; path = Pod/Classes/MWTapDetectingView.h; sourceTree = "<group>"; };
+		74ABFB71A54D04E18F5036F5834BCF7E /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.0.sdk/System/Library/Frameworks/CoreGraphics.framework; sourceTree = DEVELOPER_DIR; };
+		751719E44344493532ECB31318C7C26C /* ImageSelectedOff.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = ImageSelectedOff.png; path = Pod/Assets/ImageSelectedOff.png; sourceTree = "<group>"; };
+		77EA0323AF0686303587DFDBB473B27E /* FICImageFormat.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FICImageFormat.h; path = FastImageCache/FICImageFormat.h; sourceTree = "<group>"; };
+		7BC6F077EE9F14147BF630A2256EABA9 /* JTCalendarManager.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = JTCalendarManager.h; path = JTCalendar/JTCalendarManager.h; sourceTree = "<group>"; };
+		7D82FD3E3233F1951CB8E5B430AE1871 /* MWCaptionView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MWCaptionView.m; path = Pod/Classes/MWCaptionView.m; sourceTree = "<group>"; };
+		80F77A0AE22E002CE7EA1A7CA40E1F6F /* ImageSelectedSmallOff@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "ImageSelectedSmallOff@2x.png"; path = "Pod/Assets/ImageSelectedSmallOff@2x.png"; sourceTree = "<group>"; };
+		81E905F620EAFE16FADE074D4BD2CCB6 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.0.sdk/System/Library/Frameworks/AssetsLibrary.framework; sourceTree = DEVELOPER_DIR; };
+		820606FB3C089DA857D0CEC7CB668989 /* MWPhotoBrowser.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = MWPhotoBrowser.xcconfig; sourceTree = "<group>"; };
+		82315793DCF635EBFFB9E1A0A1C48417 /* DACircularProgress-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "DACircularProgress-prefix.pch"; sourceTree = "<group>"; };
+		873401813951F3DAE210775400802BBC /* MWPhoto.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MWPhoto.m; path = Pod/Classes/MWPhoto.m; sourceTree = "<group>"; };
+		8758D01A35F8AD71E3CB1D6A6C7DA915 /* JTCalendarManager.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = JTCalendarManager.m; path = JTCalendar/JTCalendarManager.m; sourceTree = "<group>"; };
+		899A2CCEF5FB9546B401CDB3AE84FFF5 /* FICImageTableChunk.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FICImageTableChunk.h; path = FastImageCache/FICImageTableChunk.h; sourceTree = "<group>"; };
 		8BD123FC7E975A1E72E84744AB346C62 /* Pods-OnePhoto-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-OnePhoto-frameworks.sh"; sourceTree = "<group>"; };
-		98BBCEFC28F27B373DAB658ADD34AB3D /* FICUtilities.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FICUtilities.m; path = FastImageCache/FICUtilities.m; sourceTree = "<group>"; };
-		9E8804560310FDA9244B0FB59C85DBD1 /* libJTCalendar.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libJTCalendar.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		A17E5A08C6215D0DDCA2D7D8115B6206 /* JTCalendar.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = JTCalendar.h; path = JTCalendar/JTCalendar.h; sourceTree = "<group>"; };
-		A404F016B3F06A3B1BDF7082D4D62819 /* JTCalendarPage.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = JTCalendarPage.h; path = JTCalendar/Protocols/JTCalendarPage.h; sourceTree = "<group>"; };
-		A45BFB4EC104763C3406A1598DC85AD8 /* JTCalendarWeekDay.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = JTCalendarWeekDay.h; path = JTCalendar/Protocols/JTCalendarWeekDay.h; sourceTree = "<group>"; };
+		8D75BCFA21D6C118D1FA9C031AB46626 /* libFastImageCache.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libFastImageCache.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		8EBE756B1140F1F68CEF879341EE476D /* FICImageCache.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FICImageCache.m; path = FastImageCache/FICImageCache.m; sourceTree = "<group>"; };
+		8F3322647279933849D4578769808024 /* PlayButtonOverlayLargeTap@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "PlayButtonOverlayLargeTap@2x.png"; path = "Pod/Assets/PlayButtonOverlayLargeTap@2x.png"; sourceTree = "<group>"; };
+		904870983B7D1200068F055DAA59255A /* UIImage+MWPhotoBrowser.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIImage+MWPhotoBrowser.h"; path = "Pod/Classes/UIImage+MWPhotoBrowser.h"; sourceTree = "<group>"; };
+		91A95149844A9BBA41F609A038BF7C8E /* MWPhotoBrowser-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "MWPhotoBrowser-prefix.pch"; sourceTree = "<group>"; };
+		91F6F625F0CA73737E37E5167D9F1BE5 /* FastImageCache-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "FastImageCache-prefix.pch"; sourceTree = "<group>"; };
+		9427748D8564CA31EDC0A022BACAF3AA /* SDWebImagePrefetcher.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SDWebImagePrefetcher.m; path = SDWebImage/SDWebImagePrefetcher.m; sourceTree = "<group>"; };
+		9631822B01E74FE77AC7354CE5E6F1A3 /* FastImageCache-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "FastImageCache-dummy.m"; sourceTree = "<group>"; };
+		9A99996B2F333CD714C1D8AC418E8288 /* FICImports.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FICImports.h; path = FastImageCache/FICImports.h; sourceTree = "<group>"; };
+		9CBADEA2AB27D9DD71C76033D97DB28F /* SDImageCache.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SDImageCache.m; path = SDWebImage/SDImageCache.m; sourceTree = "<group>"; };
+		9E9727B6618DA38C3E4DC7C7FEBB06C3 /* JTCalendar-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "JTCalendar-prefix.pch"; sourceTree = "<group>"; };
+		9FE8E5EEB08044776BB04A0D80BBC563 /* PlayButtonOverlayLarge@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "PlayButtonOverlayLarge@2x.png"; path = "Pod/Assets/PlayButtonOverlayLarge@2x.png"; sourceTree = "<group>"; };
+		A037A14D8162541BB17477E83232053D /* libJTCalendar.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libJTCalendar.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		A13A12AB1523F12DA6BDBFFFE6CAE2CB /* VideoOverlay.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = VideoOverlay.png; path = Pod/Assets/VideoOverlay.png; sourceTree = "<group>"; };
+		A428D7D1B582CA6878F3288A4B49598E /* SDWebImageDownloaderOperation.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SDWebImageDownloaderOperation.h; path = SDWebImage/SDWebImageDownloaderOperation.h; sourceTree = "<group>"; };
+		A4A2EBBAE7E95C103D7D4F3722BA1F0F /* FICImageTableEntry.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FICImageTableEntry.h; path = FastImageCache/FICImageTableEntry.h; sourceTree = "<group>"; };
+		A5250979F44258B32DC10EE19E878F94 /* JTCalendarDelegate.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = JTCalendarDelegate.h; path = JTCalendar/JTCalendarDelegate.h; sourceTree = "<group>"; };
+		A5F8B56BA5D56C854EDC8E83B91AF111 /* ImageError@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "ImageError@2x.png"; path = "Pod/Assets/ImageError@2x.png"; sourceTree = "<group>"; };
+		A742C23FC8190578DB8F876543A9AA48 /* JTCalendarWeek.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = JTCalendarWeek.h; path = JTCalendar/Protocols/JTCalendarWeek.h; sourceTree = "<group>"; };
+		A9CE223E8A5C922D970BD8EC751CC856 /* JTCalendarWeekDay.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = JTCalendarWeekDay.h; path = JTCalendar/Protocols/JTCalendarWeekDay.h; sourceTree = "<group>"; };
+		AB7C9D130C13C06B0A85B60B32BD578A /* MWGridViewController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MWGridViewController.h; path = Pod/Classes/MWGridViewController.h; sourceTree = "<group>"; };
+		AEFF0891421ACDFD08B4C4ADF6F62F03 /* DACircularProgressView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DACircularProgressView.m; path = DACircularProgress/DACircularProgressView.m; sourceTree = "<group>"; };
 		AF33113D78429AF1A3A267B9DCB3DF7C /* Pods-OnePhoto-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-OnePhoto-resources.sh"; sourceTree = "<group>"; };
-		AFB62CA2D9FBBC3CFE0271B1990EB635 /* FastImageCache.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = FastImageCache.xcconfig; sourceTree = "<group>"; };
-		B3A757EDC46CB9A140B57EAB97C4BCF0 /* JTCalendarSettings.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = JTCalendarSettings.m; path = JTCalendar/JTCalendarSettings.m; sourceTree = "<group>"; };
+		AF8D0CA0CA1FB9E1CBE931F33C13B04E /* UIBarButtonItemArrowLeft.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = UIBarButtonItemArrowLeft.png; path = Pod/Assets/UIBarButtonItemArrowLeft.png; sourceTree = "<group>"; };
+		B0B437395A3361D86EC3C53F9E5BEAD4 /* FICEntity.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FICEntity.h; path = FastImageCache/FICEntity.h; sourceTree = "<group>"; };
+		B14CDE9DC2F42E15E6730119B2F57B98 /* JTDateHelper.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = JTDateHelper.h; path = JTCalendar/JTDateHelper.h; sourceTree = "<group>"; };
+		B20C9586AC9E173562F889AC35176A7C /* JTCalendarPage.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = JTCalendarPage.h; path = JTCalendar/Protocols/JTCalendarPage.h; sourceTree = "<group>"; };
+		B29650A88A55272274B45DC008D9BA99 /* UIBarButtonItemArrowRight@3x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "UIBarButtonItemArrowRight@3x.png"; path = "Pod/Assets/UIBarButtonItemArrowRight@3x.png"; sourceTree = "<group>"; };
+		B59E164163C2F5C107F654952A56115B /* MWZoomingScrollView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MWZoomingScrollView.m; path = Pod/Classes/MWZoomingScrollView.m; sourceTree = "<group>"; };
+		B6064C5C1C8F8441063ED340EC1E1979 /* MWZoomingScrollView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MWZoomingScrollView.h; path = Pod/Classes/MWZoomingScrollView.h; sourceTree = "<group>"; };
+		B65DB898F103A82D2168F9BDCD1EFD6B /* PlayButtonOverlayLargeTap@3x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "PlayButtonOverlayLargeTap@3x.png"; path = "Pod/Assets/PlayButtonOverlayLargeTap@3x.png"; sourceTree = "<group>"; };
+		B7868C005B8FA4BE69044ECC174A33BE /* UIImageView+HighlightedWebCache.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIImageView+HighlightedWebCache.m"; path = "SDWebImage/UIImageView+HighlightedWebCache.m"; sourceTree = "<group>"; };
+		B9325737CB2485BB36A403C49C81D6DB /* UIBarButtonItemArrowRight.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = UIBarButtonItemArrowRight.png; path = Pod/Assets/UIBarButtonItemArrowRight.png; sourceTree = "<group>"; };
+		B986BB834973566DD00F2E3A3C2E6FAF /* MBProgressHUD.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = MBProgressHUD.xcconfig; sourceTree = "<group>"; };
+		B9DC2228C92F5C000F5C26FD956C78E0 /* ImageSelectedOn.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = ImageSelectedOn.png; path = Pod/Assets/ImageSelectedOn.png; sourceTree = "<group>"; };
 		BA6428E9F66FD5A23C0A2E06ED26CD2F /* Podfile */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		BDADEAAF48D845B3C8AFBA643F9F346B /* FICImageTableEntry.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FICImageTableEntry.h; path = FastImageCache/FICImageTableEntry.h; sourceTree = "<group>"; };
-		BFC159236B65E18F5B4CEF8E3D5DF32B /* JTHorizontalCalendarView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = JTHorizontalCalendarView.m; path = JTCalendar/Views/JTHorizontalCalendarView.m; sourceTree = "<group>"; };
-		C3F70203D8AE0E64B9F0D30F5E0F61FE /* FICImageTableEntry.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FICImageTableEntry.m; path = FastImageCache/FICImageTableEntry.m; sourceTree = "<group>"; };
-		C407192A394AB759EBF5D7A822FE8F29 /* JTCalendarWeekDayView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = JTCalendarWeekDayView.m; path = JTCalendar/Views/JTCalendarWeekDayView.m; sourceTree = "<group>"; };
-		C47384FD29650C19E51B97B8976CB7C9 /* JTCalendar.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = JTCalendar.xcconfig; sourceTree = "<group>"; };
+		BAB6387CBEC27E377EC31EA79873162F /* ImageSelectedSmallOn@3x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "ImageSelectedSmallOn@3x.png"; path = "Pod/Assets/ImageSelectedSmallOn@3x.png"; sourceTree = "<group>"; };
+		BC227E01C06FE9CDC28600BB60E808CC /* UIBarButtonItemGrid.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = UIBarButtonItemGrid.png; path = Pod/Assets/UIBarButtonItemGrid.png; sourceTree = "<group>"; };
+		BE7D05544E8FAB1CE3D9C62658179CEE /* ImageSelectedSmallOn@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "ImageSelectedSmallOn@2x.png"; path = "Pod/Assets/ImageSelectedSmallOn@2x.png"; sourceTree = "<group>"; };
+		C007F5D17E65A48472F4E31AD7B5D86B /* SDImageCache.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SDImageCache.h; path = SDWebImage/SDImageCache.h; sourceTree = "<group>"; };
+		C31BCC46D5407733FC5CAA5F1081820C /* MWPhotoBrowser-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "MWPhotoBrowser-dummy.m"; sourceTree = "<group>"; };
+		C54E0DD3CA44573554B2B198DC3DB2C4 /* MWTapDetectingImageView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MWTapDetectingImageView.m; path = Pod/Classes/MWTapDetectingImageView.m; sourceTree = "<group>"; };
 		C5BEC0F15E3D3591B80EDDEC9D622E44 /* Pods-OnePhoto-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-OnePhoto-dummy.m"; sourceTree = "<group>"; };
-		C6D3F5E58C84CAD3271F5723FAE7AD32 /* JTCalendarPageView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = JTCalendarPageView.h; path = JTCalendar/Views/JTCalendarPageView.h; sourceTree = "<group>"; };
-		C73E79EC02A666D2159B47DE804B0D0D /* JTCalendarWeek.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = JTCalendarWeek.h; path = JTCalendar/Protocols/JTCalendarWeek.h; sourceTree = "<group>"; };
-		CFBAF8B466CC8965776FCEE7E050A94B /* FICImports.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FICImports.h; path = FastImageCache/FICImports.h; sourceTree = "<group>"; };
-		D3951509172CA711A807E51E665C0295 /* FICImageFormat.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FICImageFormat.h; path = FastImageCache/FICImageFormat.h; sourceTree = "<group>"; };
-		D4A7FF1062D8812723857D77F16CCE01 /* FICImageTableChunk.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FICImageTableChunk.m; path = FastImageCache/FICImageTableChunk.m; sourceTree = "<group>"; };
+		C7889243304B15E5E1F52ABFA02D6D3C /* DACircularProgress.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = DACircularProgress.xcconfig; sourceTree = "<group>"; };
+		C862BECA78DB8BD52EB768156B9C9C63 /* MWCaptionView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MWCaptionView.h; path = Pod/Classes/MWCaptionView.h; sourceTree = "<group>"; };
+		C88804A6506D394B879171BD694CE071 /* JTCalendar.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = JTCalendar.h; path = JTCalendar/JTCalendar.h; sourceTree = "<group>"; };
+		C88D41667FDC2603C3702F873893FEAB /* SDWebImageDecoder.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SDWebImageDecoder.m; path = SDWebImage/SDWebImageDecoder.m; sourceTree = "<group>"; };
+		C8ABCF1CD93B1FF115BEA2487DBE444D /* JTVerticalCalendarView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = JTVerticalCalendarView.m; path = JTCalendar/Views/JTVerticalCalendarView.m; sourceTree = "<group>"; };
+		CB1524DE3336EA1777B7975CFFB2B9FB /* MBProgressHUD-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "MBProgressHUD-dummy.m"; sourceTree = "<group>"; };
+		CB3E4FD33A28565EB2D4058D46464C84 /* ImageSelectedOff@3x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "ImageSelectedOff@3x.png"; path = "Pod/Assets/ImageSelectedOff@3x.png"; sourceTree = "<group>"; };
+		CD0CD815CEDE5531992AD0A7FFB03D04 /* JTCalendar-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "JTCalendar-dummy.m"; sourceTree = "<group>"; };
+		CDE164FE47FCFA8DA6C971A09FD45A4E /* libDACircularProgress.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libDACircularProgress.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		D12673B2D931E30689A78A130809346D /* JTCalendar.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = JTCalendar.xcconfig; sourceTree = "<group>"; };
+		D156513DF0B550C686A62FFF994D12E6 /* UIImageView+WebCache.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIImageView+WebCache.m"; path = "SDWebImage/UIImageView+WebCache.m"; sourceTree = "<group>"; };
+		D15A4B1E8473334066C0F6348F34D6D1 /* JTCalendarDayView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = JTCalendarDayView.m; path = JTCalendar/Views/JTCalendarDayView.m; sourceTree = "<group>"; };
+		D1EF728507099BC5C622E0E3976B23A9 /* JTCalendarSettings.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = JTCalendarSettings.h; path = JTCalendar/JTCalendarSettings.h; sourceTree = "<group>"; };
+		D39FA0EDAD239AED517C08DE3EFD4948 /* DALabeledCircularProgressView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DALabeledCircularProgressView.m; path = DACircularProgress/DALabeledCircularProgressView.m; sourceTree = "<group>"; };
+		D5A34B59027760E4FEF5419DAA6A00C9 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		D5C1619C0F616ADA833957947CAF4594 /* UIImage+MultiFormat.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIImage+MultiFormat.m"; path = "SDWebImage/UIImage+MultiFormat.m"; sourceTree = "<group>"; };
+		D5E58C71B004A829ED8886D19C1AF45E /* libSDWebImage.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libSDWebImage.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		D6791D94842F28E3148103EB8358D748 /* JTCalendarWeekView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = JTCalendarWeekView.h; path = JTCalendar/Views/JTCalendarWeekView.h; sourceTree = "<group>"; };
+		D698B767142E6CD69E50F3F3BBBE08A5 /* MBProgressHUD-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "MBProgressHUD-prefix.pch"; sourceTree = "<group>"; };
+		D6C579E979796FF46866F1F8631C0A4F /* UIImage+MultiFormat.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIImage+MultiFormat.h"; path = "SDWebImage/UIImage+MultiFormat.h"; sourceTree = "<group>"; };
+		D6C61E8308A7166114DB1561ED069297 /* libMBProgressHUD.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libMBProgressHUD.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		D70DA9BE19362DF313A62AAFF856CB6B /* UIImage+GIF.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIImage+GIF.h"; path = "SDWebImage/UIImage+GIF.h"; sourceTree = "<group>"; };
+		D85CE28B8278A37FA4F98D5092CCE324 /* MWTapDetectingView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MWTapDetectingView.m; path = Pod/Classes/MWTapDetectingView.m; sourceTree = "<group>"; };
+		DAB3EC1B6BD36FB1AED0F6BC72B199CE /* JTHorizontalCalendarView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = JTHorizontalCalendarView.h; path = JTCalendar/Views/JTHorizontalCalendarView.h; sourceTree = "<group>"; };
+		DB4EFED5B36FA63CC2F99BEBE8E0C458 /* ImageError.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = ImageError.png; path = Pod/Assets/ImageError.png; sourceTree = "<group>"; };
+		DBA569B7341D9DBFED5318E0DF3041D5 /* JTCalendarScrollManager.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = JTCalendarScrollManager.h; path = JTCalendar/Managers/JTCalendarScrollManager.h; sourceTree = "<group>"; };
+		DBFFA92D3B17ABB76D098220B1FC6D8F /* MWCommon.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MWCommon.h; path = Pod/Classes/MWCommon.h; sourceTree = "<group>"; };
+		DDEEDF2EAFDC22393821AE45FA07A5AC /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.0.sdk/System/Library/Frameworks/MediaPlayer.framework; sourceTree = DEVELOPER_DIR; };
+		E0065086D0DED0386F0F9AB51388BD48 /* SDWebImageOperation.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SDWebImageOperation.h; path = SDWebImage/SDWebImageOperation.h; sourceTree = "<group>"; };
+		E10D9894F35E69A74E0A09ACED9D85B9 /* JTContent.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = JTContent.h; path = JTCalendar/Protocols/JTContent.h; sourceTree = "<group>"; };
+		E1AC91885DB2CDEE790AF4AA0B427EDE /* MBProgressHUD.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
+		E5A11D711B70020D54DF1D42AC745267 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.0.sdk/System/Library/Frameworks/ImageIO.framework; sourceTree = DEVELOPER_DIR; };
+		E63B67CD031C935DFCB7C40AD1FF86AD /* MWGridCell.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MWGridCell.m; path = Pod/Classes/MWGridCell.m; sourceTree = "<group>"; };
+		E651905C937AFAE160E59C4D04B7BEA5 /* SDWebImageManager.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SDWebImageManager.m; path = SDWebImage/SDWebImageManager.m; sourceTree = "<group>"; };
 		E77FA3EB4477E93759F24B60D1C3155D /* Pods-OnePhoto.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-OnePhoto.debug.xcconfig"; sourceTree = "<group>"; };
+		E81E197CCF3C078A28DD8FD92A2232E4 /* JTDateHelper.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = JTDateHelper.m; path = JTCalendar/JTDateHelper.m; sourceTree = "<group>"; };
 		EB0E644313E0285760736ACD7382F499 /* Pods-OnePhoto-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-OnePhoto-acknowledgements.markdown"; sourceTree = "<group>"; };
-		FACD9BAB67F8D516920DBD56C2221629 /* JTCalendarManager.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = JTCalendarManager.m; path = JTCalendar/JTCalendarManager.m; sourceTree = "<group>"; };
-		FAE8893B3F1CC876E7FE32444489BF92 /* FastImageCache-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "FastImageCache-prefix.pch"; sourceTree = "<group>"; };
+		EB4B0D0C8239C6B7E51E8539AA8DF65C /* FICImageTableChunk.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FICImageTableChunk.m; path = FastImageCache/FICImageTableChunk.m; sourceTree = "<group>"; };
+		F1E8A92825D41B0022963A7AFC49C417 /* FICUtilities.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FICUtilities.m; path = FastImageCache/FICUtilities.m; sourceTree = "<group>"; };
+		F5FA2154EB8FEE789FEE81230571BCF8 /* JTCalendarScrollManager.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = JTCalendarScrollManager.m; path = JTCalendar/Managers/JTCalendarScrollManager.m; sourceTree = "<group>"; };
+		F7A251CD5893D93CBDBCBDDD68D2F9D4 /* MWTapDetectingImageView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MWTapDetectingImageView.h; path = Pod/Classes/MWTapDetectingImageView.h; sourceTree = "<group>"; };
+		F825E1C2F5E95839218BFE89270EF13A /* PlayButtonOverlayLarge@3x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "PlayButtonOverlayLarge@3x.png"; path = "Pod/Assets/PlayButtonOverlayLarge@3x.png"; sourceTree = "<group>"; };
+		F9B4521D722A9D2B317C956E01E5B245 /* UIButton+WebCache.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIButton+WebCache.h"; path = "SDWebImage/UIButton+WebCache.h"; sourceTree = "<group>"; };
+		FA8CD2261B072933A1DA4AD350EC4699 /* UIBarButtonItemGrid@3x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "UIBarButtonItemGrid@3x.png"; path = "Pod/Assets/UIBarButtonItemGrid@3x.png"; sourceTree = "<group>"; };
+		FB2C9F1B88C0B05F3A3C8495479E5EFF /* JTCalendarSettings.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = JTCalendarSettings.m; path = JTCalendar/JTCalendarSettings.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -157,11 +428,24 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		7D493BDD0B723C2B61610BD90712CCF4 /* Frameworks */ = {
+		886428740DB164747FBA1935F65900DF /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3D9BE6CEC4FB2B6CCFC06769CD18E3CC /* Foundation.framework in Frameworks */,
+				EFE77B95F063C96D9B07BC2A988AB403 /* AssetsLibrary.framework in Frameworks */,
+				B6CB1D947CABAFFCEFC7F94006CB7AD4 /* Foundation.framework in Frameworks */,
+				319D6926D1261EB1150D83F672CCA35E /* ImageIO.framework in Frameworks */,
+				00518063767430EDC47FCC49F4409458 /* MediaPlayer.framework in Frameworks */,
+				4CFCAA497A77475D017F781F8241A4C0 /* QuartzCore.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B98B98DB394C072483E8066C6B594401 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				589CDFB90C98BF58F34B688A2BEF2D04 /* Foundation.framework in Frameworks */,
+				1181CB6FC2D63C42F19EAB56C604A71E /* ImageIO.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -173,102 +457,266 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		C7E3DBA53BBD36CEF94585C3A657F5A2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9E99791DAA8AA0153606F51758EA9D8B /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E81C08F5CCC0A5FBFF4559E2173164C7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				70D801E0B95C23BCC270E4EC8659D463 /* CoreGraphics.framework in Frameworks */,
+				2989492A1A182744E36FD61DF1746D94 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F2A9AAC03867BB4990470BAC5912E030 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				53FB0CBA14BE53F79F4EB4E7B46C523B /* Foundation.framework in Frameworks */,
+				072C184628072EDE522629576F1716DE /* QuartzCore.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F2BDF8E898C762EFB3844211CE201024 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		1293B110ACEB3E78266B4EFC39196AE5 /* FastImageCache */ = {
+		0C12CA1BD43D7B69AA22DAF3B5ABE8AF /* Core */ = {
 			isa = PBXGroup;
 			children = (
-				2CC131D41225664491594EE94EA3D066 /* FICEntity.h */,
-				1060ED42D0314C6F1B6931C3D58C9020 /* FICImageCache.h */,
-				4956EDBAD51C53073C2A18393D091D7A /* FICImageCache.m */,
-				326269940F51C4739D77CB26984BB621 /* FICImageCache+FICErrorLogging.h */,
-				D3951509172CA711A807E51E665C0295 /* FICImageFormat.h */,
-				53ED2566D1D72C8EC52F8E3580D45F3E /* FICImageFormat.m */,
-				06B93EFD942C80913352EBE5BEEF3E3F /* FICImageTable.h */,
-				3450646FE5D9B4388273D58C49B7FDFB /* FICImageTable.m */,
-				42442972C42E3A7C3A3D8BD002128113 /* FICImageTableChunk.h */,
-				D4A7FF1062D8812723857D77F16CCE01 /* FICImageTableChunk.m */,
-				BDADEAAF48D845B3C8AFBA643F9F346B /* FICImageTableEntry.h */,
-				C3F70203D8AE0E64B9F0D30F5E0F61FE /* FICImageTableEntry.m */,
-				CFBAF8B466CC8965776FCEE7E050A94B /* FICImports.h */,
-				28A367198F4412F622D954BB2BEB14F4 /* FICUtilities.h */,
-				98BBCEFC28F27B373DAB658ADD34AB3D /* FICUtilities.m */,
-				39BA133D6F9C39F4111F50CD7F5205CA /* Support Files */,
+				38FDD50CD431E296F2EB61D4F8C5D607 /* NSData+ImageContentType.h */,
+				4D4FB20C9E5E47DD0C8D170D45670B9C /* NSData+ImageContentType.m */,
+				C007F5D17E65A48472F4E31AD7B5D86B /* SDImageCache.h */,
+				9CBADEA2AB27D9DD71C76033D97DB28F /* SDImageCache.m */,
+				1D96C8B73177F5D2AF02EBF90D321AEC /* SDWebImageCompat.h */,
+				3694E6D60D93A0103FCDAA449CF065F3 /* SDWebImageCompat.m */,
+				69FE033F11E6CA0689E30803856BC7DC /* SDWebImageDecoder.h */,
+				C88D41667FDC2603C3702F873893FEAB /* SDWebImageDecoder.m */,
+				51C8BF960855B9745E10827A230B4A49 /* SDWebImageDownloader.h */,
+				18D8765E6BA8247A6510212060F5B7ED /* SDWebImageDownloader.m */,
+				A428D7D1B582CA6878F3288A4B49598E /* SDWebImageDownloaderOperation.h */,
+				04321FA9C1EA040AF8AFFA47FC4D3827 /* SDWebImageDownloaderOperation.m */,
+				6F52935626E4F18B8E2BE3839D2FF1DD /* SDWebImageManager.h */,
+				E651905C937AFAE160E59C4D04B7BEA5 /* SDWebImageManager.m */,
+				E0065086D0DED0386F0F9AB51388BD48 /* SDWebImageOperation.h */,
+				69360E408ACAF41F0BE992F148B14FC0 /* SDWebImagePrefetcher.h */,
+				9427748D8564CA31EDC0A022BACAF3AA /* SDWebImagePrefetcher.m */,
+				F9B4521D722A9D2B317C956E01E5B245 /* UIButton+WebCache.h */,
+				1DB8736F72240B37ECA436BB7D3349C4 /* UIButton+WebCache.m */,
+				D70DA9BE19362DF313A62AAFF856CB6B /* UIImage+GIF.h */,
+				1DFE7F5A86253F14FF401978D579E16C /* UIImage+GIF.m */,
+				D6C579E979796FF46866F1F8631C0A4F /* UIImage+MultiFormat.h */,
+				D5C1619C0F616ADA833957947CAF4594 /* UIImage+MultiFormat.m */,
+				29DA9A0582FBCA96F4183C5A289D5A2A /* UIImageView+HighlightedWebCache.h */,
+				B7868C005B8FA4BE69044ECC174A33BE /* UIImageView+HighlightedWebCache.m */,
+				413D8091F921ED11097F31596F8C7025 /* UIImageView+WebCache.h */,
+				D156513DF0B550C686A62FFF994D12E6 /* UIImageView+WebCache.m */,
+				1B1585B3EA8C7DB2E7EB70724FE4759E /* UIView+WebCacheOperation.h */,
+				2B6CD3362B70BF4B3ECED7B4208E2BA7 /* UIView+WebCacheOperation.m */,
+			);
+			name = Core;
+			sourceTree = "<group>";
+		};
+		0E6632F749DB89970AC88D40FBCC0FDB /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				0F906AA42A1FBED3513E3DE307FC28B2 /* SDWebImage.xcconfig */,
+				69412C9FC0C8A27959FE953213656405 /* SDWebImage-dummy.m */,
+				7180B77BF870B5256A4332420B7432EB /* SDWebImage-prefix.pch */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/SDWebImage";
+			sourceTree = "<group>";
+		};
+		0F75DF6C7C5F002280EC53F48E80B587 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1A07F2A3BDC95440B1D6376997D14187 /* iOS */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		1363A562C949DD681A63AB0689348DF5 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				DB4EFED5B36FA63CC2F99BEBE8E0C458 /* ImageError.png */,
+				A5F8B56BA5D56C854EDC8E83B91AF111 /* ImageError@2x.png */,
+				6C0A593EEEC7B18B9BDF4478F789CA54 /* ImageError@3x.png */,
+				751719E44344493532ECB31318C7C26C /* ImageSelectedOff.png */,
+				1C95DDD8CD748F62C2C243CC4ECDAB57 /* ImageSelectedOff@2x.png */,
+				CB3E4FD33A28565EB2D4058D46464C84 /* ImageSelectedOff@3x.png */,
+				B9DC2228C92F5C000F5C26FD956C78E0 /* ImageSelectedOn.png */,
+				21DCDC7523D77975B8E23BC3685E4B40 /* ImageSelectedOn@2x.png */,
+				50351B2EA7FEB5A34D26A5AC27A6E298 /* ImageSelectedOn@3x.png */,
+				6E63E242009444126172B4D9EA3F5B5F /* ImageSelectedSmallOff.png */,
+				80F77A0AE22E002CE7EA1A7CA40E1F6F /* ImageSelectedSmallOff@2x.png */,
+				4D78EE4A33573C0DA4B5F8DE961B20E2 /* ImageSelectedSmallOff@3x.png */,
+				4FC1525CE18A2D77C5C333E94E378266 /* ImageSelectedSmallOn.png */,
+				BE7D05544E8FAB1CE3D9C62658179CEE /* ImageSelectedSmallOn@2x.png */,
+				BAB6387CBEC27E377EC31EA79873162F /* ImageSelectedSmallOn@3x.png */,
+				2BA55379EB82C9320AD4C04C20E2F880 /* PlayButtonOverlayLarge.png */,
+				9FE8E5EEB08044776BB04A0D80BBC563 /* PlayButtonOverlayLarge@2x.png */,
+				F825E1C2F5E95839218BFE89270EF13A /* PlayButtonOverlayLarge@3x.png */,
+				09EA23086DA5D32E68E39A1F9E7A2500 /* PlayButtonOverlayLargeTap.png */,
+				8F3322647279933849D4578769808024 /* PlayButtonOverlayLargeTap@2x.png */,
+				B65DB898F103A82D2168F9BDCD1EFD6B /* PlayButtonOverlayLargeTap@3x.png */,
+				AF8D0CA0CA1FB9E1CBE931F33C13B04E /* UIBarButtonItemArrowLeft.png */,
+				5583875071E929FC4A21CD458B1C59AA /* UIBarButtonItemArrowLeft@2x.png */,
+				6F4945DD1D9DEFE293CBFA77FDE1C997 /* UIBarButtonItemArrowLeft@3x.png */,
+				B9325737CB2485BB36A403C49C81D6DB /* UIBarButtonItemArrowRight.png */,
+				17A67E132B58739DC8C32B05EE6C4FA5 /* UIBarButtonItemArrowRight@2x.png */,
+				B29650A88A55272274B45DC008D9BA99 /* UIBarButtonItemArrowRight@3x.png */,
+				BC227E01C06FE9CDC28600BB60E808CC /* UIBarButtonItemGrid.png */,
+				577D0362222311A870B6CE0B839A78D8 /* UIBarButtonItemGrid@2x.png */,
+				FA8CD2261B072933A1DA4AD350EC4699 /* UIBarButtonItemGrid@3x.png */,
+				A13A12AB1523F12DA6BDBFFFE6CAE2CB /* VideoOverlay.png */,
+				67DEF460025502017BA2E3D7663F14A2 /* VideoOverlay@2x.png */,
+				5E04389DA019E1F80BC7E152605B7148 /* VideoOverlay@3x.png */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		147E088A1432F3E6D255F980CBB2073A /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				B986BB834973566DD00F2E3A3C2E6FAF /* MBProgressHUD.xcconfig */,
+				CB1524DE3336EA1777B7975CFFB2B9FB /* MBProgressHUD-dummy.m */,
+				D698B767142E6CD69E50F3F3BBBE08A5 /* MBProgressHUD-prefix.pch */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/MBProgressHUD";
+			sourceTree = "<group>";
+		};
+		1A07F2A3BDC95440B1D6376997D14187 /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				81E905F620EAFE16FADE074D4BD2CCB6 /* AssetsLibrary.framework */,
+				74ABFB71A54D04E18F5036F5834BCF7E /* CoreGraphics.framework */,
+				D5A34B59027760E4FEF5419DAA6A00C9 /* Foundation.framework */,
+				E5A11D711B70020D54DF1D42AC745267 /* ImageIO.framework */,
+				DDEEDF2EAFDC22393821AE45FA07A5AC /* MediaPlayer.framework */,
+				1A43CC8C5FD3E2BF8F64BF6B9086FC43 /* QuartzCore.framework */,
+			);
+			name = iOS;
+			sourceTree = "<group>";
+		};
+		1CD6AD546B26F7A51E772B8FF9761808 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				DCFB61CB9601D2BCB3A581CBA8C149DB /* DACircularProgress */,
+				270C9E516C2461DA8F08EB7252F995FE /* FastImageCache */,
+				37827C8E6AA39A54BFA73AAA1C1AB947 /* JTCalendar */,
+				7D392F804E072240DCEF6BE8FAE5DD9A /* MBProgressHUD */,
+				39056194AC306EC3FB98F48097791B5C /* MWPhotoBrowser */,
+				88E3E4CBD4A3F2921DA7043FF3BCC0EB /* SDWebImage */,
+				60730186EADE853F8950C11C822C1071 /* UMengAnalytics-NO-IDFA */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		270C9E516C2461DA8F08EB7252F995FE /* FastImageCache */ = {
+			isa = PBXGroup;
+			children = (
+				B0B437395A3361D86EC3C53F9E5BEAD4 /* FICEntity.h */,
+				088273B2C195A2624CD8FED9180D2080 /* FICImageCache.h */,
+				8EBE756B1140F1F68CEF879341EE476D /* FICImageCache.m */,
+				0D82E4C5762A2DBFAA99639552985631 /* FICImageCache+FICErrorLogging.h */,
+				77EA0323AF0686303587DFDBB473B27E /* FICImageFormat.h */,
+				478660C5117BA014E1D5D744B13C8687 /* FICImageFormat.m */,
+				6A487638A19F8E00B2BD4A3DE4401F9B /* FICImageTable.h */,
+				15584EC2F9DDC885669A1F07934FAC7E /* FICImageTable.m */,
+				899A2CCEF5FB9546B401CDB3AE84FFF5 /* FICImageTableChunk.h */,
+				EB4B0D0C8239C6B7E51E8539AA8DF65C /* FICImageTableChunk.m */,
+				A4A2EBBAE7E95C103D7D4F3722BA1F0F /* FICImageTableEntry.h */,
+				0ED08B20B09EC845C3ED21755113C1A6 /* FICImageTableEntry.m */,
+				9A99996B2F333CD714C1D8AC418E8288 /* FICImports.h */,
+				3DBE55D30ABA4E83F05EB19D4F42AF6A /* FICUtilities.h */,
+				F1E8A92825D41B0022963A7AFC49C417 /* FICUtilities.m */,
+				6BBC410DEB3A51B65065C024F09E36B6 /* Support Files */,
 			);
 			path = FastImageCache;
 			sourceTree = "<group>";
 		};
-		2F60FB4C015DAB66B2F744C38CAF9058 /* Support Files */ = {
+		37827C8E6AA39A54BFA73AAA1C1AB947 /* JTCalendar */ = {
 			isa = PBXGroup;
 			children = (
-				C47384FD29650C19E51B97B8976CB7C9 /* JTCalendar.xcconfig */,
-				13E6E9648B50F2E9995E5225F1713F5D /* JTCalendar-dummy.m */,
-				0C255C421225D1BD5D510212A54F76A1 /* JTCalendar-prefix.pch */,
-			);
-			name = "Support Files";
-			path = "../Target Support Files/JTCalendar";
-			sourceTree = "<group>";
-		};
-		39BA133D6F9C39F4111F50CD7F5205CA /* Support Files */ = {
-			isa = PBXGroup;
-			children = (
-				AFB62CA2D9FBBC3CFE0271B1990EB635 /* FastImageCache.xcconfig */,
-				2FAB918F23D6C3694E21E2F8A1ACF44F /* FastImageCache-dummy.m */,
-				FAE8893B3F1CC876E7FE32444489BF92 /* FastImageCache-prefix.pch */,
-			);
-			name = "Support Files";
-			path = "../Target Support Files/FastImageCache";
-			sourceTree = "<group>";
-		};
-		46DECAE3C33D10A195BA941668176C47 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				180DB915D60972BD6B1B13B2CF25E63A /* libFastImageCache.a */,
-				9E8804560310FDA9244B0FB59C85DBD1 /* libJTCalendar.a */,
-				7B1265F9765DB5F2EE15B4CBC3DCEF9A /* libPods-OnePhoto.a */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		50A38EE161D1BB35DCF04D466AA3C25A /* JTCalendar */ = {
-			isa = PBXGroup;
-			children = (
-				A17E5A08C6215D0DDCA2D7D8115B6206 /* JTCalendar.h */,
-				7DF5A66053E10ADA99D70416BF1C52C7 /* JTCalendarDay.h */,
-				23EEC825FCB7AB692506F0588EDE139C /* JTCalendarDayView.h */,
-				4D8048121FBB2219CC5FCFBD5081FDCB /* JTCalendarDayView.m */,
-				1C1E766C100EFFFB46B5CE36FB3D407F /* JTCalendarDelegate.h */,
-				37D383FE492F00301D2B97702BA64C0A /* JTCalendarDelegateManager.h */,
-				5EAF63B276ED18B0F5557521F4FFA502 /* JTCalendarDelegateManager.m */,
-				0BD0666257DE2F0020A7B6DAEA7B3054 /* JTCalendarManager.h */,
-				FACD9BAB67F8D516920DBD56C2221629 /* JTCalendarManager.m */,
-				63ACA9F7DC46D4B39A0A60099ED79464 /* JTCalendarMenuView.h */,
-				7B721AA1ACA72F587DDD01D524B67415 /* JTCalendarMenuView.m */,
-				A404F016B3F06A3B1BDF7082D4D62819 /* JTCalendarPage.h */,
-				C6D3F5E58C84CAD3271F5723FAE7AD32 /* JTCalendarPageView.h */,
-				4B3556A0883C66F2BF18C6299DF1B55F /* JTCalendarPageView.m */,
-				7EA83B999D26EACBF2164FADCEA0EB99 /* JTCalendarScrollManager.h */,
-				77317CD4291496CA4F7A02440865D607 /* JTCalendarScrollManager.m */,
-				02E135AC397DD578CF9398D82177CB89 /* JTCalendarSettings.h */,
-				B3A757EDC46CB9A140B57EAB97C4BCF0 /* JTCalendarSettings.m */,
-				C73E79EC02A666D2159B47DE804B0D0D /* JTCalendarWeek.h */,
-				A45BFB4EC104763C3406A1598DC85AD8 /* JTCalendarWeekDay.h */,
-				05567E2557A1A3A03F2FE17B34F2F680 /* JTCalendarWeekDayView.h */,
-				C407192A394AB759EBF5D7A822FE8F29 /* JTCalendarWeekDayView.m */,
-				6FCACC0B2C1DC08322F99C0758A013D6 /* JTCalendarWeekView.h */,
-				49C77BD92C65C7C3E9FBA8499519E932 /* JTCalendarWeekView.m */,
-				3A4D49B7ED264D19E4796ABBC41C8A18 /* JTContent.h */,
-				1E78D0A7F2B9634AC4412F5AFEA62453 /* JTDateHelper.h */,
-				651ECF791389D5969F6028FCF1279A85 /* JTDateHelper.m */,
-				37BAB6CA12D41FA6ABDAA7E63A783BE6 /* JTHorizontalCalendarView.h */,
-				BFC159236B65E18F5B4CEF8E3D5DF32B /* JTHorizontalCalendarView.m */,
-				85FA5A12C77D2853A69912D487C1B739 /* JTMenu.h */,
-				86EA50C1C273345B53E8FFCC2256FE2F /* JTVerticalCalendarView.h */,
-				85B37A4BBB53CA813518BCD52AED1EB5 /* JTVerticalCalendarView.m */,
-				2F60FB4C015DAB66B2F744C38CAF9058 /* Support Files */,
+				C88804A6506D394B879171BD694CE071 /* JTCalendar.h */,
+				2D26B03A1ECFFC855344853CD33647DA /* JTCalendarDay.h */,
+				67A7D902DA0855E0E75CD5C508FA3085 /* JTCalendarDayView.h */,
+				D15A4B1E8473334066C0F6348F34D6D1 /* JTCalendarDayView.m */,
+				A5250979F44258B32DC10EE19E878F94 /* JTCalendarDelegate.h */,
+				315B4DD6FD36F6E68DA496FC4122BE10 /* JTCalendarDelegateManager.h */,
+				2F5356B86C3581F123F066AFFABD7587 /* JTCalendarDelegateManager.m */,
+				7BC6F077EE9F14147BF630A2256EABA9 /* JTCalendarManager.h */,
+				8758D01A35F8AD71E3CB1D6A6C7DA915 /* JTCalendarManager.m */,
+				17DDEB8F74BE7F7C158B4649678CFFA0 /* JTCalendarMenuView.h */,
+				3BB5F74F4D6EE3ED47794A49D8E10E82 /* JTCalendarMenuView.m */,
+				B20C9586AC9E173562F889AC35176A7C /* JTCalendarPage.h */,
+				3D239471008B20B14DB13183FBEE763B /* JTCalendarPageView.h */,
+				04E6ABF54370EB3AFC472053A0C37EDC /* JTCalendarPageView.m */,
+				DBA569B7341D9DBFED5318E0DF3041D5 /* JTCalendarScrollManager.h */,
+				F5FA2154EB8FEE789FEE81230571BCF8 /* JTCalendarScrollManager.m */,
+				D1EF728507099BC5C622E0E3976B23A9 /* JTCalendarSettings.h */,
+				FB2C9F1B88C0B05F3A3C8495479E5EFF /* JTCalendarSettings.m */,
+				A742C23FC8190578DB8F876543A9AA48 /* JTCalendarWeek.h */,
+				A9CE223E8A5C922D970BD8EC751CC856 /* JTCalendarWeekDay.h */,
+				22A617A1A82E97BA642A4209A3C8A537 /* JTCalendarWeekDayView.h */,
+				209ACA0D6A778C51E9D7ECD51484507B /* JTCalendarWeekDayView.m */,
+				D6791D94842F28E3148103EB8358D748 /* JTCalendarWeekView.h */,
+				574971B81D8FF780A8FF2F622DD2A618 /* JTCalendarWeekView.m */,
+				E10D9894F35E69A74E0A09ACED9D85B9 /* JTContent.h */,
+				B14CDE9DC2F42E15E6730119B2F57B98 /* JTDateHelper.h */,
+				E81E197CCF3C078A28DD8FD92A2232E4 /* JTDateHelper.m */,
+				DAB3EC1B6BD36FB1AED0F6BC72B199CE /* JTHorizontalCalendarView.h */,
+				23C3468BE88E4C6F87F48FB6F63630B2 /* JTHorizontalCalendarView.m */,
+				13CCAFD2115FB9246B250B3D85A626CF /* JTMenu.h */,
+				23123FF239B1DD532DFC6E20ABCF93C7 /* JTVerticalCalendarView.h */,
+				C8ABCF1CD93B1FF115BEA2487DBE444D /* JTVerticalCalendarView.m */,
+				5B3E885597EC4D2A7A8E0FF57706ED05 /* Support Files */,
 			);
 			path = JTCalendar;
+			sourceTree = "<group>";
+		};
+		39056194AC306EC3FB98F48097791B5C /* MWPhotoBrowser */ = {
+			isa = PBXGroup;
+			children = (
+				C862BECA78DB8BD52EB768156B9C9C63 /* MWCaptionView.h */,
+				7D82FD3E3233F1951CB8E5B430AE1871 /* MWCaptionView.m */,
+				DBFFA92D3B17ABB76D098220B1FC6D8F /* MWCommon.h */,
+				6C117F0DBFE5BF82D9D59FE5FAB65796 /* MWGridCell.h */,
+				E63B67CD031C935DFCB7C40AD1FF86AD /* MWGridCell.m */,
+				AB7C9D130C13C06B0A85B60B32BD578A /* MWGridViewController.h */,
+				0F43D408D14B282C4D474582D6C79BAB /* MWGridViewController.m */,
+				2A85FCAF2DCC9F02BD6516525FFCD00F /* MWPhoto.h */,
+				873401813951F3DAE210775400802BBC /* MWPhoto.m */,
+				6F883E7DB9B03AA4948D6CE36C8C5BB5 /* MWPhotoBrowser.h */,
+				579ACA83BC22917223777A1205394AD1 /* MWPhotoBrowser.m */,
+				6FCF5F769B06CCCBF6114D00D61AE21B /* MWPhotoBrowserPrivate.h */,
+				34A17A32F3A2E076941F7639A9DFF7AF /* MWPhotoProtocol.h */,
+				F7A251CD5893D93CBDBCBDDD68D2F9D4 /* MWTapDetectingImageView.h */,
+				C54E0DD3CA44573554B2B198DC3DB2C4 /* MWTapDetectingImageView.m */,
+				71D95211BE02539D7DDEAE6D1983F377 /* MWTapDetectingView.h */,
+				D85CE28B8278A37FA4F98D5092CCE324 /* MWTapDetectingView.m */,
+				B6064C5C1C8F8441063ED340EC1E1979 /* MWZoomingScrollView.h */,
+				B59E164163C2F5C107F654952A56115B /* MWZoomingScrollView.m */,
+				904870983B7D1200068F055DAA59255A /* UIImage+MWPhotoBrowser.h */,
+				248F64F660101F71511DE7D6A563B42E /* UIImage+MWPhotoBrowser.m */,
+				1363A562C949DD681A63AB0689348DF5 /* Resources */,
+				68AF0FB5A61F51D9A2432E71EC1A2580 /* Support Files */,
+			);
+			path = MWPhotoBrowser;
 			sourceTree = "<group>";
 		};
 		5213F94B77F639BEFA20E56982688CA1 /* Pods-OnePhoto */ = {
@@ -286,49 +734,113 @@
 			path = "Target Support Files/Pods-OnePhoto";
 			sourceTree = "<group>";
 		};
-		7DB346D0F39D3F0E887471402A8071AB = {
+		5B3E885597EC4D2A7A8E0FF57706ED05 /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				BA6428E9F66FD5A23C0A2E06ED26CD2F /* Podfile */,
-				BC3CA7F9E30CC8F7E2DD044DD34432FC /* Frameworks */,
-				C9BB6A42C2FAB183272A2E84F20C40D4 /* Pods */,
-				46DECAE3C33D10A195BA941668176C47 /* Products */,
-				E93D691BC4C2C18DE6416E3A1B7E786F /* Targets Support Files */,
+				D12673B2D931E30689A78A130809346D /* JTCalendar.xcconfig */,
+				CD0CD815CEDE5531992AD0A7FFB03D04 /* JTCalendar-dummy.m */,
+				9E9727B6618DA38C3E4DC7C7FEBB06C3 /* JTCalendar-prefix.pch */,
 			);
+			name = "Support Files";
+			path = "../Target Support Files/JTCalendar";
 			sourceTree = "<group>";
 		};
-		BC3CA7F9E30CC8F7E2DD044DD34432FC /* Frameworks */ = {
+		60730186EADE853F8950C11C822C1071 /* UMengAnalytics-NO-IDFA */ = {
 			isa = PBXGroup;
 			children = (
-				BF6342C8B29F4CEEA088EFF7AB4DE362 /* iOS */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		BEDE62B713B072F554346C5CBAA290C5 /* UMengAnalytics-NO-IDFA */ = {
-			isa = PBXGroup;
-			children = (
-				21E56E9A1763470718144D19DE9663F2 /* MobClick.h */,
+				16E7C8EC8EA913F0EFEA3948A36915A9 /* MobClick.h */,
 			);
 			path = "UMengAnalytics-NO-IDFA";
 			sourceTree = "<group>";
 		};
-		BF6342C8B29F4CEEA088EFF7AB4DE362 /* iOS */ = {
+		68AF0FB5A61F51D9A2432E71EC1A2580 /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				3E4E89230EF59BC255123B67864ACF77 /* Foundation.framework */,
+				820606FB3C089DA857D0CEC7CB668989 /* MWPhotoBrowser.xcconfig */,
+				C31BCC46D5407733FC5CAA5F1081820C /* MWPhotoBrowser-dummy.m */,
+				91A95149844A9BBA41F609A038BF7C8E /* MWPhotoBrowser-prefix.pch */,
 			);
-			name = iOS;
+			name = "Support Files";
+			path = "../Target Support Files/MWPhotoBrowser";
 			sourceTree = "<group>";
 		};
-		C9BB6A42C2FAB183272A2E84F20C40D4 /* Pods */ = {
+		6BBC410DEB3A51B65065C024F09E36B6 /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				1293B110ACEB3E78266B4EFC39196AE5 /* FastImageCache */,
-				50A38EE161D1BB35DCF04D466AA3C25A /* JTCalendar */,
-				BEDE62B713B072F554346C5CBAA290C5 /* UMengAnalytics-NO-IDFA */,
+				2BDAE58420959D864056DA000B492474 /* FastImageCache.xcconfig */,
+				9631822B01E74FE77AC7354CE5E6F1A3 /* FastImageCache-dummy.m */,
+				91F6F625F0CA73737E37E5167D9F1BE5 /* FastImageCache-prefix.pch */,
 			);
-			name = Pods;
+			name = "Support Files";
+			path = "../Target Support Files/FastImageCache";
+			sourceTree = "<group>";
+		};
+		72EA4B12DAA0B61B05FAEEEF8ECDEAC6 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				C7889243304B15E5E1F52ABFA02D6D3C /* DACircularProgress.xcconfig */,
+				3552AC97DCED1228ACF4CB143A46BDEF /* DACircularProgress-dummy.m */,
+				82315793DCF635EBFFB9E1A0A1C48417 /* DACircularProgress-prefix.pch */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/DACircularProgress";
+			sourceTree = "<group>";
+		};
+		7D392F804E072240DCEF6BE8FAE5DD9A /* MBProgressHUD */ = {
+			isa = PBXGroup;
+			children = (
+				5F874FA83827E879CADFB55E7CC8BC63 /* MBProgressHUD.h */,
+				E1AC91885DB2CDEE790AF4AA0B427EDE /* MBProgressHUD.m */,
+				147E088A1432F3E6D255F980CBB2073A /* Support Files */,
+			);
+			path = MBProgressHUD;
+			sourceTree = "<group>";
+		};
+		7DB346D0F39D3F0E887471402A8071AB = {
+			isa = PBXGroup;
+			children = (
+				BA6428E9F66FD5A23C0A2E06ED26CD2F /* Podfile */,
+				0F75DF6C7C5F002280EC53F48E80B587 /* Frameworks */,
+				1CD6AD546B26F7A51E772B8FF9761808 /* Pods */,
+				B422A63C5BC2EAFB4B997C09A8806FFE /* Products */,
+				E93D691BC4C2C18DE6416E3A1B7E786F /* Targets Support Files */,
+			);
+			sourceTree = "<group>";
+		};
+		88E3E4CBD4A3F2921DA7043FF3BCC0EB /* SDWebImage */ = {
+			isa = PBXGroup;
+			children = (
+				0C12CA1BD43D7B69AA22DAF3B5ABE8AF /* Core */,
+				0E6632F749DB89970AC88D40FBCC0FDB /* Support Files */,
+			);
+			path = SDWebImage;
+			sourceTree = "<group>";
+		};
+		B422A63C5BC2EAFB4B997C09A8806FFE /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				CDE164FE47FCFA8DA6C971A09FD45A4E /* libDACircularProgress.a */,
+				8D75BCFA21D6C118D1FA9C031AB46626 /* libFastImageCache.a */,
+				A037A14D8162541BB17477E83232053D /* libJTCalendar.a */,
+				D6C61E8308A7166114DB1561ED069297 /* libMBProgressHUD.a */,
+				60EE8D93311BDCF4ED25DBB95F2D9545 /* libMWPhotoBrowser.a */,
+				4F46B93623E1E4EF00C88874F49A8068 /* libPods-OnePhoto.a */,
+				D5E58C71B004A829ED8886D19C1AF45E /* libSDWebImage.a */,
+				39936E719BA8F0EC2E0784598E53EEDD /* MWPhotoBrowser.bundle */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		DCFB61CB9601D2BCB3A581CBA8C149DB /* DACircularProgress */ = {
+			isa = PBXGroup;
+			children = (
+				0101E7D86535CE7DAB513BE8BA5928E1 /* DACircularProgressView.h */,
+				AEFF0891421ACDFD08B4C4ADF6F62F03 /* DACircularProgressView.m */,
+				27D64BEBC2A166B93A4B1D1812FDEFCA /* DALabeledCircularProgressView.h */,
+				D39FA0EDAD239AED517C08DE3EFD4948 /* DALabeledCircularProgressView.m */,
+				72EA4B12DAA0B61B05FAEEEF8ECDEAC6 /* Support Files */,
+			);
+			path = DACircularProgress;
 			sourceTree = "<group>";
 		};
 		E93D691BC4C2C18DE6416E3A1B7E786F /* Targets Support Files */ = {
@@ -342,6 +854,34 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
+		1246A1C00980422020A6884856143651 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0C1A29BFF65C6F2801B1BE0058718A19 /* DACircularProgressView.h in Headers */,
+				0F43FEACB0C18DD4C724B1655AF47728 /* DALabeledCircularProgressView.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		25D2C7A517F8568369A1D0C98E939F5B /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5E42CD90C7EE9A72C64E0B437874A75F /* MWCaptionView.h in Headers */,
+				8B3EE8DFDC215B3ECD04085AD4C2ED4A /* MWCommon.h in Headers */,
+				81C068C19F529211E6A0709F67F0339C /* MWGridCell.h in Headers */,
+				943FE6144EBB219A1D48EB5BE9903A24 /* MWGridViewController.h in Headers */,
+				6FF59A4FB6AB15C1DDA10DA26046AE4F /* MWPhoto.h in Headers */,
+				5C9F59A178C237BD347C5D059E73A2A8 /* MWPhotoBrowser.h in Headers */,
+				F6ED470E8B9510EBF932330ECEADF0D6 /* MWPhotoBrowserPrivate.h in Headers */,
+				F95139D6C036CA3F3E7857138341E1DB /* MWPhotoProtocol.h in Headers */,
+				73911EAFDAC3170AFEC2FA28A9860DBB /* MWTapDetectingImageView.h in Headers */,
+				C73BE5B7DF22A3F423A4627C31916BC6 /* MWTapDetectingView.h in Headers */,
+				9BAE4E703E810B8268248936C17F6CE5 /* MWZoomingScrollView.h in Headers */,
+				7869FBC2EE6BD425E485CBDBA76ED408 /* UIImage+MWPhotoBrowser.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		4B0D4EA854FA007FDF9A8690701A7CFC /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
@@ -355,6 +895,28 @@
 				70C850235C2C4E7D46EC096EED77DAB2 /* FICImageTableEntry.h in Headers */,
 				86B4453FD5BAD4BD4E9CA41A66464BDC /* FICImports.h in Headers */,
 				866EFF3DE1CF427EDF63AFA4AB58787A /* FICUtilities.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A0C76077A20E75ED950BF4F88A252F83 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				34F30E1314EC4C287E6B89477C2D0FB4 /* NSData+ImageContentType.h in Headers */,
+				3B332CC633C291A7A96AD0922CFD8AB0 /* SDImageCache.h in Headers */,
+				74A9CCFEBE692130454C41959EBA5254 /* SDWebImageCompat.h in Headers */,
+				69DC2FB163EAB23712D9C3C13C72518E /* SDWebImageDecoder.h in Headers */,
+				0EF1CB072B5DE5D0A4EE7053EB0E2364 /* SDWebImageDownloader.h in Headers */,
+				C16C9E56CBDDE2AD1FCF3EFFF3127C20 /* SDWebImageDownloaderOperation.h in Headers */,
+				60262C4B68C1B0EF7D3E4FADACB10CD7 /* SDWebImageManager.h in Headers */,
+				518937C0924DA3A3DD216697CED9205F /* SDWebImageOperation.h in Headers */,
+				0498B98EB393D71314953683060EFD58 /* SDWebImagePrefetcher.h in Headers */,
+				D791C7B718024D8AED15BE84AA2FAAD0 /* UIButton+WebCache.h in Headers */,
+				A14B4E9F94C0A0EC1EE0AE8BFE030787 /* UIImage+GIF.h in Headers */,
+				F9B0A541E338684F945B7539D802CF64 /* UIImage+MultiFormat.h in Headers */,
+				0DC4183837552F23710F86F9A032C574 /* UIImageView+HighlightedWebCache.h in Headers */,
+				3939EE53B37025D6F0E05FF8A4C7DCF0 /* UIImageView+WebCache.h in Headers */,
+				311D5C7B166178CCB79CFD7E8DD4F641 /* UIView+WebCacheOperation.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -385,25 +947,71 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		EF1C003613925663F17E023C73AF519C /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5EB4F27B76513AE918BA5AE0868E87C8 /* MBProgressHUD.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		1573126C9741385500C455631EEBD77D /* Pods-OnePhoto */ = {
+		1D3729EA8E86F418F4E61A8D74486839 /* Pods-OnePhoto */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 536F3B982354B31D0583C80935D68B4D /* Build configuration list for PBXNativeTarget "Pods-OnePhoto" */;
+			buildConfigurationList = 9BA1053598C0C3E57D8828C14E1F6450 /* Build configuration list for PBXNativeTarget "Pods-OnePhoto" */;
 			buildPhases = (
-				04791494C67A1FF2BE2FCF6D3AABA8D8 /* Sources */,
-				7D493BDD0B723C2B61610BD90712CCF4 /* Frameworks */,
+				3EDAE43452C590175B02C61C0622827B /* Sources */,
+				C7E3DBA53BBD36CEF94585C3A657F5A2 /* Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				E74A91E24310F01BB709F69AEA798156 /* PBXTargetDependency */,
-				F640D8DF1401771467CBA755EAD24A3B /* PBXTargetDependency */,
+				3347A0613B34F9AFABC6DB3387C938D9 /* PBXTargetDependency */,
+				E004AA7E0C1FC0DCCD4CED51EDF6AA70 /* PBXTargetDependency */,
+				1AB185902343886FA736DD0F7602A6BE /* PBXTargetDependency */,
+				52950F51041253ACC8A00870388FBB0F /* PBXTargetDependency */,
+				A8914A7C224810776E82A89BA78AD868 /* PBXTargetDependency */,
+				99902926B454680ADD9F200B2EB02887 /* PBXTargetDependency */,
 			);
 			name = "Pods-OnePhoto";
 			productName = "Pods-OnePhoto";
-			productReference = 7B1265F9765DB5F2EE15B4CBC3DCEF9A /* libPods-OnePhoto.a */;
+			productReference = 4F46B93623E1E4EF00C88874F49A8068 /* libPods-OnePhoto.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		5813251FEA21E4AEE97385709F1912DE /* MWPhotoBrowser-MWPhotoBrowser */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9F1294BB80138FB7DEE240DF61EC1523 /* Build configuration list for PBXNativeTarget "MWPhotoBrowser-MWPhotoBrowser" */;
+			buildPhases = (
+				DE0797009C8330FFDB1FC0EB8D2DA9DD /* Sources */,
+				F2BDF8E898C762EFB3844211CE201024 /* Frameworks */,
+				8A72EB52693FE00CE73DA6BB3CA6FF41 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "MWPhotoBrowser-MWPhotoBrowser";
+			productName = "MWPhotoBrowser-MWPhotoBrowser";
+			productReference = 39936E719BA8F0EC2E0784598E53EEDD /* MWPhotoBrowser.bundle */;
+			productType = "com.apple.product-type.bundle";
+		};
+		9775596B3CA16905FC8F66DA8E2A3C67 /* DACircularProgress */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 619B0B2F7ACD42F8EF700EAE6D1C95DA /* Build configuration list for PBXNativeTarget "DACircularProgress" */;
+			buildPhases = (
+				A6993E0B001E6EB572176DFCF9B87C6A /* Sources */,
+				F2A9AAC03867BB4990470BAC5912E030 /* Frameworks */,
+				1246A1C00980422020A6884856143651 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = DACircularProgress;
+			productName = DACircularProgress;
+			productReference = CDE164FE47FCFA8DA6C971A09FD45A4E /* libDACircularProgress.a */;
 			productType = "com.apple.product-type.library.static";
 		};
 		C3AD7E342840A1BEA026D1D3A2D9C1A7 /* JTCalendar */ = {
@@ -420,7 +1028,45 @@
 			);
 			name = JTCalendar;
 			productName = JTCalendar;
-			productReference = 9E8804560310FDA9244B0FB59C85DBD1 /* libJTCalendar.a */;
+			productReference = A037A14D8162541BB17477E83232053D /* libJTCalendar.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		DE3B07ED7FF04F506B0C5E00F4973589 /* SDWebImage */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8D8B7C183B18D82F1958BB3115798433 /* Build configuration list for PBXNativeTarget "SDWebImage" */;
+			buildPhases = (
+				7357CD98F48585C602A75C901AD5E096 /* Sources */,
+				B98B98DB394C072483E8066C6B594401 /* Frameworks */,
+				A0C76077A20E75ED950BF4F88A252F83 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SDWebImage;
+			productName = SDWebImage;
+			productReference = D5E58C71B004A829ED8886D19C1AF45E /* libSDWebImage.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		E2FE87384A67337831E53490EEA8BF11 /* MWPhotoBrowser */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0732716566238BF76BBF762F85C8ABAF /* Build configuration list for PBXNativeTarget "MWPhotoBrowser" */;
+			buildPhases = (
+				255D757EA0F7652CFBF27D14BBC3231D /* Sources */,
+				886428740DB164747FBA1935F65900DF /* Frameworks */,
+				25D2C7A517F8568369A1D0C98E939F5B /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D583D511354F609B73EB28F4CFA2C32A /* PBXTargetDependency */,
+				8EE5D8EDB6C595B190E81B76D3190EB3 /* PBXTargetDependency */,
+				C3D6913F5E4E594A29E40A526602BBB7 /* PBXTargetDependency */,
+				299B50B04F45E1A2F52075C3B7A1AEB2 /* PBXTargetDependency */,
+			);
+			name = MWPhotoBrowser;
+			productName = MWPhotoBrowser;
+			productReference = 60EE8D93311BDCF4ED25DBB95F2D9545 /* libMWPhotoBrowser.a */;
 			productType = "com.apple.product-type.library.static";
 		};
 		F05E9B69C8FD64F0322D968C18D00A3D /* FastImageCache */ = {
@@ -437,7 +1083,24 @@
 			);
 			name = FastImageCache;
 			productName = FastImageCache;
-			productReference = 180DB915D60972BD6B1B13B2CF25E63A /* libFastImageCache.a */;
+			productReference = 8D75BCFA21D6C118D1FA9C031AB46626 /* libFastImageCache.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		FE2F1D7B9D9FCEA148517E4657B243F4 /* MBProgressHUD */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F2F5671C4613023EE94A2E62DA06031D /* Build configuration list for PBXNativeTarget "MBProgressHUD" */;
+			buildPhases = (
+				098439AB598DDF1AF51146A2E3E2E562 /* Sources */,
+				E81C08F5CCC0A5FBFF4559E2173164C7 /* Frameworks */,
+				EF1C003613925663F17E023C73AF519C /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MBProgressHUD;
+			productName = MBProgressHUD;
+			productReference = D6C61E8308A7166114DB1561ED069297 /* libMBProgressHUD.a */;
 			productType = "com.apple.product-type.library.static";
 		};
 /* End PBXNativeTarget section */
@@ -457,23 +1120,119 @@
 				en,
 			);
 			mainGroup = 7DB346D0F39D3F0E887471402A8071AB;
-			productRefGroup = 46DECAE3C33D10A195BA941668176C47 /* Products */;
+			productRefGroup = B422A63C5BC2EAFB4B997C09A8806FFE /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
+				9775596B3CA16905FC8F66DA8E2A3C67 /* DACircularProgress */,
 				F05E9B69C8FD64F0322D968C18D00A3D /* FastImageCache */,
 				C3AD7E342840A1BEA026D1D3A2D9C1A7 /* JTCalendar */,
-				1573126C9741385500C455631EEBD77D /* Pods-OnePhoto */,
+				FE2F1D7B9D9FCEA148517E4657B243F4 /* MBProgressHUD */,
+				E2FE87384A67337831E53490EEA8BF11 /* MWPhotoBrowser */,
+				5813251FEA21E4AEE97385709F1912DE /* MWPhotoBrowser-MWPhotoBrowser */,
+				1D3729EA8E86F418F4E61A8D74486839 /* Pods-OnePhoto */,
+				DE3B07ED7FF04F506B0C5E00F4973589 /* SDWebImage */,
 			);
 		};
 /* End PBXProject section */
 
+/* Begin PBXResourcesBuildPhase section */
+		8A72EB52693FE00CE73DA6BB3CA6FF41 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5562B2A33DCCDD28A596EE579024C7AD /* ImageError.png in Resources */,
+				AD3C6FA77BBE58E858D579BF813566B7 /* ImageError@2x.png in Resources */,
+				023B8C388E74C4FC1DB3EC5E1773C4DF /* ImageError@3x.png in Resources */,
+				9EB8F6E166DF1CB0B107B35CBD6CCA8D /* ImageSelectedOff.png in Resources */,
+				2495B01293932815D36CECAF6D0D41C4 /* ImageSelectedOff@2x.png in Resources */,
+				5059298C5F1E9513B994F3DA166B71D3 /* ImageSelectedOff@3x.png in Resources */,
+				8EF8EB8E5D4F2474B8FD4C1E4A851A68 /* ImageSelectedOn.png in Resources */,
+				6B6A25433F14C5C71405A4162F76DD12 /* ImageSelectedOn@2x.png in Resources */,
+				E6A4723559EB41D738936E766830752E /* ImageSelectedOn@3x.png in Resources */,
+				6FCC438B6D6426ADCB5A12FC9C0F40B7 /* ImageSelectedSmallOff.png in Resources */,
+				5C1EA3A4B2D74A23245225A2DEB0C35F /* ImageSelectedSmallOff@2x.png in Resources */,
+				12EDA57341C456632A6291D58D966BD6 /* ImageSelectedSmallOff@3x.png in Resources */,
+				54B79A8FA7CDA1ABFD60BA1D5DDED418 /* ImageSelectedSmallOn.png in Resources */,
+				AEE26E40C45DB6A4D13E084331742770 /* ImageSelectedSmallOn@2x.png in Resources */,
+				D761EE9B5D106050E75596579B4F9313 /* ImageSelectedSmallOn@3x.png in Resources */,
+				E93ED599FDA455D7FC17F25DBD3FA084 /* PlayButtonOverlayLarge.png in Resources */,
+				3F14A3DC0EFDE2703E26428A8B9567D5 /* PlayButtonOverlayLarge@2x.png in Resources */,
+				AF7404A4462C49837386BE45E07C646D /* PlayButtonOverlayLarge@3x.png in Resources */,
+				AC54AE865785D292AF188627CC373732 /* PlayButtonOverlayLargeTap.png in Resources */,
+				A8A43895BA91CE7F3CDEB8B72FE3A5F9 /* PlayButtonOverlayLargeTap@2x.png in Resources */,
+				93A841B8DB950B43DF5F0996B4B6C3D2 /* PlayButtonOverlayLargeTap@3x.png in Resources */,
+				DB4290A45C35377BF5D50992EA5D9D16 /* UIBarButtonItemArrowLeft.png in Resources */,
+				5AC73809CEEDD22841ACDDE568D6A873 /* UIBarButtonItemArrowLeft@2x.png in Resources */,
+				3936D1AA08B9C1C008599DD7A6CB5FC4 /* UIBarButtonItemArrowLeft@3x.png in Resources */,
+				89207F18D908E68CBF43ECC32E65C30B /* UIBarButtonItemArrowRight.png in Resources */,
+				68F869F425A902C39C39BF0D9E173FE9 /* UIBarButtonItemArrowRight@2x.png in Resources */,
+				24EA96827204BCCBF8162D12753DA166 /* UIBarButtonItemArrowRight@3x.png in Resources */,
+				A13F5FD2F55D05333AA45D54EEBCCA24 /* UIBarButtonItemGrid.png in Resources */,
+				D642DC1BEB515E4D0458DC5FF48A33F3 /* UIBarButtonItemGrid@2x.png in Resources */,
+				E71C7BD65B5516EB64EA0ECA799929DC /* UIBarButtonItemGrid@3x.png in Resources */,
+				72F94970D0A9699E47E0B002FCC5AB34 /* VideoOverlay.png in Resources */,
+				459CB44A75A5D68C89D9DBEE137FBD5C /* VideoOverlay@2x.png in Resources */,
+				2B6066637145116D118CAA5E557DDBE2 /* VideoOverlay@3x.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
-		04791494C67A1FF2BE2FCF6D3AABA8D8 /* Sources */ = {
+		098439AB598DDF1AF51146A2E3E2E562 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9DF62941835564E020D8F29F1865D542 /* Pods-OnePhoto-dummy.m in Sources */,
+				FC214077677D4F02E03C6C85F774E028 /* MBProgressHUD-dummy.m in Sources */,
+				82FC12F67E83874B93592218E9FB4CA0 /* MBProgressHUD.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		255D757EA0F7652CFBF27D14BBC3231D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C4ECADBB9BA0C2744C1E591BB5E72FF2 /* MWCaptionView.m in Sources */,
+				E9034A1F3C5127803852C6D1B26BBA22 /* MWGridCell.m in Sources */,
+				F8BEF9300F44F8774D7D66CE5EE3E370 /* MWGridViewController.m in Sources */,
+				11E0CA492A59E5D435F73FFCCD489357 /* MWPhoto.m in Sources */,
+				4C47B6FE29B46B575855064610122926 /* MWPhotoBrowser-dummy.m in Sources */,
+				261C284D8C8498314B5394EF0EB756D8 /* MWPhotoBrowser.m in Sources */,
+				6330FE4E426526E83B9D7067FEF6077F /* MWTapDetectingImageView.m in Sources */,
+				0D989089128ABE346A442B7168B6F99E /* MWTapDetectingView.m in Sources */,
+				207958F4A5DCEAED53A2B0565170EC0E /* MWZoomingScrollView.m in Sources */,
+				E20E28FD4A1BFA49377C4252BBC4BA7F /* UIImage+MWPhotoBrowser.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3EDAE43452C590175B02C61C0622827B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FBEE4EC74FD5B331DBCC218F9C9D7D67 /* Pods-OnePhoto-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7357CD98F48585C602A75C901AD5E096 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				63B3276116DCC036DC3FF64871C5B34A /* NSData+ImageContentType.m in Sources */,
+				34B2272FAB199A0B69B898BFB9E733E1 /* SDImageCache.m in Sources */,
+				33985216BF501EDD56E784D7CAD32FE7 /* SDWebImage-dummy.m in Sources */,
+				EDDE097EFD40E9A4E32E4B44C97CE44B /* SDWebImageCompat.m in Sources */,
+				29E4E0528D088AE8B2EE6D38E19D375E /* SDWebImageDecoder.m in Sources */,
+				53A65E3DDAAB4288F448625574686617 /* SDWebImageDownloader.m in Sources */,
+				29B6CC3E1560257A444A209D97AC271E /* SDWebImageDownloaderOperation.m in Sources */,
+				2BFB267A4274D5D4B277138F9D4EEDA1 /* SDWebImageManager.m in Sources */,
+				DC1F1DBD53679CB78C5967BA9DEC08CA /* SDWebImagePrefetcher.m in Sources */,
+				3F1E0CB31108E6E996D2E7418FE21D2E /* UIButton+WebCache.m in Sources */,
+				59DA6D130464A9F97CD181877DD36CB7 /* UIImage+GIF.m in Sources */,
+				B28719F6B1978267C407032A2AE646F8 /* UIImage+MultiFormat.m in Sources */,
+				DFAB389ECAD69BF8BE6357CFADABBF5C /* UIImageView+HighlightedWebCache.m in Sources */,
+				7D3B3786F1D6CED2CE141B2B1BDAE012 /* UIImageView+WebCache.m in Sources */,
+				F3BB0A963277282C6BF73E81250B6943 /* UIView+WebCacheOperation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -497,6 +1256,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		A6993E0B001E6EB572176DFCF9B87C6A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5F4AECEF356E35995112F9167B219AD6 /* DACircularProgress-dummy.m in Sources */,
+				82AC9861A9FE0BEFEC04D31C3B05ABB2 /* DACircularProgressView.m in Sources */,
+				EF9006327AFFDBED3FD589DA04E2D36A /* DALabeledCircularProgressView.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DE0797009C8330FFDB1FC0EB8D2DA9DD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		FEED6CBBE9D21848EEEAC8316C7C5422 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -514,17 +1290,65 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		E74A91E24310F01BB709F69AEA798156 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = FastImageCache;
-			target = F05E9B69C8FD64F0322D968C18D00A3D /* FastImageCache */;
-			targetProxy = 66316F23E08EE65DA1B0C631C3F88CE8 /* PBXContainerItemProxy */;
-		};
-		F640D8DF1401771467CBA755EAD24A3B /* PBXTargetDependency */ = {
+		1AB185902343886FA736DD0F7602A6BE /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = JTCalendar;
 			target = C3AD7E342840A1BEA026D1D3A2D9C1A7 /* JTCalendar */;
-			targetProxy = F3368E38924C14A6E6AA1871945B53A8 /* PBXContainerItemProxy */;
+			targetProxy = D6E74E4650053971D2438A88B4AADCDA /* PBXContainerItemProxy */;
+		};
+		299B50B04F45E1A2F52075C3B7A1AEB2 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = SDWebImage;
+			target = DE3B07ED7FF04F506B0C5E00F4973589 /* SDWebImage */;
+			targetProxy = 90C5595E0565CBEBB42EFEBB157FF619 /* PBXContainerItemProxy */;
+		};
+		3347A0613B34F9AFABC6DB3387C938D9 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = DACircularProgress;
+			target = 9775596B3CA16905FC8F66DA8E2A3C67 /* DACircularProgress */;
+			targetProxy = 8AAC30EDE95F8195978C38566B850989 /* PBXContainerItemProxy */;
+		};
+		52950F51041253ACC8A00870388FBB0F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = MBProgressHUD;
+			target = FE2F1D7B9D9FCEA148517E4657B243F4 /* MBProgressHUD */;
+			targetProxy = 4682D20C40729FBF5D71C61413D92771 /* PBXContainerItemProxy */;
+		};
+		8EE5D8EDB6C595B190E81B76D3190EB3 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = MBProgressHUD;
+			target = FE2F1D7B9D9FCEA148517E4657B243F4 /* MBProgressHUD */;
+			targetProxy = D7B59E66FA2C765426650ADECEF955EF /* PBXContainerItemProxy */;
+		};
+		99902926B454680ADD9F200B2EB02887 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = SDWebImage;
+			target = DE3B07ED7FF04F506B0C5E00F4973589 /* SDWebImage */;
+			targetProxy = 493D8904DFD072504E32E0A4352AB78D /* PBXContainerItemProxy */;
+		};
+		A8914A7C224810776E82A89BA78AD868 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = MWPhotoBrowser;
+			target = E2FE87384A67337831E53490EEA8BF11 /* MWPhotoBrowser */;
+			targetProxy = B04EEF3AAB9B69C77552CA58944F2837 /* PBXContainerItemProxy */;
+		};
+		C3D6913F5E4E594A29E40A526602BBB7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "MWPhotoBrowser-MWPhotoBrowser";
+			target = 5813251FEA21E4AEE97385709F1912DE /* MWPhotoBrowser-MWPhotoBrowser */;
+			targetProxy = 999D9522F4AD2757D76E2BC0D6606B4A /* PBXContainerItemProxy */;
+		};
+		D583D511354F609B73EB28F4CFA2C32A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = DACircularProgress;
+			target = 9775596B3CA16905FC8F66DA8E2A3C67 /* DACircularProgress */;
+			targetProxy = 386634C7797B60DF71C8AD13DAAD315D /* PBXContainerItemProxy */;
+		};
+		E004AA7E0C1FC0DCCD4CED51EDF6AA70 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = FastImageCache;
+			target = F05E9B69C8FD64F0322D968C18D00A3D /* FastImageCache */;
+			targetProxy = EB2C5EB2DF44CFB02449BFC444A06E6E /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -565,7 +1389,7 @@
 		};
 		08575B17FAA44280AFE6286AC7536F4F /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C47384FD29650C19E51B97B8976CB7C9 /* JTCalendar.xcconfig */;
+			baseConfigurationReference = D12673B2D931E30689A78A130809346D /* JTCalendar.xcconfig */;
 			buildSettings = {
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_PREFIX_HEADER = "Target Support Files/JTCalendar/JTCalendar-prefix.pch";
@@ -581,14 +1405,14 @@
 			};
 			name = Debug;
 		};
-		6EA650F0EA3E5F72801937C316194BFC /* Release */ = {
+		3D4A13D61DF067EE1130D27B139F79EE /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 09DCD0C3133FD3CABDE0B122260DDB9D /* Pods-OnePhoto.release.xcconfig */;
+			baseConfigurationReference = E77FA3EB4477E93759F24B60D1C3155D /* Pods-OnePhoto.debug.xcconfig */;
 			buildSettings = {
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				MACH_O_TYPE = staticlib;
-				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_ENABLE_DEBUG_INFO = YES;
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
 				PODS_ROOT = "$(SRCROOT)";
@@ -596,11 +1420,41 @@
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 			};
-			name = Release;
+			name = Debug;
+		};
+		617F18A93D7ABF1322E3C027265893C2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 820606FB3C089DA857D0CEC7CB668989 /* MWPhotoBrowser.xcconfig */;
+			buildSettings = {
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/MWPhotoBrowser/MWPhotoBrowser-prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRIVATE_HEADERS_FOLDER_PATH = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		717B38CC8B651B61F35E12EE4211DAF0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 820606FB3C089DA857D0CEC7CB668989 /* MWPhotoBrowser.xcconfig */;
+			buildSettings = {
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				PRODUCT_NAME = MWPhotoBrowser;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Debug;
 		};
 		7AB4EED5164F232A7DC1190609B8846F /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = AFB62CA2D9FBBC3CFE0271B1990EB635 /* FastImageCache.xcconfig */;
+			baseConfigurationReference = 2BDAE58420959D864056DA000B492474 /* FastImageCache.xcconfig */;
 			buildSettings = {
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_PREFIX_HEADER = "Target Support Files/FastImageCache/FastImageCache-prefix.pch";
@@ -615,6 +1469,42 @@
 				SKIP_INSTALL = YES;
 			};
 			name = Debug;
+		};
+		85A6795A5CD0C6DEA1F648AD0E6D1248 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 820606FB3C089DA857D0CEC7CB668989 /* MWPhotoBrowser.xcconfig */;
+			buildSettings = {
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/MWPhotoBrowser/MWPhotoBrowser-prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRIVATE_HEADERS_FOLDER_PATH = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		86334F1A4DF0160C4B098EF643AB6E07 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = C7889243304B15E5E1F52ABFA02D6D3C /* DACircularProgress.xcconfig */;
+			buildSettings = {
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/DACircularProgress/DACircularProgress-prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRIVATE_HEADERS_FOLDER_PATH = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
 		};
 		B37F0F91F85060E28F1DAAB522DC7EC1 /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -655,14 +1545,44 @@
 			};
 			name = Debug;
 		};
-		B9F169A967AC79C209BC24DD95DC0B58 /* Debug */ = {
+		B74838FB9BEB33B6489F58D787E2A6A4 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E77FA3EB4477E93759F24B60D1C3155D /* Pods-OnePhoto.debug.xcconfig */;
+			baseConfigurationReference = 820606FB3C089DA857D0CEC7CB668989 /* MWPhotoBrowser.xcconfig */;
+			buildSettings = {
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				PRODUCT_NAME = MWPhotoBrowser;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Release;
+		};
+		C0593046ABD536BD086B85302FA897DF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0F906AA42A1FBED3513E3DE307FC28B2 /* SDWebImage.xcconfig */;
+			buildSettings = {
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/SDWebImage/SDWebImage-prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRIVATE_HEADERS_FOLDER_PATH = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		C4D9C0592CB124B1209FA51A2AA614BD /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 09DCD0C3133FD3CABDE0B122260DDB9D /* Pods-OnePhoto.release.xcconfig */;
 			buildSettings = {
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				MACH_O_TYPE = staticlib;
-				MTL_ENABLE_DEBUG_INFO = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
 				PODS_ROOT = "$(SRCROOT)";
@@ -670,11 +1590,65 @@
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 			};
+			name = Release;
+		};
+		C5AFFFCB54FD9036E7BC9BA54ADAAF30 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = B986BB834973566DD00F2E3A3C2E6FAF /* MBProgressHUD.xcconfig */;
+			buildSettings = {
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/MBProgressHUD/MBProgressHUD-prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRIVATE_HEADERS_FOLDER_PATH = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		CB7148E744A9D03AEDC9D4809248999F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = C7889243304B15E5E1F52ABFA02D6D3C /* DACircularProgress.xcconfig */;
+			buildSettings = {
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/DACircularProgress/DACircularProgress-prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRIVATE_HEADERS_FOLDER_PATH = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
 			name = Debug;
+		};
+		CC01A834786EDBE30D7011502AE0F9B3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0F906AA42A1FBED3513E3DE307FC28B2 /* SDWebImage.xcconfig */;
+			buildSettings = {
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/SDWebImage/SDWebImage-prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRIVATE_HEADERS_FOLDER_PATH = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
 		};
 		D0474B66B2CFC0B7E7663D092325633A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C47384FD29650C19E51B97B8976CB7C9 /* JTCalendar.xcconfig */;
+			baseConfigurationReference = D12673B2D931E30689A78A130809346D /* JTCalendar.xcconfig */;
 			buildSettings = {
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_PREFIX_HEADER = "Target Support Files/JTCalendar/JTCalendar-prefix.pch";
@@ -692,7 +1666,7 @@
 		};
 		D862D508C8D26BDD21558D3267CD163C /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = AFB62CA2D9FBBC3CFE0271B1990EB635 /* FastImageCache.xcconfig */;
+			baseConfigurationReference = 2BDAE58420959D864056DA000B492474 /* FastImageCache.xcconfig */;
 			buildSettings = {
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_PREFIX_HEADER = "Target Support Files/FastImageCache/FastImageCache-prefix.pch";
@@ -708,23 +1682,41 @@
 			};
 			name = Release;
 		};
+		E7B8141DB24F5AA0D1F847AFEC0DB018 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = B986BB834973566DD00F2E3A3C2E6FAF /* MBProgressHUD.xcconfig */;
+			buildSettings = {
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/MBProgressHUD/MBProgressHUD-prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRIVATE_HEADERS_FOLDER_PATH = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		0732716566238BF76BBF762F85C8ABAF /* Build configuration list for PBXNativeTarget "MWPhotoBrowser" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				617F18A93D7ABF1322E3C027265893C2 /* Debug */,
+				85A6795A5CD0C6DEA1F648AD0E6D1248 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				B37F0F91F85060E28F1DAAB522DC7EC1 /* Debug */,
 				052A17875CB827423D627183396CEB60 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		536F3B982354B31D0583C80935D68B4D /* Build configuration list for PBXNativeTarget "Pods-OnePhoto" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				B9F169A967AC79C209BC24DD95DC0B58 /* Debug */,
-				6EA650F0EA3E5F72801937C316194BFC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -738,11 +1730,56 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
+		619B0B2F7ACD42F8EF700EAE6D1C95DA /* Build configuration list for PBXNativeTarget "DACircularProgress" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CB7148E744A9D03AEDC9D4809248999F /* Debug */,
+				86334F1A4DF0160C4B098EF643AB6E07 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		79EAA5712C6816A162C8ADFC8F2D3993 /* Build configuration list for PBXNativeTarget "JTCalendar" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				08575B17FAA44280AFE6286AC7536F4F /* Debug */,
 				D0474B66B2CFC0B7E7663D092325633A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8D8B7C183B18D82F1958BB3115798433 /* Build configuration list for PBXNativeTarget "SDWebImage" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C0593046ABD536BD086B85302FA897DF /* Debug */,
+				CC01A834786EDBE30D7011502AE0F9B3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		9BA1053598C0C3E57D8828C14E1F6450 /* Build configuration list for PBXNativeTarget "Pods-OnePhoto" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3D4A13D61DF067EE1130D27B139F79EE /* Debug */,
+				C4D9C0592CB124B1209FA51A2AA614BD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		9F1294BB80138FB7DEE240DF61EC1523 /* Build configuration list for PBXNativeTarget "MWPhotoBrowser-MWPhotoBrowser" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				717B38CC8B651B61F35E12EE4211DAF0 /* Debug */,
+				B74838FB9BEB33B6489F58D787E2A6A4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F2F5671C4613023EE94A2E62DA06031D /* Build configuration list for PBXNativeTarget "MBProgressHUD" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E7B8141DB24F5AA0D1F847AFEC0DB018 /* Debug */,
+				C5AFFFCB54FD9036E7BC9BA54ADAAF30 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

@@ -51,25 +51,6 @@ CGSize const OPPhotoPixelImageSize = {1, 1};
 
 #pragma mark - Image Helper Functions
 
-static CGMutablePathRef _OPCreateRoundedRectPath(CGRect rect, CGFloat cornerRadius) {
-    CGMutablePathRef path = CGPathCreateMutable();
-    
-    CGFloat minX = CGRectGetMinX(rect);
-    CGFloat midX = CGRectGetMidX(rect);
-    CGFloat maxX = CGRectGetMaxX(rect);
-    CGFloat minY = CGRectGetMinY(rect);
-    CGFloat midY = CGRectGetMidY(rect);
-    CGFloat maxY = CGRectGetMaxY(rect);
-    
-    CGPathMoveToPoint(path, NULL, minX, midY);
-    CGPathAddArcToPoint(path, NULL, minX, maxY, midX, maxY, cornerRadius);
-    CGPathAddArcToPoint(path, NULL, maxX, maxY, maxX, midY, cornerRadius);
-    CGPathAddArcToPoint(path, NULL, maxX, minY, midX, minY, cornerRadius);
-    CGPathAddArcToPoint(path, NULL, minX, minY, minX, midY, cornerRadius);
-    
-    return path;
-}
-
 static UIImage * _OPSquareImageFromImage(UIImage *image) {
     UIImage *squareImage = nil;
     CGSize imageSize = [image size];

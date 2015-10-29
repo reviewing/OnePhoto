@@ -87,7 +87,7 @@
     if ([photos count] > 0) {
         if ([photos count] > 1) {
             for (int i = 1; i < [photos count]; i++) {
-                [_context deleteObject:[photos objectAtIndex:i]];
+                [self deletePhoto:[photos objectAtIndex:i]];
             }
             NSError *error;
             if (_context.hasChanges && ![_context save:&error]) {

@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
+        <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
     </dependencies>
     <scenes>
         <!--Navigation Controller-->
@@ -82,11 +83,18 @@
                                 <segue destination="WnY-ZZ-5uP" kind="presentation" id="BKv-8t-S32"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="camera" id="cAC-RD-rTJ">
-                            <connections>
-                                <action selector="takePhoto:" destination="ko1-v8-1hz" id="IB1-4q-WRB"/>
-                            </connections>
-                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem systemItem="camera" id="cAC-RD-rTJ">
+                                <connections>
+                                    <action selector="takePhoto:" destination="ko1-v8-1hz" id="IB1-4q-WRB"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem systemItem="organize" id="ly5-C5-7FR">
+                                <connections>
+                                    <action selector="choosePhoto:" destination="ko1-v8-1hz" id="cxU-E3-ehn"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
                     </navigationItem>
                     <connections>
                         <outlet property="calendarContentView" destination="YFV-3n-8GL" id="gMF-Ck-xiU"/>

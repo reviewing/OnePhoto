@@ -18,10 +18,13 @@
 #import <FastImageCache/FICImageCache.h>
 #import <MWPhotoBrowser/MWPhotoBrowser.h>
 #import <MWPhotoBrowser/MWPhoto.h>
+#import <MBProgressHUD/MBProgressHUD.h>
 
 #import <MobileCoreServices/MobileCoreServices.h>
 
 @interface RootViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate, MWPhotoBrowserDelegate> {
+    MBProgressHUD *_hud;
+    
     NSInteger _callbackCount;
     
     BOOL _isFirstAppear;
@@ -56,6 +59,9 @@
     [_calendarManager setDate:[NSDate date]];
     
     _isFirstAppear = YES;
+    
+    _hud = [[MBProgressHUD alloc] initWithView:self.view];
+    [self.view addSubview:_hud];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -90,6 +96,7 @@
 
 - (void)viewWillDisappear:(BOOL)animated {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [_hud hide:YES];
 }
 
 - (void)applicationDidBecomeActive:(NSNotification *)notification {
@@ -120,24 +127,32 @@
 }
 
 - (IBAction)takePhoto:(id)sender {
-    [self startCameraControllerFromViewController:self usingDelegate:self];
+    [self startCameraControllerFromViewController:self sourceType:UIImagePickerControllerSourceTypeCamera usingDelegate:self];
 }
 
-- (BOOL)startCameraControllerFromViewController:(UIViewController*) controller
+- (IBAction)choosePhoto:(id)sender {
+    [self startCameraControllerFromViewController:self sourceType:UIImagePickerControllerSourceTypePhotoLibrary usingDelegate:self];
+}
+
+- (BOOL)startCameraControllerFromViewController:(UIViewController*) controller sourceType:(UIImagePickerControllerSourceType) sourceType
                                    usingDelegate:(id <UIImagePickerControllerDelegate, UINavigationControllerDelegate>) delegate {
     
-    if (([UIImagePickerController isSourceTypeAvailable: UIImagePickerControllerSourceTypeCamera] == NO) || (delegate == nil) || (controller == nil)) {
+    if (([UIImagePickerController isSourceTypeAvailable: sourceType] == NO) || (delegate == nil) || (controller == nil)) {
         return NO;
     }
     
+    [_hud show:YES];
+
     UIImagePickerController *cameraUI = [[UIImagePickerController alloc] init];
-    cameraUI.sourceType = UIImagePickerControllerSourceTypeCamera;
-    cameraUI.cameraDevice = UIImagePickerControllerCameraDeviceFront;
+    cameraUI.sourceType = sourceType;
+    
+    if (sourceType == UIImagePickerControllerSourceTypeCamera) {
+        cameraUI.cameraDevice = UIImagePickerControllerCameraDeviceFront;
+    }
     cameraUI.mediaTypes = [[NSArray alloc] initWithObjects:(NSString *) kUTTypeImage, nil];
     cameraUI.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
     cameraUI.allowsEditing = YES;
     cameraUI.delegate = delegate;
-    
     [controller presentViewController:cameraUI animated:YES completion:nil];
     
     [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
@@ -253,10 +268,12 @@
                 [self presentViewController:nc animated:YES completion:nil];
             } else {
                 if ([calendar.dateHelper date:lOPDayView.date isTheSameDayThan:[NSDate date]]) {
-                    [self startCameraControllerFromViewController:self usingDelegate:self];
+                    [self newPhotoAction];
                 } else {
-//                    _specifiedDate = lOPDayView.date;
-//                    [self startCameraControllerFromViewController:self usingDelegate:self];
+#ifdef TEST_VERSION
+                    _specifiedDate = lOPDayView.date;
+                    [self newPhotoAction];
+#endif
                 }
             }
             break;
@@ -272,6 +289,27 @@
             break;
         }
     }
+}
+
+- (void)newPhotoAction {
+    UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"添加新的照片"
+                                                                   message:@""
+                                                            preferredStyle:UIAlertControllerStyleActionSheet];
+    UIAlertAction* libraryAction = [UIAlertAction actionWithTitle:@"从“照片”中选取" style:UIAlertActionStyleDefault
+                                                          handler:^(UIAlertAction * action) {
+                                                              [self startCameraControllerFromViewController:self sourceType:UIImagePickerControllerSourceTypePhotoLibrary usingDelegate:self];
+                                                          }];
+    UIAlertAction* cameraAction = [UIAlertAction actionWithTitle:@"拍摄一张照片" style:UIAlertActionStyleDefault
+                                                          handler:^(UIAlertAction * action) {
+                                                              [self startCameraControllerFromViewController:self sourceType:UIImagePickerControllerSourceTypeCamera usingDelegate:self];
+                                                          }];
+    UIAlertAction* cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel
+                                                          handler:^(UIAlertAction * action) {}];
+    
+    [alert addAction:libraryAction];
+    [alert addAction:cameraAction];
+    [alert addAction:cancelAction];
+    [self presentViewController:alert animated:YES completion:nil];
 }
 
 - (UIView<JTCalendarDay> *)calendarBuildDayView:(JTCalendarManager *)calendar {

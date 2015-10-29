@@ -73,6 +73,7 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
     [[NSNotificationCenter defaultCenter] addObserverForName:OPCoreDataStoreMerged
                                                       object:nil
                                                        queue:[NSOperationQueue mainQueue]
@@ -95,6 +96,7 @@
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
+    [self viewWillDisappear:animated];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     [_hud hide:YES];
 }
@@ -113,6 +115,7 @@
 
 
 - (void)viewDidAppear:(BOOL)animated {
+    [self viewDidAppear:animated];
     if (_isFirstAppear) {
         _isFirstAppear = NO;
         [_calendarContentView scrollToCurrentMonth:NO];

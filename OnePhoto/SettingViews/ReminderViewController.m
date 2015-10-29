@@ -37,6 +37,7 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated {
+    [self viewWillAppear:animated];
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(applicationDidBecomeActive:)
                                                  name:UIApplicationDidBecomeActiveNotification
@@ -48,6 +49,7 @@
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
+    [self viewWillDisappear:animated];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     
     if ([[[GlobalUtils HHmmFormatter] stringFromDate:self.reminderTimePicker.date] isEqualToString:_reminderNow]) {

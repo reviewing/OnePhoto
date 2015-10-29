@@ -46,4 +46,7 @@
 
 #define REMINDER_TIME_KEY @"reminder.time"
 
+#warning Don't release with this macro
+#define TEST_VERSION
+
 #endif

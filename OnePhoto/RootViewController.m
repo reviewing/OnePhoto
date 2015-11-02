@@ -96,7 +96,7 @@
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
-    [self viewWillDisappear:animated];
+    [super viewWillDisappear:animated];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     [_hud hide:YES];
 }
@@ -115,7 +115,7 @@
 
 
 - (void)viewDidAppear:(BOOL)animated {
-    [self viewDidAppear:animated];
+    [super viewDidAppear:animated];
     if (_isFirstAppear) {
         _isFirstAppear = NO;
         [_calendarContentView scrollToCurrentMonth:NO];

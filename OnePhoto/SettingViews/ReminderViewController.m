@@ -62,13 +62,17 @@
         [GlobalUtils alertMessage:@"设置提醒失败，请重试"];
         return;
     }
-    notification.fireDate = self.reminderTimePicker.date;
+    
+    NSTimeInterval time = floor([self.reminderTimePicker.date timeIntervalSinceReferenceDate] / 60.0) * 60.0;
+    NSDate *dateWith0Second = [NSDate dateWithTimeIntervalSinceReferenceDate:time];
+    notification.fireDate = dateWith0Second;
     notification.timeZone = [NSTimeZone defaultTimeZone];
     notification.repeatInterval = NSCalendarUnitDay;
     
     notification.alertBody = @"马上拍下今天的1 Photo吧！";
     notification.alertAction = @"现在就去";
     notification.alertTitle = @"1 Photo";
+    notification.userInfo = [NSDictionary dictionaryWithObject:OPNotificationTypeDailyReminder forKey:OPNotificationType];
     
     notification.soundName = UILocalNotificationDefaultSoundName;
     notification.applicationIconBadgeNumber = 1;

@@ -10,6 +10,8 @@
 #import "UIColor+Remix.h"
 
 NSString * const OPCoreDataStoreMerged = @"OPCoreDataStoreMerged";
+NSString * const OPNotificationType = @"OPNotificationType";
+NSString * const OPNotificationTypeDailyReminder = @"OPNotificationTypeDailyReminder";
 
 static UIColor *_appBaseColor = nil;
 

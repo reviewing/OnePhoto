@@ -46,6 +46,30 @@
 
 #define REMINDER_TIME_KEY @"reminder.time"
 
+#define JUMP_TO @"jump_to"
+#define JUMP_FROM @"jump_from"
+
+#define SET_JUMPING(to, from) \
+    do { \
+        if (to != nil) { \
+            [[NSUserDefaults standardUserDefaults] setObject:to forKey:JUMP_TO]; \
+        } else { \
+            CLEAR_JUMP_TO(); \
+        } \
+        if (from != nil) { \
+            [[NSUserDefaults standardUserDefaults] setObject:from forKey:JUMP_FROM]; \
+        } else { \
+            CLEAR_JUMP_FROM(); \
+        } \
+    } while (0)
+
+#define IM_JUMPING_TO [[NSUserDefaults standardUserDefaults] stringForKey:JUMP_TO]
+#define IM_JUMPING_FROM [[NSUserDefaults standardUserDefaults] stringForKey:JUMP_FROM]
+
+#define CLEAR_JUMP_TO() [[NSUserDefaults standardUserDefaults] removeObjectForKey:JUMP_TO]
+#define CLEAR_JUMP_FROM() [[NSUserDefaults standardUserDefaults] removeObjectForKey:JUMP_FROM]
+
+
 #warning Don't release with this macro
 #define TEST_VERSION
 

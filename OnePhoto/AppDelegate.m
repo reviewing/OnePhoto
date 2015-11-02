@@ -10,6 +10,8 @@
 #import <FastImageCache/FICImageCache.h>
 #import "OPPhoto.h"
 #import "CoreDataHelper.h"
+#import "RootViewController.h"
+#import "SettingsViewController.h"
 
 @interface AppDelegate () <FICImageCacheDelegate>
 
@@ -82,6 +84,7 @@
     UILocalNotification *notification = [launchOptions objectForKey:UIApplicationLaunchOptionsLocalNotificationKey];
     if (notification) {
         application.applicationIconBadgeNumber = 0;
+        [self application:application didReceiveLocalNotification:notification];
     }
     
     return YES;
@@ -157,6 +160,37 @@
 
 - (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notif {
     application.applicationIconBadgeNumber = 0;
+    if ([[notif.userInfo objectForKey:OPNotificationType] isEqualToString:OPNotificationTypeDailyReminder]) {
+        if (application.applicationState == UIApplicationStateInactive || application.applicationState == UIApplicationStateBackground) {
+            SET_JUMPING(@"UIImagePickerController", @"RootViewController");
+        } else {
+            UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"每日提醒"
+                                                                           message:@"现在拍下今天的1 Photo？"
+                                                                    preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertAction* cameraAction = [UIAlertAction actionWithTitle:@"现在就去" style:UIAlertActionStyleDefault
+                                                                 handler:^(UIAlertAction * action) {
+                                                                     UINavigationController *nc = ((UINavigationController *)self.window.rootViewController);
+                                                                     if ([[nc visibleViewController] isKindOfClass:[RootViewController class]]) {
+                                                                         [((RootViewController *)[nc visibleViewController]) performSelector:@selector(newPhotoAction)];
+                                                                     } else {
+                                                                         SET_JUMPING(@"UIImagePickerController", @"");
+                                                                         [nc popToRootViewControllerAnimated:NO];
+                                                                         if ([[nc visibleViewController] isKindOfClass:[SettingsViewController class]]) {
+                                                                             [[nc visibleViewController].presentingViewController dismissViewControllerAnimated:NO completion:nil];
+                                                                         }
+                                                                     }
+                                                                 }];
+            UIAlertAction* cancelAction = [UIAlertAction actionWithTitle:@"不用了" style:UIAlertActionStyleCancel
+                                                                 handler:^(UIAlertAction * action) {}];
+            
+            [alert addAction:cameraAction];
+            [alert addAction:cancelAction];
+            
+            UINavigationController *nc = ((UINavigationController *)self.window.rootViewController);
+            DHLogDebug(@"[nc visibleViewController] @ %@", [[nc visibleViewController] class]);
+            [[nc visibleViewController] presentViewController:alert animated:YES completion:nil];
+        }
+    }
 }
 
 #pragma mark - Core Data stack

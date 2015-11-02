@@ -74,6 +74,11 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    if ([IM_JUMPING_TO isEqualToString:@"UIImagePickerController"]) {
+        [self newPhotoAction];
+        SET_JUMPING(nil, nil);
+    }
+
     [[NSNotificationCenter defaultCenter] addObserverForName:OPCoreDataStoreMerged
                                                       object:nil
                                                        queue:[NSOperationQueue mainQueue]
@@ -102,6 +107,10 @@
 }
 
 - (void)applicationDidBecomeActive:(NSNotification *)notification {
+    if ([IM_JUMPING_TO isEqualToString:@"UIImagePickerController"]) {
+        [self newPhotoAction];
+        SET_JUMPING(nil, nil);
+    }
     [self.calendarContentView reloadData];
 }
 

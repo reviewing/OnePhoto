@@ -10,6 +10,8 @@
 #import <UIKit/UIKit.h>
 
 FOUNDATION_EXPORT NSString * const OPCoreDataStoreMerged;
+FOUNDATION_EXPORT NSString * const OPNotificationType;
+FOUNDATION_EXPORT NSString * const OPNotificationTypeDailyReminder;
 
 @interface GlobalUtils : NSObject
 

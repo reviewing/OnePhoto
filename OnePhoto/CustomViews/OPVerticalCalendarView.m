@@ -70,13 +70,17 @@
     NSAssert(_manager != nil, @"manager cannot be nil");
     
     self->_date = date;
-    _numOfRows = [self monthsBetweenDate:_startDate with:_date] + 1;
     [self reloadData];
 }
 
 - (void)setManager:(JTCalendarManager *)manager {
     self->_manager = manager;
+}
+
+- (void)reloadData {
     _startDate = [[CoreDataHelper sharedHelper] firstDayIn1Photo];
+    _numOfRows = [self monthsBetweenDate:_startDate with:_date] + 1;
+    [super reloadData];
 }
 
 #pragma mark - Table View Data Source

@@ -273,6 +273,13 @@
         [photoCloud saveToURL:[photoCloud fileURL] forSaveOperation:UIDocumentSaveForCreating completionHandler:^(BOOL success) {
             if (success) {
                 [[CoreDataHelper sharedHelper] insertPhoto:photoPath];
+                if (!_specifiedDate) {
+                    id reminderTime = [[NSUserDefaults standardUserDefaults] objectForKey:REMINDER_TIME_KEY];
+                    if ([reminderTime isKindOfClass:[NSDate class]]) {
+                        NSDate *fireDate = [GlobalUtils addToDate:[GlobalUtils HHmmToday:[[GlobalUtils HHmmFormatter] stringFromDate:reminderTime]] days:1];
+                        [GlobalUtils setDailyNotification:fireDate];
+                    }
+                }
                 [self renewPhotoCounts];
                 DHLogDebug(@"document saved successfully");
             } else {
@@ -367,6 +374,11 @@
         case OP_DAY_TOUCH_DELETE: {
             if (photo) {
                 [[CoreDataHelper sharedHelper] deletePhoto:photo];
+                id reminderTime = [[NSUserDefaults standardUserDefaults] objectForKey:REMINDER_TIME_KEY];
+                if ([reminderTime isKindOfClass:[NSDate class]]) {
+                    NSDate *fireDate = [GlobalUtils HHmmToday:[[GlobalUtils HHmmFormatter] stringFromDate:reminderTime]];
+                    [GlobalUtils setDailyNotification:fireDate];
+                }
                 [self renewPhotoCounts];
                 [lOPDayView setPhoto:nil];
             }

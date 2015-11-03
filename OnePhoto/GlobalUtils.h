@@ -38,15 +38,25 @@ FOUNDATION_EXPORT NSString * const OPUbiquitousKeyValueStoreHasPhotoKey;
 
 + (NSInteger)dayOfMonth:(NSDate *)date;
 
-+ (void)alertMessage:(NSString *)message;
++ (NSDate *)HHmmToday:(NSString *)HHmm;
 
-+ (void)alertError:(NSError *)error;
++ (NSDate *)addToDate:(NSDate *)date days:(NSInteger)days;
+
++ (void)setDailyNotification:(NSDate *)fireDate;
+
+#pragma mark - Stats
 
 + (void)newEvent:(NSString *)eventId;
 
 + (void)newEvent:(NSString *)eventId type:(NSString *)type;
 
 + (void)newEvent:(NSString *)eventId attributes:(NSDictionary *)attrs;
+
+#pragma mark - UI Utils
+
++ (void)alertMessage:(NSString *)message;
+
++ (void)alertError:(NSError *)error;
 
 + (UIImage *)imageWithColor:(UIColor *)color;
 

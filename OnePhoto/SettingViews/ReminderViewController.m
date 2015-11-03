@@ -7,6 +7,7 @@
 //
 
 #import "ReminderViewController.h"
+#import "CoreDataHelper.h"
 
 @interface ReminderViewController () {
     NSString* _reminderNow;
@@ -20,10 +21,13 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.reminderTimePicker addTarget:self action:@selector(timeChanged:) forControlEvents:UIControlEventValueChanged];
-    if ([[NSUserDefaults standardUserDefaults] objectForKey:REMINDER_TIME_KEY]) {
-        self.reminderTimePicker.date = [[NSUserDefaults standardUserDefaults] objectForKey:REMINDER_TIME_KEY];
+    
+    id reminderTime = [[NSUserDefaults standardUserDefaults] objectForKey:REMINDER_TIME_KEY];
+    if ([reminderTime isKindOfClass:[NSDate class]]) {
+        NSDate *fireDate = [GlobalUtils HHmmToday:[[GlobalUtils HHmmFormatter] stringFromDate:reminderTime]];
+        self.reminderTimePicker.date = fireDate;
         _reminderNow = [[GlobalUtils HHmmFormatter] stringFromDate:self.reminderTimePicker.date];
-    }    
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -56,28 +60,12 @@
         return;
     }
     
-    [[UIApplication sharedApplication] cancelAllLocalNotifications];
-    UILocalNotification *notification = [[UILocalNotification alloc] init];
-    if (notification == nil) {
-        [GlobalUtils alertMessage:@"设置提醒失败，请重试"];
-        return;
+    BOOL isTodayPhotoTaked = [[CoreDataHelper sharedHelper] isPhotoOfDateExists:[[GlobalUtils dateFormatter] stringFromDate:[NSDate date]]];
+    if (isTodayPhotoTaked) {
+        [GlobalUtils setDailyNotification:[GlobalUtils addToDate:self.reminderTimePicker.date days:1]];
+    } else {
+        [GlobalUtils setDailyNotification:self.reminderTimePicker.date];
     }
-    
-    NSTimeInterval time = floor([self.reminderTimePicker.date timeIntervalSinceReferenceDate] / 60.0) * 60.0;
-    NSDate *dateWith0Second = [NSDate dateWithTimeIntervalSinceReferenceDate:time];
-    notification.fireDate = dateWith0Second;
-    notification.timeZone = [NSTimeZone defaultTimeZone];
-    notification.repeatInterval = NSCalendarUnitDay;
-    
-    notification.alertBody = @"马上拍下今天的1 Photo吧！";
-    notification.alertAction = @"现在就去";
-    notification.alertTitle = @"1 Photo";
-    notification.userInfo = [NSDictionary dictionaryWithObject:OPNotificationTypeDailyReminder forKey:OPNotificationType];
-    
-    notification.soundName = UILocalNotificationDefaultSoundName;
-    notification.applicationIconBadgeNumber = 1;
-    
-    [[UIApplication sharedApplication] scheduleLocalNotification:notification];
 }
 
 - (void)applicationDidBecomeActive:(NSNotification *)notification {

@@ -22,6 +22,8 @@ static NSDateFormatter *_HHmmFormatter = nil;
 
 static NSDateFormatter *_chineseFormatter = nil;
 
+static NSCalendar *_calendar = nil;
+
 @implementation GlobalUtils
 
 + (UIColor *)appBaseColor {
@@ -45,6 +47,19 @@ static NSDateFormatter *_chineseFormatter = nil;
 
 + (CGFloat)monthLabelSize {
     return 17.0f;
+}
+
++ (NSCalendar *)calendar {
+    if(!_calendar){
+#ifdef __IPHONE_8_0
+        _calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+#else
+        _calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+#endif
+        _calendar.timeZone = [NSTimeZone systemTimeZone];
+        _calendar.locale = [NSLocale currentLocale];
+    }
+    return _calendar;
 }
 
 + (NSDateFormatter *)dateFormatter {
@@ -92,6 +107,50 @@ static NSDateFormatter *_chineseFormatter = nil;
 + (NSInteger)dayOfMonth:(NSDate *)date {
     NSDateComponents *components = [[NSCalendar currentCalendar] components:NSCalendarUnitDay fromDate:date];
     return components.day;
+}
+
++ (NSDate *)HHmmToday:(NSString *)HHmm {
+    NSDateComponents *components = [[self calendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear fromDate:[NSDate date]];
+    NSDateComponents *HHmmComponents = [[self calendar] components:NSCalendarUnitHour | NSCalendarUnitMinute fromDate:[[self HHmmFormatter] dateFromString:HHmm]];
+    components.hour = HHmmComponents.hour;
+    components.minute = HHmmComponents.minute;
+    components.second = 0;
+    NSDate *date = [[self calendar] dateFromComponents:components];
+    return date;
+}
+
++ (NSDate *)addToDate:(NSDate *)date days:(NSInteger)days {
+    NSDateComponents *components = [NSDateComponents new];
+    components.day = days;
+    return [[self calendar] dateByAddingComponents:components toDate:date options:0];
+}
+
++ (void)setDailyNotification:(NSDate *)fireDate {
+    [[UIApplication sharedApplication] cancelAllLocalNotifications];
+    UILocalNotification *notification = [[UILocalNotification alloc] init];
+    if (notification == nil) {
+        [self alertMessage:@"设置提醒失败，请重试"];
+        return;
+    }
+    
+    NSTimeInterval time = floor([fireDate timeIntervalSinceReferenceDate] / 60.0) * 60.0;
+    NSDate *dateWith0Second = [NSDate dateWithTimeIntervalSinceReferenceDate:time];
+    notification.fireDate = dateWith0Second;
+    
+    DHLogDebug(@"设置提醒：%@", fireDate);
+    
+    notification.timeZone = [NSTimeZone defaultTimeZone];
+    notification.repeatInterval = NSCalendarUnitDay;
+    
+    notification.alertBody = @"马上拍下今天的1 Photo吧！";
+    notification.alertAction = @"现在就去";
+    notification.alertTitle = @"1 Photo";
+    notification.userInfo = [NSDictionary dictionaryWithObject:OPNotificationTypeDailyReminder forKey:OPNotificationType];
+    
+    notification.soundName = UILocalNotificationDefaultSoundName;
+    notification.applicationIconBadgeNumber = 1;
+    
+    [[UIApplication sharedApplication] scheduleLocalNotification:notification];
 }
 
 #pragma mark - Stats

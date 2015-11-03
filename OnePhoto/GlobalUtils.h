@@ -12,6 +12,7 @@
 FOUNDATION_EXPORT NSString * const OPCoreDataStoreMerged;
 FOUNDATION_EXPORT NSString * const OPNotificationType;
 FOUNDATION_EXPORT NSString * const OPNotificationTypeDailyReminder;
+FOUNDATION_EXPORT NSString * const OPUbiquitousKeyValueStoreHasPhotoKey;
 
 @interface GlobalUtils : NSObject
 

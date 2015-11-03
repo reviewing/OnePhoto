@@ -22,6 +22,8 @@
 
 #import <MobileCoreServices/MobileCoreServices.h>
 
+#define MAIN_TITLE @"1 Photo"
+
 @interface RootViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate, MWPhotoBrowserDelegate> {
     MBProgressHUD *_hud;
     
@@ -62,6 +64,57 @@
     
     _hud = [[MBProgressHUD alloc] initWithView:self.view];
     [self.view addSubview:_hud];
+    
+    CGRect headerTitleSubtitleFrame = CGRectMake(0, 0, 200, 44);
+    UIView* _headerTitleSubtitleView = [[UILabel alloc] initWithFrame:headerTitleSubtitleFrame];
+    _headerTitleSubtitleView.backgroundColor = [UIColor clearColor];
+    _headerTitleSubtitleView.autoresizesSubviews = YES;
+    
+    CGRect titleFrame = CGRectMake(0, 2, 200, 24);
+    UILabel *titleView = [[UILabel alloc] initWithFrame:titleFrame];
+    titleView.backgroundColor = [UIColor clearColor];
+    titleView.font = [UIFont boldSystemFontOfSize:17];
+    titleView.textAlignment = NSTextAlignmentCenter;
+    titleView.textColor = [UIColor whiteColor];
+    titleView.text = @"";
+    titleView.adjustsFontSizeToFitWidth = YES;
+    [_headerTitleSubtitleView addSubview:titleView];
+    
+    CGRect subtitleFrame = CGRectMake(0, 24, 200, 44-24);
+    UILabel *subtitleView = [[UILabel alloc] initWithFrame:subtitleFrame];
+    subtitleView.backgroundColor = [UIColor clearColor];
+    subtitleView.font = [UIFont boldSystemFontOfSize:12];
+    subtitleView.textAlignment = NSTextAlignmentCenter;
+    subtitleView.textColor = [UIColor whiteColor];
+    subtitleView.text = @"";
+    subtitleView.adjustsFontSizeToFitWidth = YES;
+    [_headerTitleSubtitleView addSubview:subtitleView];
+    
+    _headerTitleSubtitleView.autoresizingMask = (UIViewAutoresizingFlexibleLeftMargin |
+                                                 UIViewAutoresizingFlexibleRightMargin |
+                                                 UIViewAutoresizingFlexibleTopMargin |
+                                                 UIViewAutoresizingFlexibleBottomMargin);
+    
+    self.navigationItem.titleView = _headerTitleSubtitleView;
+    [self setHeaderTitle:MAIN_TITLE andSubtitle:nil];
+}
+
+- (void)setHeaderTitle:(NSString *)headerTitle andSubtitle:(NSString *)headerSubtitle {
+    assert(self.navigationItem.titleView != nil);
+    UIView* headerTitleSubtitleView = self.navigationItem.titleView;
+    UILabel* titleView = [headerTitleSubtitleView.subviews objectAtIndex:0];
+    UILabel* subtitleView = [headerTitleSubtitleView.subviews objectAtIndex:1];
+    assert((titleView != nil) && (subtitleView != nil) && ([titleView isKindOfClass:[UILabel class]]) && ([subtitleView isKindOfClass:[UILabel class]]));
+    titleView.text = headerTitle;
+    subtitleView.text = headerSubtitle;
+    
+    if ([headerSubtitle length] == 0) {
+        subtitleView.hidden = YES;
+        titleView.frame = CGRectMake(0, 10, 200, 24);
+    } else {
+        subtitleView.hidden = NO;
+        titleView.frame = CGRectMake(0, 2, 200, 24);
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -79,11 +132,20 @@
         SET_JUMPING(nil, nil);
     }
 
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(storeDidChange:)
+                                                 name:NSUbiquitousKeyValueStoreDidChangeExternallyNotification
+                                               object:[NSUbiquitousKeyValueStore defaultStore]];
+    
+    [[NSUbiquitousKeyValueStore defaultStore] synchronize];
+    
     [[NSNotificationCenter defaultCenter] addObserverForName:OPCoreDataStoreMerged
                                                       object:nil
                                                        queue:[NSOperationQueue mainQueue]
                                                   usingBlock:^(NSNotification *note) {
+                                                      DHLogDebug(@"OPCoreDataStoreMergedNotification");
                                                       [self.calendarContentView reloadData];
+                                                      [self setHeaderTitle:MAIN_TITLE andSubtitle:nil];
                                                   }];
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(applicationDidBecomeActive:)
@@ -104,6 +166,13 @@
     [super viewWillDisappear:animated];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     [_hud hide:YES];
+}
+
+- (void)storeDidChange:(NSNotification *)notification {
+    DHLogDebug(@"storeDidChange");
+    long long countOfPhotos = [[NSUbiquitousKeyValueStore defaultStore] longLongForKey:OPUbiquitousKeyValueStoreHasPhotoKey];
+    DHLogDebug(@"countOfPhotos: %lld", countOfPhotos);
+    [self setHeaderTitle:MAIN_TITLE andSubtitle:@"正在同步..."];
 }
 
 - (void)applicationDidBecomeActive:(NSNotification *)notification {
@@ -139,11 +208,7 @@
 }
 
 - (IBAction)takePhoto:(id)sender {
-    [self startCameraControllerFromViewController:self sourceType:UIImagePickerControllerSourceTypeCamera usingDelegate:self];
-}
-
-- (IBAction)choosePhoto:(id)sender {
-    [self startCameraControllerFromViewController:self sourceType:UIImagePickerControllerSourceTypePhotoLibrary usingDelegate:self];
+    [self newPhotoAction];
 }
 
 - (BOOL)startCameraControllerFromViewController:(UIViewController*) controller sourceType:(UIImagePickerControllerSourceType) sourceType
@@ -202,13 +267,13 @@
         
         NSURL *ubiq = [[NSFileManager defaultManager] URLForUbiquityContainerIdentifier:nil];
         NSURL *ubiquitousURL = [[ubiq URLByAppendingPathComponent:@"Documents"] URLByAppendingPathComponent:photoPath];
-
-        [[CoreDataHelper sharedHelper] insertPhoto:photoPath];
         
         OPPhotoCloud *photoCloud = [[OPPhotoCloud alloc] initWithFileURL:ubiquitousURL];
         photoCloud.imageData = UIImageJPEGRepresentation(imageToSave, 0.8);
         [photoCloud saveToURL:[photoCloud fileURL] forSaveOperation:UIDocumentSaveForCreating completionHandler:^(BOOL success) {
             if (success) {
+                [[CoreDataHelper sharedHelper] insertPhoto:photoPath];
+                [self renewPhotoCounts];
                 DHLogDebug(@"document saved successfully");
             } else {
                 [GlobalUtils alertMessage:@"保存图片失败，请检查iCloud账户设置后重试"];
@@ -218,6 +283,15 @@
     
     _specifiedDate = nil;
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)renewPhotoCounts {
+    NSInteger count = [[CoreDataHelper sharedHelper] countOfPhotos];
+    if (count < 0) {
+        count = [[NSUbiquitousKeyValueStore defaultStore] longLongForKey:OPUbiquitousKeyValueStoreHasPhotoKey] + 1;
+    }
+    DHLogDebug(@"renewPhotoCounts: %ld", (long)count);
+    [[NSUbiquitousKeyValueStore defaultStore] setLongLong:count forKey:OPUbiquitousKeyValueStoreHasPhotoKey];
 }
 
 #pragma mark - CalendarManager delegate
@@ -293,6 +367,7 @@
         case OP_DAY_TOUCH_DELETE: {
             if (photo) {
                 [[CoreDataHelper sharedHelper] deletePhoto:photo];
+                [self renewPhotoCounts];
                 [lOPDayView setPhoto:nil];
             }
             break;

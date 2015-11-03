@@ -30,4 +30,6 @@
 
 - (NSArray *)allPhotosSorted;
 
+- (NSInteger)countOfPhotos;
+
 @end

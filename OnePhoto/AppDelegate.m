@@ -57,6 +57,21 @@
     [sharedImageCache setDelegate:self];
     [sharedImageCache setFormats:mutableImageFormats];
     
+    NSURL *ubiq = [[NSFileManager defaultManager] URLForUbiquityContainerIdentifier:nil];
+    if (ubiq) {
+        DHLogDebug(@"iCloud access at %@", ubiq);
+        NSURL *photoFolder = [[ubiq URLByAppendingPathComponent:@"Documents"] URLByAppendingPathComponent:@"photos"];
+        
+        NSError *error;
+        [[NSFileManager defaultManager] createDirectoryAtURL:photoFolder withIntermediateDirectories:YES attributes:nil error:&error];
+        if(error) {
+            DHLogError(@"Error createDirectoryAtURL");
+        } else {
+            DHLogDebug(@"createDirectoryAtURL succeed");
+            [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:YES] forKey:@"photos.dir.created"];
+        }
+    }
+    
     UIUserNotificationType types = UIUserNotificationTypeBadge | UIUserNotificationTypeSound | UIUserNotificationTypeAlert;
     UIUserNotificationSettings *mySettings = [UIUserNotificationSettings settingsForTypes:types categories:nil];
     [[UIApplication sharedApplication] registerUserNotificationSettings:mySettings];
@@ -130,21 +145,7 @@
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
     NSURL *ubiq = [[NSFileManager defaultManager] URLForUbiquityContainerIdentifier:nil];
-    if (ubiq) {
-        DHLogDebug(@"iCloud access at %@", ubiq);
-        NSURL *photoFolder = [[ubiq URLByAppendingPathComponent:@"Documents"] URLByAppendingPathComponent:@"photos"];
-        
-        //        if (![[NSUserDefaults standardUserDefaults] boolForKey:@"photos.dir.created"]) {
-        NSError *error;
-        [[NSFileManager defaultManager] createDirectoryAtURL:photoFolder withIntermediateDirectories:YES attributes:nil error:&error];
-        if(error) {
-            DHLogError(@"Error createDirectoryAtURL");
-        } else {
-            DHLogDebug(@"createDirectoryAtURL succeed");
-            [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:YES] forKey:@"photos.dir.created"];
-        }
-        //        }
-    } else {
+    if (!ubiq) {
         DHLogError(@"No iCloud access");
         [GlobalUtils alertMessage:@"该设备没有设置iCloud账户，无法正常使用1 Photo，请在登录iCloud后重试"];
     }

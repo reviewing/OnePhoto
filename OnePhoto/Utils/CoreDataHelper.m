@@ -148,6 +148,18 @@
     return [[NSOrderedSet orderedSetWithSet:[self allPhotos]] sortedArrayUsingDescriptors:[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"dateString" ascending:YES]]];
 }
 
+- (NSInteger)countOfPhotos {
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    [request setEntity:[NSEntityDescription entityForName:@"OPPhoto" inManagedObjectContext:_context]];
+    NSError *error;
+    NSInteger count = [_context countForFetchRequest:request error:&error];
+    if (error) {
+        DHLogError(@"couldn't fetch: %@", [error localizedDescription]);
+        count = -1;
+    }
+    return count;
+}
+
 - (void)deleteImageCache:(OPPhoto *)photo {
     FICImageCache *sharedImageCache = [FICImageCache sharedImageCache];
     [sharedImageCache deleteImageForEntity:photo withFormatName:OPPhotoSquareImage32BitBGRFormatName];

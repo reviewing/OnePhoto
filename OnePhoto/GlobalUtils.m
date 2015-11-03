@@ -12,6 +12,7 @@
 NSString * const OPCoreDataStoreMerged = @"OPCoreDataStoreMerged";
 NSString * const OPNotificationType = @"OPNotificationType";
 NSString * const OPNotificationTypeDailyReminder = @"OPNotificationTypeDailyReminder";
+NSString * const OPUbiquitousKeyValueStoreHasPhotoKey = @"OPUbiquitousKeyValueStoreHasPhotoKey";
 
 static UIColor *_appBaseColor = nil;
 

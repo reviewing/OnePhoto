@@ -13,6 +13,8 @@
 
 #define PHOTO_COUNT_KEY @"kOPPhotoCount"
 #define CONSECUTIVE_DAYS_KEY @"kOPConsecutiveDays"
+#define TODAY_PHOTO_NAME @"kOPTodayPhotoName"
+#define TODAT_IMAGE_DATA @"kOPTodayImageData"
 
 @interface CoreDataHelper () {
     NSManagedObjectContext *_context;
@@ -169,14 +171,18 @@
     NSUserDefaults * defaults = [[NSUserDefaults alloc] initWithSuiteName:@"group.top.defaults.onephoto"];
     [defaults setObject:[NSNumber numberWithInteger:[self countOfPhotos]] forKey:PHOTO_COUNT_KEY];
     
-    NSEnumerator *photosEnumerator = [[self allPhotosSorted] reverseObjectEnumerator];
+    NSArray *photos = [self allPhotosSorted];
+    NSEnumerator *photosEnumerator = [photos reverseObjectEnumerator];
     NSInteger consecutiveDays = 0;
     NSString *today = [[GlobalUtils dateFormatter] stringFromDate:[NSDate date]];
 
     OPPhoto *photo;
     NSString *daySentinel = today;
+    
+    BOOL isTodayPhotoTaked = NO;
     while ((photo = [photosEnumerator nextObject])) {
         if ([photo.dateString isEqualToString:today]) {
+            isTodayPhotoTaked = YES;
             consecutiveDays++;
         } else {
             if ([GlobalUtils date:photo.dateString isJustBefore:daySentinel]) {
@@ -189,6 +195,17 @@
     }
     
     [defaults setObject:[NSNumber numberWithInteger:consecutiveDays] forKey:CONSECUTIVE_DAYS_KEY];
+    if (isTodayPhotoTaked) {
+        OPPhoto *todayPhoto = [photos lastObject];
+        if (![[defaults stringForKey:TODAY_PHOTO_NAME] isEqualToString:todayPhoto.source_image_url]) {
+            [defaults setObject:todayPhoto.source_image_url forKey:TODAY_PHOTO_NAME];
+            [[FICImageCache sharedImageCache] asynchronouslyRetrieveImageForEntity:todayPhoto withFormatName:OPPhotoSquareImage32BitBGRFormatName completionBlock:^(id<FICEntity> entity, NSString *formatName, UIImage *image) {
+                [defaults setObject:UIImageJPEGRepresentation(image, 1.0) forKey:TODAT_IMAGE_DATA];
+            }];
+        }
+    } else {
+        [defaults setObject:nil forKey:TODAT_IMAGE_DATA];
+    }
 }
 
 - (void)deleteImageCache:(OPPhoto *)photo {

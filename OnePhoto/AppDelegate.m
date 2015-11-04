@@ -127,6 +127,10 @@
                                                           });
                                                       }];
                                                   }];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(applicationSignificantTimeChange:)
+                                                 name:UIApplicationSignificantTimeChangeNotification
+                                               object:nil];
     [[CoreDataHelper sharedHelper] cacheNewDataForAppGroup];
     return YES;
 }
@@ -159,6 +163,10 @@
     // Saves changes in the application's managed object context before the application terminates.
     [self saveContext];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+- (void)applicationSignificantTimeChange:(UIApplication *)application {
+    [[CoreDataHelper sharedHelper] cacheNewDataForAppGroup];
 }
 
 - (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notif {
@@ -225,7 +233,7 @@
                 [[nc visibleViewController].presentingViewController dismissViewControllerAnimated:NO completion:nil];
             }
         }
-    } else if ([action isEqualToString:@"view"]) {
+    } else if ([action isEqualToString:@"open"]) {
         UINavigationController *nc = ((UINavigationController *)self.window.rootViewController);
         if ([[nc visibleViewController] isKindOfClass:[RootViewController class]]) {
 

@@ -11,11 +11,17 @@
 
 #define PHOTO_COUNT_KEY @"kOPPhotoCount"
 #define CONSECUTIVE_DAYS_KEY @"kOPConsecutiveDays"
+#define TODAY_PHOTO_NAME @"kOPTodayPhotoName"
+#define TODAT_IMAGE_DATA @"kOPTodayImageData"
 
 @interface TodayViewController () <NCWidgetProviding>
+@property (weak, nonatomic) IBOutlet UIImageView *todayImageView;
+@property (weak, nonatomic) IBOutlet UIButton *addPhotoButton;
 @property (weak, nonatomic) IBOutlet UILabel *photoCountLabel;
 @property (weak, nonatomic) IBOutlet UILabel *consecutiveDaysLabel;
 
+@property (weak, nonatomic) NSString *todayPhotoName;
+@property (weak, nonatomic) NSData *todayImageData;
 @property (nonatomic) NSInteger photoCount;
 @property (nonatomic) NSInteger consecutiveDays;
 
@@ -41,10 +47,13 @@
     // If there's an update, use NCUpdateResultNewData
     NSUserDefaults * defaults = [[NSUserDefaults alloc] initWithSuiteName:@"group.top.defaults.onephoto"];
 
-    NSInteger currentPhotoCount = [[defaults valueForKey:PHOTO_COUNT_KEY] integerValue];
-    NSInteger currentConsecutiveDays = [[defaults valueForKey:CONSECUTIVE_DAYS_KEY] integerValue];
+    NSString *currentTodayPhotoName = [defaults stringForKey:TODAY_PHOTO_NAME];
+    NSInteger currentPhotoCount = [[defaults objectForKey:PHOTO_COUNT_KEY] integerValue];
+    NSInteger currentConsecutiveDays = [[defaults objectForKey:CONSECUTIVE_DAYS_KEY] integerValue];
     
-    if (currentPhotoCount != self.photoCount || currentConsecutiveDays != self.consecutiveDays) {
+    if (![currentTodayPhotoName isEqualToString:self.todayPhotoName] || currentPhotoCount != self.photoCount || currentConsecutiveDays != self.consecutiveDays) {
+        self.todayPhotoName = currentTodayPhotoName;
+        self.todayImageData = [defaults objectForKey:TODAT_IMAGE_DATA];
         self.photoCount = currentPhotoCount;
         self.consecutiveDays = currentConsecutiveDays;
         [self updateInterface];
@@ -58,13 +67,36 @@
     return UIEdgeInsetsMake(0, 48, 0, 0);
 }
 
+- (IBAction)open:(UIButton *)sender {
+    NSURL *url = [NSURL URLWithString:@"open1photo://top.defaults.onephoto/todayext?action=open"];
+    [self.extensionContext openURL:url completionHandler:nil];
+}
+
 - (IBAction)add:(id)sender {
     NSURL *url = [NSURL URLWithString:@"open1photo://top.defaults.onephoto/todayext?action=add"];
     [self.extensionContext openURL:url completionHandler:nil];
 }
 
+- (NSString *)todayImageName {
+    return [[NSUserDefaults standardUserDefaults] stringForKey:TODAY_PHOTO_NAME];
+}
+
+- (void)setTodayPhotoName:(NSString *)todayPhotoName {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setValue:todayPhotoName forKey:TODAY_PHOTO_NAME];
+}
+
+- (NSData *)todayImageData {
+    return [[NSUserDefaults standardUserDefaults] objectForKey:TODAT_IMAGE_DATA];
+}
+
+- (void)setTodayImageData:(NSData *)todayImageData {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setValue:todayImageData forKey:TODAT_IMAGE_DATA];
+}
+
 - (NSInteger)photoCount {
-    return [[[NSUserDefaults standardUserDefaults] valueForKey:PHOTO_COUNT_KEY] integerValue];
+    return [[[NSUserDefaults standardUserDefaults] objectForKey:PHOTO_COUNT_KEY] integerValue];
 }
 
 - (void)setPhotoCount:(NSInteger)photoCount {
@@ -73,7 +105,7 @@
 }
 
 - (NSInteger)consecutiveDays {
-    return [[[NSUserDefaults standardUserDefaults] valueForKey:CONSECUTIVE_DAYS_KEY] integerValue];
+    return [[[NSUserDefaults standardUserDefaults] objectForKey:CONSECUTIVE_DAYS_KEY] integerValue];
 }
 
 - (void)setConsecutiveDays:(NSInteger)consecutiveDays {
@@ -82,6 +114,10 @@
 }
 
 - (void)updateInterface {
+    UIImage *todayPhoto = [UIImage imageWithData:self.todayImageData];
+    [self.todayImageView setImage:todayPhoto];
+    self.todayImageView.hidden = !todayPhoto;
+    self.addPhotoButton.hidden = todayPhoto;
     NSInteger photoCount = self.photoCount;
     self.photoCountLabel.text = [NSString stringWithFormat:@"%ld", (long)photoCount];
     [self.photoCountLabel sizeToFit];

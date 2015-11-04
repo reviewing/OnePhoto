@@ -37,6 +37,7 @@
 
 @property (weak, nonatomic) IBOutlet OPCalendarWeekDayView *weekDayView;
 @property (weak, nonatomic) IBOutlet OPVerticalCalendarView *calendarContentView;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *addPhotoItem;
 
 @property (strong, nonatomic) JTCalendarManager *calendarManager;
 
@@ -410,6 +411,10 @@
     [alert addAction:libraryAction];
     [alert addAction:cameraAction];
     [alert addAction:cancelAction];
+    if([alert respondsToSelector:@selector(popoverPresentationController)]) {
+        // iOS8
+        alert.popoverPresentationController.barButtonItem = self.addPhotoItem;
+    }
     [self presentViewController:alert animated:YES completion:nil];
 }
 

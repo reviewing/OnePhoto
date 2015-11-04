@@ -270,10 +270,12 @@
         
         OPPhotoCloud *photoCloud = [[OPPhotoCloud alloc] initWithFileURL:ubiquitousURL];
         photoCloud.imageData = UIImageJPEGRepresentation(imageToSave, 0.8);
+        
+        __block BOOL isToday = !_specifiedDate;
         [photoCloud saveToURL:[photoCloud fileURL] forSaveOperation:UIDocumentSaveForCreating completionHandler:^(BOOL success) {
             if (success) {
                 [[CoreDataHelper sharedHelper] insertPhoto:photoPath];
-                if (!_specifiedDate) {
+                if (isToday) {
                     id reminderTime = [[NSUserDefaults standardUserDefaults] objectForKey:REMINDER_TIME_KEY];
                     if ([reminderTime isKindOfClass:[NSDate class]]) {
                         NSDate *fireDate = [GlobalUtils addToDate:[GlobalUtils HHmmToday:[[GlobalUtils HHmmFormatter] stringFromDate:reminderTime]] days:1];

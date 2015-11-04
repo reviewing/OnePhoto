@@ -153,6 +153,10 @@ static NSCalendar *_calendar = nil;
     [[UIApplication sharedApplication] scheduleLocalNotification:notification];
 }
 
++ (BOOL)date:(NSString *)date1 isJustBefore:(NSString *)date2 {
+    return [date2 isEqualToString:[[self dateFormatter] stringFromDate:[self addToDate:[[self dateFormatter] dateFromString:date1] days:1]]];
+}
+
 #pragma mark - Stats
 
 + (void)newEvent:(NSString *)eventId {

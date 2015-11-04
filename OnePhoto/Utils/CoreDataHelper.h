@@ -32,4 +32,6 @@
 
 - (NSInteger)countOfPhotos;
 
+- (void)cacheNewDataForAppGroup;
+
 @end

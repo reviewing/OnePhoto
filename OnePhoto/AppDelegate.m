@@ -110,6 +110,7 @@
                                                           [self.managedObjectContext mergeChangesFromContextDidSaveNotification:note];
                                                           dispatch_async(dispatch_get_main_queue(), ^(){
                                                               [[NSNotificationCenter defaultCenter] postNotificationName:OPCoreDataStoreMerged object:nil];
+                                                              [[CoreDataHelper sharedHelper] cacheNewDataForAppGroup];
                                                           });
                                                       }];
                                                   }];
@@ -122,9 +123,11 @@
                                                           [self.managedObjectContext mergeChangesFromContextDidSaveNotification:note];
                                                           dispatch_async(dispatch_get_main_queue(), ^(){
                                                               [[NSNotificationCenter defaultCenter] postNotificationName:OPCoreDataStoreMerged object:nil];
+                                                              [[CoreDataHelper sharedHelper] cacheNewDataForAppGroup];
                                                           });
                                                       }];
                                                   }];
+    [[CoreDataHelper sharedHelper] cacheNewDataForAppGroup];
     return YES;
 }
 
@@ -193,6 +196,50 @@
     }
 }
 
+- (NSDictionary *)parseQueryString:(NSString *)query {
+    NSMutableDictionary *dict = [[NSMutableDictionary alloc] initWithCapacity:6];
+    NSArray *pairs = [query componentsSeparatedByString:@"&"];
+    
+    for (NSString *pair in pairs) {
+        NSArray *elements = [pair componentsSeparatedByString:@"="];
+        NSString *key = [[elements objectAtIndex:0] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+        NSString *val = [[elements objectAtIndex:1] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+        
+        [dict setObject:val forKey:key];
+    }
+    return dict;
+}
+
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url options:(NSDictionary<NSString *,id> *)options {
+    DHLogDebug(@"url recieved: %@", url);
+    
+    NSString *action = [[self parseQueryString:[url query]] objectForKey:@"action"];
+    if ([action isEqualToString:@"add"]) {
+        UINavigationController *nc = ((UINavigationController *)self.window.rootViewController);
+        if ([[nc visibleViewController] isKindOfClass:[RootViewController class]]) {
+            [((RootViewController *)[nc visibleViewController]) performSelector:@selector(newPhotoAction)];
+        } else {
+            SET_JUMPING(@"UIImagePickerController", @"");
+            [nc popToRootViewControllerAnimated:NO];
+            if ([[nc visibleViewController] isKindOfClass:[SettingsViewController class]]) {
+                [[nc visibleViewController].presentingViewController dismissViewControllerAnimated:NO completion:nil];
+            }
+        }
+    } else if ([action isEqualToString:@"view"]) {
+        UINavigationController *nc = ((UINavigationController *)self.window.rootViewController);
+        if ([[nc visibleViewController] isKindOfClass:[RootViewController class]]) {
+
+        } else {
+            [nc popToRootViewControllerAnimated:NO];
+            if ([[nc visibleViewController] isKindOfClass:[SettingsViewController class]]) {
+                [[nc visibleViewController].presentingViewController dismissViewControllerAnimated:NO completion:nil];
+            }
+        }
+
+    }
+    return YES;
+}
+
 #pragma mark - Core Data stack
 
 @synthesize managedObjectContext = _managedObjectContext;
@@ -242,7 +289,6 @@
     
     return _persistentStoreCoordinator;
 }
-
 
 - (NSManagedObjectContext *)managedObjectContext {
     // Returns the managed object context for the application (which is already bound to the persistent store coordinator for the application.)

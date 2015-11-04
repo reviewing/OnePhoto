@@ -84,15 +84,26 @@
                                     <constraint firstAttribute="height" constant="30" id="9L4-9j-Nlb"/>
                                     <constraint firstAttribute="width" constant="60" id="g1g-NX-Ter"/>
                                 </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="thin" pointSize="15"/>
                                 <state key="normal" title="添加">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                        <integer key="value" value="4"/>
+                                        <integer key="value" value="2"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="add:" destination="M4Y-Lb-cyx" eventType="touchUpInside" id="jsS-eB-nEb"/>
+                                </connections>
                             </button>
+                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rm1-te-osB">
+                                <rect key="frame" x="20" y="28" width="60" height="60"/>
+                                <animations/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="60" id="yHV-pK-fRK"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <animations/>
                         <constraints>
@@ -107,9 +118,12 @@
                             <constraint firstItem="GcN-lo-r42" firstAttribute="leading" secondItem="S3S-Oj-5AN" secondAttribute="leadingMargin" id="S9S-Pc-2Kq"/>
                             <constraint firstItem="FKl-LY-JtV" firstAttribute="top" secondItem="Dpr-KB-eZh" secondAttribute="bottom" constant="13" id="Td3-yz-Efw"/>
                             <constraint firstAttribute="trailing" secondItem="9gx-jL-nhc" secondAttribute="trailing" constant="24" id="Yeh-Sk-gCp"/>
+                            <constraint firstItem="FKl-LY-JtV" firstAttribute="top" secondItem="rm1-te-osB" secondAttribute="bottom" constant="2" id="cCD-h5-pKD"/>
+                            <constraint firstItem="rm1-te-osB" firstAttribute="leading" secondItem="S3S-Oj-5AN" secondAttribute="leadingMargin" id="cfC-H8-Ja1"/>
                             <constraint firstItem="qma-zV-tez" firstAttribute="centerX" secondItem="S3S-Oj-5AN" secondAttribute="centerX" id="ctF-jK-fcR"/>
                             <constraint firstItem="Dpr-KB-eZh" firstAttribute="leading" secondItem="6jF-si-dvV" secondAttribute="trailing" id="lPh-kE-LkN"/>
                             <constraint firstItem="GcN-lo-r42" firstAttribute="top" secondItem="Ft6-oW-KC0" secondAttribute="bottom" constant="8" symbolic="YES" id="mYS-Cv-VNx"/>
+                            <constraint firstItem="rm1-te-osB" firstAttribute="top" secondItem="GcN-lo-r42" secondAttribute="bottom" constant="2" id="nZA-2U-Jyi"/>
                             <constraint firstItem="XhR-G3-Gs9" firstAttribute="centerX" secondItem="S3S-Oj-5AN" secondAttribute="centerX" id="ngm-iy-sxG"/>
                             <constraint firstItem="6jF-si-dvV" firstAttribute="centerY" secondItem="52Q-ms-GTv" secondAttribute="centerY" id="pSw-4f-Bb9"/>
                             <constraint firstItem="MWs-vY-Thf" firstAttribute="centerY" secondItem="XhR-G3-Gs9" secondAttribute="centerY" id="tS7-hY-dAI"/>
@@ -123,6 +137,10 @@
                     <nil key="simulatedBottomBarMetrics"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="320" height="90"/>
+                    <connections>
+                        <outlet property="consecutiveDaysLabel" destination="6jF-si-dvV" id="vMd-8I-Q2u"/>
+                        <outlet property="photoCountLabel" destination="XhR-G3-Gs9" id="QmY-66-TbB"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vXp-U4-Rya" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

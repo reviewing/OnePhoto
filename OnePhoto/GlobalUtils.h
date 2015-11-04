@@ -44,6 +44,8 @@ FOUNDATION_EXPORT NSString * const OPUbiquitousKeyValueStoreHasPhotoKey;
 
 + (void)setDailyNotification:(NSDate *)fireDate;
 
++ (BOOL)date:(NSString *)date1 isJustBefore:(NSString *)date2;
+
 #pragma mark - Stats
 
 + (void)newEvent:(NSString *)eventId;

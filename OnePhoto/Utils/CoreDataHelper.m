@@ -11,6 +11,9 @@
 #import "AppDelegate.h"
 #import <FastImageCache/FICImageCache.h>
 
+#define PHOTO_COUNT_KEY @"kOPPhotoCount"
+#define CONSECUTIVE_DAYS_KEY @"kOPConsecutiveDays"
+
 @interface CoreDataHelper () {
     NSManagedObjectContext *_context;
 }
@@ -52,6 +55,7 @@
     if (_context.hasChanges && ![_context save:&error]) {
         DHLogError(@"couldn't save: %@", [error localizedDescription]);
     }
+    [self cacheNewDataForAppGroup];
 }
 
 - (void)deletePhoto:(OPPhoto *)photo {
@@ -71,6 +75,7 @@
     if (_context.hasChanges && ![_context save:&error]) {
         DHLogError(@"couldn't save: %@", [error localizedDescription]);
     }
+    [self cacheNewDataForAppGroup];
 }
 
 - (OPPhoto *)getPhotoAt:(NSString *)date {
@@ -158,6 +163,32 @@
         count = -1;
     }
     return count;
+}
+
+- (void)cacheNewDataForAppGroup {
+    NSUserDefaults * defaults = [[NSUserDefaults alloc] initWithSuiteName:@"group.top.defaults.onephoto"];
+    [defaults setObject:[NSNumber numberWithInteger:[self countOfPhotos]] forKey:PHOTO_COUNT_KEY];
+    
+    NSEnumerator *photosEnumerator = [[self allPhotosSorted] reverseObjectEnumerator];
+    NSInteger consecutiveDays = 0;
+    NSString *today = [[GlobalUtils dateFormatter] stringFromDate:[NSDate date]];
+
+    OPPhoto *photo;
+    NSString *daySentinel = today;
+    while ((photo = [photosEnumerator nextObject])) {
+        if ([photo.dateString isEqualToString:today]) {
+            consecutiveDays++;
+        } else {
+            if ([GlobalUtils date:photo.dateString isJustBefore:daySentinel]) {
+                consecutiveDays++;
+                daySentinel = photo.dateString;
+            } else {
+                break;
+            }
+        }
+    }
+    
+    [defaults setObject:[NSNumber numberWithInteger:consecutiveDays] forKey:CONSECUTIVE_DAYS_KEY];
 }
 
 - (void)deleteImageCache:(OPPhoto *)photo {

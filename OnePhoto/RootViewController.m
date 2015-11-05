@@ -376,14 +376,7 @@
         }
         case OP_DAY_TOUCH_DELETE: {
             if (photo) {
-                [[CoreDataHelper sharedHelper] deletePhoto:photo];
-                id reminderTime = [[NSUserDefaults standardUserDefaults] objectForKey:REMINDER_TIME_KEY];
-                if ([reminderTime isKindOfClass:[NSDate class]]) {
-                    NSDate *fireDate = [GlobalUtils HHmmToday:[[GlobalUtils HHmmFormatter] stringFromDate:reminderTime]];
-                    [GlobalUtils setDailyNotification:fireDate];
-                }
-                [self renewPhotoCounts];
-                [lOPDayView setPhoto:nil];
+                [self deletePhotoAction:lOPDayView photo:photo];
             }
             break;
         }
@@ -414,6 +407,33 @@
     if([alert respondsToSelector:@selector(popoverPresentationController)]) {
         // iOS8
         alert.popoverPresentationController.barButtonItem = self.addPhotoItem;
+    }
+    [self presentViewController:alert animated:YES completion:nil];
+}
+
+- (void)deletePhotoAction:(OPCalendarDayView *)dayView photo:(OPPhoto *)photo {
+    UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"删除照片"
+                                                                   message:@"警告：删除后不可恢复"
+                                                            preferredStyle:UIAlertControllerStyleActionSheet];
+    UIAlertAction* deleteAction = [UIAlertAction actionWithTitle:@"删除" style:UIAlertActionStyleDestructive
+                                                         handler:^(UIAlertAction * action) {
+                                                             [[CoreDataHelper sharedHelper] deletePhoto:photo];
+                                                             id reminderTime = [[NSUserDefaults standardUserDefaults] objectForKey:REMINDER_TIME_KEY];
+                                                             if ([reminderTime isKindOfClass:[NSDate class]]) {
+                                                                 NSDate *fireDate = [GlobalUtils HHmmToday:[[GlobalUtils HHmmFormatter] stringFromDate:reminderTime]];
+                                                                 [GlobalUtils setDailyNotification:fireDate];
+                                                             }
+                                                             [self renewPhotoCounts];
+                                                             [dayView setPhoto:nil];
+                                                         }];
+    UIAlertAction* cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel
+                                                         handler:^(UIAlertAction * action) {}];
+    
+    [alert addAction:deleteAction];
+    [alert addAction:cancelAction];
+    if([alert respondsToSelector:@selector(popoverPresentationController)]) {
+        // iOS8
+        alert.popoverPresentationController.sourceView = dayView;
     }
     [self presentViewController:alert animated:YES completion:nil];
 }

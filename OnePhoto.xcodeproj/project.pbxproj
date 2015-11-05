@@ -39,6 +39,7 @@
 		18F406471B957F1900E97458 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18F406461B957F1900E97458 /* MobileCoreServices.framework */; };
 		18F4064E1B968D7B00E97458 /* OPVerticalCalendarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F4064D1B968D7B00E97458 /* OPVerticalCalendarView.m */; };
 		18F7501D1BC8B65C00B0BEB7 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18F7501C1BC8B65C00B0BEB7 /* CloudKit.framework */; };
+		222002117E9B58E4FC4E2889 /* libPods-OnePhoto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FEC1568EF312A8929D22A563 /* libPods-OnePhoto.a */; };
 		9F3ABF2846EB01A22A2D960C /* libPods-OnePhoto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FEC1568EF312A8929D22A563 /* libPods-OnePhoto.a */; };
 /* End PBXBuildFile section */
 
@@ -163,6 +164,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				188387A11BE8B7BB00207775 /* NotificationCenter.framework in Frameworks */,
+				222002117E9B58E4FC4E2889 /* libPods-OnePhoto.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -412,9 +414,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 188387B01BE8B7BB00207775 /* Build configuration list for PBXNativeTarget "OnePhotoSummary" */;
 			buildPhases = (
+				C8B0D985517569E0A39271CA /* Check Pods Manifest.lock */,
 				1883879B1BE8B7BB00207775 /* Sources */,
 				1883879C1BE8B7BB00207775 /* Frameworks */,
 				1883879D1BE8B7BB00207775 /* Resources */,
+				EA7E622017586A349E4622B4 /* Embed Pods Frameworks */,
+				4C58513DE2A4B37772834BA6 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -541,6 +546,21 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
+		4C58513DE2A4B37772834BA6 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-OnePhoto/Pods-OnePhoto-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		83552204FD9E73FBABA4F304 /* Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -554,6 +574,36 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-OnePhoto/Pods-OnePhoto-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C8B0D985517569E0A39271CA /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		EA7E622017586A349E4622B4 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-OnePhoto/Pods-OnePhoto-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		ECFA10706851C01288A96F9A /* Embed Pods Frameworks */ = {
@@ -822,6 +872,7 @@
 		};
 		188387AE1BE8B7BB00207775 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 40B983C60B6C941DF886CF4B /* Pods-OnePhoto.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = OnePhotoSummary/OnePhotoSummary.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -839,6 +890,7 @@
 		};
 		188387AF1BE8B7BB00207775 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 995CA079F330BCA2BF9CBD4D /* Pods-OnePhoto.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = OnePhotoSummary/OnePhotoSummary.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";

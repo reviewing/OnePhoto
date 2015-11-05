@@ -26,12 +26,9 @@
 
 @interface RootViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate, MWPhotoBrowserDelegate> {
     MBProgressHUD *_hud;
-    
     NSInteger _callbackCount;
-    
     BOOL _isFirstAppear;
     NSArray *_photos;
-    
     NSDate *_specifiedDate;
 }
 
@@ -97,7 +94,7 @@
                                                  UIViewAutoresizingFlexibleBottomMargin);
     
     self.navigationItem.titleView = _headerTitleSubtitleView;
-    [self setHeaderTitle:MAIN_TITLE andSubtitle:nil];
+    [self setHeaderTitle:MAIN_TITLE andSubtitle:nil];    
 }
 
 - (void)setHeaderTitle:(NSString *)headerTitle andSubtitle:(NSString *)headerSubtitle {

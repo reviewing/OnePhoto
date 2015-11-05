@@ -10,6 +10,7 @@
 #import "OPPhoto.h"
 #import "AppDelegate.h"
 #import <FastImageCache/FICImageCache.h>
+#import <MMWormhole/MMWormhole.h>
 
 #define PHOTO_COUNT_KEY @"kOPPhotoCount"
 #define CONSECUTIVE_DAYS_KEY @"kOPConsecutiveDays"
@@ -19,6 +20,8 @@
 @interface CoreDataHelper () {
     NSManagedObjectContext *_context;
 }
+
+@property (nonatomic, strong) MMWormhole *wormhole;
 
 @end
 
@@ -31,6 +34,7 @@
         sharedInstance = [[CoreDataHelper alloc] init];
         AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
         sharedInstance->_context = [appDelegate managedObjectContext];
+        sharedInstance.wormhole = [[MMWormhole alloc] initWithApplicationGroupIdentifier:@"group.top.defaults.onephoto" optionalDirectory:@"wormhole"];
     });
     return sharedInstance;
 }
@@ -206,6 +210,7 @@
     } else {
         [defaults setObject:nil forKey:TODAT_IMAGE_DATA];
     }
+    [self.wormhole passMessageObject:@{@"flag" : @"check"} identifier:@"update"];
 }
 
 - (void)deleteImageCache:(OPPhoto *)photo {

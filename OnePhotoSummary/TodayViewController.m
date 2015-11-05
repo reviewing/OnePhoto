@@ -9,6 +9,8 @@
 #import "TodayViewController.h"
 #import <NotificationCenter/NotificationCenter.h>
 
+#import <MMWormhole/MMWormhole.h>
+
 #define PHOTO_COUNT_KEY @"kOPPhotoCount"
 #define CONSECUTIVE_DAYS_KEY @"kOPConsecutiveDays"
 #define TODAY_PHOTO_NAME @"kOPTodayPhotoName"
@@ -25,12 +27,28 @@
 @property (nonatomic) NSInteger photoCount;
 @property (nonatomic) NSInteger consecutiveDays;
 
+@property (nonatomic, strong) MMWormhole *wormhole;
+
 @end
 
 @implementation TodayViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.wormhole = [[MMWormhole alloc] initWithApplicationGroupIdentifier:@"group.top.defaults.onephoto" optionalDirectory:@"wormhole"];
+    id messageObject = [self.wormhole messageWithIdentifier:@"update"];
+    NSString *string = [messageObject valueForKey:@"flag"];
+    if (string != nil) {
+        [self refreshData];
+    }
+
+    [self.wormhole listenForMessageWithIdentifier:@"update" listener:^(id messageObject) {
+        NSString *string = [messageObject valueForKey:@"flag"];
+        if (string != nil) {
+            [self refreshData];
+        }
+    }];
+    
     [self updateInterface];
 }
 
@@ -45,8 +63,16 @@
     // If an error is encountered, use NCUpdateResultFailed
     // If there's no update required, use NCUpdateResultNoData
     // If there's an update, use NCUpdateResultNewData
-    NSUserDefaults * defaults = [[NSUserDefaults alloc] initWithSuiteName:@"group.top.defaults.onephoto"];
+    if ([self refreshData]) {
+        completionHandler(NCUpdateResultNewData);
+    } else {
+        completionHandler(NCUpdateResultNoData);
+    }
+}
 
+- (BOOL)refreshData {
+    NSUserDefaults * defaults = [[NSUserDefaults alloc] initWithSuiteName:@"group.top.defaults.onephoto"];
+    
     NSString *currentTodayPhotoName = [defaults stringForKey:TODAY_PHOTO_NAME];
     NSInteger currentPhotoCount = [[defaults objectForKey:PHOTO_COUNT_KEY] integerValue];
     NSInteger currentConsecutiveDays = [[defaults objectForKey:CONSECUTIVE_DAYS_KEY] integerValue];
@@ -57,10 +83,10 @@
         self.photoCount = currentPhotoCount;
         self.consecutiveDays = currentConsecutiveDays;
         [self updateInterface];
-        completionHandler(NCUpdateResultNewData);
-    } else {
-        completionHandler(NCUpdateResultNoData);
+        return YES;
     }
+    
+    return NO;
 }
 
 - (UIEdgeInsets)widgetMarginInsetsForProposedMarginInsets:(UIEdgeInsets)defaultMarginInsets {

@@ -3,7 +3,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Today View Controller-->
@@ -120,16 +119,16 @@
                             <constraint firstItem="XhR-G3-Gs9" firstAttribute="centerY" secondItem="52Q-ms-GTv" secondAttribute="centerY" id="Ban-xE-jlV"/>
                             <constraint firstItem="9gx-jL-nhc" firstAttribute="centerY" secondItem="GcN-lo-r42" secondAttribute="centerY" id="BkG-k9-BRI"/>
                             <constraint firstItem="FKl-LY-JtV" firstAttribute="top" secondItem="AAf-fJ-bOy" secondAttribute="bottom" constant="13" id="Bxt-Nt-b20"/>
+                            <constraint firstItem="qma-zV-tez" firstAttribute="leading" secondItem="GcN-lo-r42" secondAttribute="trailing" constant="54" id="DZm-2D-O4b"/>
                             <constraint firstItem="FKl-LY-JtV" firstAttribute="top" secondItem="nSh-Bh-Gx5" secondAttribute="bottom" id="Dxi-Nw-k1P"/>
                             <constraint firstItem="nSh-Bh-Gx5" firstAttribute="top" secondItem="Ft6-oW-KC0" secondAttribute="bottom" id="Htt-xx-euh"/>
                             <constraint firstItem="52Q-ms-GTv" firstAttribute="top" secondItem="GcN-lo-r42" secondAttribute="bottom" constant="19" id="Jii-58-NqV"/>
+                            <constraint firstItem="rm1-te-osB" firstAttribute="centerX" secondItem="GcN-lo-r42" secondAttribute="centerX" id="Ofq-Y6-XxS"/>
                             <constraint firstItem="FKl-LY-JtV" firstAttribute="top" secondItem="52Q-ms-GTv" secondAttribute="bottom" constant="15" id="RRM-BQ-4lP"/>
-                            <constraint firstItem="GcN-lo-r42" firstAttribute="leading" secondItem="S3S-Oj-5AN" secondAttribute="leadingMargin" id="S9S-Pc-2Kq"/>
                             <constraint firstItem="FKl-LY-JtV" firstAttribute="top" secondItem="Dpr-KB-eZh" secondAttribute="bottom" constant="13" id="Td3-yz-Efw"/>
                             <constraint firstAttribute="trailing" secondItem="nSh-Bh-Gx5" secondAttribute="trailing" id="VIr-YF-GUa"/>
                             <constraint firstAttribute="trailing" secondItem="9gx-jL-nhc" secondAttribute="trailing" constant="24" id="Yeh-Sk-gCp"/>
                             <constraint firstItem="FKl-LY-JtV" firstAttribute="top" secondItem="rm1-te-osB" secondAttribute="bottom" constant="2" id="cCD-h5-pKD"/>
-                            <constraint firstItem="rm1-te-osB" firstAttribute="leading" secondItem="S3S-Oj-5AN" secondAttribute="leadingMargin" id="cfC-H8-Ja1"/>
                             <constraint firstItem="qma-zV-tez" firstAttribute="centerX" secondItem="S3S-Oj-5AN" secondAttribute="centerX" id="ctF-jK-fcR"/>
                             <constraint firstItem="Dpr-KB-eZh" firstAttribute="leading" secondItem="6jF-si-dvV" secondAttribute="trailing" id="lPh-kE-LkN"/>
                             <constraint firstItem="GcN-lo-r42" firstAttribute="top" secondItem="Ft6-oW-KC0" secondAttribute="bottom" constant="8" symbolic="YES" id="mYS-Cv-VNx"/>

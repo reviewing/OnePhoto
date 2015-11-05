@@ -361,11 +361,11 @@
                 [self presentViewController:nc animated:YES completion:nil];
             } else {
                 if ([calendar.dateHelper date:lOPDayView.date isTheSameDayThan:[NSDate date]]) {
-                    [self newPhotoAction];
+                    [self newPhotoAction:lOPDayView];
                 } else {
 #ifdef TEST_VERSION
                     _specifiedDate = lOPDayView.date;
-                    [self newPhotoAction];
+                    [self newPhotoAction:lOPDayView];
 #endif
                 }
             }
@@ -384,6 +384,10 @@
 }
 
 - (void)newPhotoAction {
+    [self newPhotoAction:nil];
+}
+
+- (void)newPhotoAction:(OPCalendarDayView *)dayView {
     UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"添加新的照片"
                                                                    message:@""
                                                             preferredStyle:UIAlertControllerStyleActionSheet];
@@ -403,7 +407,11 @@
     [alert addAction:cancelAction];
     if([alert respondsToSelector:@selector(popoverPresentationController)]) {
         // iOS8
-        alert.popoverPresentationController.barButtonItem = self.addPhotoItem;
+        if (dayView) {
+            alert.popoverPresentationController.sourceView = dayView;
+        } else {
+            alert.popoverPresentationController.barButtonItem = self.addPhotoItem;
+        }
     }
     [self presentViewController:alert animated:YES completion:nil];
 }

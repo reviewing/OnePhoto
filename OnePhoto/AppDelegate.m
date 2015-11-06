@@ -8,10 +8,12 @@
 
 #import "AppDelegate.h"
 #import <FastImageCache/FICImageCache.h>
+#import <VENTouchLock/VENTouchLock.h>
 #import "OPPhoto.h"
 #import "CoreDataHelper.h"
 #import "RootViewController.h"
 #import "SettingsViewController.h"
+#import "LockSplashViewController.h"
 
 @interface AppDelegate () <FICImageCacheDelegate>
 
@@ -20,6 +22,12 @@
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    [[VENTouchLock sharedInstance] setKeychainService:@"OnePhoto"
+                                      keychainAccount:@"OnePhoto"
+                                        touchIDReason:@"解锁1 Photo"
+                                 passcodeAttemptLimit:5
+                            splashViewControllerClass:[LockSplashViewController class]];
+    
     [DHLogger setLogLevel:DH_LOG_DEBUG];
 
     if ((DHLogLevel)[[NSUserDefaults standardUserDefaults] integerForKey:@"debug.level"] == DH_LOG_VERBOSE) {

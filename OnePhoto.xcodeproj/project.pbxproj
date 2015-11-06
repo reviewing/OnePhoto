@@ -29,6 +29,7 @@
 		188387A51BE8B7BB00207775 /* TodayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 188387A41BE8B7BB00207775 /* TodayViewController.m */; };
 		188387A81BE8B7BB00207775 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 188387A61BE8B7BB00207775 /* MainInterface.storyboard */; };
 		188387AD1BE8B7BB00207775 /* OnePhotoSummary.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 1883879F1BE8B7BB00207775 /* OnePhotoSummary.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		188387B41BEB41A300207775 /* LockSplashViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 188387B31BEB41A300207775 /* LockSplashViewController.m */; };
 		1886BD761BDF59BA006FCDD5 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1886BD781BDF59BA006FCDD5 /* Localizable.strings */; };
 		18E894421BD4EF6200AA460A /* OPPhotoCloud.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E894411BD4EF6200AA460A /* OPPhotoCloud.m */; };
 		18F405621B93683700E97458 /* OPCalendarDayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F405611B93683700E97458 /* OPCalendarDayView.m */; };
@@ -116,6 +117,8 @@
 		188387A71BE8B7BB00207775 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
 		188387A91BE8B7BB00207775 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		188387B11BE9E90D00207775 /* OnePhotoSummary.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = OnePhotoSummary.entitlements; sourceTree = "<group>"; };
+		188387B21BEB41A300207775 /* LockSplashViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LockSplashViewController.h; sourceTree = "<group>"; };
+		188387B31BEB41A300207775 /* LockSplashViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LockSplashViewController.m; sourceTree = "<group>"; };
 		1886BD771BDF59BA006FCDD5 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		18E894401BD4EF6200AA460A /* OPPhotoCloud.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPPhotoCloud.h; sourceTree = "<group>"; };
 		18E894411BD4EF6200AA460A /* OPPhotoCloud.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPPhotoCloud.m; sourceTree = "<group>"; };
@@ -275,6 +278,8 @@
 		1867EB961B8F693D00C10219 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				188387B21BEB41A300207775 /* LockSplashViewController.h */,
+				188387B31BEB41A300207775 /* LockSplashViewController.m */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -628,6 +633,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				188387B41BEB41A300207775 /* LockSplashViewController.m in Sources */,
 				18F406371B94461D00E97458 /* OPCalendarWeekDayView.m in Sources */,
 				18F4064E1B968D7B00E97458 /* OPVerticalCalendarView.m in Sources */,
 				1867EB721B8F5E6400C10219 /* AppDelegate.m in Sources */,

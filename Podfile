@@ -6,6 +6,7 @@ target 'OnePhoto' do
     pod 'UMengAnalytics-NO-IDFA'
     pod "MWPhotoBrowser"
     pod 'MMWormhole', '~> 2.0.0'
-
+    pod 'VENTouchLock', '~> 1.0'
+    
 end
 

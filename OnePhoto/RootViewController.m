@@ -38,6 +38,8 @@
 
 @property (strong, nonatomic) JTCalendarManager *calendarManager;
 
+@property (nonatomic, strong) UIPopoverController *photoPickerPopOver;
+
 @end
 
 @implementation RootViewController
@@ -234,6 +236,32 @@
     return YES;
 }
 
+- (BOOL)popPhotoPickerFromView:(UIView *)view sourceType:(UIImagePickerControllerSourceType) sourceType
+                 usingDelegate:(id <UIImagePickerControllerDelegate, UINavigationControllerDelegate>) delegate {
+    if (([UIImagePickerController isSourceTypeAvailable: sourceType] == NO) || (delegate == nil)) {
+        return NO;
+    }
+    
+    UIImagePickerController *cameraUI = [[UIImagePickerController alloc] init];
+    cameraUI.sourceType = sourceType;
+    cameraUI.mediaTypes = [[NSArray alloc] initWithObjects:(NSString *) kUTTypeImage, nil];
+    cameraUI.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+    cameraUI.allowsEditing = YES;
+    cameraUI.delegate = delegate;
+    
+    UIPopoverController *popover = [[UIPopoverController alloc] initWithContentViewController:cameraUI];
+    if (view) {
+        [popover presentPopoverFromRect:view.bounds inView:view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+    } else {
+        [popover presentPopoverFromBarButtonItem:self.addPhotoItem permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+    }
+    self.photoPickerPopOver = popover;
+    
+    [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
+    return YES;
+}
+
+
 #pragma mark - UIImagePickerController delegate
 
 // For responding to the user tapping Cancel.
@@ -393,14 +421,18 @@
                                                             preferredStyle:UIAlertControllerStyleActionSheet];
     UIAlertAction* libraryAction = [UIAlertAction actionWithTitle:@"从“照片”中选取" style:UIAlertActionStyleDefault
                                                           handler:^(UIAlertAction * action) {
-                                                              [self startCameraControllerFromViewController:self sourceType:UIImagePickerControllerSourceTypePhotoLibrary usingDelegate:self];
+                                                              if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+                                                                  [self popPhotoPickerFromView:dayView sourceType:UIImagePickerControllerSourceTypePhotoLibrary usingDelegate:self];
+                                                              } else {
+                                                                  [self startCameraControllerFromViewController:self sourceType:UIImagePickerControllerSourceTypePhotoLibrary usingDelegate:self];
+                                                              }
                                                           }];
     UIAlertAction* cameraAction = [UIAlertAction actionWithTitle:@"拍摄一张照片" style:UIAlertActionStyleDefault
-                                                          handler:^(UIAlertAction * action) {
-                                                              [self startCameraControllerFromViewController:self sourceType:UIImagePickerControllerSourceTypeCamera usingDelegate:self];
-                                                          }];
+                                                         handler:^(UIAlertAction * action) {
+                                                             [self startCameraControllerFromViewController:self sourceType:UIImagePickerControllerSourceTypeCamera usingDelegate:self];
+                                                         }];
     UIAlertAction* cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel
-                                                          handler:^(UIAlertAction * action) {}];
+                                                         handler:^(UIAlertAction * action) {}];
     
     [alert addAction:libraryAction];
     [alert addAction:cameraAction];
@@ -496,7 +528,7 @@
 }
 
 - (void)photoBrowser:(MWPhotoBrowser *)photoBrowser didDisplayPhotoAtIndex:(NSUInteger)index {
-
+    
 }
 
 - (void)photoBrowserDidFinishModalPresentation:(MWPhotoBrowser *)photoBrowser {

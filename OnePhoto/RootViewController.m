@@ -22,19 +22,19 @@
 
 #import <MobileCoreServices/MobileCoreServices.h>
 
+#define MAIN_TITLE @"1 Photo"
+
 @interface RootViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate, MWPhotoBrowserDelegate> {
     MBProgressHUD *_hud;
-    
     NSInteger _callbackCount;
-    
     BOOL _isFirstAppear;
     NSArray *_photos;
-    
     NSDate *_specifiedDate;
 }
 
 @property (weak, nonatomic) IBOutlet OPCalendarWeekDayView *weekDayView;
 @property (weak, nonatomic) IBOutlet OPVerticalCalendarView *calendarContentView;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *addPhotoItem;
 
 @property (strong, nonatomic) JTCalendarManager *calendarManager;
 
@@ -62,6 +62,57 @@
     
     _hud = [[MBProgressHUD alloc] initWithView:self.view];
     [self.view addSubview:_hud];
+    
+    CGRect headerTitleSubtitleFrame = CGRectMake(0, 0, 200, 44);
+    UIView* _headerTitleSubtitleView = [[UILabel alloc] initWithFrame:headerTitleSubtitleFrame];
+    _headerTitleSubtitleView.backgroundColor = [UIColor clearColor];
+    _headerTitleSubtitleView.autoresizesSubviews = YES;
+    
+    CGRect titleFrame = CGRectMake(0, 2, 200, 24);
+    UILabel *titleView = [[UILabel alloc] initWithFrame:titleFrame];
+    titleView.backgroundColor = [UIColor clearColor];
+    titleView.font = [UIFont boldSystemFontOfSize:17];
+    titleView.textAlignment = NSTextAlignmentCenter;
+    titleView.textColor = [UIColor whiteColor];
+    titleView.text = @"";
+    titleView.adjustsFontSizeToFitWidth = YES;
+    [_headerTitleSubtitleView addSubview:titleView];
+    
+    CGRect subtitleFrame = CGRectMake(0, 24, 200, 44-24);
+    UILabel *subtitleView = [[UILabel alloc] initWithFrame:subtitleFrame];
+    subtitleView.backgroundColor = [UIColor clearColor];
+    subtitleView.font = [UIFont boldSystemFontOfSize:12];
+    subtitleView.textAlignment = NSTextAlignmentCenter;
+    subtitleView.textColor = [UIColor whiteColor];
+    subtitleView.text = @"";
+    subtitleView.adjustsFontSizeToFitWidth = YES;
+    [_headerTitleSubtitleView addSubview:subtitleView];
+    
+    _headerTitleSubtitleView.autoresizingMask = (UIViewAutoresizingFlexibleLeftMargin |
+                                                 UIViewAutoresizingFlexibleRightMargin |
+                                                 UIViewAutoresizingFlexibleTopMargin |
+                                                 UIViewAutoresizingFlexibleBottomMargin);
+    
+    self.navigationItem.titleView = _headerTitleSubtitleView;
+    [self setHeaderTitle:MAIN_TITLE andSubtitle:nil];    
+}
+
+- (void)setHeaderTitle:(NSString *)headerTitle andSubtitle:(NSString *)headerSubtitle {
+    assert(self.navigationItem.titleView != nil);
+    UIView* headerTitleSubtitleView = self.navigationItem.titleView;
+    UILabel* titleView = [headerTitleSubtitleView.subviews objectAtIndex:0];
+    UILabel* subtitleView = [headerTitleSubtitleView.subviews objectAtIndex:1];
+    assert((titleView != nil) && (subtitleView != nil) && ([titleView isKindOfClass:[UILabel class]]) && ([subtitleView isKindOfClass:[UILabel class]]));
+    titleView.text = headerTitle;
+    subtitleView.text = headerSubtitle;
+    
+    if ([headerSubtitle length] == 0) {
+        subtitleView.hidden = YES;
+        titleView.frame = CGRectMake(0, 10, 200, 24);
+    } else {
+        subtitleView.hidden = NO;
+        titleView.frame = CGRectMake(0, 2, 200, 24);
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -73,11 +124,26 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    if ([IM_JUMPING_TO isEqualToString:@"UIImagePickerController"]) {
+        [self newPhotoAction];
+        SET_JUMPING(nil, nil);
+    }
+
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(storeDidChange:)
+                                                 name:NSUbiquitousKeyValueStoreDidChangeExternallyNotification
+                                               object:[NSUbiquitousKeyValueStore defaultStore]];
+    
+    [[NSUbiquitousKeyValueStore defaultStore] synchronize];
+    
     [[NSNotificationCenter defaultCenter] addObserverForName:OPCoreDataStoreMerged
                                                       object:nil
                                                        queue:[NSOperationQueue mainQueue]
                                                   usingBlock:^(NSNotification *note) {
+                                                      DHLogDebug(@"OPCoreDataStoreMergedNotification");
                                                       [self.calendarContentView reloadData];
+                                                      [self setHeaderTitle:MAIN_TITLE andSubtitle:nil];
                                                   }];
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(applicationDidBecomeActive:)
@@ -95,11 +161,23 @@
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     [_hud hide:YES];
 }
 
+- (void)storeDidChange:(NSNotification *)notification {
+    DHLogDebug(@"storeDidChange");
+    long long countOfPhotos = [[NSUbiquitousKeyValueStore defaultStore] longLongForKey:OPUbiquitousKeyValueStoreHasPhotoKey];
+    DHLogDebug(@"countOfPhotos: %lld", countOfPhotos);
+    [self setHeaderTitle:MAIN_TITLE andSubtitle:@"正在同步..."];
+}
+
 - (void)applicationDidBecomeActive:(NSNotification *)notification {
+    if ([IM_JUMPING_TO isEqualToString:@"UIImagePickerController"]) {
+        [self newPhotoAction];
+        SET_JUMPING(nil, nil);
+    }
     [self.calendarContentView reloadData];
 }
 
@@ -113,6 +191,7 @@
 
 
 - (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
     if (_isFirstAppear) {
         _isFirstAppear = NO;
         [_calendarContentView scrollToCurrentMonth:NO];
@@ -127,11 +206,7 @@
 }
 
 - (IBAction)takePhoto:(id)sender {
-    [self startCameraControllerFromViewController:self sourceType:UIImagePickerControllerSourceTypeCamera usingDelegate:self];
-}
-
-- (IBAction)choosePhoto:(id)sender {
-    [self startCameraControllerFromViewController:self sourceType:UIImagePickerControllerSourceTypePhotoLibrary usingDelegate:self];
+    [self newPhotoAction];
 }
 
 - (BOOL)startCameraControllerFromViewController:(UIViewController*) controller sourceType:(UIImagePickerControllerSourceType) sourceType
@@ -190,13 +265,22 @@
         
         NSURL *ubiq = [[NSFileManager defaultManager] URLForUbiquityContainerIdentifier:nil];
         NSURL *ubiquitousURL = [[ubiq URLByAppendingPathComponent:@"Documents"] URLByAppendingPathComponent:photoPath];
-
-        [[CoreDataHelper sharedHelper] insertPhoto:photoPath];
         
         OPPhotoCloud *photoCloud = [[OPPhotoCloud alloc] initWithFileURL:ubiquitousURL];
         photoCloud.imageData = UIImageJPEGRepresentation(imageToSave, 0.8);
+        
+        __block BOOL isToday = !_specifiedDate;
         [photoCloud saveToURL:[photoCloud fileURL] forSaveOperation:UIDocumentSaveForCreating completionHandler:^(BOOL success) {
             if (success) {
+                [[CoreDataHelper sharedHelper] insertPhoto:photoPath];
+                if (isToday) {
+                    id reminderTime = [[NSUserDefaults standardUserDefaults] objectForKey:REMINDER_TIME_KEY];
+                    if ([reminderTime isKindOfClass:[NSDate class]]) {
+                        NSDate *fireDate = [GlobalUtils addToDate:[GlobalUtils HHmmToday:[[GlobalUtils HHmmFormatter] stringFromDate:reminderTime]] days:1];
+                        [GlobalUtils setDailyNotification:fireDate];
+                    }
+                }
+                [self renewPhotoCounts];
                 DHLogDebug(@"document saved successfully");
             } else {
                 [GlobalUtils alertMessage:@"保存图片失败，请检查iCloud账户设置后重试"];
@@ -206,6 +290,15 @@
     
     _specifiedDate = nil;
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)renewPhotoCounts {
+    NSInteger count = [[CoreDataHelper sharedHelper] countOfPhotos];
+    if (count < 0) {
+        count = [[NSUbiquitousKeyValueStore defaultStore] longLongForKey:OPUbiquitousKeyValueStoreHasPhotoKey] + 1;
+    }
+    DHLogDebug(@"renewPhotoCounts: %ld", (long)count);
+    [[NSUbiquitousKeyValueStore defaultStore] setLongLong:count forKey:OPUbiquitousKeyValueStoreHasPhotoKey];
 }
 
 #pragma mark - CalendarManager delegate
@@ -268,11 +361,11 @@
                 [self presentViewController:nc animated:YES completion:nil];
             } else {
                 if ([calendar.dateHelper date:lOPDayView.date isTheSameDayThan:[NSDate date]]) {
-                    [self newPhotoAction];
+                    [self newPhotoAction:lOPDayView];
                 } else {
 #ifdef TEST_VERSION
                     _specifiedDate = lOPDayView.date;
-                    [self newPhotoAction];
+                    [self newPhotoAction:lOPDayView];
 #endif
                 }
             }
@@ -280,8 +373,7 @@
         }
         case OP_DAY_TOUCH_DELETE: {
             if (photo) {
-                [[CoreDataHelper sharedHelper] deletePhoto:photo];
-                [lOPDayView setPhoto:nil];
+                [self deletePhotoAction:lOPDayView photo:photo];
             }
             break;
         }
@@ -292,6 +384,10 @@
 }
 
 - (void)newPhotoAction {
+    [self newPhotoAction:nil];
+}
+
+- (void)newPhotoAction:(OPCalendarDayView *)dayView {
     UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"添加新的照片"
                                                                    message:@""
                                                             preferredStyle:UIAlertControllerStyleActionSheet];
@@ -309,6 +405,41 @@
     [alert addAction:libraryAction];
     [alert addAction:cameraAction];
     [alert addAction:cancelAction];
+    if([alert respondsToSelector:@selector(popoverPresentationController)]) {
+        // iOS8
+        if (dayView) {
+            alert.popoverPresentationController.sourceView = dayView;
+        } else {
+            alert.popoverPresentationController.barButtonItem = self.addPhotoItem;
+        }
+    }
+    [self presentViewController:alert animated:YES completion:nil];
+}
+
+- (void)deletePhotoAction:(OPCalendarDayView *)dayView photo:(OPPhoto *)photo {
+    UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"删除照片"
+                                                                   message:@"警告：删除后不可恢复"
+                                                            preferredStyle:UIAlertControllerStyleActionSheet];
+    UIAlertAction* deleteAction = [UIAlertAction actionWithTitle:@"删除" style:UIAlertActionStyleDestructive
+                                                         handler:^(UIAlertAction * action) {
+                                                             [[CoreDataHelper sharedHelper] deletePhoto:photo];
+                                                             id reminderTime = [[NSUserDefaults standardUserDefaults] objectForKey:REMINDER_TIME_KEY];
+                                                             if ([reminderTime isKindOfClass:[NSDate class]]) {
+                                                                 NSDate *fireDate = [GlobalUtils HHmmToday:[[GlobalUtils HHmmFormatter] stringFromDate:reminderTime]];
+                                                                 [GlobalUtils setDailyNotification:fireDate];
+                                                             }
+                                                             [self renewPhotoCounts];
+                                                             [dayView setPhoto:nil];
+                                                         }];
+    UIAlertAction* cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel
+                                                         handler:^(UIAlertAction * action) {}];
+    
+    [alert addAction:deleteAction];
+    [alert addAction:cancelAction];
+    if([alert respondsToSelector:@selector(popoverPresentationController)]) {
+        // iOS8
+        alert.popoverPresentationController.sourceView = dayView;
+    }
     [self presentViewController:alert animated:YES completion:nil];
 }
 

@@ -10,6 +10,9 @@
 #import <UIKit/UIKit.h>
 
 FOUNDATION_EXPORT NSString * const OPCoreDataStoreMerged;
+FOUNDATION_EXPORT NSString * const OPNotificationType;
+FOUNDATION_EXPORT NSString * const OPNotificationTypeDailyReminder;
+FOUNDATION_EXPORT NSString * const OPUbiquitousKeyValueStoreHasPhotoKey;
 
 @interface GlobalUtils : NSObject
 
@@ -35,15 +38,27 @@ FOUNDATION_EXPORT NSString * const OPCoreDataStoreMerged;
 
 + (NSInteger)dayOfMonth:(NSDate *)date;
 
-+ (void)alertMessage:(NSString *)message;
++ (NSDate *)HHmmToday:(NSString *)HHmm;
 
-+ (void)alertError:(NSError *)error;
++ (NSDate *)addToDate:(NSDate *)date days:(NSInteger)days;
+
++ (void)setDailyNotification:(NSDate *)fireDate;
+
++ (BOOL)date:(NSString *)date1 isJustBefore:(NSString *)date2;
+
+#pragma mark - Stats
 
 + (void)newEvent:(NSString *)eventId;
 
 + (void)newEvent:(NSString *)eventId type:(NSString *)type;
 
 + (void)newEvent:(NSString *)eventId attributes:(NSDictionary *)attrs;
+
+#pragma mark - UI Utils
+
++ (void)alertMessage:(NSString *)message;
+
++ (void)alertError:(NSError *)error;
 
 + (UIImage *)imageWithColor:(UIColor *)color;
 

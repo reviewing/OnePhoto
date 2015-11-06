@@ -12,6 +12,7 @@
 
 @interface RootViewController : UIViewController <JTCalendarDelegate>
 
+- (void)newPhotoAction;
 
 @end
 

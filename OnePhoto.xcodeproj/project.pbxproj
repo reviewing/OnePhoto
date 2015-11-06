@@ -25,6 +25,10 @@
 		187412ED1B96D27B0089CEFF /* OPCalendarWeekView.m in Sources */ = {isa = PBXBuildFile; fileRef = 187412EC1B96D27B0089CEFF /* OPCalendarWeekView.m */; };
 		187412F01B96D3790089CEFF /* OPCalendarPageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 187412EF1B96D3790089CEFF /* OPCalendarPageView.m */; };
 		187412F81B9BE3BB0089CEFF /* CoreDataHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 187412F71B9BE3BB0089CEFF /* CoreDataHelper.m */; };
+		188387A11BE8B7BB00207775 /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 188387A01BE8B7BB00207775 /* NotificationCenter.framework */; };
+		188387A51BE8B7BB00207775 /* TodayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 188387A41BE8B7BB00207775 /* TodayViewController.m */; };
+		188387A81BE8B7BB00207775 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 188387A61BE8B7BB00207775 /* MainInterface.storyboard */; };
+		188387AD1BE8B7BB00207775 /* OnePhotoSummary.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 1883879F1BE8B7BB00207775 /* OnePhotoSummary.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		1886BD761BDF59BA006FCDD5 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1886BD781BDF59BA006FCDD5 /* Localizable.strings */; };
 		18E894421BD4EF6200AA460A /* OPPhotoCloud.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E894411BD4EF6200AA460A /* OPPhotoCloud.m */; };
 		18F405621B93683700E97458 /* OPCalendarDayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F405611B93683700E97458 /* OPCalendarDayView.m */; };
@@ -35,6 +39,7 @@
 		18F406471B957F1900E97458 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18F406461B957F1900E97458 /* MobileCoreServices.framework */; };
 		18F4064E1B968D7B00E97458 /* OPVerticalCalendarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F4064D1B968D7B00E97458 /* OPVerticalCalendarView.m */; };
 		18F7501D1BC8B65C00B0BEB7 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18F7501C1BC8B65C00B0BEB7 /* CloudKit.framework */; };
+		222002117E9B58E4FC4E2889 /* libPods-OnePhoto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FEC1568EF312A8929D22A563 /* libPods-OnePhoto.a */; };
 		9F3ABF2846EB01A22A2D960C /* libPods-OnePhoto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FEC1568EF312A8929D22A563 /* libPods-OnePhoto.a */; };
 /* End PBXBuildFile section */
 
@@ -46,7 +51,28 @@
 			remoteGlobalIDString = 1867EB681B8F5E6400C10219;
 			remoteInfo = OnePhoto;
 		};
+		188387AA1BE8B7BB00207775 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1867EB611B8F5E6400C10219 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1883879E1BE8B7BB00207775;
+			remoteInfo = OnePhotoSummary;
+		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		188387AC1BE8B7BB00207775 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				188387AD1BE8B7BB00207775 /* OnePhotoSummary.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		183C69FA1BDE0DDB008E93AB /* ReminderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReminderViewController.h; sourceTree = "<group>"; };
@@ -83,6 +109,13 @@
 		187412F61B9BE3BB0089CEFF /* CoreDataHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreDataHelper.h; sourceTree = "<group>"; };
 		187412F71B9BE3BB0089CEFF /* CoreDataHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreDataHelper.m; sourceTree = "<group>"; };
 		187413021B9C2A670089CEFF /* OnePhoto 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "OnePhoto 2.xcdatamodel"; sourceTree = "<group>"; };
+		1883879F1BE8B7BB00207775 /* OnePhotoSummary.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = OnePhotoSummary.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		188387A01BE8B7BB00207775 /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
+		188387A31BE8B7BB00207775 /* TodayViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TodayViewController.h; sourceTree = "<group>"; };
+		188387A41BE8B7BB00207775 /* TodayViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TodayViewController.m; sourceTree = "<group>"; };
+		188387A71BE8B7BB00207775 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
+		188387A91BE8B7BB00207775 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		188387B11BE9E90D00207775 /* OnePhotoSummary.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = OnePhotoSummary.entitlements; sourceTree = "<group>"; };
 		1886BD771BDF59BA006FCDD5 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		18E894401BD4EF6200AA460A /* OPPhotoCloud.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPPhotoCloud.h; sourceTree = "<group>"; };
 		18E894411BD4EF6200AA460A /* OPPhotoCloud.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPPhotoCloud.m; sourceTree = "<group>"; };
@@ -126,6 +159,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		1883879C1BE8B7BB00207775 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				188387A11BE8B7BB00207775 /* NotificationCenter.framework in Frameworks */,
+				222002117E9B58E4FC4E2889 /* libPods-OnePhoto.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -158,6 +200,7 @@
 				1844F4091BD764F200F65D26 /* Settings.bundle */,
 				1867EB6B1B8F5E6400C10219 /* OnePhoto */,
 				1867EB881B8F5E6400C10219 /* OnePhotoTests */,
+				188387A21BE8B7BB00207775 /* OnePhotoSummary */,
 				1867EB6A1B8F5E6400C10219 /* Products */,
 				E23E5ACED83FA5B9C75E75A5 /* Pods */,
 				4DE54957F1CA3C83994243B3 /* Frameworks */,
@@ -169,6 +212,7 @@
 			children = (
 				1867EB691B8F5E6400C10219 /* OnePhoto.app */,
 				1867EB851B8F5E6400C10219 /* OnePhotoTests.xctest */,
+				1883879F1BE8B7BB00207775 /* OnePhotoSummary.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -235,6 +279,18 @@
 			path = ViewControllers;
 			sourceTree = "<group>";
 		};
+		188387A21BE8B7BB00207775 /* OnePhotoSummary */ = {
+			isa = PBXGroup;
+			children = (
+				188387B11BE9E90D00207775 /* OnePhotoSummary.entitlements */,
+				188387A31BE8B7BB00207775 /* TodayViewController.h */,
+				188387A41BE8B7BB00207775 /* TodayViewController.m */,
+				188387A61BE8B7BB00207775 /* MainInterface.storyboard */,
+				188387A91BE8B7BB00207775 /* Info.plist */,
+			);
+			path = OnePhotoSummary;
+			sourceTree = "<group>";
+		};
 		18E8943F1BD4EF2F00AA460A /* iCloud */ = {
 			isa = PBXGroup;
 			children = (
@@ -296,6 +352,7 @@
 				18F7501C1BC8B65C00B0BEB7 /* CloudKit.framework */,
 				18F406461B957F1900E97458 /* MobileCoreServices.framework */,
 				FEC1568EF312A8929D22A563 /* libPods-OnePhoto.a */,
+				188387A01BE8B7BB00207775 /* NotificationCenter.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -323,10 +380,12 @@
 				1867EB951B8F5F5A00C10219 /* ShellScript */,
 				83552204FD9E73FBABA4F304 /* Copy Pods Resources */,
 				ECFA10706851C01288A96F9A /* Embed Pods Frameworks */,
+				188387AC1BE8B7BB00207775 /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				188387AB1BE8B7BB00207775 /* PBXTargetDependency */,
 			);
 			name = OnePhoto;
 			productName = OnePhoto;
@@ -351,6 +410,26 @@
 			productReference = 1867EB851B8F5E6400C10219 /* OnePhotoTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		1883879E1BE8B7BB00207775 /* OnePhotoSummary */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 188387B01BE8B7BB00207775 /* Build configuration list for PBXNativeTarget "OnePhotoSummary" */;
+			buildPhases = (
+				C8B0D985517569E0A39271CA /* Check Pods Manifest.lock */,
+				1883879B1BE8B7BB00207775 /* Sources */,
+				1883879C1BE8B7BB00207775 /* Frameworks */,
+				1883879D1BE8B7BB00207775 /* Resources */,
+				EA7E622017586A349E4622B4 /* Embed Pods Frameworks */,
+				4C58513DE2A4B37772834BA6 /* Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = OnePhotoSummary;
+			productName = OnePhotoSummary;
+			productReference = 1883879F1BE8B7BB00207775 /* OnePhotoSummary.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -364,6 +443,9 @@
 						CreatedOnToolsVersion = 6.4;
 						DevelopmentTeam = 446D3PL69W;
 						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
 							com.apple.iCloud = {
 								enabled = 1;
 							};
@@ -372,6 +454,15 @@
 					1867EB841B8F5E6400C10219 = {
 						CreatedOnToolsVersion = 6.4;
 						TestTargetID = 1867EB681B8F5E6400C10219;
+					};
+					1883879E1BE8B7BB00207775 = {
+						CreatedOnToolsVersion = 7.1;
+						DevelopmentTeam = 446D3PL69W;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -390,6 +481,7 @@
 			targets = (
 				1867EB681B8F5E6400C10219 /* OnePhoto */,
 				1867EB841B8F5E6400C10219 /* OnePhotoTests */,
+				1883879E1BE8B7BB00207775 /* OnePhotoSummary */,
 			);
 		};
 /* End PBXProject section */
@@ -412,6 +504,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1883879D1BE8B7BB00207775 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				188387A81BE8B7BB00207775 /* MainInterface.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -446,6 +546,21 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
+		4C58513DE2A4B37772834BA6 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-OnePhoto/Pods-OnePhoto-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		83552204FD9E73FBABA4F304 /* Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -459,6 +574,36 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-OnePhoto/Pods-OnePhoto-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C8B0D985517569E0A39271CA /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		EA7E622017586A349E4622B4 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-OnePhoto/Pods-OnePhoto-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		ECFA10706851C01288A96F9A /* Embed Pods Frameworks */ = {
@@ -513,6 +658,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		1883879B1BE8B7BB00207775 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				188387A51BE8B7BB00207775 /* TodayViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -520,6 +673,11 @@
 			isa = PBXTargetDependency;
 			target = 1867EB681B8F5E6400C10219 /* OnePhoto */;
 			targetProxy = 1867EB861B8F5E6400C10219 /* PBXContainerItemProxy */;
+		};
+		188387AB1BE8B7BB00207775 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1883879E1BE8B7BB00207775 /* OnePhotoSummary */;
+			targetProxy = 188387AA1BE8B7BB00207775 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -540,6 +698,14 @@
 				18F406491B9582B300E97458 /* zh-Hans */,
 			);
 			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+		188387A61BE8B7BB00207775 /* MainInterface.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				188387A71BE8B7BB00207775 /* Base */,
+			);
+			name = MainInterface.storyboard;
 			sourceTree = "<group>";
 		};
 		1886BD781BDF59BA006FCDD5 /* Localizable.strings */ = {
@@ -704,6 +870,41 @@
 			};
 			name = Release;
 		};
+		188387AE1BE8B7BB00207775 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 40B983C60B6C941DF886CF4B /* Pods-OnePhoto.debug.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = OnePhotoSummary/OnePhotoSummary.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				INFOPLIST_FILE = OnePhotoSummary/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = top.defaults.OnePhoto.OnePhotoSummary;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		188387AF1BE8B7BB00207775 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 995CA079F330BCA2BF9CBD4D /* Pods-OnePhoto.release.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = OnePhotoSummary/OnePhotoSummary.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				INFOPLIST_FILE = OnePhotoSummary/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = top.defaults.OnePhoto.OnePhotoSummary;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -730,6 +931,15 @@
 			buildConfigurations = (
 				1867EB931B8F5E6400C10219 /* Debug */,
 				1867EB941B8F5E6400C10219 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		188387B01BE8B7BB00207775 /* Build configuration list for PBXNativeTarget "OnePhotoSummary" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				188387AE1BE8B7BB00207775 /* Debug */,
+				188387AF1BE8B7BB00207775 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

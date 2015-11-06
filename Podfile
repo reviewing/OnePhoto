@@ -1,9 +1,11 @@
 platform :ios, '7.0'
 
 target 'OnePhoto' do
-    pod 'JTCalendar', '~> 2.1.1'
+    pod 'JTCalendar', '~> 2.1.4'
     pod 'FastImageCache', '~> 1.3'
     pod 'UMengAnalytics-NO-IDFA'
     pod "MWPhotoBrowser"
+    pod 'MMWormhole', '~> 2.0.0'
+
 end
 

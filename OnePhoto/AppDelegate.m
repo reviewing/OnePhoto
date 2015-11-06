@@ -10,6 +10,8 @@
 #import <FastImageCache/FICImageCache.h>
 #import "OPPhoto.h"
 #import "CoreDataHelper.h"
+#import "RootViewController.h"
+#import "SettingsViewController.h"
 
 @interface AppDelegate () <FICImageCacheDelegate>
 
@@ -54,25 +56,20 @@
     FICImageCache *sharedImageCache = [FICImageCache sharedImageCache];
     [sharedImageCache setDelegate:self];
     [sharedImageCache setFormats:mutableImageFormats];
-        
+    
     NSURL *ubiq = [[NSFileManager defaultManager] URLForUbiquityContainerIdentifier:nil];
     if (ubiq) {
         DHLogDebug(@"iCloud access at %@", ubiq);
         NSURL *photoFolder = [[ubiq URLByAppendingPathComponent:@"Documents"] URLByAppendingPathComponent:@"photos"];
         
-//        if (![[NSUserDefaults standardUserDefaults] boolForKey:@"photos.dir.created"]) {
-            NSError *error;
-            [[NSFileManager defaultManager] createDirectoryAtURL:photoFolder withIntermediateDirectories:YES attributes:nil error:&error];
-            if(error) {
-                DHLogError(@"Error createDirectoryAtURL");
-            } else {
-                DHLogDebug(@"createDirectoryAtURL succeed");
-                [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:YES] forKey:@"photos.dir.created"];
-            }            
-//        }
-    } else {
-        DHLogError(@"No iCloud access");
-        [GlobalUtils alertMessage:@"该设备没有设置iCloud账户，无法正常使用1 Photo，请在登录iCloud后重试"];
+        NSError *error;
+        [[NSFileManager defaultManager] createDirectoryAtURL:photoFolder withIntermediateDirectories:YES attributes:nil error:&error];
+        if(error) {
+            DHLogError(@"Error createDirectoryAtURL");
+        } else {
+            DHLogDebug(@"createDirectoryAtURL succeed");
+            [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:YES] forKey:@"photos.dir.created"];
+        }
     }
     
     UIUserNotificationType types = UIUserNotificationTypeBadge | UIUserNotificationTypeSound | UIUserNotificationTypeAlert;
@@ -82,28 +79,9 @@
     UILocalNotification *notification = [launchOptions objectForKey:UIApplicationLaunchOptionsLocalNotificationKey];
     if (notification) {
         application.applicationIconBadgeNumber = 0;
+        [self application:application didReceiveLocalNotification:notification];
     }
     
-    return YES;
-}
-
-- (void)applicationWillResignActive:(UIApplication *)application {
-    // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
-    // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-}
-
-- (void)applicationDidEnterBackground:(UIApplication *)application {
-    // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
-    // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
-}
-
-- (void)applicationWillEnterForeground:(UIApplication *)application {
-    // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
-}
-
-- (void)applicationDidBecomeActive:(UIApplication *)application {
-    // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
     [[NSNotificationCenter defaultCenter] addObserverForName:NSPersistentStoreCoordinatorStoresWillChangeNotification
                                                       object:self.managedObjectContext.persistentStoreCoordinator
                                                        queue:[NSOperationQueue mainQueue]
@@ -132,6 +110,7 @@
                                                           [self.managedObjectContext mergeChangesFromContextDidSaveNotification:note];
                                                           dispatch_async(dispatch_get_main_queue(), ^(){
                                                               [[NSNotificationCenter defaultCenter] postNotificationName:OPCoreDataStoreMerged object:nil];
+                                                              [[CoreDataHelper sharedHelper] cacheNewDataForAppGroup];
                                                           });
                                                       }];
                                                   }];
@@ -144,19 +123,129 @@
                                                           [self.managedObjectContext mergeChangesFromContextDidSaveNotification:note];
                                                           dispatch_async(dispatch_get_main_queue(), ^(){
                                                               [[NSNotificationCenter defaultCenter] postNotificationName:OPCoreDataStoreMerged object:nil];
+                                                              [[CoreDataHelper sharedHelper] cacheNewDataForAppGroup];
                                                           });
                                                       }];
                                                   }];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(applicationSignificantTimeChange:)
+                                                 name:UIApplicationSignificantTimeChangeNotification
+                                               object:nil];
+    [[CoreDataHelper sharedHelper] cacheNewDataForAppGroup];
+    return YES;
+}
+
+- (void)applicationWillResignActive:(UIApplication *)application {
+    // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
+    // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
+}
+
+- (void)applicationDidEnterBackground:(UIApplication *)application {
+    // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
+    // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+}
+
+- (void)applicationWillEnterForeground:(UIApplication *)application {
+    // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
+}
+
+- (void)applicationDidBecomeActive:(UIApplication *)application {
+    // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    NSURL *ubiq = [[NSFileManager defaultManager] URLForUbiquityContainerIdentifier:nil];
+    if (!ubiq) {
+        DHLogError(@"No iCloud access");
+        [GlobalUtils alertMessage:@"该设备没有设置iCloud账户，无法正常使用1 Photo，请在登录iCloud后重试"];
+    }
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     // Saves changes in the application's managed object context before the application terminates.
     [self saveContext];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+- (void)applicationSignificantTimeChange:(UIApplication *)application {
+    [[CoreDataHelper sharedHelper] cacheNewDataForAppGroup];
 }
 
 - (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notif {
     application.applicationIconBadgeNumber = 0;
+    if ([[notif.userInfo objectForKey:OPNotificationType] isEqualToString:OPNotificationTypeDailyReminder]) {
+        if (application.applicationState == UIApplicationStateInactive || application.applicationState == UIApplicationStateBackground) {
+            SET_JUMPING(@"UIImagePickerController", @"RootViewController");
+        } else {
+            UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"每日提醒"
+                                                                           message:@"现在拍下今天的1 Photo？"
+                                                                    preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertAction* cameraAction = [UIAlertAction actionWithTitle:@"现在就去" style:UIAlertActionStyleDefault
+                                                                 handler:^(UIAlertAction * action) {
+                                                                     UINavigationController *nc = ((UINavigationController *)self.window.rootViewController);
+                                                                     if ([[nc visibleViewController] isKindOfClass:[RootViewController class]]) {
+                                                                         [((RootViewController *)[nc visibleViewController]) performSelector:@selector(newPhotoAction)];
+                                                                     } else {
+                                                                         SET_JUMPING(@"UIImagePickerController", @"");
+                                                                         [nc popToRootViewControllerAnimated:NO];
+                                                                         if ([[nc visibleViewController] isKindOfClass:[SettingsViewController class]]) {
+                                                                             [[nc visibleViewController].presentingViewController dismissViewControllerAnimated:NO completion:nil];
+                                                                         }
+                                                                     }
+                                                                 }];
+            UIAlertAction* cancelAction = [UIAlertAction actionWithTitle:@"不用了" style:UIAlertActionStyleCancel
+                                                                 handler:^(UIAlertAction * action) {}];
+            
+            [alert addAction:cameraAction];
+            [alert addAction:cancelAction];
+            
+            UINavigationController *nc = ((UINavigationController *)self.window.rootViewController);
+            DHLogDebug(@"[nc visibleViewController] @ %@", [[nc visibleViewController] class]);
+            [[nc visibleViewController] presentViewController:alert animated:YES completion:nil];
+        }
+    }
+}
+
+- (NSDictionary *)parseQueryString:(NSString *)query {
+    NSMutableDictionary *dict = [[NSMutableDictionary alloc] initWithCapacity:6];
+    NSArray *pairs = [query componentsSeparatedByString:@"&"];
+    
+    for (NSString *pair in pairs) {
+        NSArray *elements = [pair componentsSeparatedByString:@"="];
+        NSString *key = [[elements objectAtIndex:0] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+        NSString *val = [[elements objectAtIndex:1] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+        
+        [dict setObject:val forKey:key];
+    }
+    return dict;
+}
+
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url options:(NSDictionary<NSString *,id> *)options {
+    DHLogDebug(@"url recieved: %@", url);
+    
+    NSString *action = [[self parseQueryString:[url query]] objectForKey:@"action"];
+    if ([action isEqualToString:@"add"]) {
+        UINavigationController *nc = ((UINavigationController *)self.window.rootViewController);
+        if ([[nc visibleViewController] isKindOfClass:[RootViewController class]]) {
+            [((RootViewController *)[nc visibleViewController]) performSelector:@selector(newPhotoAction)];
+        } else {
+            SET_JUMPING(@"UIImagePickerController", @"");
+            [nc popToRootViewControllerAnimated:NO];
+            if ([[nc visibleViewController] isKindOfClass:[SettingsViewController class]]) {
+                [[nc visibleViewController].presentingViewController dismissViewControllerAnimated:NO completion:nil];
+            }
+        }
+    } else if ([action isEqualToString:@"open"]) {
+        UINavigationController *nc = ((UINavigationController *)self.window.rootViewController);
+        if ([[nc visibleViewController] isKindOfClass:[RootViewController class]]) {
+
+        } else {
+            [nc popToRootViewControllerAnimated:NO];
+            if ([[nc visibleViewController] isKindOfClass:[SettingsViewController class]]) {
+                [[nc visibleViewController].presentingViewController dismissViewControllerAnimated:NO completion:nil];
+            }
+        }
+
+    }
+    return YES;
 }
 
 #pragma mark - Core Data stack
@@ -208,7 +297,6 @@
     
     return _persistentStoreCoordinator;
 }
-
 
 - (NSManagedObjectContext *)managedObjectContext {
     // Returns the managed object context for the application (which is already bound to the persistent store coordinator for the application.)

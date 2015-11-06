@@ -30,4 +30,8 @@
 
 - (NSArray *)allPhotosSorted;
 
+- (NSInteger)countOfPhotos;
+
+- (void)cacheNewDataForAppGroup;
+
 @end

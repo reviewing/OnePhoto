@@ -1,8 +1,11 @@
 PODS:
   - DACircularProgress (2.3.1)
   - FastImageCache (1.3)
-  - JTCalendar (2.1.1)
+  - JTCalendar (2.1.4)
   - MBProgressHUD (0.9.1)
+  - MMWormhole (2.0.0):
+    - MMWormhole/Core (= 2.0.0)
+  - MMWormhole/Core (2.0.0)
   - MWPhotoBrowser (2.1.1):
     - DACircularProgress (~> 2.3)
     - MBProgressHUD (~> 0.9)
@@ -10,21 +13,23 @@ PODS:
   - SDWebImage (3.7.3):
     - SDWebImage/Core (= 3.7.3)
   - SDWebImage/Core (3.7.3)
-  - UMengAnalytics-NO-IDFA (3.5.11)
+  - UMengAnalytics-NO-IDFA (3.6.5)
 
 DEPENDENCIES:
   - FastImageCache (~> 1.3)
-  - JTCalendar (~> 2.1.1)
+  - JTCalendar (~> 2.1.4)
+  - MMWormhole (~> 2.0.0)
   - MWPhotoBrowser
   - UMengAnalytics-NO-IDFA
 
 SPEC CHECKSUMS:
   DACircularProgress: 4dd437c0fc3da5161cb289e07ac449493d41db71
   FastImageCache: 25f214fd46405daca3d1995d783fb83b9036c62e
-  JTCalendar: 1b4d7b77c4f994694afdc29d8946ae0e1198a636
+  JTCalendar: 9b1352c7ec41cc26b19c189d6608ba48060a53d9
   MBProgressHUD: c47f2c166c126cf2ce36498d80f33e754d4e93ad
+  MMWormhole: 0cd3fd35a9118b2e2d762b499f54eeaace0be791
   MWPhotoBrowser: ba0d0c09ffda3a7ea10093518738c502c1c7141c
   SDWebImage: 1d2b1a1efda1ade1b00b6f8498865f8ddedc8a84
-  UMengAnalytics-NO-IDFA: e41024644de702e450093ef043af20b5fbe06cbc
+  UMengAnalytics-NO-IDFA: 279e28990a08efb56cff1821d2954bb00aa6975a
 
 COCOAPODS: 0.39.0

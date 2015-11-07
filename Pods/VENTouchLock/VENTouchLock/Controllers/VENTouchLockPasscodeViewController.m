@@ -41,6 +41,10 @@ static const NSInteger VENTouchLockViewControllerPasscodeLength = 4;
     [self configurePasscodeView];
 }
 
+- (UIStatusBarStyle)preferredStatusBarStyle {
+    return UIStatusBarStyleLightContent;
+}
+
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];

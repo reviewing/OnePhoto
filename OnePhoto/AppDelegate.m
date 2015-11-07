@@ -213,15 +213,12 @@
                                                                     preferredStyle:UIAlertControllerStyleAlert];
             UIAlertAction* cameraAction = [UIAlertAction actionWithTitle:@"现在就去" style:UIAlertActionStyleDefault
                                                                  handler:^(UIAlertAction * action) {
-                                                                     UINavigationController *nc = ((UINavigationController *)self.window.rootViewController);
-                                                                     if ([[nc visibleViewController] isKindOfClass:[RootViewController class]]) {
-                                                                         [((RootViewController *)[nc visibleViewController]) performSelector:@selector(newPhotoAction)];
+                                                                     UIViewController *topController = [GlobalUtils topMostController];
+                                                                     if ([topController isKindOfClass:[UINavigationController class]] && [((UINavigationController *)topController).visibleViewController isKindOfClass:[RootViewController class]]) {
+                                                                         [((RootViewController *)((UINavigationController *)topController).visibleViewController) performSelector:@selector(newPhotoAction)];
                                                                      } else {
                                                                          SET_JUMPING(@"UIImagePickerController", @"");
-                                                                         [nc popToRootViewControllerAnimated:NO];
-                                                                         if ([[nc visibleViewController] isKindOfClass:[SettingsViewController class]]) {
-                                                                             [[nc visibleViewController].presentingViewController dismissViewControllerAnimated:NO completion:nil];
-                                                                         }
+                                                                        [GlobalUtils popToRootOrAfterPop:[SettingBaseViewController class]];
                                                                      }
                                                                  }];
             UIAlertAction* cancelAction = [UIAlertAction actionWithTitle:@"不用了" style:UIAlertActionStyleCancel
@@ -230,9 +227,7 @@
             [alert addAction:cameraAction];
             [alert addAction:cancelAction];
             
-            UINavigationController *nc = ((UINavigationController *)self.window.rootViewController);
-            DHLogDebug(@"[nc visibleViewController] @ %@", [[nc visibleViewController] class]);
-            [[nc visibleViewController] presentViewController:alert animated:YES completion:nil];
+            [[GlobalUtils topMostController] presentViewController:alert animated:YES completion:nil];
         }
     }
 }
@@ -256,25 +251,20 @@
     
     NSString *action = [[self parseQueryString:[url query]] objectForKey:@"action"];
     if ([action isEqualToString:@"add"]) {
-        UINavigationController *nc = ((UINavigationController *)self.window.rootViewController);
-        if ([[nc visibleViewController] isKindOfClass:[RootViewController class]]) {
-            [((RootViewController *)[nc visibleViewController]) performSelector:@selector(newPhotoAction)];
+        UIViewController *topController = [GlobalUtils topMostController];
+        if ([topController isKindOfClass:[UINavigationController class]] && [((UINavigationController *)topController).visibleViewController isKindOfClass:[RootViewController class]]) {
+            [((RootViewController *)((UINavigationController *)topController).visibleViewController) performSelector:@selector(newPhotoAction)];
         } else {
             SET_JUMPING(@"UIImagePickerController", @"");
-            [nc popToRootViewControllerAnimated:NO];
-            if ([[nc visibleViewController] isKindOfClass:[SettingsViewController class]]) {
-                [[nc visibleViewController].presentingViewController dismissViewControllerAnimated:NO completion:nil];
-            }
+            [GlobalUtils popToRootOrAfterPop:[SettingBaseViewController class]];
         }
     } else if ([action isEqualToString:@"open"]) {
-        UINavigationController *nc = ((UINavigationController *)self.window.rootViewController);
-        if ([[nc visibleViewController] isKindOfClass:[RootViewController class]]) {
+        UIViewController *topController = [GlobalUtils topMostController];
+        if ([topController isKindOfClass:[UINavigationController class]] && [((UINavigationController *)topController).visibleViewController isKindOfClass:[RootViewController class]]) {
 
         } else {
-            [nc popToRootViewControllerAnimated:NO];
-            if ([[nc visibleViewController] isKindOfClass:[SettingsViewController class]]) {
-                [[nc visibleViewController].presentingViewController dismissViewControllerAnimated:NO completion:nil];
-            }
+            SET_JUMPING(@"RootViewController", @"");
+            [GlobalUtils popToRootOrAfterPop:[SettingBaseViewController class]];
         }
 
     }

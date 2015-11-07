@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SettingBaseViewController.h"
 
-@interface EditTextViewController : UITableViewController
+@interface EditTextViewController : SettingBaseViewController
 
 @property (nonatomic, strong) NSDictionary *setting;
 

@@ -56,6 +56,10 @@ FOUNDATION_EXPORT NSString * const OPUbiquitousKeyValueStoreHasPhotoKey;
 
 #pragma mark - UI Utils
 
++ (void)popToRootOrAfterPop:(Class)viewControllerClass;
+
++ (UIViewController*)topMostController;
+
 + (void)alertMessage:(NSString *)message;
 
 + (void)alertError:(NSError *)error;

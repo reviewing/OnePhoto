@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SettingBaseViewController.h"
 
-@interface ValueSelectorViewController : UITableViewController
+@interface ValueSelectorViewController : SettingBaseViewController
 
 @property (nonatomic, strong) NSDictionary *setting;
 

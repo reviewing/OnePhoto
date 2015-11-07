@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SettingBaseViewController.h"
 
-@interface SettingsViewController : UITableViewController <UIActionSheetDelegate>
+@interface SettingsViewController : SettingBaseViewController <UIActionSheetDelegate>
 
 @end

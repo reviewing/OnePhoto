@@ -42,14 +42,6 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(applicationDidBecomeActive:)
-                                                 name:UIApplicationDidBecomeActiveNotification
-                                               object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(applicationWillResignActive:)
-                                                 name:UIApplicationWillResignActiveNotification
-                                               object:nil];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -66,14 +58,6 @@
     } else {
         [GlobalUtils setDailyNotification:self.reminderTimePicker.date];
     }
-}
-
-- (void)applicationDidBecomeActive:(NSNotification *)notification {
-    [self.tableView reloadData];
-}
-
-- (void)applicationWillResignActive:(NSNotification *)notification {
-    
 }
 
 #pragma mark - Table view data source

@@ -130,6 +130,8 @@
     if ([IM_JUMPING_TO isEqualToString:@"UIImagePickerController"]) {
         [self newPhotoAction];
         SET_JUMPING(nil, nil);
+    } else if ([IM_JUMPING_TO isEqualToString:@"RootViewController"]) {
+        SET_JUMPING(nil, nil);
     }
 
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -178,6 +180,8 @@
 - (void)applicationDidBecomeActive:(NSNotification *)notification {
     if ([IM_JUMPING_TO isEqualToString:@"UIImagePickerController"]) {
         [self newPhotoAction];
+        SET_JUMPING(nil, nil);
+    } else if ([IM_JUMPING_TO isEqualToString:@"RootViewController"]) {
         SET_JUMPING(nil, nil);
     }
     [self.calendarContentView reloadData];

@@ -8,6 +8,7 @@
 
 #import "GlobalUtils.h"
 #import "UIColor+Remix.h"
+#import "SettingsViewController.h"
 
 NSString * const OPCoreDataStoreMerged = @"OPCoreDataStoreMerged";
 NSString * const OPNotificationType = @"OPNotificationType";
@@ -180,6 +181,34 @@ static NSCalendar *_calendar = nil;
 }
 
 #pragma mark - UI Utils
+
++ (void)popToRootOrAfterPop:(Class)viewControllerClass {
+    UIViewController *topController = [self topMostController];
+    while (topController.presentingViewController) {
+        [topController.presentingViewController dismissViewControllerAnimated:NO completion:nil];
+        if ([self viewController:topController isKindOfClass:viewControllerClass]) {
+            break;
+        }
+        topController = topController.presentingViewController;
+    }
+}
+
++ (BOOL)viewController:(UIViewController *)viewController isKindOfClass:(Class)viewControllerClass {
+    if ([viewController isKindOfClass:[UINavigationController class]]) {
+        viewController = [((UINavigationController *)viewController).viewControllers objectAtIndex:0];
+    }
+    return [viewController isKindOfClass:viewControllerClass];
+}
+
++ (UIViewController*)topMostController {
+    UIViewController *topController = [UIApplication sharedApplication].keyWindow.rootViewController;
+    
+    while (topController.presentedViewController) {
+        topController = topController.presentedViewController;
+    }
+    
+    return topController;
+}
 
 + (void)alertMessage:(NSString *)message {
     UIAlertView *toast = [[UIAlertView alloc] initWithTitle:@"提示"

@@ -143,7 +143,7 @@
     UIImage *todayPhoto = [UIImage imageWithData:self.todayImageData];
     [self.todayImageView setImage:todayPhoto];
     self.todayImageView.hidden = !todayPhoto;
-    self.addPhotoButton.hidden = todayPhoto;
+    self.addPhotoButton.hidden = (todayPhoto != nil);
     NSInteger photoCount = self.photoCount;
     self.photoCountLabel.text = [NSString stringWithFormat:@"%ld", (long)photoCount];
     [self.photoCountLabel sizeToFit];

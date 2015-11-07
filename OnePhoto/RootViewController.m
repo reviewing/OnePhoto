@@ -323,7 +323,7 @@
 - (void)renewPhotoCounts {
     NSInteger count = [[CoreDataHelper sharedHelper] countOfPhotos];
     if (count < 0) {
-        count = [[NSUbiquitousKeyValueStore defaultStore] longLongForKey:OPUbiquitousKeyValueStoreHasPhotoKey] + 1;
+        count = (NSInteger)[[NSUbiquitousKeyValueStore defaultStore] longLongForKey:OPUbiquitousKeyValueStoreHasPhotoKey] + 1;
     }
     DHLogDebug(@"renewPhotoCounts: %ld", (long)count);
     [[NSUbiquitousKeyValueStore defaultStore] setLongLong:count forKey:OPUbiquitousKeyValueStoreHasPhotoKey];

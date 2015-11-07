@@ -127,6 +127,10 @@ static NSCalendar *_calendar = nil;
 
 + (void)setDailyNotification:(NSDate *)fireDate {
     [[UIApplication sharedApplication] cancelAllLocalNotifications];
+    if (fireDate == nil) {
+        return;
+    }
+    
     UILocalNotification *notification = [[UILocalNotification alloc] init];
     if (notification == nil) {
         [self alertMessage:@"设置提醒失败，请重试"];

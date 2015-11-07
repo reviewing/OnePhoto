@@ -7,13 +7,98 @@
 		<array>
 			<dict>
 				<key>key</key>
-				<string>reminder.time</string>
+				<string>enable.reminder</string>
 				<key>name</key>
 				<string>提醒</string>
+				<key>type</key>
+				<string>BOOL</string>
+				<key>default</key>
+				<false/>
+				<key>depended</key>
+				<true/>
+			</dict>
+			<dict>
+				<key>key</key>
+				<string>reminder.time</string>
+				<key>name</key>
+				<string>每日提醒</string>
 				<key>type</key>
 				<string>SubPage</string>
 				<key>selector</key>
 				<string>editReminders</string>
+				<key>depends</key>
+				<string>enable.reminder</string>
+				<key>depends.value</key>
+				<true/>
+			</dict>
+		</array>
+	</dict>
+	<dict>
+		<key>items</key>
+		<array>
+			<dict>
+				<key>key</key>
+				<string>enable.passcode</string>
+				<key>name</key>
+				<string>密码</string>
+				<key>name.disable</key>
+				<string>密码与Touch ID</string>
+				<key>type</key>
+				<string>BOOL</string>
+				<key>default</key>
+				<false/>
+				<key>depended</key>
+				<true/>
+			</dict>
+			<dict>
+				<key>key</key>
+				<string>passcode.time</string>
+				<key>name</key>
+				<string>激活密码</string>
+				<key>type</key>
+				<string>Array</string>
+				<key>value.type</key>
+				<string>Number</string>
+				<key>values</key>
+				<array>
+					<integer>0</integer>
+					<integer>1</integer>
+					<integer>3</integer>
+					<integer>5</integer>
+					<integer>10</integer>
+					<integer>30</integer>
+					<integer>60</integer>
+				</array>
+				<key>values.description</key>
+				<array>
+					<string>立即</string>
+					<string>1分钟</string>
+					<string>3分钟</string>
+					<string>5分钟</string>
+					<string>10分钟</string>
+					<string>30分钟</string>
+					<string>1小时</string>
+				</array>
+				<key>default</key>
+				<integer>0</integer>
+				<key>depends</key>
+				<string>enable.passcode</string>
+				<key>depends.value</key>
+				<true/>
+			</dict>
+			<dict>
+				<key>key</key>
+				<string>enable.touchID</string>
+				<key>name</key>
+				<string>Touch ID</string>
+				<key>type</key>
+				<string>BOOL</string>
+				<key>default</key>
+				<false/>
+				<key>depends</key>
+				<string>enable.passcode</string>
+				<key>depends.value</key>
+				<true/>
 			</dict>
 		</array>
 	</dict>

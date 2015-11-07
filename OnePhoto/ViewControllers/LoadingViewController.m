@@ -1,39 +1,37 @@
 //
-//  LockSplashViewController.m
+//  LoadingViewController.m
 //  OnePhoto
 //
-//  Created by Hong Duan on 11/5/15.
+//  Created by Hong Duan on 11/6/15.
 //  Copyright © 2015 Hong D. Empire. All rights reserved.
 //
 
-#import "LockSplashViewController.h"
+#import "LoadingViewController.h"
 
-@interface LockSplashViewController ()
+@interface LoadingViewController ()
 
 @end
 
-@implementation LockSplashViewController
+@implementation LoadingViewController
 
-- (instancetype)init {
-    UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    self = [storyboard instantiateViewControllerWithIdentifier:@"LockSplashViewController"];
-    DHLogDebug(@"----init");
-    return self;
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    // Do any additional setup after loading the view.
 }
 
 - (UIStatusBarStyle)preferredStatusBarStyle {
     return UIStatusBarStyleLightContent;
 }
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    DHLogDebug(@"----init");
-    self.view.backgroundColor = [UIColor darkGrayColor];
-}
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [self performSegueWithIdentifier:@"RootViewControllerSegue" sender:nil];
+    });
 }
 
 /*

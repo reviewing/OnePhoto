@@ -56,7 +56,7 @@
     [super viewWillDisappear:animated];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     
-    if ([[[GlobalUtils HHmmFormatter] stringFromDate:self.reminderTimePicker.date] isEqualToString:_reminderNow]) {
+    if (![[NSUserDefaults standardUserDefaults] objectForKey:REMINDER_TIME_KEY] || [[[GlobalUtils HHmmFormatter] stringFromDate:self.reminderTimePicker.date] isEqualToString:_reminderNow]) {
         return;
     }
     
@@ -94,7 +94,7 @@
         if ([[NSUserDefaults standardUserDefaults] objectForKey:REMINDER_TIME_KEY]) {
             cell.detailTextLabel.text = [[GlobalUtils HHmmFormatter] stringFromDate:[[NSUserDefaults standardUserDefaults] objectForKey:REMINDER_TIME_KEY]];
         } else {
-            cell.detailTextLabel.text = @"未设置（点击设置）";
+            cell.detailTextLabel.text = @"点击设置";
         }
     } else {
         cell.detailTextLabel.text = @"已禁用";

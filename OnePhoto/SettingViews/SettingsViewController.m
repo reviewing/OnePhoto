@@ -9,6 +9,7 @@
 #import "SettingsViewController.h"
 #import "EditTextViewController.h"
 #import "ValueSelectorViewController.h"
+#import <VENTouchLock/VENTouchLock.h>
 
 @interface SettingsViewController () {
     NSArray *_settingsDefaultArray;
@@ -170,6 +171,10 @@
     
     cell.textLabel.text = [self objectForKey:@"name" atIndexPath:indexPath];
     
+    if ([type isEqualToString:@"BOOL"] && ![[NSUserDefaults standardUserDefaults] boolForKey:[self objectForKey:@"key" atIndexPath:indexPath]] && [[self objectForKey:@"name.disable" atIndexPath:indexPath] length] > 0) {
+        cell.textLabel.text = [self objectForKey:@"name.disable" atIndexPath:indexPath];
+    }
+    
     return cell;
 }
 
@@ -237,14 +242,75 @@
     UITableViewCell *cell = (UITableViewCell *) sender.superview;
     NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
     NSString *key = [self objectForKey:@"key" atIndexPath:indexPath];
-    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:sender.on] forKey:key];
     
     NSDictionary *dict = @{@"type" : key, @"value" : sender.on ? @"YES" : @"NO"};
     [GlobalUtils newEvent:@"setting_switch" attributes:dict];
     
     if ([key isEqualToString:@"write.data.to.file"]) {
         [DHLogger setWriteDataToFile:sender.on];
+    } else if ([key isEqualToString:@"enable.reminder"]) {
+        if (sender.on) {
+            if ([[UIApplication sharedApplication] currentUserNotificationSettings].types == UIUserNotificationTypeNone) {
+                sender.on = NO;
+                UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"无法打开提醒"
+                                                                               message:@"1 Photo的通知功能被禁用，\n请到系统设置中打开"
+                                                                        preferredStyle:UIAlertControllerStyleAlert];
+                UIAlertAction* confirmAction = [UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleCancel
+                                                                     handler:^(UIAlertAction * action) {}];
+                
+                [alert addAction:confirmAction];
+                [self presentViewController:alert animated:YES completion:nil];
+                return;
+            }
+        } else {
+            [GlobalUtils setDailyNotification:nil];
+        }
+    } else if ([key isEqualToString:@"enable.passcode"]) {
+        if (sender.on) {
+            VENTouchLockCreatePasscodeViewController *createPasscodeVC = [[VENTouchLockCreatePasscodeViewController alloc] init];
+            __weak __typeof__(self) weakSelf = self;
+            createPasscodeVC.willFinishWithResult = ^(BOOL success) {
+                if (success) {
+                    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:YES] forKey:key];
+                    _settings = [self stretchSettings:_settingsDefaultArray];
+                    [self.tableView reloadData];
+                    [weakSelf dismissViewControllerAnimated:YES completion:nil];
+                } else {
+                    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:NO] forKey:key];
+                }
+            };
+            [self presentViewController:[createPasscodeVC embeddedInNavigationController] animated:YES completion:nil];
+            return;
+        } else {
+            if ([[VENTouchLock sharedInstance] isPasscodeSet]) {
+                [[VENTouchLock sharedInstance] deletePasscode];
+            }
+            [VENTouchLock setShouldUseTouchID:NO];
+            [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:NO] forKey:@"enable.touchID"];
+        }
+    } else if ([key isEqualToString:@"enable.touchID"]) {
+        if (sender.on) {
+            if (![VENTouchLock canUseTouchID]) {
+                sender.on = NO;
+                UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Touch ID不可用"
+                                                                               message:@"该设备尚未启用Touch ID，\n请到系统设置中开启"
+                                                                        preferredStyle:UIAlertControllerStyleAlert];
+                UIAlertAction* confirmAction = [UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleCancel
+                                                                      handler:^(UIAlertAction * action) {}];
+                
+                [alert addAction:confirmAction];
+                [self presentViewController:alert animated:YES completion:nil];
+                return;
+            } else {
+                [VENTouchLock setShouldUseTouchID:YES];
+            }
+        } else {
+            [VENTouchLock setShouldUseTouchID:NO];
+        }
     }
+    
+    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:sender.on] forKey:key];
+
     BOOL isDepended = [[self objectForKey:@"depended" atIndexPath:indexPath] boolValue];
     if (isDepended) {
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
@@ -255,7 +321,24 @@
 }
 
 - (NSArray *)stretchSettings:(NSArray *)settings {
-    return settings;
+    NSMutableArray *stretchedSettings = [NSMutableArray array];
+    for (NSDictionary *section in settings) {
+        NSMutableDictionary *sectionMC = [section mutableCopy];
+        NSMutableArray *items = [[section objectForKey:@"items"] mutableCopy];
+        for (NSDictionary *row in [section objectForKey:@"items"]) {
+            if ([row objectForKey:@"depends"]) {
+                BOOL dependsValue = [[row objectForKey:@"depends.value"] boolValue];
+                if (dependsValue != [[NSUserDefaults standardUserDefaults] boolForKey:[row objectForKey:@"depends"]]) {
+                    [items removeObject:row];
+                }
+            }
+       }
+        if ([items count] > 0) {
+            [sectionMC setObject:items forKey:@"items"];
+            [stretchedSettings addObject:sectionMC];
+        }
+    }
+    return [stretchedSettings copy];
 }
 
 - (id)objectForKey:(NSString *)key atIndexPath:(NSIndexPath *)indexPath {

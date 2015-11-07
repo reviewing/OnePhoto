@@ -28,6 +28,19 @@
                                  passcodeAttemptLimit:5
                             splashViewControllerClass:[LockSplashViewController class]];
     
+    [VENTouchLock sharedInstance].appearance.passcodeViewControllerTitleColor = [UIColor lightTextColor];
+    [VENTouchLock sharedInstance].appearance.passcodeViewControllerCharacterColor = [UIColor whiteColor];
+    [VENTouchLock sharedInstance].appearance.passcodeViewControllerBackgroundColor = [UIColor darkGrayColor];
+    [VENTouchLock sharedInstance].appearance.cancelBarButtonItemTitle = @"取消";
+    [VENTouchLock sharedInstance].appearance.createPasscodeInitialLabelText = @"请输入密码";
+    [VENTouchLock sharedInstance].appearance.createPasscodeConfirmLabelText = @"请重复输入一次密码";
+    [VENTouchLock sharedInstance].appearance.createPasscodeMismatchedLabelText = @"两次密码输入不一致，请重新设置";
+    [VENTouchLock sharedInstance].appearance.createPasscodeViewControllerTitle = @"设置密码";
+    [VENTouchLock sharedInstance].appearance.enterPasscodeInitialLabelText = @"请输入密码";
+    [VENTouchLock sharedInstance].appearance.enterPasscodeIncorrectLabelText = @"密码错误，请重试";
+    [VENTouchLock sharedInstance].appearance.enterPasscodeViewControllerTitle = @"输入密码";
+    [VENTouchLock sharedInstance].appearance.touchIDCancelPresentsPasscodeViewController = YES;
+
     [DHLogger setLogLevel:DH_LOG_DEBUG];
 
     if ((DHLogLevel)[[NSUserDefaults standardUserDefaults] integerForKey:@"debug.level"] == DH_LOG_VERBOSE) {
@@ -79,6 +92,18 @@
             [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:YES] forKey:@"photos.dir.created"];
         }
     }
+    
+    // 初始化默认设置
+    NSString *settingsPlist = [[NSBundle mainBundle] pathForResource:@"Settings" ofType:@"plist"];
+    NSMutableDictionary *defaults = [NSMutableDictionary dictionary];
+    for (NSDictionary *section in [NSArray arrayWithContentsOfFile:settingsPlist]) {
+        for (NSDictionary *dic in [section objectForKey:@"items"]) {
+            if ([dic objectForKey:@"default"]) {
+                [defaults setObject:[dic objectForKey:@"default"] forKey:[dic objectForKey:@"key"]];
+            }
+        }
+    }
+    [[NSUserDefaults standardUserDefaults] registerDefaults:defaults];
     
     UIUserNotificationType types = UIUserNotificationTypeBadge | UIUserNotificationTypeSound | UIUserNotificationTypeAlert;
     UIUserNotificationSettings *mySettings = [UIUserNotificationSettings settingsForTypes:types categories:nil];

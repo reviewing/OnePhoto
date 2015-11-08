@@ -271,12 +271,18 @@
 // For responding to the user tapping Cancel.
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *) picker {
     _specifiedDate = nil;
+    if ([IM_JUMPING_TO isEqualToString:@"UIImagePickerController"]) {
+        SET_JUMPING(nil, nil);
+    }
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 // For responding to the user accepting a newly-captured picture or movie
 - (void)imagePickerController:(UIImagePickerController *) picker didFinishPickingMediaWithInfo:(NSDictionary *) info {
-    
+    if ([IM_JUMPING_TO isEqualToString:@"UIImagePickerController"]) {
+        SET_JUMPING(nil, nil);
+    }
+
     NSString *mediaType = [info objectForKey: UIImagePickerControllerMediaType];
     UIImage *originalImage, *editedImage, *imageToSave;
     

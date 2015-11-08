@@ -30,14 +30,11 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    if ([IM_JUMPING_TO isEqualToString:@"RootViewController"] || [IM_JUMPING_TO isEqualToString:@"UIImagePickerController"]) {
-        [self performSegueWithIdentifier:@"RootViewControllerNoAnimationSegue" sender:nil];
-    }
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [self performSegueWithIdentifier:@"RootViewControllerSegue" sender:nil];
     });
 }

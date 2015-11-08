@@ -8,7 +8,9 @@
 
 #import "GlobalUtils.h"
 #import "UIColor+Remix.h"
-#import "SettingsViewController.h"
+#import "LoadingViewController.h"
+#import "LockSplashViewController.h"
+#import <VENTouchLock/VENTouchLockEnterPasscodeViewController.h>
 
 NSString * const OPCoreDataStoreMerged = @"OPCoreDataStoreMerged";
 NSString * const OPNotificationType = @"OPNotificationType";
@@ -185,6 +187,9 @@ static NSCalendar *_calendar = nil;
 + (void)popToRootOrAfterPop:(Class)viewControllerClass {
     UIViewController *topController = [self topMostController];
     while (topController.presentingViewController) {
+        if ([self viewController:topController.presentingViewController isKindOfClass:[LoadingViewController class]] || [self viewController:topController.presentingViewController isKindOfClass:[LockSplashViewController class]]) {
+            break;
+        }
         [topController.presentingViewController dismissViewControllerAnimated:NO completion:nil];
         if ([self viewController:topController isKindOfClass:viewControllerClass]) {
             break;

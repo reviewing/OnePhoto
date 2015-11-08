@@ -17,7 +17,6 @@
 - (instancetype)init {
     UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     self = [storyboard instantiateViewControllerWithIdentifier:@"LockSplashViewController"];
-    DHLogDebug(@"----init");
     return self;
 }
 
@@ -27,7 +26,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    DHLogDebug(@"----init");
     self.view.backgroundColor = [UIColor darkGrayColor];
 }
 

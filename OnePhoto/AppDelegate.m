@@ -206,20 +206,14 @@
     application.applicationIconBadgeNumber = 0;
     if ([[notif.userInfo objectForKey:OPNotificationType] isEqualToString:OPNotificationTypeDailyReminder]) {
         if (application.applicationState == UIApplicationStateInactive || application.applicationState == UIApplicationStateBackground) {
-            SET_JUMPING(@"UIImagePickerController", @"RootViewController");
+            [self redirectBasedOnAction:@"add"];
         } else {
             UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"每日提醒"
                                                                            message:@"现在拍下今天的1 Photo？"
                                                                     preferredStyle:UIAlertControllerStyleAlert];
             UIAlertAction* cameraAction = [UIAlertAction actionWithTitle:@"现在就去" style:UIAlertActionStyleDefault
                                                                  handler:^(UIAlertAction * action) {
-                                                                     UIViewController *topController = [GlobalUtils topMostController];
-                                                                     if ([topController isKindOfClass:[UINavigationController class]] && [((UINavigationController *)topController).visibleViewController isKindOfClass:[RootViewController class]]) {
-                                                                         [((RootViewController *)((UINavigationController *)topController).visibleViewController) performSelector:@selector(newPhotoAction)];
-                                                                     } else {
-                                                                         SET_JUMPING(@"UIImagePickerController", @"");
-                                                                        [GlobalUtils popToRootOrAfterPop:[SettingBaseViewController class]];
-                                                                     }
+                                                                     [self redirectBasedOnAction:@"add"];
                                                                  }];
             UIAlertAction* cancelAction = [UIAlertAction actionWithTitle:@"不用了" style:UIAlertActionStyleCancel
                                                                  handler:^(UIAlertAction * action) {}];
@@ -248,27 +242,45 @@
 
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url options:(NSDictionary<NSString *,id> *)options {
     DHLogDebug(@"url recieved: %@", url);
-    
     NSString *action = [[self parseQueryString:[url query]] objectForKey:@"action"];
-    if ([action isEqualToString:@"add"]) {
-        UIViewController *topController = [GlobalUtils topMostController];
-        if ([topController isKindOfClass:[UINavigationController class]] && [((UINavigationController *)topController).visibleViewController isKindOfClass:[RootViewController class]]) {
-            [((RootViewController *)((UINavigationController *)topController).visibleViewController) performSelector:@selector(newPhotoAction)];
-        } else {
-            SET_JUMPING(@"UIImagePickerController", @"");
-            [GlobalUtils popToRootOrAfterPop:[SettingBaseViewController class]];
-        }
-    } else if ([action isEqualToString:@"open"]) {
-        UIViewController *topController = [GlobalUtils topMostController];
-        if ([topController isKindOfClass:[UINavigationController class]] && [((UINavigationController *)topController).visibleViewController isKindOfClass:[RootViewController class]]) {
-
-        } else {
-            SET_JUMPING(@"RootViewController", @"");
-            [GlobalUtils popToRootOrAfterPop:[SettingBaseViewController class]];
-        }
-
-    }
+    [self redirectBasedOnAction:action];
     return YES;
+}
+
+- (void)redirectBasedOnAction:(NSString *)action {
+    if (![[VENTouchLock sharedInstance] isPasscodeSet]) {
+        if ([action isEqualToString:@"add"]) {
+            UIViewController *topController = [GlobalUtils topMostController];
+            if ([topController isKindOfClass:[UINavigationController class]] && [((UINavigationController *)topController).visibleViewController isKindOfClass:[RootViewController class]]) {
+                [((RootViewController *)((UINavigationController *)topController).visibleViewController) performSelector:@selector(newPhotoAction)];
+            } else {
+                SET_JUMPING(@"UIImagePickerController", @"");
+                [GlobalUtils popToRootOrAfterPop:[SettingBaseViewController class]];
+            }
+        } else if ([action isEqualToString:@"open"]) {
+            UIViewController *topController = [GlobalUtils topMostController];
+            if ([topController isKindOfClass:[UINavigationController class]] && [((UINavigationController *)topController).visibleViewController isKindOfClass:[RootViewController class]]) {
+                
+            } else {
+                SET_JUMPING(@"RootViewController", @"");
+                [GlobalUtils popToRootOrAfterPop:[SettingBaseViewController class]];
+            }
+        }
+    } else {
+        if ([action isEqualToString:@"add"]) {
+            SET_JUMPING(@"UIImagePickerController", @"");
+        } else if ([action isEqualToString:@"open"]) {
+            SET_JUMPING(@"RootViewController", @"");
+        }
+        if ([UIApplication sharedApplication].applicationState == UIApplicationStateActive) {
+            [GlobalUtils popToRootOrAfterPop:[SettingBaseViewController class]];
+            UIViewController *topController = [GlobalUtils topMostController];
+            if ([topController isKindOfClass:[UINavigationController class]] && [((UINavigationController *)topController).visibleViewController isKindOfClass:[RootViewController class]]) {
+                [((RootViewController *)((UINavigationController *)topController).visibleViewController) performSelector:@selector(newPhotoAction)];
+                SET_JUMPING(nil, nil);
+            }
+        }
+    }
 }
 
 #pragma mark - Core Data stack

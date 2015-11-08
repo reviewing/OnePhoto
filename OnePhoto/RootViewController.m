@@ -30,6 +30,7 @@
     BOOL _isFirstAppear;
     NSArray *_photos;
     NSDate *_specifiedDate;
+    NSDate *_selectedDate;
 }
 
 @property (weak, nonatomic) IBOutlet OPCalendarWeekDayView *weekDayView;
@@ -365,10 +366,15 @@
     } else if ([dayView.date compare:[NSDate date]] == NSOrderedDescending) {
         dayView.hidden = YES;
     }
+    // Selected
+    else if(_selectedDate && [_calendarManager.dateHelper date:_selectedDate isTheSameDayThan:dayView.date]){
+        dayView.layer.borderColor = [[GlobalUtils daySelectionColor] CGColor];
+        dayView.layer.borderWidth = 2;
+    }
     // Today
     else if([_calendarManager.dateHelper date:[NSDate date] isTheSameDayThan:dayView.date]){
         dayView.layer.borderColor = [[GlobalUtils appBaseColor] CGColor];
-        dayView.layer.borderWidth = 1;
+        dayView.layer.borderWidth = 2;
     } else {
         dayView.layer.borderColor = [[UIColor clearColor] CGColor];
         dayView.layer.borderWidth = 0;
@@ -377,6 +383,12 @@
 
 - (void)calendar:(JTCalendarManager *)calendar didTouchDayView:(UIView<JTCalendarDay> *)dayView {
     OPCalendarDayView *lOPDayView = (OPCalendarDayView *)dayView;
+    
+    if (_selectedDate == nil || ![_calendarManager.dateHelper date:_selectedDate isTheSameDayThan:dayView.date]) {
+        _selectedDate = dayView.date;
+        [self.calendarContentView reloadData];
+    }
+    
     OPPhoto *photo = [[CoreDataHelper sharedHelper] getPhotoAt:[GlobalUtils stringFromDate:lOPDayView.date]];
     
     switch (lOPDayView.touchEvent) {
@@ -538,7 +550,8 @@
 }
 
 - (void)photoBrowser:(MWPhotoBrowser *)photoBrowser didDisplayPhotoAtIndex:(NSUInteger)index {
-    
+    OPPhoto *displayedPhoto = [_photos objectAtIndex:index];
+    _selectedDate = [[GlobalUtils dateFormatter] dateFromString:displayedPhoto.dateString];
 }
 
 - (void)photoBrowserDidFinishModalPresentation:(MWPhotoBrowser *)photoBrowser {

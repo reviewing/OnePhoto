@@ -48,6 +48,10 @@ static NSCalendar *_calendar = nil;
     _appBaseColor = color;
 }
 
++ (UIColor *)daySelectionColor {
+    return UIColorFromRGB(0xC589E8);
+}
+
 + (CGFloat)monthLabelSize {
     return 17.0f;
 }

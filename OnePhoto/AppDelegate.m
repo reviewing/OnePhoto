@@ -28,6 +28,8 @@
                                  passcodeAttemptLimit:5
                             splashViewControllerClass:[LockSplashViewController class]];
     
+    [GlobalUtils setupNotificationSettings];
+    
     [VENTouchLock sharedInstance].appearance.passcodeViewControllerTitleColor = [UIColor lightTextColor];
     [VENTouchLock sharedInstance].appearance.passcodeViewControllerCharacterColor = [UIColor whiteColor];
     [VENTouchLock sharedInstance].appearance.passcodeViewControllerBackgroundColor = [UIColor darkGrayColor];
@@ -224,6 +226,16 @@
             [[GlobalUtils topMostController] presentViewController:alert animated:YES completion:nil];
         }
     }
+}
+
+- (void)application:(UIApplication *)application handleActionWithIdentifier:(NSString *)identifier forLocalNotification:(UILocalNotification *)notification completionHandler:(void (^)())completionHandler {
+    if ([identifier isEqualToString:@"ignore.1photo"]) {
+        application.applicationIconBadgeNumber = 0;
+    } else if ([identifier isEqualToString:@"add.1photo"]) {
+        [self redirectBasedOnAction:@"add"];
+    }
+    
+    completionHandler();
 }
 
 - (NSDictionary *)parseQueryString:(NSString *)query {

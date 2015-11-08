@@ -42,6 +42,8 @@ FOUNDATION_EXPORT NSString * const OPUbiquitousKeyValueStoreHasPhotoKey;
 
 + (NSDate *)addToDate:(NSDate *)date days:(NSInteger)days;
 
++ (void)setupNotificationSettings;
+
 + (void)setDailyNotification:(NSDate *)fireDate;
 
 + (BOOL)date:(NSString *)date1 isJustBefore:(NSString *)date2;

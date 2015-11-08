@@ -128,6 +128,35 @@ static NSCalendar *_calendar = nil;
     return [[self calendar] dateByAddingComponents:components toDate:date options:0];
 }
 
++ (void)setupNotificationSettings {
+    if ([[UIApplication sharedApplication] currentUserNotificationSettings].types != UIUserNotificationTypeNone) {
+        UIUserNotificationType notificationTypes = UIUserNotificationTypeAlert | UIUserNotificationTypeSound;
+        UIMutableUserNotificationAction *ignoreAction = [UIMutableUserNotificationAction new];
+        ignoreAction.identifier = @"ignore.1photo";
+        ignoreAction.title = @"我知道了";
+        ignoreAction.activationMode = UIUserNotificationActivationModeBackground;
+        ignoreAction.destructive = YES;
+        ignoreAction.authenticationRequired = NO;
+
+        UIMutableUserNotificationAction *addPhotoAction = [UIMutableUserNotificationAction new];
+        addPhotoAction.identifier = @"add.1photo";
+        addPhotoAction.title = @"现在就去！";
+        addPhotoAction.activationMode = UIUserNotificationActivationModeForeground;
+        addPhotoAction.destructive = NO;
+        addPhotoAction.authenticationRequired = YES;
+
+        NSArray *actions = [NSArray arrayWithObjects:ignoreAction, addPhotoAction, nil];
+        UIMutableUserNotificationCategory *category = [UIMutableUserNotificationCategory new];
+        category.identifier = @"add1photo";
+        [category setActions:actions forContext:UIUserNotificationActionContextDefault];
+        [category setActions:actions forContext:UIUserNotificationActionContextMinimal];
+        
+        NSSet *categories = [NSSet setWithObject:category];
+        UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:notificationTypes categories:categories];
+        [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
+    }
+}
+
 + (void)setDailyNotification:(NSDate *)fireDate {
     [[UIApplication sharedApplication] cancelAllLocalNotifications];
     if (fireDate == nil) {
@@ -152,11 +181,13 @@ static NSCalendar *_calendar = nil;
     notification.alertBody = @"马上拍下今天的1 Photo吧！";
     notification.alertAction = @"现在就去";
     notification.alertTitle = @"1 Photo";
+    notification.category = @"add1photo";
     notification.userInfo = [NSDictionary dictionaryWithObject:OPNotificationTypeDailyReminder forKey:OPNotificationType];
     
     notification.soundName = UILocalNotificationDefaultSoundName;
     notification.applicationIconBadgeNumber = 1;
     
+    [self setupNotificationSettings];
     [[UIApplication sharedApplication] scheduleLocalNotification:notification];
 }
 

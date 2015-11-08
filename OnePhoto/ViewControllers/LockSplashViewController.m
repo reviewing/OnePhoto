@@ -34,6 +34,14 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (IBAction)unlock:(UIButton *)sender {
+    [self showUnlockAnimated:YES];
+}
+
+- (IBAction)unlockByPassword:(UIButton *)sender {
+    [self showPasscodeAnimated:YES];
+}
+
 /*
 #pragma mark - Navigation
 

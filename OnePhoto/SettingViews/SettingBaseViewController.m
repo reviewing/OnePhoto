@@ -31,7 +31,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    if ([IM_JUMPING_TO isEqualToString:@"UIImagePickerController"] || [IM_JUMPING_TO isEqualToString:@"RootViewController"]) {
+    if ([IM_JUMPING_TO isEqualToString:@"NewPhotoAction"] || [IM_JUMPING_TO isEqualToString:@"RootViewController"]) {
         [self.presentingViewController dismissViewControllerAnimated:NO completion:nil];
         return;
     }

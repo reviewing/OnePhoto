@@ -266,7 +266,7 @@
             if ([topController isKindOfClass:[UINavigationController class]] && [((UINavigationController *)topController).visibleViewController isKindOfClass:[RootViewController class]]) {
                 [((RootViewController *)((UINavigationController *)topController).visibleViewController) performSelector:@selector(newPhotoAction)];
             } else {
-                SET_JUMPING(@"UIImagePickerController", @"");
+                SET_JUMPING(@"NewPhotoAction", @"");
                 [GlobalUtils popToRootOrAfterPop:[SettingBaseViewController class]];
             }
         } else if ([action isEqualToString:@"open"]) {
@@ -280,7 +280,7 @@
         }
     } else {
         if ([action isEqualToString:@"add"]) {
-            SET_JUMPING(@"UIImagePickerController", @"");
+            SET_JUMPING(@"NewPhotoAction", @"");
         } else if ([action isEqualToString:@"open"]) {
             SET_JUMPING(@"RootViewController", @"");
         }

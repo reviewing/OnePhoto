@@ -1,0 +1,24 @@
+/* 
+  DBCamera.strings
+  DBCamera
+
+  Created by iBo on 11/02/14.
+  Copyright (c) 2014 PSSD - Daniele Bogo. All rights reserved.
+*/
+
+"button.use" = "选取";
+"button.retake" = "重拍";
+
+"general.error.title" = "注意";
+"general.button.cancel" = "取消";
+
+"cameraimage.nopolicy" = "请开启相机权限，通过设置 -> 隐私 -> 相机 开启";
+"cameraimage.noconnection" = "无法连接到相机，请检查设置 -> 隐私 -> 相机";
+
+"pickerimage.nopolicy" = "请开启相机权限，通过设置 -> 隐私 -> 照片 开启";
+"pickerimage.nophoto" = "你的相册里还没有照片";
+
+"pagecontrol.text" = "%i/%i";
+
+"cropmode.title" = "比例";
+"cropmode.square" = "正方形";

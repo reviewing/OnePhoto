@@ -19,12 +19,14 @@
 #import <MWPhotoBrowser/MWPhotoBrowser.h>
 #import <MWPhotoBrowser/MWPhoto.h>
 #import <MBProgressHUD/MBProgressHUD.h>
+#import <DBCamera/DBCameraViewController.h>
+#import <DBCamera/DBCameraContainerViewController.h>
 
 #import <MobileCoreServices/MobileCoreServices.h>
 
 #define MAIN_TITLE @"1 Photo"
 
-@interface RootViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate, MWPhotoBrowserDelegate> {
+@interface RootViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate, MWPhotoBrowserDelegate, DBCameraViewControllerDelegate> {
     MBProgressHUD *_hud;
     NSInteger _callbackCount;
     BOOL _isFirstAppear;
@@ -128,7 +130,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    if ([IM_JUMPING_TO isEqualToString:@"UIImagePickerController"]) {
+    if ([IM_JUMPING_TO isEqualToString:@"NewPhotoAction"]) {
         [self newPhotoAction];
         SET_JUMPING(nil, nil);
     } else if ([IM_JUMPING_TO isEqualToString:@"RootViewController"]) {
@@ -179,7 +181,7 @@
 }
 
 - (void)applicationDidBecomeActive:(NSNotification *)notification {
-    if ([IM_JUMPING_TO isEqualToString:@"UIImagePickerController"]) {
+    if ([IM_JUMPING_TO isEqualToString:@"NewPhotoAction"]) {
         [self newPhotoAction];
         SET_JUMPING(nil, nil);
     } else if ([IM_JUMPING_TO isEqualToString:@"RootViewController"]) {
@@ -214,6 +216,19 @@
 
 - (IBAction)takePhoto:(id)sender {
     [self newPhotoAction];
+}
+
+- (void)startDBCamera {
+    DBCameraViewController *cameraController = [DBCameraViewController initWithDelegate:self];
+    [cameraController setForceQuadCrop:YES];
+    
+    DBCameraContainerViewController *container = [[DBCameraContainerViewController alloc] initWithDelegate:self];
+    [container setCameraViewController:cameraController];
+    [container setFullScreenMode];
+    
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:container];
+    [nav setNavigationBarHidden:YES];
+    [self presentViewController:nav animated:YES completion:nil];
 }
 
 - (BOOL)startCameraControllerFromViewController:(UIViewController*) controller sourceType:(UIImagePickerControllerSourceType) sourceType
@@ -272,7 +287,7 @@
 // For responding to the user tapping Cancel.
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *) picker {
     _specifiedDate = nil;
-    if ([IM_JUMPING_TO isEqualToString:@"UIImagePickerController"]) {
+    if ([IM_JUMPING_TO isEqualToString:@"NewPhotoAction"]) {
         SET_JUMPING(nil, nil);
     }
     [self dismissViewControllerAnimated:YES completion:nil];
@@ -280,7 +295,7 @@
 
 // For responding to the user accepting a newly-captured picture or movie
 - (void)imagePickerController:(UIImagePickerController *) picker didFinishPickingMediaWithInfo:(NSDictionary *) info {
-    if ([IM_JUMPING_TO isEqualToString:@"UIImagePickerController"]) {
+    if ([IM_JUMPING_TO isEqualToString:@"NewPhotoAction"]) {
         SET_JUMPING(nil, nil);
     }
 
@@ -299,36 +314,63 @@
             imageToSave = originalImage;
         }
         
-        NSString *dateString = [GlobalUtils stringFromDate:_specifiedDate ? _specifiedDate : [NSDate date]];
-        NSString *photoPath = [@"photos" stringByAppendingPathComponent:[[dateString stringByAppendingString:[[[NSUUID UUID] UUIDString] substringToIndex:8]] stringByAppendingPathExtension:@"jpg"]];
-        
-        NSURL *ubiq = [[NSFileManager defaultManager] URLForUbiquityContainerIdentifier:nil];
-        NSURL *ubiquitousURL = [[ubiq URLByAppendingPathComponent:@"Documents"] URLByAppendingPathComponent:photoPath];
-        
-        OPPhotoCloud *photoCloud = [[OPPhotoCloud alloc] initWithFileURL:ubiquitousURL];
-        photoCloud.imageData = UIImageJPEGRepresentation(imageToSave, 0.8);
-        
-        __block BOOL isToday = !_specifiedDate;
-        [photoCloud saveToURL:[photoCloud fileURL] forSaveOperation:UIDocumentSaveForCreating completionHandler:^(BOOL success) {
-            if (success) {
-                [[CoreDataHelper sharedHelper] insertPhoto:photoPath];
-                if (isToday) {
-                    id reminderTime = [[NSUserDefaults standardUserDefaults] objectForKey:REMINDER_TIME_KEY];
-                    if ([reminderTime isKindOfClass:[NSDate class]]) {
-                        NSDate *fireDate = [GlobalUtils addToDate:[GlobalUtils HHmmToday:[[GlobalUtils HHmmFormatter] stringFromDate:reminderTime]] days:1];
-                        [GlobalUtils setDailyNotification:fireDate];
-                    }
-                }
-                [self renewPhotoCounts];
-                DHLogDebug(@"document saved successfully");
-            } else {
-                [GlobalUtils alertMessage:@"保存图片失败，请检查iCloud账户设置后重试"];
-            }
-        }];
+        [self saveImage:imageToSave];
     }
     
     _specifiedDate = nil;
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+#pragma mark - DBCameraViewControllerDelegate
+
+- (void)dismissCamera:(id)cameraViewController{
+    _specifiedDate = nil;
+    if ([IM_JUMPING_TO isEqualToString:@"NewPhotoAction"]) {
+        SET_JUMPING(nil, nil);
+    }
+    [self dismissViewControllerAnimated:YES completion:nil];
+    [cameraViewController restoreFullScreenMode];
+}
+
+- (void)camera:(id)cameraViewController didFinishWithImage:(UIImage *)image withMetadata:(NSDictionary *)metadata
+{
+    if ([IM_JUMPING_TO isEqualToString:@"NewPhotoAction"]) {
+        SET_JUMPING(nil, nil);
+    }
+
+    [self saveImage:image];
+    [cameraViewController restoreFullScreenMode];
+    _specifiedDate = nil;
+    [self.presentedViewController dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)saveImage:(UIImage *)image {
+    NSString *dateString = [GlobalUtils stringFromDate:_specifiedDate ? _specifiedDate : [NSDate date]];
+    NSString *photoPath = [@"photos" stringByAppendingPathComponent:[[dateString stringByAppendingString:[[[NSUUID UUID] UUIDString] substringToIndex:8]] stringByAppendingPathExtension:@"jpg"]];
+    
+    NSURL *ubiq = [[NSFileManager defaultManager] URLForUbiquityContainerIdentifier:nil];
+    NSURL *ubiquitousURL = [[ubiq URLByAppendingPathComponent:@"Documents"] URLByAppendingPathComponent:photoPath];
+    
+    OPPhotoCloud *photoCloud = [[OPPhotoCloud alloc] initWithFileURL:ubiquitousURL];
+    photoCloud.imageData = UIImageJPEGRepresentation(image, 0.8);
+    
+    __block BOOL isToday = !_specifiedDate;
+    [photoCloud saveToURL:[photoCloud fileURL] forSaveOperation:UIDocumentSaveForCreating completionHandler:^(BOOL success) {
+        if (success) {
+            [[CoreDataHelper sharedHelper] insertPhoto:photoPath];
+            if (isToday) {
+                id reminderTime = [[NSUserDefaults standardUserDefaults] objectForKey:REMINDER_TIME_KEY];
+                if ([reminderTime isKindOfClass:[NSDate class]]) {
+                    NSDate *fireDate = [GlobalUtils addToDate:[GlobalUtils HHmmToday:[[GlobalUtils HHmmFormatter] stringFromDate:reminderTime]] days:1];
+                    [GlobalUtils setDailyNotification:fireDate];
+                }
+            }
+            [self renewPhotoCounts];
+            DHLogDebug(@"document saved successfully");
+        } else {
+            [GlobalUtils alertMessage:@"保存图片失败，请检查iCloud账户设置后重试"];
+        }
+    }];
 }
 
 - (void)renewPhotoCounts {
@@ -451,7 +493,7 @@
                                                           }];
     UIAlertAction* cameraAction = [UIAlertAction actionWithTitle:@"拍摄一张照片" style:UIAlertActionStyleDefault
                                                          handler:^(UIAlertAction * action) {
-                                                             [self startCameraControllerFromViewController:self sourceType:UIImagePickerControllerSourceTypeCamera usingDelegate:self];
+                                                             [self startDBCamera];
                                                          }];
     UIAlertAction* cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel
                                                          handler:^(UIAlertAction * action) {}];

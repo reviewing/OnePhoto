@@ -277,7 +277,7 @@
             if (![VENTouchLock canUseTouchID]) {
                 sender.on = NO;
                 UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Touch ID不可用"
-                                                                               message:@"该设备尚未启用Touch ID，\n请到系统设置中开启"
+                                                                               message:@"该设备尚未启用或者不支持Touch ID，\n请到系统设置中开启"
                                                                         preferredStyle:UIAlertControllerStyleAlert];
                 UIAlertAction* confirmAction = [UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleCancel
                                                                       handler:^(UIAlertAction * action) {}];

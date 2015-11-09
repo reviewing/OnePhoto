@@ -37,7 +37,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ebU-NA-20G">
-                                <rect key="frame" x="201.5" y="564" width="197" height="28"/>
+                                <rect key="frame" x="201" y="436" width="197" height="28"/>
                                 <animations/>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <state key="normal" title="Touch ID出现问题？使用密码解锁">
@@ -55,7 +55,7 @@
                             <constraint firstItem="TX8-Y8-ncy" firstAttribute="centerX" secondItem="x7Y-sY-EJX" secondAttribute="centerX" id="5gr-Lp-njb"/>
                             <constraint firstItem="TX8-Y8-ncy" firstAttribute="centerY" secondItem="x7Y-sY-EJX" secondAttribute="centerY" multiplier="0.5" id="K6Z-PC-SFI"/>
                             <constraint firstItem="MEH-ob-oKk" firstAttribute="centerY" secondItem="x7Y-sY-EJX" secondAttribute="centerY" id="O7u-mG-r2b"/>
-                            <constraint firstItem="QQ6-mn-w3v" firstAttribute="top" secondItem="ebU-NA-20G" secondAttribute="bottom" constant="8" id="O8k-K9-pnA"/>
+                            <constraint firstItem="ebU-NA-20G" firstAttribute="centerY" secondItem="x7Y-sY-EJX" secondAttribute="centerY" multiplier="1.5" id="Owy-ac-Aih"/>
                             <constraint firstItem="MEH-ob-oKk" firstAttribute="centerX" secondItem="x7Y-sY-EJX" secondAttribute="centerX" id="ub8-TC-xd3"/>
                         </constraints>
                     </view>

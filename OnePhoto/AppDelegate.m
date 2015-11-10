@@ -14,8 +14,9 @@
 #import "RootViewController.h"
 #import "SettingsViewController.h"
 #import "LockSplashViewController.h"
+#import "WXApi.h"
 
-@interface AppDelegate () <FICImageCacheDelegate>
+@interface AppDelegate () <FICImageCacheDelegate, WXApiDelegate>
 
 @property (strong, nonatomic) UIView *snapshotView;
 
@@ -178,6 +179,7 @@
         [self checkIfNeedLock];
     }
     
+    [WXApi registerApp:@"wx849773dbbda54dc1"];
     return YES;
 }
 
@@ -308,7 +310,7 @@
     DHLogDebug(@"url recieved: %@", url);
     NSString *action = [[self parseQueryString:[url query]] objectForKey:@"action"];
     [self redirectBasedOnAction:action];
-    return YES;
+    return [WXApi handleOpenURL:url delegate:self];
 }
 
 - (void)redirectBasedOnAction:(NSString *)action {

@@ -24,6 +24,8 @@
 
 #import <MobileCoreServices/MobileCoreServices.h>
 
+#import "WXApi.h"
+
 #define MAIN_TITLE @"1 Photo"
 
 @interface RootViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate, MWPhotoBrowserDelegate, DBCameraViewControllerDelegate> {
@@ -229,6 +231,8 @@
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:container];
     [nav setNavigationBarHidden:YES];
     [self presentViewController:nav animated:YES completion:nil];
+    
+    [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
 }
 
 - (BOOL)startCameraControllerFromViewController:(UIViewController*) controller sourceType:(UIImagePickerControllerSourceType) sourceType
@@ -536,6 +540,60 @@
     [self presentActionSheetFrom:viewController title:@"删除照片" message:@"警告：删除后不可恢复" actions:[NSArray arrayWithObjects:deleteAction, cancelAction, nil] anchor:anchor];
 }
 
+- (void)sharePhotoAction:(UIViewController *)viewController anchor:(NSObject *)anchor photo:(OPPhoto *)photo {
+    NSURL *ubiq = [[NSFileManager defaultManager] URLForUbiquityContainerIdentifier:nil];
+    NSURL *ubiquitousURL = [[ubiq URLByAppendingPathComponent:@"Documents"] URLByAppendingPathComponent:photo.source_image_url];
+
+    UIAlertAction* weixinAction = [UIAlertAction actionWithTitle:@"分享给微信朋友" style:UIAlertActionStyleDefault
+                                                         handler:^(UIAlertAction * action) {
+                                                             [self sendImageData:[NSData dataWithContentsOfURL:ubiquitousURL]
+                                                                         TagName:@"WECHAT_TAG_JUMP_APP"
+                                                                      MessageExt:@"1 Photo"
+                                                                          Action:@"<action>open</action>"
+                                                                      ThumbImage:[GlobalUtils squareAndSmall:[UIImage imageWithContentsOfFile:ubiquitousURL.path]]
+                                                                         InScene:WXSceneSession];
+                                                         }];
+    UIAlertAction* weixinFCAction = [UIAlertAction actionWithTitle:@"分享到微信朋友圈" style:UIAlertActionStyleDefault
+                                                         handler:^(UIAlertAction * action) {
+                                                             [self sendImageData:[NSData dataWithContentsOfURL:ubiquitousURL]
+                                                                         TagName:@"WECHAT_TAG_JUMP_APP"
+                                                                      MessageExt:@"1 Photo"
+                                                                          Action:@"<action>open</action>"
+                                                                      ThumbImage:[GlobalUtils squareAndSmall:[UIImage imageWithContentsOfFile:ubiquitousURL.path]]
+                                                                         InScene:WXSceneTimeline];
+                                                         }];
+    UIAlertAction* systemAction = [UIAlertAction actionWithTitle:@"其它操作" style:UIAlertActionStyleDefault
+                                                         handler:^(UIAlertAction * action) {
+                                                             if ([viewController respondsToSelector:@selector(showProgressHUDWithMessage:)]) {
+                                                                 [viewController performSelector:@selector(showProgressHUDWithMessage:) withObject:nil];
+                                                             }
+                                                             NSMutableArray *items = [NSMutableArray arrayWithObject:[UIImage imageWithContentsOfFile:ubiquitousURL.path]];
+                                                             __block UIActivityViewController *activityViewController = [[UIActivityViewController alloc] initWithActivityItems:items applicationActivities:nil];
+                                                             
+                                                             activityViewController.completionWithItemsHandler = ^(NSString *activityType, BOOL completed, NSArray *returnedItems, NSError *activityError) {
+                                                                 activityViewController = nil;
+                                                             };
+                                                             // iOS 8 - Set the Anchor Point for the popover
+                                                             if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"8")) {
+                                                                 if ([anchor isKindOfClass:[UIView class]]) {
+                                                                     activityViewController.popoverPresentationController.sourceView = (UIView *)anchor;
+                                                                 } else if ([anchor isKindOfClass:[UIBarButtonItem class]]) {
+                                                                     activityViewController.popoverPresentationController.barButtonItem = (UIBarButtonItem *)anchor;
+                                                                 }
+                                                             }
+                                                             [viewController presentViewController:activityViewController animated:YES completion:^(){
+                                                                 if ([viewController respondsToSelector:@selector(hideProgressHUD:)]) {
+                                                                     [viewController performSelector:@selector(hideProgressHUD:) withObject:@YES];
+                                                                 }
+                                                             }];
+
+                                                         }];
+    UIAlertAction* cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel
+                                                         handler:^(UIAlertAction * action) {}];
+
+    [self presentActionSheetFrom:viewController title:@"分享照片" message:@"" actions:[NSArray arrayWithObjects:weixinAction, weixinFCAction, systemAction, cancelAction, nil] anchor:anchor];
+}
+
 - (void)presentActionSheetFrom:(UIViewController *)viewController title:(NSString *)title message:(NSString *)message actions:(NSArray *)actions anchor:(NSObject *)anchor {
     UIAlertController* alert = [UIAlertController alertControllerWithTitle:title
                                                                    message:message
@@ -625,21 +683,37 @@
 
 - (void)photoBrowser:(MWPhotoBrowser *)photoBrowser actionButtonPressedForPhotoAtIndex:(NSUInteger)index {
     OPPhoto *photo = [_photos objectAtIndex:index];
-    NSURL *ubiq = [[NSFileManager defaultManager] URLForUbiquityContainerIdentifier:nil];
-    NSURL *ubiquitousURL = [[ubiq URLByAppendingPathComponent:@"Documents"] URLByAppendingPathComponent:photo.source_image_url];
-
-    NSMutableArray *items = [NSMutableArray arrayWithObject:[UIImage imageWithContentsOfFile:ubiquitousURL.path]];
-    __block UIActivityViewController *activityViewController = [[UIActivityViewController alloc] initWithActivityItems:items applicationActivities:nil];
-    
-    activityViewController.completionWithItemsHandler = ^(NSString *activityType, BOOL completed, NSArray *returnedItems, NSError *activityError) {
-        activityViewController = nil;
-    };
-    // iOS 8 - Set the Anchor Point for the popover
+    NSObject *anchor;
     if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"8")) {
-        UIBarButtonItem *actionItem = [photoBrowser valueForKey:@"_actionButton"];
-        activityViewController.popoverPresentationController.barButtonItem = actionItem;
+        anchor = [photoBrowser valueForKey:@"_actionButton"];
     }
-    [photoBrowser presentViewController:activityViewController animated:YES completion:nil];
+    [self sharePhotoAction:photoBrowser anchor:anchor photo:photo];
+}
+
+- (BOOL)sendImageData:(NSData *)imageData
+              TagName:(NSString *)tagName
+           MessageExt:(NSString *)messageExt
+               Action:(NSString *)action
+           ThumbImage:(UIImage *)thumbImage
+              InScene:(enum WXScene)scene {
+    WXImageObject *ext = [WXImageObject object];
+    ext.imageData = imageData;
+    
+    WXMediaMessage *message = [WXMediaMessage message];
+    message.title = nil;
+    message.description = nil;
+    message.mediaObject = ext;
+    message.messageExt = messageExt;
+    message.messageAction = action;
+    message.mediaTagName = tagName;
+    [message setThumbImage:thumbImage];
+    
+    SendMessageToWXReq *req = [[SendMessageToWXReq alloc] init];
+    req.bText = NO;
+    req.scene = scene;
+    req.message = message;
+
+    return [WXApi sendReq:req];
 }
 
 - (void)photoBrowserDidFinishModalPresentation:(MWPhotoBrowser *)photoBrowser {

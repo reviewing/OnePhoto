@@ -25,6 +25,12 @@
 		187412ED1B96D27B0089CEFF /* OPCalendarWeekView.m in Sources */ = {isa = PBXBuildFile; fileRef = 187412EC1B96D27B0089CEFF /* OPCalendarWeekView.m */; };
 		187412F01B96D3790089CEFF /* OPCalendarPageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 187412EF1B96D3790089CEFF /* OPCalendarPageView.m */; };
 		187412F81B9BE3BB0089CEFF /* CoreDataHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 187412F71B9BE3BB0089CEFF /* CoreDataHelper.m */; };
+		1874B76B1BF226ED0093597C /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1874B7691BF226E00093597C /* CoreTelephony.framework */; };
+		1874B7701BF2270A0093597C /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1874B76D1BF2270A0093597C /* libWeChatSDK.a */; };
+		1874B7721BF22A690093597C /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1874B7711BF22A690093597C /* SystemConfiguration.framework */; };
+		1874B7741BF22A720093597C /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 1874B7731BF22A720093597C /* libz.tbd */; };
+		1874B7761BF22A800093597C /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 1874B7751BF22A800093597C /* libsqlite3.0.tbd */; };
+		1874B7781BF22A8A0093597C /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 1874B7771BF22A8A0093597C /* libc++.tbd */; };
 		188387A11BE8B7BB00207775 /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 188387A01BE8B7BB00207775 /* NotificationCenter.framework */; };
 		188387A51BE8B7BB00207775 /* TodayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 188387A41BE8B7BB00207775 /* TodayViewController.m */; };
 		188387A81BE8B7BB00207775 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 188387A61BE8B7BB00207775 /* MainInterface.storyboard */; };
@@ -112,6 +118,14 @@
 		187412F61B9BE3BB0089CEFF /* CoreDataHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreDataHelper.h; sourceTree = "<group>"; };
 		187412F71B9BE3BB0089CEFF /* CoreDataHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreDataHelper.m; sourceTree = "<group>"; };
 		187413021B9C2A670089CEFF /* OnePhoto 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "OnePhoto 2.xcdatamodel"; sourceTree = "<group>"; };
+		1874B7691BF226E00093597C /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		1874B76D1BF2270A0093597C /* libWeChatSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeChatSDK.a; sourceTree = "<group>"; };
+		1874B76E1BF2270A0093597C /* WXApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApi.h; sourceTree = "<group>"; };
+		1874B76F1BF2270A0093597C /* WXApiObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApiObject.h; sourceTree = "<group>"; };
+		1874B7711BF22A690093597C /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		1874B7731BF22A720093597C /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		1874B7751BF22A800093597C /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
+		1874B7771BF22A8A0093597C /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
 		1883879F1BE8B7BB00207775 /* OnePhotoSummary.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = OnePhotoSummary.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		188387A01BE8B7BB00207775 /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
 		188387A31BE8B7BB00207775 /* TodayViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TodayViewController.h; sourceTree = "<group>"; };
@@ -155,9 +169,15 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1874B7781BF22A8A0093597C /* libc++.tbd in Frameworks */,
+				1874B7761BF22A800093597C /* libsqlite3.0.tbd in Frameworks */,
+				1874B7741BF22A720093597C /* libz.tbd in Frameworks */,
+				1874B7721BF22A690093597C /* SystemConfiguration.framework in Frameworks */,
+				1874B76B1BF226ED0093597C /* CoreTelephony.framework in Frameworks */,
 				18F7501D1BC8B65C00B0BEB7 /* CloudKit.framework in Frameworks */,
 				18F406471B957F1900E97458 /* MobileCoreServices.framework in Frameworks */,
 				9F3ABF2846EB01A22A2D960C /* libPods-OnePhoto.a in Frameworks */,
+				1874B7701BF2270A0093597C /* libWeChatSDK.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -231,6 +251,7 @@
 		1867EB6B1B8F5E6400C10219 /* OnePhoto */ = {
 			isa = PBXGroup;
 			children = (
+				1874B76C1BF2270A0093597C /* Library */,
 				18E8943F1BD4EF2F00AA460A /* iCloud */,
 				18F7501B1BC8B2EC00B0BEB7 /* OnePhoto.entitlements */,
 				18F406311B94411300E97458 /* Categories */,
@@ -292,6 +313,16 @@
 				188387B81BEC8DEE00207775 /* LoadingViewController.m */,
 			);
 			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		1874B76C1BF2270A0093597C /* Library */ = {
+			isa = PBXGroup;
+			children = (
+				1874B76D1BF2270A0093597C /* libWeChatSDK.a */,
+				1874B76E1BF2270A0093597C /* WXApi.h */,
+				1874B76F1BF2270A0093597C /* WXApiObject.h */,
+			);
+			path = Library;
 			sourceTree = "<group>";
 		};
 		188387A21BE8B7BB00207775 /* OnePhotoSummary */ = {
@@ -364,6 +395,11 @@
 		4DE54957F1CA3C83994243B3 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1874B7771BF22A8A0093597C /* libc++.tbd */,
+				1874B7751BF22A800093597C /* libsqlite3.0.tbd */,
+				1874B7731BF22A720093597C /* libz.tbd */,
+				1874B7711BF22A690093597C /* SystemConfiguration.framework */,
+				1874B7691BF226E00093597C /* CoreTelephony.framework */,
 				18F7501C1BC8B65C00B0BEB7 /* CloudKit.framework */,
 				18F406461B957F1900E97458 /* MobileCoreServices.framework */,
 				FEC1568EF312A8929D22A563 /* libPods-OnePhoto.a */,
@@ -845,6 +881,10 @@
 				INFOPLIST_FILE = OnePhoto/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/OnePhoto/Library/**",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = top.defaults.OnePhoto;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -865,6 +905,10 @@
 				INFOPLIST_FILE = OnePhoto/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/OnePhoto/Library/**",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = top.defaults.OnePhoto;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";

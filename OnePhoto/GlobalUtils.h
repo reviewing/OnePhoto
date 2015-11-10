@@ -75,4 +75,6 @@ FOUNDATION_EXPORT NSString * const OPUbiquitousKeyValueStoreHasPhotoKey;
 
 + (UIImage *)imageWithColor:(UIColor *)color;
 
++ (UIImage *)squareAndSmall:(UIImage *)image;
+
 @end

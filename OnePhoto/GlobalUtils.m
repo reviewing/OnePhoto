@@ -277,4 +277,20 @@ static NSCalendar *_calendar = nil;
     return image;
 }
 
++ (UIImage *)squareAndSmall:(UIImage *)image {
+    CGSize finalsize = CGSizeMake(128,128);
+    
+    CGFloat scale = MAX(finalsize.width/image.size.width,
+                        finalsize.height/image.size.height);
+    CGFloat width = image.size.width * scale;
+    CGFloat height = image.size.height * scale;
+    
+    CGRect rr = CGRectMake( 0, 0, width, height);
+    UIGraphicsBeginImageContextWithOptions(finalsize, NO, 0);
+    [image drawInRect:rr];
+    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return newImage;
+}
+
 @end

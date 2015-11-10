@@ -17,6 +17,8 @@
 
 @interface AppDelegate () <FICImageCacheDelegate>
 
+@property (strong, nonatomic) UIView *snapshotView;
+
 @end
 
 @implementation AppDelegate
@@ -106,9 +108,7 @@
         }
     }
     
-    if ([[VENTouchLock sharedInstance] isPasscodeSet]) {
-        [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:YES] forKey:@"enable.passcode"];
-    }
+    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:[[VENTouchLock sharedInstance] isPasscodeSet]] forKey:@"enable.passcode"];
     
     [[NSUserDefaults standardUserDefaults] registerDefaults:defaults];
     
@@ -183,10 +183,29 @@
 - (void)applicationDidEnterBackground:(UIApplication *)application {
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+    [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate dateWithTimeIntervalSinceNow:0.1]];
+    VENTouchLockSplashViewController *snapshotSplashViewController = [[LockSplashViewController alloc] init];
+    [snapshotSplashViewController setIsSnapshotViewController:YES];
+    UIViewController *snapshotDisplayController;
+    snapshotDisplayController = snapshotSplashViewController;
+    [snapshotDisplayController loadView];
+    [snapshotDisplayController viewDidLoad];
+    UIWindow *mainWindow = [[UIApplication sharedApplication].windows firstObject];
+    snapshotDisplayController.view.frame = mainWindow.bounds;
+    self.snapshotView = snapshotDisplayController.view;
+    [mainWindow addSubview:self.snapshotView];
+
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [[VENTouchLock sharedInstance] lock];
+    });
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.snapshotView removeFromSuperview];
+        self.snapshotView = nil;
+    });
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {

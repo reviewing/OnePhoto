@@ -53,4 +53,6 @@ typedef NS_ENUM(NSUInteger, VENTouchLockSplashViewControllerUnlockType) {
  */
 - (void)setIsSnapshotViewController:(BOOL)isSnapshotViewController;
 
+- (BOOL)isSnapshotViewController;
+
 @end

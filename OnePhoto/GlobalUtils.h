@@ -12,6 +12,7 @@
 #define DEFAULTS_KEY_ENABLE_PASSCODE @"enable.passcode"
 #define DEFAULTS_KEY_PASSCODE_TIME @"passcode.time"
 #define DEFAULTS_KEY_LAST_BACKGROUND_TIME @"last.background.time"
+#define DEFAULTS_KEY_SAVE_TO_LIBRARY @"save.to.library"
 
 FOUNDATION_EXPORT NSString * const OPCoreDataStoreMerged;
 FOUNDATION_EXPORT NSString * const OPNotificationType;

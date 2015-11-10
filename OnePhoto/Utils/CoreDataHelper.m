@@ -101,10 +101,6 @@
             for (int i = 1; i < [photos count]; i++) {
                 [self deletePhoto:[photos objectAtIndex:i]];
             }
-            NSError *error;
-            if (_context.hasChanges && ![_context save:&error]) {
-                DHLogError(@"couldn't save: %@", [error localizedDescription]);
-            }
         }
         return [photos objectAtIndex:0];
     }
@@ -186,13 +182,15 @@
     
     BOOL isTodayPhotoTaked = NO;
     while ((photo = [photosEnumerator nextObject])) {
-        if ([photo.dateString isEqualToString:today]) {
+        if (!isTodayPhotoTaked && [photo.dateString isEqualToString:today]) {
             isTodayPhotoTaked = YES;
             consecutiveDays++;
         } else {
             if ([GlobalUtils date:photo.dateString isJustBefore:daySentinel]) {
                 consecutiveDays++;
                 daySentinel = photo.dateString;
+            } else if ([photo.dateString isEqualToString:daySentinel]) {
+                continue;
             } else {
                 break;
             }

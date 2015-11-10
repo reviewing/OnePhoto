@@ -141,7 +141,7 @@
 
 - (void) applicationDidEnterBackground:(NSNotification*)notifcation
 {
-    [_pageViewController.view setAlpha:0];
+//    [_pageViewController.view setAlpha:0];
 }
 
 - (void) loadLibraryGroups

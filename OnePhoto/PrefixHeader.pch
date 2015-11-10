@@ -69,6 +69,10 @@
 #define CLEAR_JUMP_TO() [[NSUserDefaults standardUserDefaults] removeObjectForKey:JUMP_TO]
 #define CLEAR_JUMP_FROM() [[NSUserDefaults standardUserDefaults] removeObjectForKey:JUMP_FROM]
 
+#define BOOL_FOR_KEY(key) [[NSUserDefaults standardUserDefaults] boolForKey:key]
+#define STRING_FOR_KEY(key) [[NSUserDefaults standardUserDefaults] stringForKey:key]
+#define INTEGER_FOR_KEY(key) [[NSUserDefaults standardUserDefaults] integerForKey:key]
+#define OBJECT_FOR_KEY(key) [[NSUserDefaults standardUserDefaults] objectForKey:key]
 
 #warning Don't release with this macro
 #define TEST_VERSION

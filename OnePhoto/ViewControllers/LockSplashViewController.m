@@ -10,6 +10,8 @@
 
 @interface LockSplashViewController ()
 
+@property (weak, nonatomic) IBOutlet UIButton *unlockButton;
+@property (weak, nonatomic) IBOutlet UIButton *unlockPasswordButton;
 @end
 
 @implementation LockSplashViewController
@@ -27,6 +29,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor darkGrayColor];
+    if (self.isSnapshotViewController) {
+        self.unlockButton.hidden = YES;
+        self.unlockPasswordButton.hidden = YES;
+    }
 }
 
 - (void)didReceiveMemoryWarning {

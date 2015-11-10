@@ -183,21 +183,27 @@
 - (void)applicationDidEnterBackground:(UIApplication *)application {
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
-    [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate dateWithTimeIntervalSinceNow:0.1]];
-    VENTouchLockSplashViewController *snapshotSplashViewController = [[LockSplashViewController alloc] init];
-    [snapshotSplashViewController setIsSnapshotViewController:YES];
-    UIViewController *snapshotDisplayController;
-    snapshotDisplayController = snapshotSplashViewController;
-    [snapshotDisplayController loadView];
-    [snapshotDisplayController viewDidLoad];
-    UIWindow *mainWindow = [[UIApplication sharedApplication].windows firstObject];
-    snapshotDisplayController.view.frame = mainWindow.bounds;
-    self.snapshotView = snapshotDisplayController.view;
-    [mainWindow addSubview:self.snapshotView];
+    if (BOOL_FOR_KEY(DEFAULTS_KEY_ENABLE_PASSCODE)) {
+        [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate dateWithTimeIntervalSinceNow:0.1]];
+        VENTouchLockSplashViewController *snapshotSplashViewController = [[LockSplashViewController alloc] init];
+        [snapshotSplashViewController setIsSnapshotViewController:YES];
+        UIViewController *snapshotDisplayController;
+        snapshotDisplayController = snapshotSplashViewController;
+        [snapshotDisplayController loadView];
+        [snapshotDisplayController viewDidLoad];
+        UIWindow *mainWindow = [[UIApplication sharedApplication].windows firstObject];
+        snapshotDisplayController.view.frame = mainWindow.bounds;
+        self.snapshotView = snapshotDisplayController.view;
+        [mainWindow addSubview:self.snapshotView];
 
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [[VENTouchLock sharedInstance] lock];
-    });
+        if (INTEGER_FOR_KEY(DEFAULTS_KEY_PASSCODE_TIME) == 0) {
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [[VENTouchLock sharedInstance] lock];
+            });
+        }
+    }
+    
+    [[NSUserDefaults standardUserDefaults] setObject:[NSDate date] forKey:DEFAULTS_KEY_LAST_BACKGROUND_TIME];
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
@@ -206,6 +212,18 @@
         [self.snapshotView removeFromSuperview];
         self.snapshotView = nil;
     });
+    
+    if (BOOL_FOR_KEY(DEFAULTS_KEY_ENABLE_PASSCODE)) {
+        if (!OBJECT_FOR_KEY(DEFAULTS_KEY_LAST_BACKGROUND_TIME)) {
+            [[VENTouchLock sharedInstance] lock];
+        } else if (INTEGER_FOR_KEY(DEFAULTS_KEY_PASSCODE_TIME) != 0) {
+            NSDate *lastBackgroundTime = OBJECT_FOR_KEY(DEFAULTS_KEY_LAST_BACKGROUND_TIME);
+            if ([[NSDate date] timeIntervalSinceDate:lastBackgroundTime] >= INTEGER_FOR_KEY(DEFAULTS_KEY_PASSCODE_TIME) * 60) {
+                [[VENTouchLock sharedInstance] lock];
+            }
+        }
+    }
+    [[NSUserDefaults standardUserDefaults] setObject:nil forKey:DEFAULTS_KEY_LAST_BACKGROUND_TIME];
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {

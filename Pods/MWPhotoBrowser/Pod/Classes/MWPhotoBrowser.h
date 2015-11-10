@@ -73,4 +73,7 @@
 - (void)showNextPhotoAnimated:(BOOL)animated;
 - (void)showPreviousPhotoAnimated:(BOOL)animated;
 
+- (void)showProgressHUDWithMessage:(NSString *)message;
+- (void)hideProgressHUD:(BOOL)animated;
+
 @end

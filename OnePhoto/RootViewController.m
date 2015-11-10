@@ -465,7 +465,9 @@
         }
         case OP_DAY_TOUCH_DELETE: {
             if (photo) {
-                [self deletePhotoAction:lOPDayView photo:photo];
+                [self deletePhotoActionFrom:self anchor:lOPDayView photo:photo completion:^(){
+                    [lOPDayView setPhoto:nil];
+                }];
             }
             break;
         }
@@ -512,10 +514,7 @@
     [self presentViewController:alert animated:YES completion:nil];
 }
 
-- (void)deletePhotoAction:(OPCalendarDayView *)dayView photo:(OPPhoto *)photo {
-    UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"删除照片"
-                                                                   message:@"警告：删除后不可恢复"
-                                                            preferredStyle:UIAlertControllerStyleActionSheet];
+- (void)deletePhotoActionFrom:(UIViewController *)viewController anchor:(NSObject *)anchor photo:(OPPhoto *)photo completion:(void (^)(void))completion {
     UIAlertAction* deleteAction = [UIAlertAction actionWithTitle:@"删除" style:UIAlertActionStyleDestructive
                                                          handler:^(UIAlertAction * action) {
                                                              [[CoreDataHelper sharedHelper] deletePhoto:photo];
@@ -525,18 +524,31 @@
                                                                  [GlobalUtils setDailyNotification:fireDate];
                                                              }
                                                              [self renewPhotoCounts];
-                                                             [dayView setPhoto:nil];
+                                                             completion();
                                                          }];
     UIAlertAction* cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel
                                                          handler:^(UIAlertAction * action) {}];
     
-    [alert addAction:deleteAction];
-    [alert addAction:cancelAction];
-    if([alert respondsToSelector:@selector(popoverPresentationController)]) {
-        // iOS8
-        alert.popoverPresentationController.sourceView = dayView;
+    [self presentActionSheetFrom:viewController title:@"删除照片" message:@"警告：删除后不可恢复" actions:[NSArray arrayWithObjects:deleteAction, cancelAction, nil] anchor:anchor];
+}
+
+- (void)presentActionSheetFrom:(UIViewController *)viewController title:(NSString *)title message:(NSString *)message actions:(NSArray *)actions anchor:(NSObject *)anchor {
+    UIAlertController* alert = [UIAlertController alertControllerWithTitle:title
+                                                                   message:message
+                                                            preferredStyle:UIAlertControllerStyleActionSheet];
+    for (UIAlertAction *action in actions) {
+        [alert addAction:action];
     }
-    [self presentViewController:alert animated:YES completion:nil];
+    
+    if([alert respondsToSelector:@selector(popoverPresentationController)]) {
+        if ([anchor isKindOfClass:[UIView class]]) {
+            alert.popoverPresentationController.sourceView = (UIView *)anchor;
+        } else if ([anchor isKindOfClass:[UIBarButtonItem class]]) {
+            alert.popoverPresentationController.barButtonItem = (UIBarButtonItem *)anchor;
+        }
+    }
+    
+    [viewController presentViewController:alert animated:YES completion:nil];
 }
 
 - (UIView<JTCalendarDay> *)calendarBuildDayView:(JTCalendarManager *)calendar {
@@ -594,6 +606,36 @@
 - (void)photoBrowser:(MWPhotoBrowser *)photoBrowser didDisplayPhotoAtIndex:(NSUInteger)index {
     OPPhoto *displayedPhoto = [_photos objectAtIndex:index];
     _selectedDate = [[GlobalUtils dateFormatter] dateFromString:displayedPhoto.dateString];
+}
+
+- (void)photoBrowser:(MWPhotoBrowser *)photoBrowser trashButtonPressedForPhotoAtIndex:(NSUInteger)index {
+    UIBarButtonItem *trashButton = [photoBrowser valueForKey:@"_trashButton"];
+    [self deletePhotoActionFrom:photoBrowser anchor:trashButton photo:[_photos objectAtIndex:index] completion:^(){
+        _photos = [[CoreDataHelper sharedHelper] allPhotosSorted];
+        if (index >= [_photos count]) {
+            [photoBrowser setCurrentPhotoIndex:[_photos count] - 1];
+        }
+        [photoBrowser reloadData];
+    }];
+}
+
+- (void)photoBrowser:(MWPhotoBrowser *)photoBrowser actionButtonPressedForPhotoAtIndex:(NSUInteger)index {
+    OPPhoto *photo = [_photos objectAtIndex:index];
+    NSURL *ubiq = [[NSFileManager defaultManager] URLForUbiquityContainerIdentifier:nil];
+    NSURL *ubiquitousURL = [[ubiq URLByAppendingPathComponent:@"Documents"] URLByAppendingPathComponent:photo.source_image_url];
+
+    NSMutableArray *items = [NSMutableArray arrayWithObject:[UIImage imageWithContentsOfFile:ubiquitousURL.path]];
+    __block UIActivityViewController *activityViewController = [[UIActivityViewController alloc] initWithActivityItems:items applicationActivities:nil];
+    
+    activityViewController.completionWithItemsHandler = ^(NSString *activityType, BOOL completed, NSArray *returnedItems, NSError *activityError) {
+        activityViewController = nil;
+    };
+    // iOS 8 - Set the Anchor Point for the popover
+    if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"8")) {
+        UIBarButtonItem *actionItem = [photoBrowser valueForKey:@"_actionButton"];
+        activityViewController.popoverPresentationController.barButtonItem = actionItem;
+    }
+    [photoBrowser presentViewController:activityViewController animated:YES completion:nil];
 }
 
 - (void)photoBrowserDidFinishModalPresentation:(MWPhotoBrowser *)photoBrowser {

@@ -47,6 +47,13 @@
                                     <action selector="unlockByPassword:" destination="Zur-dd-LVB" eventType="touchUpInside" id="jQf-e5-qiD"/>
                                 </connections>
                             </button>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="每天一张照片 ♥︎ 轻松记录生活" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fBv-G0-J1b">
+                                <rect key="frame" x="194" y="441" width="213" height="20"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <color key="textColor" cocoaTouchSystemColor="lightTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
@@ -56,10 +63,13 @@
                             <constraint firstItem="TX8-Y8-ncy" firstAttribute="centerY" secondItem="x7Y-sY-EJX" secondAttribute="centerY" multiplier="0.5" id="K6Z-PC-SFI"/>
                             <constraint firstItem="MEH-ob-oKk" firstAttribute="centerY" secondItem="x7Y-sY-EJX" secondAttribute="centerY" id="O7u-mG-r2b"/>
                             <constraint firstItem="ebU-NA-20G" firstAttribute="centerY" secondItem="x7Y-sY-EJX" secondAttribute="centerY" multiplier="1.5" id="Owy-ac-Aih"/>
+                            <constraint firstItem="fBv-G0-J1b" firstAttribute="centerY" secondItem="x7Y-sY-EJX" secondAttribute="centerY" multiplier="1.5" id="Sf1-mP-AwT"/>
+                            <constraint firstItem="fBv-G0-J1b" firstAttribute="centerX" secondItem="x7Y-sY-EJX" secondAttribute="centerX" id="lxp-CW-Lb2"/>
                             <constraint firstItem="MEH-ob-oKk" firstAttribute="centerX" secondItem="x7Y-sY-EJX" secondAttribute="centerX" id="ub8-TC-xd3"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="mottoLabel" destination="fBv-G0-J1b" id="mRK-xd-y1s"/>
                         <outlet property="unlockButton" destination="MEH-ob-oKk" id="WPg-38-DEE"/>
                         <outlet property="unlockPasswordButton" destination="ebU-NA-20G" id="GfJ-s6-KKl"/>
                     </connections>

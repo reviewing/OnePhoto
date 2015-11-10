@@ -12,6 +12,7 @@
 
 @property (weak, nonatomic) IBOutlet UIButton *unlockButton;
 @property (weak, nonatomic) IBOutlet UIButton *unlockPasswordButton;
+@property (weak, nonatomic) IBOutlet UILabel *mottoLabel;
 @end
 
 @implementation LockSplashViewController
@@ -32,6 +33,7 @@
     if (self.isSnapshotViewController) {
         self.unlockButton.hidden = YES;
         self.unlockPasswordButton.hidden = YES;
+        self.mottoLabel.hidden = NO;
     }
 }
 

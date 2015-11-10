@@ -109,7 +109,6 @@
     }
     
     [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:[[VENTouchLock sharedInstance] isPasscodeSet]] forKey:@"enable.passcode"];
-    
     [[NSUserDefaults standardUserDefaults] registerDefaults:defaults];
     
     UIUserNotificationType types = UIUserNotificationTypeBadge | UIUserNotificationTypeSound | UIUserNotificationTypeAlert;
@@ -172,6 +171,13 @@
                                                  name:UIApplicationSignificantTimeChangeNotification
                                                object:nil];
     [[CoreDataHelper sharedHelper] cacheNewDataForAppGroup];
+    
+    if (INTEGER_FOR_KEY(DEFAULTS_KEY_PASSCODE_TIME) == 0) {
+        [[VENTouchLock sharedInstance] lock];
+    } else {
+        [self checkIfNeedLock];
+    }
+    
     return YES;
 }
 
@@ -213,6 +219,19 @@
         self.snapshotView = nil;
     });
     
+    [self checkIfNeedLock];
+}
+
+- (void)applicationDidBecomeActive:(UIApplication *)application {
+    // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    NSURL *ubiq = [[NSFileManager defaultManager] URLForUbiquityContainerIdentifier:nil];
+    if (!ubiq) {
+        DHLogError(@"No iCloud access");
+        [GlobalUtils alertMessage:@"该设备没有设置iCloud账户，无法正常使用1 Photo，请在登录iCloud后重试"];
+    }
+}
+
+- (void)checkIfNeedLock {
     if (BOOL_FOR_KEY(DEFAULTS_KEY_ENABLE_PASSCODE)) {
         if (!OBJECT_FOR_KEY(DEFAULTS_KEY_LAST_BACKGROUND_TIME)) {
             [[VENTouchLock sharedInstance] lock];
@@ -224,15 +243,6 @@
         }
     }
     [[NSUserDefaults standardUserDefaults] setObject:nil forKey:DEFAULTS_KEY_LAST_BACKGROUND_TIME];
-}
-
-- (void)applicationDidBecomeActive:(UIApplication *)application {
-    // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-    NSURL *ubiq = [[NSFileManager defaultManager] URLForUbiquityContainerIdentifier:nil];
-    if (!ubiq) {
-        DHLogError(@"No iCloud access");
-        [GlobalUtils alertMessage:@"该设备没有设置iCloud账户，无法正常使用1 Photo，请在登录iCloud后重试"];
-    }
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {

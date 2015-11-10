@@ -20,7 +20,7 @@
 
 + (UIViewController*)ventouchlock_topMostController
 {
-    UIViewController *topController = [UIApplication sharedApplication].keyWindow.rootViewController;
+    UIViewController *topController = [UIApplication sharedApplication].delegate.window.rootViewController;
 
     while (topController.presentedViewController) {
         topController = topController.presentedViewController;

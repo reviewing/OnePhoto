@@ -191,6 +191,7 @@
             }];
         }
     } else {
+        [defaults setObject:nil forKey:TODAY_PHOTO_NAME];
         [defaults setObject:nil forKey:TODAT_IMAGE_DATA];
     }
     [self.wormhole passMessageObject:@{@"flag" : @"check"} identifier:@"update"];

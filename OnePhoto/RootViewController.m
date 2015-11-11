@@ -306,6 +306,8 @@
     NSString *mediaType = [info objectForKey: UIImagePickerControllerMediaType];
     UIImage *originalImage, *editedImage, *imageToSave;
     
+    BOOL success = YES;
+    
     // Handle a still image capture
     if (CFStringCompare((CFStringRef) mediaType, kUTTypeImage, 0) == kCFCompareEqualTo) {
         
@@ -318,11 +320,17 @@
             imageToSave = originalImage;
         }
         
-        [self saveImage:imageToSave shouldSaveToLibrary:NO];
+        success = [self saveImage:imageToSave shouldSaveToLibrary:NO];
     }
     
     _specifiedDate = nil;
-    [self dismissViewControllerAnimated:YES completion:nil];
+    [self dismissViewControllerAnimated:YES completion:^(){
+        if (!success) {
+            UIAlertAction* cancelAction = [UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleCancel
+                                                                 handler:^(UIAlertAction * action) {}];
+            [self presentAlertFrom:self title:@"发生错误" message:@"该设备没有设置iCloud账户，无法保存图片，请在登录iCloud后重试" actions:[NSArray arrayWithObject:cancelAction]];
+        }
+    }];
 }
 
 #pragma mark - DBCameraViewControllerDelegate
@@ -342,18 +350,28 @@
         SET_JUMPING(nil, nil);
     }
 
-    [self saveImage:image shouldSaveToLibrary:YES];
+    BOOL success = [self saveImage:image shouldSaveToLibrary:YES];
     [cameraViewController restoreFullScreenMode];
     _specifiedDate = nil;
-    [self.presentedViewController dismissViewControllerAnimated:YES completion:nil];
+    [self.presentedViewController dismissViewControllerAnimated:YES completion:^(){
+        if (!success) {
+            UIAlertAction* cancelAction = [UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleCancel
+                                                                 handler:^(UIAlertAction * action) {}];
+            [self presentAlertFrom:self title:@"发生错误" message:@"该设备没有设置iCloud账户，无法保存图片，请在登录iCloud后重试" actions:[NSArray arrayWithObject:cancelAction]];
+        }
+    }];
 }
 
-- (void)saveImage:(UIImage *)image shouldSaveToLibrary:(BOOL)saveToLibrary {
+- (BOOL)saveImage:(UIImage *)image shouldSaveToLibrary:(BOOL)saveToLibrary {
     NSString *dateString = [GlobalUtils stringFromDate:_specifiedDate ? _specifiedDate : [NSDate date]];
     NSString *photoPath = [@"photos" stringByAppendingPathComponent:[[dateString stringByAppendingString:[[[NSUUID UUID] UUIDString] substringToIndex:8]] stringByAppendingPathExtension:@"jpg"]];
     
     NSURL *ubiq = [[NSFileManager defaultManager] URLForUbiquityContainerIdentifier:nil];
     NSURL *ubiquitousURL = [[ubiq URLByAppendingPathComponent:@"Documents"] URLByAppendingPathComponent:photoPath];
+    
+    if (ubiquitousURL == nil) {
+        return NO;
+    }
     
     OPPhotoCloud *photoCloud = [[OPPhotoCloud alloc] initWithFileURL:ubiquitousURL];
     photoCloud.imageData = UIImageJPEGRepresentation(image, 0.8);
@@ -379,6 +397,8 @@
             [GlobalUtils alertMessage:@"保存图片失败，请检查iCloud账户设置后重试"];
         }
     }];
+    
+    return YES;
 }
 
 - (void)renewPhotoCounts {

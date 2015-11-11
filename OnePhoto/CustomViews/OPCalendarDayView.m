@@ -9,6 +9,7 @@
 #import "OPCalendarDayView.h"
 #import "CoreDataHelper.h"
 #import "OPPhoto.h"
+#import "OPMarkerView.h"
 
 #import <FastImageCache/FICImageCache.h>
 
@@ -20,32 +21,27 @@
 
 @implementation OPCalendarDayView
 
-- (instancetype)initWithFrame:(CGRect)frame
-{
+- (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
-    if(!self){
+    if (!self) {
         return nil;
     }
     
     [self commonInit];
-    
     return self;
 }
 
-- (instancetype)initWithCoder:(NSCoder *)aDecoder
-{
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
-    if(!self){
+    if (!self) {
         return nil;
     }
     
     [self commonInit];
-    
     return self;
 }
 
-- (void)commonInit
-{
+- (void)commonInit {
     self.opaque = NO;
     self.clipsToBounds = YES;
     
@@ -65,7 +61,7 @@
         _dotView = [UIView new];
         [self addSubview:_dotView];
         
-        _dotView.backgroundColor = [GlobalUtils appBaseColor];
+        _dotView.backgroundColor = [[GlobalUtils appBaseColor] colorWithAlphaComponent:0.75];
     }
     
     {
@@ -78,6 +74,11 @@
     }
     
     {
+        _markerView = [OPMarkerView new];
+        [self addSubview:_markerView];
+    }
+    
+    {
         self.userInteractionEnabled = YES;
 
         UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didTouch)];
@@ -87,8 +88,7 @@
     }
 }
 
-- (void)layoutSubviews
-{
+- (void)layoutSubviews {
     _photoView.frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height);
     
     [_textLabel sizeToFit];
@@ -101,10 +101,12 @@
     _dotView.frame = CGRectMake(0, 0, sizeDot, sizeDot);
     _dotView.center = CGPointMake(self.frame.size.width / 2., 4 + (_textLabel.frame.size.height / 2.));
     _dotView.layer.cornerRadius = sizeDot / 2.;
+    
+    _markerView.frame = CGRectMake(0, 0, 24, 24);
+    _markerView.center = CGPointMake(self.frame.size.width - 12, self.frame.size.height - 12);
 }
 
-- (void)setDate:(NSDate *)date
-{
+- (void)setDate:(NSDate *)date {
     NSAssert(date != nil, @"date cannot be nil");
     NSAssert(_manager != nil, @"manager cannot be nil");
     
@@ -126,8 +128,7 @@
     }
 }
 
-- (void)reload
-{
+- (void)reload {
     _textLabel.text = [NSString stringWithFormat:@"%ld", (long)[GlobalUtils dayOfMonth:_date]];
     [_textLabel sizeToFit];
 
@@ -142,11 +143,18 @@
 //        _textLabel.textColor = [UIColor whiteColor];
 //    }
     
+    NSString *dateString = [[GlobalUtils dateFormatter] stringFromDate:_date];
+    if ([[[CoreDataHelper sharedHelper] getPhotoAt:dateString] count] > 1) {
+        self.markerView.hidden = NO;
+    } else {
+        self.markerView.hidden = YES;
+    }
+    
     [_manager.delegateManager prepareDayView:self];
+    [self setNeedsDisplay];
 }
 
-- (void)didTouch
-{
+- (void)didTouch {
     self.touchEvent = OP_DAY_TOUCH_UP;
     [_manager.delegateManager didTouchDayView:self];
 }

@@ -410,6 +410,9 @@
 
 - (void)calendar:(JTCalendarManager *)calendar prepareDayView:(UIView<JTCalendarDay> *)dayView {
     dayView.hidden = NO;
+    dayView.layer.borderColor = [[UIColor clearColor] CGColor];
+    dayView.layer.borderWidth = 0;
+    ((OPCalendarDayView *)dayView).dotView.backgroundColor = [[GlobalUtils appBaseColor] colorWithAlphaComponent:0.75];
 
     if ([dayView isFromAnotherMonth]) {
         dayView.hidden = YES;
@@ -419,15 +422,14 @@
     // Selected
     else if(_selectedDate && [_calendarManager.dateHelper date:_selectedDate isTheSameDayThan:dayView.date]){
         dayView.layer.borderColor = [[GlobalUtils daySelectionColor] CGColor];
-        dayView.layer.borderWidth = 2;
+        dayView.layer.borderWidth = 1;
+        ((OPCalendarDayView *)dayView).dotView.backgroundColor = [[GlobalUtils daySelectionColor] colorWithAlphaComponent:0.75];
     }
     // Today
     else if([_calendarManager.dateHelper date:[NSDate date] isTheSameDayThan:dayView.date]){
-        dayView.layer.borderColor = [[GlobalUtils appBaseColor] CGColor];
-        dayView.layer.borderWidth = 2;
+
     } else {
-        dayView.layer.borderColor = [[UIColor clearColor] CGColor];
-        dayView.layer.borderWidth = 0;
+    
     }
 }
 
@@ -439,7 +441,11 @@
         [self.calendarContentView reloadData];
     }
     
-    OPPhoto *photo = [[CoreDataHelper sharedHelper] getPhotoAt:[GlobalUtils stringFromDate:lOPDayView.date]];
+    OPPhoto *photo;
+    NSArray *photosForThisDay = [[CoreDataHelper sharedHelper] getPhotoAt:[GlobalUtils stringFromDate:lOPDayView.date]];
+    if ([photosForThisDay count] > 0) {
+        photo = [photosForThisDay objectAtIndex:0];
+    }
     
     switch (lOPDayView.touchEvent) {
         case OP_DAY_TOUCH_UP: {

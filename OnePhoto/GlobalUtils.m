@@ -52,6 +52,10 @@ static NSCalendar *_calendar = nil;
     return UIColorFromRGB(0xC589E8);
 }
 
++ (UIColor *)warningColor {
+    return UIColorFromRGB(0xFF3864);
+}
+
 + (CGFloat)monthLabelSize {
     return 17.0f;
 }

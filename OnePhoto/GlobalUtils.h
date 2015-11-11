@@ -29,6 +29,8 @@ FOUNDATION_EXPORT NSString * const OPUbiquitousKeyValueStoreHasPhotoKey;
 
 + (UIColor *)daySelectionColor;
 
++ (UIColor *)warningColor;
+
 + (void)setAppBaseColor:(UIColor *)color;
 
 + (CGFloat)monthLabelSize;

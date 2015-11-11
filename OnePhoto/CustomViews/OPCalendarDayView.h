@@ -26,6 +26,8 @@ typedef NS_ENUM(NSInteger, OP_DAY_TOUCH_EVENT) {
 @property (nonatomic, readonly) UIView *dotView;
 @property (nonatomic, readonly) UILabel *textLabel;
 
+@property (nonatomic, strong) UIView *markerView;
+
 @property (nonatomic) BOOL isFromAnotherMonth;
 
 - (void)setPhoto:(OPPhoto *)photo;

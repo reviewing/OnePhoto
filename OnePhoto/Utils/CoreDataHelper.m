@@ -40,19 +40,12 @@
 }
 
 - (BOOL)isPhotoOfDateExists:(NSString *)date {
-    return [self getPhotoAt:date] != nil;
+    return [[self getPhotoAt:date] count] > 0;
 }
 
 - (void)insertPhoto:(NSString *)source_image_url {
     NSString *photoFileName = [source_image_url lastPathComponent];
     NSString *dateString = [photoFileName substringToIndex:8];
-    
-    // 删除老照片
-    OPPhoto *oldPhoto = [self getPhotoAt:dateString];
-    if (oldPhoto) {
-        [_context deleteObject:oldPhoto];
-        [self deleteImageCache:oldPhoto];
-    }
     
     OPPhoto *photo = [NSEntityDescription insertNewObjectForEntityForName:@"OPPhoto" inManagedObjectContext:_context];
     photo.source_image_url = source_image_url;
@@ -85,7 +78,7 @@
     [self cacheNewDataForAppGroup];
 }
 
-- (OPPhoto *)getPhotoAt:(NSString *)date {
+- (NSArray *)getPhotoAt:(NSString *)date {
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
     [request setEntity:[NSEntityDescription entityForName:@"OPPhoto" inManagedObjectContext:_context]];
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"dateString BEGINSWITH[c] %@", date];
@@ -95,16 +88,7 @@
     if (error) {
         DHLogError(@"couldn't fetch: %@", [error localizedDescription]);
     }
-    
-    if ([photos count] > 0) {
-        if ([photos count] > 1) {
-            for (int i = 1; i < [photos count]; i++) {
-                [self deletePhoto:[photos objectAtIndex:i]];
-            }
-        }
-        return [photos objectAtIndex:0];
-    }
-    return nil;
+    return photos;
 }
 
 - (NSArray *)getPhotosInMonth:(NSString *)month {

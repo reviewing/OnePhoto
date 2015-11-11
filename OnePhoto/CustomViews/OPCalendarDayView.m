@@ -151,7 +151,6 @@
     }
     
     [_manager.delegateManager prepareDayView:self];
-    [self setNeedsDisplay];
 }
 
 - (void)didTouch {

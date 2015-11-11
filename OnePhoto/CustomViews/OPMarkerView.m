@@ -13,6 +13,8 @@
     OPMarkerViewType _type;
 }
 
+@property (nonatomic, strong) UILabel *sign;
+
 @end
 
 @implementation OPMarkerView
@@ -41,6 +43,19 @@
     _position = OPMarkerViewPositionBottomRight;
     _type = OPMarkerViewTypeMultipleWarning;
     self.backgroundColor = [UIColor clearColor];
+    
+    _sign = [UILabel new];
+    [self addSubview:_sign];
+    
+    _sign.textColor = [UIColor whiteColor];
+    _sign.textAlignment = NSTextAlignmentCenter;
+    _sign.font = [UIFont boldSystemFontOfSize:15.0];
+    _sign.text = @"!";
+}
+
+- (void)layoutSubviews {
+    [_sign sizeToFit];
+    _sign.frame = CGRectMake((self.frame.size.width - _sign.frame.size.width) / 2. + 6, 6, _sign.frame.size.width, _sign.frame.size.height);
 }
 
 - (void)setPosition:(OPMarkerViewPosition)position {
@@ -50,20 +65,25 @@
 
 - (void)setType:(OPMarkerViewType)type {
     _type = type;
+    if (_type == OPMarkerViewTypeMultipleWarning) {
+        _sign.text = @"!";
+    }
     [self setNeedsDisplay];
 }
 
 - (void)drawRect:(CGRect)rect {
-    CGContextRef ctx = UIGraphicsGetCurrentContext();
+    if (_type == OPMarkerViewTypeMultipleWarning) {
+        CGContextRef ctx = UIGraphicsGetCurrentContext();
+        
+        CGContextBeginPath(ctx);
+        CGContextMoveToPoint   (ctx, CGRectGetMaxX(rect), CGRectGetMinY(rect));  // top left
+        CGContextAddLineToPoint(ctx, CGRectGetMinX(rect), CGRectGetMaxY(rect));  // mid right
+        CGContextAddLineToPoint(ctx, CGRectGetMaxX(rect), CGRectGetMaxY(rect));  // bottom left
+        CGContextClosePath(ctx);
     
-    CGContextBeginPath(ctx);
-    CGContextMoveToPoint   (ctx, CGRectGetMaxX(rect), CGRectGetMinY(rect));  // top left
-    CGContextAddLineToPoint(ctx, CGRectGetMinX(rect), CGRectGetMaxY(rect));  // mid right
-    CGContextAddLineToPoint(ctx, CGRectGetMaxX(rect), CGRectGetMaxY(rect));  // bottom left
-    CGContextClosePath(ctx);
-    
-    CGContextSetRGBFillColor(ctx, 1.0, 1.0/255.0, 1.0/255.0, 0.75);
-    CGContextFillPath(ctx);
+        CGContextSetRGBFillColor(ctx, 1.0, 1.0/255.0, 1.0/255.0, 0.75);
+        CGContextFillPath(ctx);
+    }
 }
 
 @end

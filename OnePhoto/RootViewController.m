@@ -546,21 +546,33 @@
 
     UIAlertAction* weixinAction = [UIAlertAction actionWithTitle:@"分享给微信朋友" style:UIAlertActionStyleDefault
                                                          handler:^(UIAlertAction * action) {
-                                                             [self sendImageData:[NSData dataWithContentsOfURL:ubiquitousURL]
-                                                                         TagName:@"WECHAT_TAG_JUMP_APP"
-                                                                      MessageExt:@"1 Photo"
-                                                                          Action:@"<action>open</action>"
-                                                                      ThumbImage:[GlobalUtils squareAndSmall:[UIImage imageWithContentsOfFile:ubiquitousURL.path]]
-                                                                         InScene:WXSceneSession];
-                                                         }];
+                                                             if ([WXApi isWXAppInstalled]) {
+                                                                 [self sendImageData:[NSData dataWithContentsOfURL:ubiquitousURL]
+                                                                             TagName:@"WECHAT_TAG_JUMP_APP"
+                                                                          MessageExt:@"1 Photo"
+                                                                              Action:@"<action>open</action>"
+                                                                          ThumbImage:[GlobalUtils squareAndSmall:[UIImage imageWithContentsOfFile:ubiquitousURL.path]]
+                                                                             InScene:WXSceneSession];
+                                                             } else {
+                                                                 UIAlertAction* cancelAction = [UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleCancel
+                                                                                                                      handler:^(UIAlertAction * action) {}];
+                                                                 [self presentAlertFrom:viewController title:@"无法打开微信" message:@"未检测到微信，请确认是否安装了微信" actions:[NSArray arrayWithObject:cancelAction]];
+                                                             }
+                                                        }];
     UIAlertAction* weixinFCAction = [UIAlertAction actionWithTitle:@"分享到微信朋友圈" style:UIAlertActionStyleDefault
                                                          handler:^(UIAlertAction * action) {
-                                                             [self sendImageData:[NSData dataWithContentsOfURL:ubiquitousURL]
-                                                                         TagName:@"WECHAT_TAG_JUMP_APP"
-                                                                      MessageExt:@"1 Photo"
-                                                                          Action:@"<action>open</action>"
-                                                                      ThumbImage:[GlobalUtils squareAndSmall:[UIImage imageWithContentsOfFile:ubiquitousURL.path]]
-                                                                         InScene:WXSceneTimeline];
+                                                             if ([WXApi isWXAppInstalled]) {
+                                                                 [self sendImageData:[NSData dataWithContentsOfURL:ubiquitousURL]
+                                                                             TagName:@"WECHAT_TAG_JUMP_APP"
+                                                                          MessageExt:@"1 Photo"
+                                                                              Action:@"<action>open</action>"
+                                                                          ThumbImage:[GlobalUtils squareAndSmall:[UIImage imageWithContentsOfFile:ubiquitousURL.path]]
+                                                                             InScene:WXSceneTimeline];
+                                                             } else {
+                                                                 UIAlertAction* cancelAction = [UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleCancel
+                                                                                                                      handler:^(UIAlertAction * action) {}];
+                                                                 [self presentAlertFrom:viewController title:@"无法打开微信" message:@"未检测到微信，请确认是否安装了微信" actions:[NSArray arrayWithObject:cancelAction]];
+                                                             }
                                                          }];
     UIAlertAction* systemAction = [UIAlertAction actionWithTitle:@"其它操作" style:UIAlertActionStyleDefault
                                                          handler:^(UIAlertAction * action) {
@@ -573,7 +585,6 @@
                                                              activityViewController.completionWithItemsHandler = ^(NSString *activityType, BOOL completed, NSArray *returnedItems, NSError *activityError) {
                                                                  activityViewController = nil;
                                                              };
-                                                             // iOS 8 - Set the Anchor Point for the popover
                                                              if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"8")) {
                                                                  if ([anchor isKindOfClass:[UIView class]]) {
                                                                      activityViewController.popoverPresentationController.sourceView = (UIView *)anchor;
@@ -592,6 +603,17 @@
                                                          handler:^(UIAlertAction * action) {}];
 
     [self presentActionSheetFrom:viewController title:@"分享照片" message:@"" actions:[NSArray arrayWithObjects:weixinAction, weixinFCAction, systemAction, cancelAction, nil] anchor:anchor];
+}
+
+- (void)presentAlertFrom:(UIViewController *)viewController title:(NSString *)title message:(NSString *)message actions:(NSArray *)actions {
+    UIAlertController* alert = [UIAlertController alertControllerWithTitle:title
+                                                                   message:message
+                                                            preferredStyle:UIAlertControllerStyleAlert];
+    for (UIAlertAction *action in actions) {
+        [alert addAction:action];
+    }
+    
+    [viewController presentViewController:alert animated:YES completion:nil];
 }
 
 - (void)presentActionSheetFrom:(UIViewController *)viewController title:(NSString *)title message:(NSString *)message actions:(NSArray *)actions anchor:(NSObject *)anchor {

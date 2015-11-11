@@ -308,12 +308,25 @@
 
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url options:(NSDictionary<NSString *,id> *)options {
     DHLogDebug(@"url recieved: %@", url);
+    BOOL handled = NO;
+    
     NSString *action = [[self parseQueryString:[url query]] objectForKey:@"action"];
-    [self redirectBasedOnAction:action];
-    return [WXApi handleOpenURL:url delegate:self];
+    handled = [self redirectBasedOnAction:action];
+    
+    if (!handled) {
+        handled = [WXApi handleOpenURL:url delegate:self];
+    } else {
+        [WXApi handleOpenURL:url delegate:self];
+    }
+    
+    return handled;
 }
 
-- (void)redirectBasedOnAction:(NSString *)action {
+- (void)onResp:(BaseResp *)resp {
+    DHLogDebug(@"resp class @ %@", [resp class]);
+}
+
+- (BOOL)redirectBasedOnAction:(NSString *)action {
     if (![[VENTouchLock sharedInstance] isPasscodeSet]) {
         if ([action isEqualToString:@"add"]) {
             UIViewController *topController = [GlobalUtils topMostController];
@@ -347,6 +360,12 @@
             }
         }
     }
+    
+    if ([action isEqualToString:@"add"] || [action isEqualToString:@"open"]) {
+        return YES;
+    }
+    
+    return NO;
 }
 
 #pragma mark - Core Data stack

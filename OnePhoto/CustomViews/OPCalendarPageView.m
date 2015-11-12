@@ -51,6 +51,7 @@
 - (void)commonInit
 {
     // Maybe used in future
+    self.backgroundColor = [UIColor clearColor];
 }
 
 - (void)setDate:(NSDate *)date

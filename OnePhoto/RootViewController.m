@@ -62,6 +62,9 @@
     _weekDayView.manager = _calendarManager;
     [_weekDayView reload];
     
+    _calendarContentView.backgroundView = nil;
+    _calendarContentView.backgroundColor = UIColorFromRGBA(0xeeeeeecf);
+    
     [_calendarManager setContentView:_calendarContentView];
     [_calendarManager setDate:[NSDate date]];
     

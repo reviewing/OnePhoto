@@ -38,6 +38,8 @@
 
 - (void)commonInit
 {
+    self.backgroundColor = UIColorFromRGBA(0xeeeeeecf);
+
     NSMutableArray *dayViews = [NSMutableArray new];
     
     for(int i = 0; i < NUMBER_OF_DAY_BY_WEEK; ++i){
@@ -52,6 +54,7 @@
             label.textColor = [GlobalUtils appBaseDarkerColor];
         }
         label.font = [UIFont systemFontOfSize:11];
+        label.backgroundColor = [UIColor clearColor];
     }
     
     _dayViews = dayViews;

@@ -45,6 +45,8 @@
     self.opaque = NO;
     self.clipsToBounds = YES;
     
+    self.backgroundColor = [UIColor clearColor];
+    
     {
         // This will stuck the scrolling
 //        self.layer.cornerRadius = 5.0;

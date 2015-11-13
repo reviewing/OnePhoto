@@ -31,6 +31,7 @@ typedef NS_ENUM(NSInteger, OP_DAY_TOUCH_EVENT) {
 @property (nonatomic) BOOL isFromAnotherMonth;
 
 - (void)setPhoto:(OPPhoto *)photo;
+- (OPPhoto *)photo;
 
 @property (nonatomic) OP_DAY_TOUCH_EVENT touchEvent;
 

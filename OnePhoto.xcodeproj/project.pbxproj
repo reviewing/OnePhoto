@@ -13,6 +13,8 @@
 		1850F6EC1BD8DB0900818142 /* EditTextViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1850F6E71BD8DB0900818142 /* EditTextViewController.m */; };
 		1850F6ED1BD8DB0900818142 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1850F6E91BD8DB0900818142 /* SettingsViewController.m */; };
 		1850F6EE1BD8DB0900818142 /* ValueSelectorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1850F6EB1BD8DB0900818142 /* ValueSelectorViewController.m */; };
+		18603DD31BF45A9500A369A3 /* iCloudAccessor.m in Sources */ = {isa = PBXBuildFile; fileRef = 18603DD21BF45A9500A369A3 /* iCloudAccessor.m */; };
+		18603DEE1BF5B69500A369A3 /* MultiPhotoViewer.m in Sources */ = {isa = PBXBuildFile; fileRef = 18603DED1BF5B69500A369A3 /* MultiPhotoViewer.m */; };
 		1867EB6F1B8F5E6400C10219 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 1867EB6E1B8F5E6400C10219 /* main.m */; };
 		1867EB721B8F5E6400C10219 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1867EB711B8F5E6400C10219 /* AppDelegate.m */; };
 		1867EB751B8F5E6400C10219 /* OnePhoto.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1867EB731B8F5E6400C10219 /* OnePhoto.xcdatamodeld */; };
@@ -95,6 +97,10 @@
 		1850F6E91BD8DB0900818142 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
 		1850F6EA1BD8DB0900818142 /* ValueSelectorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ValueSelectorViewController.h; sourceTree = "<group>"; };
 		1850F6EB1BD8DB0900818142 /* ValueSelectorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ValueSelectorViewController.m; sourceTree = "<group>"; };
+		18603DD11BF45A9500A369A3 /* iCloudAccessor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iCloudAccessor.h; sourceTree = "<group>"; };
+		18603DD21BF45A9500A369A3 /* iCloudAccessor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iCloudAccessor.m; sourceTree = "<group>"; };
+		18603DEC1BF5B69500A369A3 /* MultiPhotoViewer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MultiPhotoViewer.h; sourceTree = "<group>"; };
+		18603DED1BF5B69500A369A3 /* MultiPhotoViewer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MultiPhotoViewer.m; sourceTree = "<group>"; };
 		1867EB691B8F5E6400C10219 /* OnePhoto.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OnePhoto.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1867EB6D1B8F5E6400C10219 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1867EB6E1B8F5E6400C10219 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -384,6 +390,10 @@
 				18F4063A1B944EF600E97458 /* DHLogger.m */,
 				187412F61B9BE3BB0089CEFF /* CoreDataHelper.h */,
 				187412F71B9BE3BB0089CEFF /* CoreDataHelper.m */,
+				18603DD11BF45A9500A369A3 /* iCloudAccessor.h */,
+				18603DD21BF45A9500A369A3 /* iCloudAccessor.m */,
+				18603DEC1BF5B69500A369A3 /* MultiPhotoViewer.h */,
+				18603DED1BF5B69500A369A3 /* MultiPhotoViewer.m */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -704,6 +714,7 @@
 				1867EB721B8F5E6400C10219 /* AppDelegate.m in Sources */,
 				189C558C1BF2F0E800279C3F /* OPMarkerView.m in Sources */,
 				18E894421BD4EF6200AA460A /* OPPhotoCloud.m in Sources */,
+				18603DD31BF45A9500A369A3 /* iCloudAccessor.m in Sources */,
 				183C69FC1BDE0DDB008E93AB /* ReminderViewController.m in Sources */,
 				187412F81B9BE3BB0089CEFF /* CoreDataHelper.m in Sources */,
 				18F405621B93683700E97458 /* OPCalendarDayView.m in Sources */,
@@ -720,6 +731,7 @@
 				1867EB751B8F5E6400C10219 /* OnePhoto.xcdatamodeld in Sources */,
 				1850F6EE1BD8DB0900818142 /* ValueSelectorViewController.m in Sources */,
 				18F406341B94414C00E97458 /* UIColor+Remix.m in Sources */,
+				18603DEE1BF5B69500A369A3 /* MultiPhotoViewer.m in Sources */,
 				1850F6EC1BD8DB0900818142 /* EditTextViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -15,6 +15,8 @@
 #import "OPPhoto.h"
 #import "OPPhotoCloud.h"
 #import "CoreDataHelper.h"
+#import "iCloudAccessor.h"
+#import "MultiPhotoViewer.h"
 #import <FastImageCache/FICImageCache.h>
 #import <MWPhotoBrowser/MWPhotoBrowser.h>
 #import <MWPhotoBrowser/MWPhoto.h>
@@ -35,6 +37,8 @@
     NSArray *_photos;
     NSDate *_specifiedDate;
     NSDate *_selectedDate;
+    
+    MultiPhotoViewer *_multiPhotoView;
 }
 
 @property (weak, nonatomic) IBOutlet OPCalendarWeekDayView *weekDayView;
@@ -149,13 +153,20 @@
     
     [[NSUbiquitousKeyValueStore defaultStore] synchronize];
     
-    [[NSNotificationCenter defaultCenter] addObserverForName:OPCoreDataStoreMerged
+    [[NSNotificationCenter defaultCenter] addObserverForName:OPCoreDataStoreMergedNotification
                                                       object:nil
                                                        queue:[NSOperationQueue mainQueue]
                                                   usingBlock:^(NSNotification *note) {
                                                       DHLogDebug(@"OPCoreDataStoreMergedNotification");
                                                       [self.calendarContentView reloadData];
                                                       [self setHeaderTitle:MAIN_TITLE andSubtitle:nil];
+                                                  }];
+    [[NSNotificationCenter defaultCenter] addObserverForName:OPiCloudPhotosMetadataUpdatedNotification
+                                                      object:nil
+                                                       queue:[NSOperationQueue mainQueue]
+                                                  usingBlock:^(NSNotification *note) {
+                                                      DHLogDebug(@"OPiCloudPhotosMetadataUpdatedNotification");
+                                                      [self.calendarContentView reloadData];
                                                   }];
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(applicationDidBecomeActive:)
@@ -331,7 +342,7 @@
         if (!success) {
             UIAlertAction* cancelAction = [UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleCancel
                                                                  handler:^(UIAlertAction * action) {}];
-            [self presentAlertFrom:self title:@"发生错误" message:@"该设备没有设置iCloud账户，无法保存图片，请在登录iCloud后重试" actions:[NSArray arrayWithObject:cancelAction]];
+            [GlobalUtils presentAlertFrom:self title:@"发生错误" message:@"该设备没有设置iCloud账户，无法保存图片，请在登录iCloud后重试" actions:[NSArray arrayWithObject:cancelAction]];
         }
     }];
 }
@@ -360,7 +371,7 @@
         if (!success) {
             UIAlertAction* cancelAction = [UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleCancel
                                                                  handler:^(UIAlertAction * action) {}];
-            [self presentAlertFrom:self title:@"发生错误" message:@"该设备没有设置iCloud账户，无法保存图片，请在登录iCloud后重试" actions:[NSArray arrayWithObject:cancelAction]];
+            [GlobalUtils presentAlertFrom:self title:@"发生错误" message:@"该设备没有设置iCloud账户，无法保存图片，请在登录iCloud后重试" actions:[NSArray arrayWithObject:cancelAction]];
         }
     }];
 }
@@ -394,7 +405,7 @@
                     [GlobalUtils setDailyNotification:fireDate];
                 }
             }
-            [self renewPhotoCounts];
+            [GlobalUtils renewPhotoCounts];
             DHLogDebug(@"document saved successfully");
         } else {
             [GlobalUtils alertMessage:@"保存图片失败，请检查iCloud账户设置后重试"];
@@ -402,15 +413,6 @@
     }];
     
     return YES;
-}
-
-- (void)renewPhotoCounts {
-    NSInteger count = [[CoreDataHelper sharedHelper] countOfPhotos];
-    if (count < 0) {
-        count = (NSInteger)[[NSUbiquitousKeyValueStore defaultStore] longLongForKey:OPUbiquitousKeyValueStoreHasPhotoKey] + 1;
-    }
-    DHLogDebug(@"renewPhotoCounts: %ld", (long)count);
-    [[NSUbiquitousKeyValueStore defaultStore] setLongLong:count forKey:OPUbiquitousKeyValueStoreHasPhotoKey];
 }
 
 #pragma mark - CalendarManager delegate
@@ -464,14 +466,34 @@
         [self.calendarContentView reloadData];
     }
     
-    OPPhoto *photo;
-    NSArray *photosForThisDay = [[CoreDataHelper sharedHelper] getPhotoAt:[GlobalUtils stringFromDate:lOPDayView.date]];
-    if ([photosForThisDay count] > 0) {
-        photo = [photosForThisDay objectAtIndex:0];
-    }
+    OPPhoto *photo = [lOPDayView photo];
     
     switch (lOPDayView.touchEvent) {
         case OP_DAY_TOUCH_UP: {
+            if (!lOPDayView.markerView.hidden) {
+                NSString *dateString = [[GlobalUtils dateFormatter] stringFromDate:lOPDayView.date];
+                _multiPhotoView = [[MultiPhotoViewer alloc] initWithHost:self
+                                                                    date:dateString
+                                                                selected:photo.source_image_url
+                                                                coreData:[[CoreDataHelper sharedHelper] getPhotosAt:dateString]
+                                                                  iCloud:[[iCloudAccessor shareAccessor] urlsAt:dateString]];
+                MWPhotoBrowser *browser = [[MWPhotoBrowser alloc] initWithDelegate:_multiPhotoView];
+                browser.displayActionButton = YES;
+                browser.displayNavArrows = YES;
+                browser.alwaysShowControls = YES;
+                browser.zoomPhotosToFill = YES;
+                
+                [browser showNextPhotoAnimated:YES];
+                [browser showPreviousPhotoAnimated:YES];
+                [browser setCurrentPhotoIndex:0];
+
+                UINavigationController *nc = [[UINavigationController alloc] initWithRootViewController:browser];
+                nc.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+                [self presentViewController:nc animated:YES completion:nil];
+
+                break;
+            }
+            
             if (photo) {
                 _photos = [[CoreDataHelper sharedHelper] allPhotosSorted];
                 
@@ -502,7 +524,7 @@
         }
         case OP_DAY_TOUCH_DELETE: {
             if (photo) {
-                [self deletePhotoActionFrom:self anchor:lOPDayView photo:photo completion:^(){
+                [GlobalUtils deletePhotoActionFrom:self anchor:lOPDayView photo:photo completion:^(){
                     [lOPDayView setPhoto:nil];
                 }];
             }
@@ -549,119 +571,6 @@
         }
     }
     [self presentViewController:alert animated:YES completion:nil];
-}
-
-- (void)deletePhotoActionFrom:(UIViewController *)viewController anchor:(NSObject *)anchor photo:(OPPhoto *)photo completion:(void (^)(void))completion {
-    UIAlertAction* deleteAction = [UIAlertAction actionWithTitle:@"删除" style:UIAlertActionStyleDestructive
-                                                         handler:^(UIAlertAction * action) {
-                                                             [[CoreDataHelper sharedHelper] deletePhoto:photo];
-                                                             id reminderTime = [[NSUserDefaults standardUserDefaults] objectForKey:REMINDER_TIME_KEY];
-                                                             if ([reminderTime isKindOfClass:[NSDate class]]) {
-                                                                 NSDate *fireDate = [GlobalUtils HHmmToday:[[GlobalUtils HHmmFormatter] stringFromDate:reminderTime]];
-                                                                 [GlobalUtils setDailyNotification:fireDate];
-                                                             }
-                                                             [self renewPhotoCounts];
-                                                             completion();
-                                                         }];
-    UIAlertAction* cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel
-                                                         handler:^(UIAlertAction * action) {}];
-    
-    [self presentActionSheetFrom:viewController title:@"删除照片" message:@"警告：删除后不可恢复" actions:[NSArray arrayWithObjects:deleteAction, cancelAction, nil] anchor:anchor];
-}
-
-- (void)sharePhotoAction:(UIViewController *)viewController anchor:(NSObject *)anchor photo:(OPPhoto *)photo {
-    NSURL *ubiq = [[NSFileManager defaultManager] URLForUbiquityContainerIdentifier:nil];
-    NSURL *ubiquitousURL = [[ubiq URLByAppendingPathComponent:@"Documents"] URLByAppendingPathComponent:photo.source_image_url];
-
-    UIAlertAction* weixinAction = [UIAlertAction actionWithTitle:@"分享给微信朋友" style:UIAlertActionStyleDefault
-                                                         handler:^(UIAlertAction * action) {
-                                                             if ([WXApi isWXAppInstalled]) {
-                                                                 [self sendImageData:[NSData dataWithContentsOfURL:ubiquitousURL]
-                                                                             TagName:@"WECHAT_TAG_JUMP_APP"
-                                                                          MessageExt:@"1 Photo"
-                                                                              Action:@"<action>open</action>"
-                                                                          ThumbImage:[GlobalUtils squareAndSmall:[UIImage imageWithContentsOfFile:ubiquitousURL.path]]
-                                                                             InScene:WXSceneSession];
-                                                             } else {
-                                                                 UIAlertAction* cancelAction = [UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleCancel
-                                                                                                                      handler:^(UIAlertAction * action) {}];
-                                                                 [self presentAlertFrom:viewController title:@"无法打开微信" message:@"未检测到微信，请确认是否安装了微信" actions:[NSArray arrayWithObject:cancelAction]];
-                                                             }
-                                                        }];
-    UIAlertAction* weixinFCAction = [UIAlertAction actionWithTitle:@"分享到微信朋友圈" style:UIAlertActionStyleDefault
-                                                         handler:^(UIAlertAction * action) {
-                                                             if ([WXApi isWXAppInstalled]) {
-                                                                 [self sendImageData:[NSData dataWithContentsOfURL:ubiquitousURL]
-                                                                             TagName:@"WECHAT_TAG_JUMP_APP"
-                                                                          MessageExt:@"1 Photo"
-                                                                              Action:@"<action>open</action>"
-                                                                          ThumbImage:[GlobalUtils squareAndSmall:[UIImage imageWithContentsOfFile:ubiquitousURL.path]]
-                                                                             InScene:WXSceneTimeline];
-                                                             } else {
-                                                                 UIAlertAction* cancelAction = [UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleCancel
-                                                                                                                      handler:^(UIAlertAction * action) {}];
-                                                                 [self presentAlertFrom:viewController title:@"无法打开微信" message:@"未检测到微信，请确认是否安装了微信" actions:[NSArray arrayWithObject:cancelAction]];
-                                                             }
-                                                         }];
-    UIAlertAction* systemAction = [UIAlertAction actionWithTitle:@"其它操作" style:UIAlertActionStyleDefault
-                                                         handler:^(UIAlertAction * action) {
-                                                             if ([viewController respondsToSelector:@selector(showProgressHUDWithMessage:)]) {
-                                                                 [viewController performSelector:@selector(showProgressHUDWithMessage:) withObject:nil];
-                                                             }
-                                                             NSMutableArray *items = [NSMutableArray arrayWithObject:[UIImage imageWithContentsOfFile:ubiquitousURL.path]];
-                                                             __block UIActivityViewController *activityViewController = [[UIActivityViewController alloc] initWithActivityItems:items applicationActivities:nil];
-                                                             
-                                                             activityViewController.completionWithItemsHandler = ^(NSString *activityType, BOOL completed, NSArray *returnedItems, NSError *activityError) {
-                                                                 activityViewController = nil;
-                                                             };
-                                                             if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"8")) {
-                                                                 if ([anchor isKindOfClass:[UIView class]]) {
-                                                                     activityViewController.popoverPresentationController.sourceView = (UIView *)anchor;
-                                                                 } else if ([anchor isKindOfClass:[UIBarButtonItem class]]) {
-                                                                     activityViewController.popoverPresentationController.barButtonItem = (UIBarButtonItem *)anchor;
-                                                                 }
-                                                             }
-                                                             [viewController presentViewController:activityViewController animated:YES completion:^(){
-                                                                 if ([viewController respondsToSelector:@selector(hideProgressHUD:)]) {
-                                                                     [viewController performSelector:@selector(hideProgressHUD:) withObject:@YES];
-                                                                 }
-                                                             }];
-
-                                                         }];
-    UIAlertAction* cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel
-                                                         handler:^(UIAlertAction * action) {}];
-
-    [self presentActionSheetFrom:viewController title:@"分享照片" message:@"" actions:[NSArray arrayWithObjects:weixinAction, weixinFCAction, systemAction, cancelAction, nil] anchor:anchor];
-}
-
-- (void)presentAlertFrom:(UIViewController *)viewController title:(NSString *)title message:(NSString *)message actions:(NSArray *)actions {
-    UIAlertController* alert = [UIAlertController alertControllerWithTitle:title
-                                                                   message:message
-                                                            preferredStyle:UIAlertControllerStyleAlert];
-    for (UIAlertAction *action in actions) {
-        [alert addAction:action];
-    }
-    
-    [viewController presentViewController:alert animated:YES completion:nil];
-}
-
-- (void)presentActionSheetFrom:(UIViewController *)viewController title:(NSString *)title message:(NSString *)message actions:(NSArray *)actions anchor:(NSObject *)anchor {
-    UIAlertController* alert = [UIAlertController alertControllerWithTitle:title
-                                                                   message:message
-                                                            preferredStyle:UIAlertControllerStyleActionSheet];
-    for (UIAlertAction *action in actions) {
-        [alert addAction:action];
-    }
-    
-    if([alert respondsToSelector:@selector(popoverPresentationController)]) {
-        if ([anchor isKindOfClass:[UIView class]]) {
-            alert.popoverPresentationController.sourceView = (UIView *)anchor;
-        } else if ([anchor isKindOfClass:[UIBarButtonItem class]]) {
-            alert.popoverPresentationController.barButtonItem = (UIBarButtonItem *)anchor;
-        }
-    }
-    
-    [viewController presentViewController:alert animated:YES completion:nil];
 }
 
 - (UIView<JTCalendarDay> *)calendarBuildDayView:(JTCalendarManager *)calendar {
@@ -723,7 +632,7 @@
 
 - (void)photoBrowser:(MWPhotoBrowser *)photoBrowser trashButtonPressedForPhotoAtIndex:(NSUInteger)index {
     UIBarButtonItem *trashButton = [photoBrowser valueForKey:@"_trashButton"];
-    [self deletePhotoActionFrom:photoBrowser anchor:trashButton photo:[_photos objectAtIndex:index] completion:^(){
+    [GlobalUtils deletePhotoActionFrom:photoBrowser anchor:trashButton photo:[_photos objectAtIndex:index] completion:^(){
         _photos = [[CoreDataHelper sharedHelper] allPhotosSorted];
         if (index >= [_photos count]) {
             [photoBrowser setCurrentPhotoIndex:[_photos count] - 1];
@@ -738,33 +647,7 @@
     if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"8")) {
         anchor = [photoBrowser valueForKey:@"_actionButton"];
     }
-    [self sharePhotoAction:photoBrowser anchor:anchor photo:photo];
-}
-
-- (BOOL)sendImageData:(NSData *)imageData
-              TagName:(NSString *)tagName
-           MessageExt:(NSString *)messageExt
-               Action:(NSString *)action
-           ThumbImage:(UIImage *)thumbImage
-              InScene:(enum WXScene)scene {
-    WXImageObject *ext = [WXImageObject object];
-    ext.imageData = imageData;
-    
-    WXMediaMessage *message = [WXMediaMessage message];
-    message.title = nil;
-    message.description = nil;
-    message.mediaObject = ext;
-    message.messageExt = messageExt;
-    message.messageAction = action;
-    message.mediaTagName = tagName;
-    [message setThumbImage:thumbImage];
-    
-    SendMessageToWXReq *req = [[SendMessageToWXReq alloc] init];
-    req.bText = NO;
-    req.scene = scene;
-    req.message = message;
-
-    return [WXApi sendReq:req];
+    [GlobalUtils sharePhotoAction:photoBrowser anchor:anchor photo:photo];
 }
 
 - (void)photoBrowserDidFinishModalPresentation:(MWPhotoBrowser *)photoBrowser {

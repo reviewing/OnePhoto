@@ -64,7 +64,7 @@
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(){
         __block NSDate *date = [self.date copy];
-        __block NSArray *photos = [[CoreDataHelper sharedHelper] getPhotosInMonth:[[GlobalUtils stringFromDate:date] substringToIndex:6]];
+        __block NSArray *photos = [[CoreDataHelper sharedHelper] getPhotosForAMonthView:[[GlobalUtils stringFromDate:date] substringToIndex:6]];
         dispatch_async(dispatch_get_main_queue(), ^(){
             if ([self.manager.dateHelper date:date isTheSameDayThan:self.date]) {
                 for (OPCalendarWeekView *weekView in _weeksViews) {

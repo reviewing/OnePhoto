@@ -14,10 +14,14 @@
 #define DEFAULTS_KEY_LAST_BACKGROUND_TIME @"last.background.time"
 #define DEFAULTS_KEY_SAVE_TO_LIBRARY @"save.to.library"
 
-FOUNDATION_EXPORT NSString * const OPCoreDataStoreMerged;
+FOUNDATION_EXPORT NSString * const OPCoreDataStoreMergedNotification;
+FOUNDATION_EXPORT NSString * const OPiCloudPhotosMetadataUpdatedNotification;
+
 FOUNDATION_EXPORT NSString * const OPNotificationType;
 FOUNDATION_EXPORT NSString * const OPNotificationTypeDailyReminder;
 FOUNDATION_EXPORT NSString * const OPUbiquitousKeyValueStoreHasPhotoKey;
+
+@class OPPhoto;
 
 @interface GlobalUtils : NSObject
 
@@ -42,6 +46,8 @@ FOUNDATION_EXPORT NSString * const OPUbiquitousKeyValueStoreHasPhotoKey;
 + (NSDateFormatter *)HHmmFormatter;
 
 + (NSDateFormatter *)chineseFormatter;
+
++ (NSString *)chineseRepresentation:(NSString *)dateString;
 
 + (NSUInteger)daysOfMonthByDate:(NSDate *)date;
 
@@ -78,5 +84,21 @@ FOUNDATION_EXPORT NSString * const OPUbiquitousKeyValueStoreHasPhotoKey;
 + (UIImage *)imageWithColor:(UIColor *)color;
 
 + (UIImage *)squareAndSmall:(UIImage *)image;
+
++ (void)deletePhotoActionFrom:(UIViewController *)viewController anchor:(NSObject *)anchor photo:(OPPhoto *)photo completion:(void (^)(void))completion;
+
++ (void)deletePhotoActionFrom:(UIViewController *)viewController anchor:(NSObject *)anchor photoUrl:(NSURL *)url completion:(void (^)(void))completion;
+
++ (void)sharePhotoAction:(UIViewController *)viewController anchor:(NSObject *)anchor photo:(OPPhoto *)photo;
+
++ (void)presentAlertFrom:(UIViewController *)viewController title:(NSString *)title message:(NSString *)message actions:(NSArray *)actions;
+
++ (void)presentActionSheetFrom:(UIViewController *)viewController title:(NSString *)title message:(NSString *)message actions:(NSArray *)actions anchor:(NSObject *)anchor;
+
++ (void)renewPhotoCounts;
+
+#pragma mark - Others
+
++ (NSString *)last2PathComponentsOf:(NSURL *)url;
 
 @end

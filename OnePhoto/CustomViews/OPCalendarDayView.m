@@ -8,6 +8,7 @@
 
 #import "OPCalendarDayView.h"
 #import "CoreDataHelper.h"
+#import "iCloudAccessor.h"
 #import "OPPhoto.h"
 #import "OPMarkerView.h"
 
@@ -146,7 +147,8 @@
 //    }
     
     NSString *dateString = [[GlobalUtils dateFormatter] stringFromDate:_date];
-    if ([[[CoreDataHelper sharedHelper] getPhotoAt:dateString] count] > 1) {
+    if ([[[CoreDataHelper sharedHelper] getPhotosAt:dateString] count] > 1 || [[[iCloudAccessor shareAccessor] urlsAt:dateString] count] > 1
+        || ([[[CoreDataHelper sharedHelper] getPhotosAt:dateString] count] == 0 && [[[iCloudAccessor shareAccessor] urlsAt:dateString] count] > 0)) {
         self.markerView.hidden = NO;
     } else {
         self.markerView.hidden = YES;

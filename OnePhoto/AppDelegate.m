@@ -11,6 +11,7 @@
 #import <VENTouchLock/VENTouchLock.h>
 #import "OPPhoto.h"
 #import "CoreDataHelper.h"
+#import "iCloudAccessor.h"
 #import "RootViewController.h"
 #import "SettingsViewController.h"
 #import "LockSplashViewController.h"
@@ -149,7 +150,7 @@
                                                       [self.managedObjectContext performBlock:^{
                                                           [self.managedObjectContext mergeChangesFromContextDidSaveNotification:note];
                                                           dispatch_async(dispatch_get_main_queue(), ^(){
-                                                              [[NSNotificationCenter defaultCenter] postNotificationName:OPCoreDataStoreMerged object:nil];
+                                                              [[NSNotificationCenter defaultCenter] postNotificationName:OPCoreDataStoreMergedNotification object:nil];
                                                               [[CoreDataHelper sharedHelper] cacheNewDataForAppGroup];
                                                           });
                                                       }];
@@ -162,7 +163,7 @@
                                                       [self.managedObjectContext performBlock:^{
                                                           [self.managedObjectContext mergeChangesFromContextDidSaveNotification:note];
                                                           dispatch_async(dispatch_get_main_queue(), ^(){
-                                                              [[NSNotificationCenter defaultCenter] postNotificationName:OPCoreDataStoreMerged object:nil];
+                                                              [[NSNotificationCenter defaultCenter] postNotificationName:OPCoreDataStoreMergedNotification object:nil];
                                                               [[CoreDataHelper sharedHelper] cacheNewDataForAppGroup];
                                                           });
                                                       }];
@@ -212,6 +213,7 @@
     }
     
     [[NSUserDefaults standardUserDefaults] setObject:[NSDate date] forKey:DEFAULTS_KEY_LAST_BACKGROUND_TIME];
+    [[iCloudAccessor shareAccessor] stopQuery];
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
@@ -230,6 +232,8 @@
     if (!ubiq) {
         DHLogError(@"No iCloud access");
         [GlobalUtils alertMessage:@"该设备没有设置iCloud账户，无法正常使用1 Photo，请在登录iCloud后重试"];
+    } else {
+        [[iCloudAccessor shareAccessor] startQuery];
     }
 }
 

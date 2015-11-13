@@ -8,6 +8,7 @@
 
 #import "CoreDataHelper.h"
 #import "OPPhoto.h"
+#import "iCloudAccessor.h"
 #import "AppDelegate.h"
 #import <FastImageCache/FICImageCache.h>
 #import <MMWormhole/MMWormhole.h>
@@ -40,7 +41,7 @@
 }
 
 - (BOOL)isPhotoOfDateExists:(NSString *)date {
-    return [[self getPhotoAt:date] count] > 0;
+    return [[self getPhotosAt:date] count] > 0;
 }
 
 - (void)insertPhoto:(NSString *)source_image_url {
@@ -59,26 +60,17 @@
 
 - (void)deletePhoto:(OPPhoto *)photo {
     [self deleteImageCache:photo];
-    NSURL *ubiq = [[NSFileManager defaultManager] URLForUbiquityContainerIdentifier:nil];
-    NSURL *ubiquitousURL = [[ubiq URLByAppendingPathComponent:@"Documents"] URLByAppendingPathComponent:photo.source_image_url];
     [_context deleteObject:photo];
     NSError *error;
     if (_context.hasChanges && ![_context save:&error]) {
         DHLogError(@"couldn't save: %@", [error localizedDescription]);
     } else {
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
-            NSFileCoordinator* fileCoordinator = [[NSFileCoordinator alloc] initWithFilePresenter:nil];
-            [fileCoordinator coordinateWritingItemAtURL:ubiquitousURL options:NSFileCoordinatorWritingForDeleting
-                                                  error:nil byAccessor:^(NSURL* writingURL) {
-                                                      NSFileManager* fileManager = [[NSFileManager alloc] init];
-                                                      [fileManager removeItemAtURL:writingURL error:nil];
-                                                  }];
-        });
+        [[iCloudAccessor shareAccessor] deleteFileWithRelativelyPath:photo.source_image_url];
     }
     [self cacheNewDataForAppGroup];
 }
 
-- (NSArray *)getPhotoAt:(NSString *)date {
+- (NSArray *)getPhotosAt:(NSString *)date {
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
     [request setEntity:[NSEntityDescription entityForName:@"OPPhoto" inManagedObjectContext:_context]];
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"dateString BEGINSWITH[c] %@", date];
@@ -91,7 +83,7 @@
     return photos;
 }
 
-- (NSArray *)getPhotosInMonth:(NSString *)month {
+- (NSArray *)getPhotosForAMonthView:(NSString *)month {
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
     [request setEntity:[NSEntityDescription entityForName:@"OPPhoto" inManagedObjectContext:_context]];
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"dateString BEGINSWITH[c] %@", month];

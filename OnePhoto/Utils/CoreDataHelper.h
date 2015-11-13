@@ -20,9 +20,9 @@
 
 - (void)deletePhoto:(OPPhoto *)photo;
 
-- (NSArray *)getPhotoAt:(NSString *)date;
+- (NSArray *)getPhotosAt:(NSString *)date;
 
-- (NSArray *)getPhotosInMonth:(NSString *)month;
+- (NSArray *)getPhotosForAMonthView:(NSString *)month;
 
 - (NSDate *)firstDayIn1Photo;
 

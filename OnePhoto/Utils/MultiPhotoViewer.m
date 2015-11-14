@@ -101,6 +101,9 @@ typedef void (^completionBlock)(void);
             [photoBrowser setCurrentPhotoIndex:[_mergedPhotos count] - 1];
         }
         [photoBrowser reloadData];
+        if ([_mergedPhotos count] == 0) {
+            [_hostViewController dismissViewControllerAnimated:YES completion:nil];
+        }
     };
     if ([[_mergedPhotos objectAtIndex:index] isKindOfClass:[OPPhoto class]]) {
         [GlobalUtils deletePhotoActionFrom:photoBrowser anchor:trashButton photo:[_mergedPhotos objectAtIndex:index] completion:completion];
@@ -110,12 +113,15 @@ typedef void (^completionBlock)(void);
 }
 
 - (void)photoBrowser:(MWPhotoBrowser *)photoBrowser actionButtonPressedForPhotoAtIndex:(NSUInteger)index {
-    OPPhoto *photo = [_mergedPhotos objectAtIndex:index];
     NSObject *anchor;
     if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"8")) {
         anchor = [photoBrowser valueForKey:@"_actionButton"];
     }
-    [GlobalUtils sharePhotoAction:photoBrowser anchor:anchor photo:photo];
+    if ([[_mergedPhotos objectAtIndex:index] isKindOfClass:[OPPhoto class]]) {
+        [GlobalUtils sharePhotoAction:photoBrowser anchor:anchor photo:[_mergedPhotos objectAtIndex:index]];
+    } else if ([[_mergedPhotos objectAtIndex:index] isKindOfClass:[NSURL class]]) {
+        [GlobalUtils sharePhotoAction:photoBrowser anchor:anchor photoUrl:[_mergedPhotos objectAtIndex:index]];
+    }
 }
 
 - (void)photoBrowserDidFinishModalPresentation:(MWPhotoBrowser *)photoBrowser {

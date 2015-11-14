@@ -127,6 +127,7 @@
             }
         }];
     } else {
+        _photo = nil;
         [_photoView setImage:nil];
     }
 }

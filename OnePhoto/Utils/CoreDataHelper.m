@@ -59,13 +59,14 @@
 }
 
 - (void)deletePhoto:(OPPhoto *)photo {
+    NSString *photoPath = photo.source_image_url;
     [self deleteImageCache:photo];
     [_context deleteObject:photo];
     NSError *error;
     if (_context.hasChanges && ![_context save:&error]) {
         DHLogError(@"couldn't save: %@", [error localizedDescription]);
     } else {
-        [[iCloudAccessor shareAccessor] deleteFileWithRelativelyPath:photo.source_image_url];
+        [[iCloudAccessor shareAccessor] deleteFileWithRelativelyPath:photoPath];
     }
     [self cacheNewDataForAppGroup];
 }

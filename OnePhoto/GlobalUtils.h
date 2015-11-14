@@ -91,6 +91,8 @@ FOUNDATION_EXPORT NSString * const OPUbiquitousKeyValueStoreHasPhotoKey;
 
 + (void)sharePhotoAction:(UIViewController *)viewController anchor:(NSObject *)anchor photo:(OPPhoto *)photo;
 
++ (void)sharePhotoAction:(UIViewController *)viewController anchor:(NSObject *)anchor photoUrl:(NSURL *)url;
+
 + (void)presentAlertFrom:(UIViewController *)viewController title:(NSString *)title message:(NSString *)message actions:(NSArray *)actions;
 
 + (void)presentActionSheetFrom:(UIViewController *)viewController title:(NSString *)title message:(NSString *)message actions:(NSArray *)actions anchor:(NSObject *)anchor;

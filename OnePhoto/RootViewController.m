@@ -146,13 +146,10 @@
         SET_JUMPING(nil, nil);
     }
     
-    [[NSNotificationCenter defaultCenter] addObserverForName:OPCoreDataStoreUpdatedNotification
-                                                      object:nil
-                                                       queue:[NSOperationQueue mainQueue]
-                                                  usingBlock:^(NSNotification *note) {
-                                                      DHLogDebug(@"OPCoreDataStoreUpdatedNotification");
-                                                      [self.calendarContentView reloadData];
-                                                  }];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(coreDataStoreUpdated:)
+                                                 name:OPCoreDataStoreUpdatedNotification
+                                               object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(applicationDidBecomeActive:)
                                                  name:UIApplicationDidBecomeActiveNotification
@@ -172,6 +169,11 @@
     [super viewWillDisappear:animated];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     [_hud hide:YES];
+}
+
+- (void)coreDataStoreUpdated:(NSNotification *)notification {
+    DHLogDebug(@"OPCoreDataStoreUpdatedNotification");
+    [self.calendarContentView reloadData];
 }
 
 - (void)applicationDidBecomeActive:(NSNotification *)notification {

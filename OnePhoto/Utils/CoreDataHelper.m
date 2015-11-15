@@ -41,18 +41,21 @@
 }
 
 - (void)tryRefresh {
-    [[NSNotificationCenter defaultCenter] addObserverForName:OPiCloudPhotosMetadataUpdatedNotification
-                                                      object:nil
-                                                       queue:[NSOperationQueue mainQueue]
-                                                  usingBlock:^(NSNotification *note) {
-                                                      DHLogDebug(@"OPiCloudPhotosMetadataUpdatedNotification");
-                                                      [self perfromRefresh];
-                                                  }];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:OPiCloudPhotosMetadataUpdatedNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(iCloudPhotosMetadataUpdated:)
+                                                 name:OPiCloudPhotosMetadataUpdatedNotification
+                                               object:nil];
     [[iCloudAccessor shareAccessor] startQuery];
 }
 
+- (void)iCloudPhotosMetadataUpdated:(NSNotification *)notification {
+    DHLogDebug(@"OPiCloudPhotosMetadataUpdatedNotification");
+    [self perfromRefresh];
+}
+
 - (void)perfromRefresh {
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:OPiCloudPhotosMetadataUpdatedNotification object:nil];
     [[iCloudAccessor shareAccessor] stopQuery];
     NSSet *photos = [self allPhotos];
     for (OPPhoto *photo in photos) {

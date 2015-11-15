@@ -83,6 +83,20 @@
     [[NSNotificationCenter defaultCenter] postNotificationName:OPiCloudPhotosMetadataUpdatedNotification object:nil];
 }
 
+- (NSArray *)urls {
+    return _iCloudURLs;
+}
+
+- (BOOL)relativelyPathExists:(NSString *)path {
+    NSURL *ubiq = [[NSFileManager defaultManager] URLForUbiquityContainerIdentifier:nil];
+    NSURL *ubiquitousURL = [[ubiq URLByAppendingPathComponent:@"Documents"] URLByAppendingPathComponent:path];
+    return [self urlExists:ubiquitousURL];
+}
+
+- (BOOL)urlExists:(NSURL *)url {
+    return [_iCloudURLs containsObject:url];
+}
+
 - (NSArray *)urlsAt:(NSString *)date {
     if (!_iCloudURLs) {
         return nil;

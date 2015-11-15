@@ -14,7 +14,7 @@
 #define DEFAULTS_KEY_LAST_BACKGROUND_TIME @"last.background.time"
 #define DEFAULTS_KEY_SAVE_TO_LIBRARY @"save.to.library"
 
-FOUNDATION_EXPORT NSString * const OPCoreDataStoreMergedNotification;
+FOUNDATION_EXPORT NSString * const OPCoreDataStoreUpdatedNotification;
 FOUNDATION_EXPORT NSString * const OPiCloudPhotosMetadataUpdatedNotification;
 
 FOUNDATION_EXPORT NSString * const OPNotificationType;

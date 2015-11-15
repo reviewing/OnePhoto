@@ -16,6 +16,12 @@
 
 - (void)startQuery;
 
+- (NSArray *)urls;
+
+- (BOOL)relativelyPathExists:(NSString *)path;
+
+- (BOOL)urlExists:(NSURL *)url;
+
 - (NSArray *)urlsAt:(NSString *)date;
 
 - (void)deleteFileWithRelativelyPath:(NSString *)path;

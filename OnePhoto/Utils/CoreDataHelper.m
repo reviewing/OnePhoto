@@ -40,6 +40,37 @@
     return sharedInstance;
 }
 
+- (void)tryRefresh {
+    [[NSNotificationCenter defaultCenter] addObserverForName:OPiCloudPhotosMetadataUpdatedNotification
+                                                      object:nil
+                                                       queue:[NSOperationQueue mainQueue]
+                                                  usingBlock:^(NSNotification *note) {
+                                                      DHLogDebug(@"OPiCloudPhotosMetadataUpdatedNotification");
+                                                      [self perfromRefresh];
+                                                  }];
+    [[iCloudAccessor shareAccessor] startQuery];
+}
+
+- (void)perfromRefresh {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [[iCloudAccessor shareAccessor] stopQuery];
+    NSSet *photos = [self allPhotos];
+    for (OPPhoto *photo in photos) {
+        if (![[iCloudAccessor shareAccessor] relativelyPathExists:photo.source_image_url]) {
+            [self deletePhoto:photo];
+        }
+    }
+    NSArray *urls = [[iCloudAccessor shareAccessor] urls];
+    for (NSURL *url in urls) {
+        NSString *dateString = [[url.path lastPathComponent] substringToIndex:8];
+        NSString *relativelyPath = [GlobalUtils last2PathComponentsOf:url];
+        if (![self isPhotoOfDateExists:dateString]) {
+            [self insertPhoto:relativelyPath];
+        }
+    }
+    [[NSNotificationCenter defaultCenter] postNotificationName:OPCoreDataStoreUpdatedNotification object:nil];
+}
+
 - (BOOL)isPhotoOfDateExists:(NSString *)date {
     return [[self getPhotosAt:date] count] > 0;
 }

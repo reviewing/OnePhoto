@@ -145,27 +145,12 @@
     } else if ([IM_JUMPING_TO isEqualToString:@"RootViewController"]) {
         SET_JUMPING(nil, nil);
     }
-
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(storeDidChange:)
-                                                 name:NSUbiquitousKeyValueStoreDidChangeExternallyNotification
-                                               object:[NSUbiquitousKeyValueStore defaultStore]];
     
-    [[NSUbiquitousKeyValueStore defaultStore] synchronize];
-    
-    [[NSNotificationCenter defaultCenter] addObserverForName:OPCoreDataStoreMergedNotification
+    [[NSNotificationCenter defaultCenter] addObserverForName:OPCoreDataStoreUpdatedNotification
                                                       object:nil
                                                        queue:[NSOperationQueue mainQueue]
                                                   usingBlock:^(NSNotification *note) {
-                                                      DHLogDebug(@"OPCoreDataStoreMergedNotification");
-                                                      [self.calendarContentView reloadData];
-                                                      [self setHeaderTitle:MAIN_TITLE andSubtitle:nil];
-                                                  }];
-    [[NSNotificationCenter defaultCenter] addObserverForName:OPiCloudPhotosMetadataUpdatedNotification
-                                                      object:nil
-                                                       queue:[NSOperationQueue mainQueue]
-                                                  usingBlock:^(NSNotification *note) {
-                                                      DHLogDebug(@"OPiCloudPhotosMetadataUpdatedNotification");
+                                                      DHLogDebug(@"OPCoreDataStoreUpdatedNotification");
                                                       [self.calendarContentView reloadData];
                                                   }];
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -187,13 +172,6 @@
     [super viewWillDisappear:animated];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     [_hud hide:YES];
-}
-
-- (void)storeDidChange:(NSNotification *)notification {
-    DHLogDebug(@"storeDidChange");
-    long long countOfPhotos = [[NSUbiquitousKeyValueStore defaultStore] longLongForKey:OPUbiquitousKeyValueStoreHasPhotoKey];
-    DHLogDebug(@"countOfPhotos: %lld", countOfPhotos);
-    [self setHeaderTitle:MAIN_TITLE andSubtitle:@"正在同步..."];
 }
 
 - (void)applicationDidBecomeActive:(NSNotification *)notification {

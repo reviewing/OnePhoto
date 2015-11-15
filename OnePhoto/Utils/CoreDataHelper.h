@@ -14,6 +14,8 @@
 
 + (instancetype)sharedHelper;
 
+- (void)tryRefresh;
+
 - (BOOL)isPhotoOfDateExists:(NSString *)date;
 
 - (void)insertPhoto:(NSString *)source_image_url;

@@ -11,7 +11,6 @@
 #import <VENTouchLock/VENTouchLock.h>
 #import "OPPhoto.h"
 #import "CoreDataHelper.h"
-#import "iCloudAccessor.h"
 #import "RootViewController.h"
 #import "SettingsViewController.h"
 #import "LockSplashViewController.h"
@@ -123,51 +122,6 @@
         [self application:application didReceiveLocalNotification:notification];
     }
     
-    [[NSNotificationCenter defaultCenter] addObserverForName:NSPersistentStoreCoordinatorStoresWillChangeNotification
-                                                      object:self.managedObjectContext.persistentStoreCoordinator
-                                                       queue:[NSOperationQueue mainQueue]
-                                                  usingBlock:^(NSNotification *note) {
-                                                      DHLogDebug(@"NSPersistentStoreCoordinatorStoresWillChangeNotification");
-                                                      [self.managedObjectContext performBlock:^{
-                                                          if ([self.managedObjectContext hasChanges]) {
-                                                              NSError *saveError;
-                                                              if (![self.managedObjectContext save:&saveError]) {
-                                                                  NSLog(@"Save error: %@", saveError);
-                                                              }
-                                                          } else {
-                                                              // drop any managed object references
-                                                              [self.managedObjectContext reset];
-                                                          }
-                                                      }];
-                                                      // drop any managed object references
-                                                      // disable user interface with setEnabled: or an overlay
-                                                  }];
-    [[NSNotificationCenter defaultCenter] addObserverForName:NSPersistentStoreCoordinatorStoresDidChangeNotification
-                                                      object:self.managedObjectContext.persistentStoreCoordinator
-                                                       queue:[NSOperationQueue mainQueue]
-                                                  usingBlock:^(NSNotification *note) {
-                                                      DHLogDebug(@"NSPersistentStoreCoordinatorStoresDidChangeNotification: %@", [note.userInfo objectForKey:NSAddedPersistentStoresKey]);
-                                                      [self.managedObjectContext performBlock:^{
-                                                          [self.managedObjectContext mergeChangesFromContextDidSaveNotification:note];
-                                                          dispatch_async(dispatch_get_main_queue(), ^(){
-                                                              [[NSNotificationCenter defaultCenter] postNotificationName:OPCoreDataStoreMergedNotification object:nil];
-                                                              [[CoreDataHelper sharedHelper] cacheNewDataForAppGroup];
-                                                          });
-                                                      }];
-                                                  }];
-    [[NSNotificationCenter defaultCenter] addObserverForName:NSPersistentStoreDidImportUbiquitousContentChangesNotification
-                                                      object:self.managedObjectContext.persistentStoreCoordinator
-                                                       queue:[NSOperationQueue mainQueue]
-                                                  usingBlock:^(NSNotification *note) {
-                                                      DHLogDebug(@"NSPersistentStoreDidImportUbiquitousContentChangesNotification");
-                                                      [self.managedObjectContext performBlock:^{
-                                                          [self.managedObjectContext mergeChangesFromContextDidSaveNotification:note];
-                                                          dispatch_async(dispatch_get_main_queue(), ^(){
-                                                              [[NSNotificationCenter defaultCenter] postNotificationName:OPCoreDataStoreMergedNotification object:nil];
-                                                              [[CoreDataHelper sharedHelper] cacheNewDataForAppGroup];
-                                                          });
-                                                      }];
-                                                  }];
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(applicationSignificantTimeChange:)
                                                  name:UIApplicationSignificantTimeChangeNotification
@@ -213,7 +167,6 @@
     }
     
     [[NSUserDefaults standardUserDefaults] setObject:[NSDate date] forKey:DEFAULTS_KEY_LAST_BACKGROUND_TIME];
-    [[iCloudAccessor shareAccessor] stopQuery];
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
@@ -233,7 +186,7 @@
         DHLogError(@"No iCloud access");
         [GlobalUtils alertMessage:@"该设备没有设置iCloud账户，无法正常使用1 Photo，请在登录iCloud后重试"];
     } else {
-        [[iCloudAccessor shareAccessor] startQuery];
+        [[CoreDataHelper sharedHelper] tryRefresh];
     }
 }
 
@@ -405,7 +358,7 @@
     NSURL *storeURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"OnePhoto.sqlite"];
     NSError *error = nil;
     NSString *failureReason = @"There was an error creating or loading the application's saved data.";
-    NSDictionary *options = [NSDictionary dictionaryWithObjectsAndKeys: [NSNumber numberWithBool:YES], NSMigratePersistentStoresAutomaticallyOption, [NSNumber numberWithBool:YES], NSInferMappingModelAutomaticallyOption, @"OnePhotoCloudStore", NSPersistentStoreUbiquitousContentNameKey, nil];
+    NSDictionary *options = [NSDictionary dictionaryWithObjectsAndKeys: [NSNumber numberWithBool:YES], NSMigratePersistentStoresAutomaticallyOption, [NSNumber numberWithBool:YES], NSInferMappingModelAutomaticallyOption, nil];
     if (![_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:options error:&error]) {
         // Report any error we got.
         NSMutableDictionary *dict = [NSMutableDictionary dictionary];

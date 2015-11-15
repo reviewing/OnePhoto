@@ -18,7 +18,7 @@
 #import "iCloudAccessor.h"
 #import "WXApi.h"
 
-NSString * const OPCoreDataStoreMergedNotification = @"OPCoreDataStoreMergedNotification";
+NSString * const OPCoreDataStoreUpdatedNotification = @"OPCoreDataStoreUpdatedNotification";
 NSString * const OPiCloudPhotosMetadataUpdatedNotification = @"OPiCloudPhotosMetadataUpdatedNotification";
 NSString * const OPNotificationType = @"OPNotificationType";
 NSString * const OPNotificationTypeDailyReminder = @"OPNotificationTypeDailyReminder";

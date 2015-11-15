@@ -74,6 +74,9 @@
 #define INTEGER_FOR_KEY(key) [[NSUserDefaults standardUserDefaults] integerForKey:key]
 #define OBJECT_FOR_KEY(key) [[NSUserDefaults standardUserDefaults] objectForKey:key]
 
+#define IDIOM    UI_USER_INTERFACE_IDIOM()
+#define IPAD     UIUserInterfaceIdiomPad
+
 #warning Don't release with this macro
 #define TEST_VERSION
 

@@ -390,6 +390,13 @@
         } else {
             [GlobalUtils alertMessage:@"保存图片失败，请检查iCloud账户设置后重试"];
         }
+        [photoCloud closeWithCompletionHandler:^(BOOL success) {
+            if (success) {
+                DHLogDebug(@"iCloud document closed");
+            } else {
+                DHLogDebug(@"failed closing document from iCloud");
+            }
+        }];
     }];
     
     return YES;

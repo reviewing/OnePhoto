@@ -45,6 +45,13 @@ CGSize const OPPhotoPixelImageSize = {1, 1};
 
     dispatch_semaphore_wait(waitForICloud, DISPATCH_TIME_FOREVER);
     UIImage *sourceImage = [UIImage imageWithData:photoCloud.imageData];
+    [photoCloud closeWithCompletionHandler:^(BOOL success) {
+        if (success) {
+            DHLogDebug(@"iCloud document closed");
+        } else {
+            DHLogDebug(@"failed closing document from iCloud");
+        }
+    }];
     DHLogDebug(@"%@", [ubiquitousURL absoluteString]);
     return sourceImage;
 }

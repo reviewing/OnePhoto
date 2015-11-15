@@ -506,6 +506,7 @@
             if (photo) {
                 [GlobalUtils deletePhotoActionFrom:self anchor:lOPDayView photo:photo completion:^(){
                     [lOPDayView setPhoto:nil];
+                    [self.calendarContentView reloadData];
                 }];
             }
             break;

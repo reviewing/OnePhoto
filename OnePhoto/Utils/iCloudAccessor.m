@@ -11,6 +11,7 @@
 @interface iCloudAccessor () {
     NSMetadataQuery * _query;
     NSMutableArray *_iCloudURLs;
+    NSMutableArray *_deletingQueue;
 }
 
 @end
@@ -23,6 +24,7 @@
     dispatch_once(&onceToken, ^{
         sharedInstance = [[iCloudAccessor alloc] init];
         sharedInstance->_iCloudURLs = [[NSMutableArray alloc] init];
+        sharedInstance->_deletingQueue = [NSMutableArray array];
     });
     return sharedInstance;
 }
@@ -75,7 +77,12 @@
     NSArray * queryResults = [_query results];
     for (NSMetadataItem * result in queryResults) {
         NSURL * fileURL = [result valueForAttribute:NSMetadataItemURLKey];
-        [_iCloudURLs addObject:fileURL];
+        NSNumber * aBool = nil;
+        
+        [fileURL getResourceValue:&aBool forKey:NSURLIsHiddenKey error:nil];
+        if (aBool && ![aBool boolValue]) {
+            [_iCloudURLs addObject:fileURL];
+        }
     }
     
     DHLogDebug(@"Found %lu iCloud files.", (unsigned long)_iCloudURLs.count);
@@ -84,7 +91,7 @@
 }
 
 - (NSArray *)urls {
-    return _iCloudURLs;
+    return [self cleanURLs:_iCloudURLs cleanDeletingQueue:YES];
 }
 
 - (BOOL)relativelyPathExists:(NSString *)path {
@@ -104,7 +111,30 @@
     
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"lastPathComponent BEGINSWITH[c] %@", date];
     NSArray *urls = [_iCloudURLs filteredArrayUsingPredicate:predicate];
-    return urls;
+    return [self cleanURLs:urls cleanDeletingQueue:NO];
+}
+
+- (NSArray *)cleanURLs:(NSArray *)rawURLs cleanDeletingQueue:(BOOL)cleanDQ {
+    NSMutableArray *urls = [NSMutableArray array];
+    
+    if (cleanDQ) {
+        NSMutableArray *deletingURLs = [_deletingQueue mutableCopy];
+        for (NSURL *url in _deletingQueue) {
+            if (![rawURLs containsObject:url]) {
+                [deletingURLs removeObject:url];
+            }
+        }
+        
+        _deletingQueue = deletingURLs;
+    }
+    
+    for (NSURL *url in rawURLs) {
+        if (![_deletingQueue containsObject:url]) {
+            [urls addObject:url];
+        }
+    }
+    
+    return [urls copy];
 }
 
 - (void)deleteFileWithRelativelyPath:(NSString *)path {
@@ -114,12 +144,19 @@
 }
 
 - (void)deleteFileWithAbsolutelyURL:(NSURL *)url {
+    [_deletingQueue addObject:url];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
         NSFileCoordinator* fileCoordinator = [[NSFileCoordinator alloc] initWithFilePresenter:nil];
         [fileCoordinator coordinateWritingItemAtURL:url options:NSFileCoordinatorWritingForDeleting
                                               error:nil byAccessor:^(NSURL* writingURL) {
                                                   NSFileManager* fileManager = [[NSFileManager alloc] init];
-                                                  [fileManager removeItemAtURL:writingURL error:nil];
+                                                  NSError *error;
+                                                  [fileManager removeItemAtURL:writingURL error:&error];
+                                                  if (error) {
+                                                      DHLogError(@"removeItemAtURL:%@ error: %@", writingURL, error);
+                                                  } else {
+                                                      DHLogDebug(@"removeItemAtURL:%@ succeed!!!", writingURL);
+                                                  }
                                               }];
     });
 }

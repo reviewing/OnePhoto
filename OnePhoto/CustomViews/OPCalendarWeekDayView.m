@@ -38,8 +38,10 @@
 
 - (void)commonInit
 {
-    self.backgroundColor = UIColorFromRGBA(0xeeeeeecf);
-
+    if (IDIOM != IPAD) {
+        self.backgroundColor = UIColorFromRGBA(0xeeeeeecf);
+    }
+    
     NSMutableArray *dayViews = [NSMutableArray new];
     
     for(int i = 0; i < NUMBER_OF_DAY_BY_WEEK; ++i){

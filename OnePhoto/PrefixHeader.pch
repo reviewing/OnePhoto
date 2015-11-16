@@ -44,8 +44,6 @@
         _Pragma("clang diagnostic pop") \
     } while (0)
 
-#define REMINDER_TIME_KEY @"reminder.time"
-
 #define JUMP_TO @"jump_to"
 #define JUMP_FROM @"jump_from"
 

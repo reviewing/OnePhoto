@@ -10,6 +10,7 @@
 #import "EditTextViewController.h"
 #import "ValueSelectorViewController.h"
 #import <VENTouchLock/VENTouchLock.h>
+#import "CoreDataHelper.h"
 
 @interface SettingsViewController () {
     NSArray *_settingsDefaultArray;
@@ -179,12 +180,14 @@
     } else if ([type isEqualToString:@"Action"]) {
         [self signOutAction];
     } else if ([type isEqualToString:@"SubPage"]) {
-        if ([key isEqualToString:REMINDER_TIME_KEY]) {
+        if ([key isEqualToString:DEFAULTS_KEY_REMINDER_TIME]) {
             if ([[UIApplication sharedApplication] currentUserNotificationSettings].types != UIUserNotificationTypeNone) {
                 [self performSegueWithIdentifier:@"ReminderSegue" sender:nil];
             } else {
                 [GlobalUtils alertMessage:@"1 Photo的通知已被禁用，请于iOS设置中打开"];
             }
+        } else if ([key isEqualToString:DEFAULTS_KEY_START_DATE]) {
+            
         }
     }
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
@@ -206,7 +209,7 @@
 }
 
 - (NSString *)getDetailForSubPage:(NSString *)key {
-    if ([key isEqualToString:REMINDER_TIME_KEY]) {
+    if ([key isEqualToString:DEFAULTS_KEY_REMINDER_TIME]) {
         if ([[UIApplication sharedApplication] currentUserNotificationSettings].types != UIUserNotificationTypeNone) {
             if ([[NSUserDefaults standardUserDefaults] objectForKey:key]) {
                 return [[GlobalUtils HHmmFormatter] stringFromDate:[[NSUserDefaults standardUserDefaults] objectForKey:key]];
@@ -216,6 +219,11 @@
         } else {
             return @"未设置";
         }
+    } else if ([key isEqualToString:DEFAULTS_KEY_START_DATE]) {
+        if (![[NSUserDefaults standardUserDefaults] objectForKey:key]) {
+            [[NSUserDefaults standardUserDefaults] setObject:[[CoreDataHelper sharedHelper] firstDayIn1Photo] forKey:key];
+        }
+        return [[GlobalUtils yyyyMMFormatter] stringFromDate:[[NSUserDefaults standardUserDefaults] objectForKey:key]];
     }
     return key;
 }

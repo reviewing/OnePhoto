@@ -7,6 +7,21 @@
 		<array>
 			<dict>
 				<key>key</key>
+				<string>start.date</string>
+				<key>name</key>
+				<string>起始月份</string>
+				<key>type</key>
+				<string>SubPage</string>
+				<key>selector</key>
+				<string>setStartDate</string>
+			</dict>
+		</array>
+	</dict>
+	<dict>
+		<key>items</key>
+		<array>
+			<dict>
+				<key>key</key>
 				<string>enable.reminder</string>
 				<key>name</key>
 				<string>提醒</string>

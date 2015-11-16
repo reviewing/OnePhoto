@@ -78,7 +78,11 @@
 }
 
 - (void)reloadData {
-    _startDate = [[CoreDataHelper sharedHelper] firstDayIn1Photo];
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:DEFAULTS_KEY_START_DATE]) {
+        _startDate = [[NSUserDefaults standardUserDefaults] objectForKey:DEFAULTS_KEY_START_DATE];
+    } else {
+        _startDate = [[CoreDataHelper sharedHelper] firstDayIn1Photo];
+    }
     _numOfRows = [self monthsBetweenDate:_startDate with:_date] + 1;
     [super reloadData];
 }

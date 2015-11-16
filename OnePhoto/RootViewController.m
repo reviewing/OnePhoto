@@ -381,7 +381,7 @@
         if (success) {
             [[CoreDataHelper sharedHelper] insertPhoto:photoPath];
             if (isToday) {
-                id reminderTime = [[NSUserDefaults standardUserDefaults] objectForKey:REMINDER_TIME_KEY];
+                id reminderTime = [[NSUserDefaults standardUserDefaults] objectForKey:DEFAULTS_KEY_REMINDER_TIME];
                 if ([reminderTime isKindOfClass:[NSDate class]]) {
                     NSDate *fireDate = [GlobalUtils addToDate:[GlobalUtils HHmmToday:[[GlobalUtils HHmmFormatter] stringFromDate:reminderTime]] days:1];
                     [GlobalUtils setDailyNotification:fireDate];

@@ -104,6 +104,14 @@ static NSCalendar *_calendar = nil;
     return _HHmmFormatter;
 }
 
++ (NSDateFormatter *)yyyyMMFormatter {
+    NSDateFormatter *yyyyMMFormatter = [NSDateFormatter new];
+    yyyyMMFormatter.timeZone = [NSTimeZone systemTimeZone];
+    yyyyMMFormatter.locale = [NSLocale currentLocale];
+    [yyyyMMFormatter setDateFormat:@"yyyy年MM月"];
+    return yyyyMMFormatter;
+}
+
 + (NSDateFormatter *)chineseFormatter {
     if (_chineseFormatter == nil) {
         _chineseFormatter = [NSDateFormatter new];
@@ -312,7 +320,7 @@ static NSCalendar *_calendar = nil;
     UIAlertAction* deleteAction = [UIAlertAction actionWithTitle:@"删除" style:UIAlertActionStyleDestructive
                                                          handler:^(UIAlertAction * action) {
                                                              [[CoreDataHelper sharedHelper] deletePhoto:photo];
-                                                             id reminderTime = [[NSUserDefaults standardUserDefaults] objectForKey:REMINDER_TIME_KEY];
+                                                             id reminderTime = [[NSUserDefaults standardUserDefaults] objectForKey:DEFAULTS_KEY_REMINDER_TIME];
                                                              if ([reminderTime isKindOfClass:[NSDate class]]) {
                                                                  NSDate *fireDate = [GlobalUtils HHmmToday:[[GlobalUtils HHmmFormatter] stringFromDate:reminderTime]];
                                                                  [GlobalUtils setDailyNotification:fireDate];

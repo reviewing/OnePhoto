@@ -22,7 +22,7 @@
     [super viewDidLoad];
     [self.reminderTimePicker addTarget:self action:@selector(timeChanged:) forControlEvents:UIControlEventValueChanged];
     
-    id reminderTime = [[NSUserDefaults standardUserDefaults] objectForKey:REMINDER_TIME_KEY];
+    id reminderTime = [[NSUserDefaults standardUserDefaults] objectForKey:DEFAULTS_KEY_REMINDER_TIME];
     if ([reminderTime isKindOfClass:[NSDate class]]) {
         NSDate *fireDate = [GlobalUtils HHmmToday:[[GlobalUtils HHmmFormatter] stringFromDate:reminderTime]];
         self.reminderTimePicker.date = fireDate;
@@ -36,7 +36,7 @@
 }
 
 - (void)timeChanged:(id)sender {
-    [[NSUserDefaults standardUserDefaults] setObject:self.reminderTimePicker.date forKey:REMINDER_TIME_KEY];
+    [[NSUserDefaults standardUserDefaults] setObject:self.reminderTimePicker.date forKey:DEFAULTS_KEY_REMINDER_TIME];
     [self.tableView reloadData];
 }
 
@@ -48,7 +48,7 @@
     [super viewWillDisappear:animated];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     
-    if (![[NSUserDefaults standardUserDefaults] objectForKey:REMINDER_TIME_KEY] || [[[GlobalUtils HHmmFormatter] stringFromDate:self.reminderTimePicker.date] isEqualToString:_reminderNow]) {
+    if (![[NSUserDefaults standardUserDefaults] objectForKey:DEFAULTS_KEY_REMINDER_TIME] || [[[GlobalUtils HHmmFormatter] stringFromDate:self.reminderTimePicker.date] isEqualToString:_reminderNow]) {
         return;
     }
     
@@ -75,8 +75,8 @@
     cell.textLabel.text = @"每天提醒";
     
     if ([[UIApplication sharedApplication] currentUserNotificationSettings].types != UIUserNotificationTypeNone) {
-        if ([[NSUserDefaults standardUserDefaults] objectForKey:REMINDER_TIME_KEY]) {
-            cell.detailTextLabel.text = [[GlobalUtils HHmmFormatter] stringFromDate:[[NSUserDefaults standardUserDefaults] objectForKey:REMINDER_TIME_KEY]];
+        if ([[NSUserDefaults standardUserDefaults] objectForKey:DEFAULTS_KEY_REMINDER_TIME]) {
+            cell.detailTextLabel.text = [[GlobalUtils HHmmFormatter] stringFromDate:[[NSUserDefaults standardUserDefaults] objectForKey:DEFAULTS_KEY_REMINDER_TIME]];
         } else {
             cell.detailTextLabel.text = @"点击设置";
         }

@@ -40,6 +40,11 @@
     return sharedInstance;
 }
 
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:OPiCloudPhotosMetadataUpdatedNotification object:nil];
+    [[iCloudAccessor shareAccessor] stopQuery];
+}
+
 - (void)tryRefresh {
     [[NSNotificationCenter defaultCenter] removeObserver:self name:OPiCloudPhotosMetadataUpdatedNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -55,8 +60,6 @@
 }
 
 - (void)perfromRefresh {
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:OPiCloudPhotosMetadataUpdatedNotification object:nil];
-    [[iCloudAccessor shareAccessor] stopQuery];
     NSSet *photos = [self allPhotos];
     for (OPPhoto *photo in photos) {
         if (![[iCloudAccessor shareAccessor] relativelyPathExists:photo.source_image_url]) {

@@ -131,6 +131,9 @@
 }
 
 - (void)setPhoto:(OPPhoto *)photo {
+    if ([photo isEqual:_photo] || (_photo == nil && [photo isEqual:[NSNull null]])) {
+        return;
+    }
     __block NSString *date = [[GlobalUtils dateFormatter] stringFromDate:_date];
     if (photo && ![photo isEqual:[NSNull null]]) {
         _photo = photo;

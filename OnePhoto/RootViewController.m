@@ -165,6 +165,10 @@
                                                  name:UIApplicationSignificantTimeChangeNotification
                                                object:nil];
     [self.calendarContentView reloadData];
+    if (_isFirstAppear) {
+        _isFirstAppear = NO;
+        [_calendarContentView scrollToCurrentMonth:NO];
+    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -199,12 +203,6 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    if (_isFirstAppear) {
-        _isFirstAppear = NO;
-        [_calendarContentView scrollToCurrentMonth:NO];
-    } else {
-        [_calendarContentView scrollToCurrentMonth:YES];
-    }
     [self buildFastImageCache];
 }
 

@@ -426,7 +426,7 @@
     dayView.hidden = NO;
     dayView.layer.borderColor = [[UIColor clearColor] CGColor];
     dayView.layer.borderWidth = 0;
-    ((OPCalendarDayView *)dayView).dotView.backgroundColor = [[GlobalUtils appBaseColor] colorWithAlphaComponent:0.75];
+    ((OPCalendarDayView *)dayView).dayLabelBG.backgroundColor = [[GlobalUtils appBaseColor] colorWithAlphaComponent:0.75];
 
     if ([dayView isFromAnotherMonth]) {
         dayView.hidden = YES;
@@ -437,7 +437,7 @@
     else if(_selectedDate && [_calendarManager.dateHelper date:_selectedDate isTheSameDayThan:dayView.date]){
         dayView.layer.borderColor = [[GlobalUtils daySelectionColor] CGColor];
         dayView.layer.borderWidth = 1;
-        ((OPCalendarDayView *)dayView).dotView.backgroundColor = [[GlobalUtils daySelectionColor] colorWithAlphaComponent:0.75];
+        ((OPCalendarDayView *)dayView).dayLabelBG.backgroundColor = [[GlobalUtils daySelectionColor] colorWithAlphaComponent:0.75];
     }
     // Today
     else if([_calendarManager.dateHelper date:[NSDate date] isTheSameDayThan:dayView.date]){

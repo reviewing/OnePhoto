@@ -61,19 +61,19 @@
     }
     
     {
-        _dotView = [UIView new];
-        [self addSubview:_dotView];
+        _dayLabelBG = [UIView new];
+        [self addSubview:_dayLabelBG];
         
-        _dotView.backgroundColor = [[GlobalUtils appBaseColor] colorWithAlphaComponent:0.75];
+        _dayLabelBG.backgroundColor = [[GlobalUtils appBaseColor] colorWithAlphaComponent:0.75];
     }
     
     {
-        _textLabel = [UILabel new];
-        [self addSubview:_textLabel];
+        _dayLabel = [UILabel new];
+        [self addSubview:_dayLabel];
         
-        _textLabel.textColor = [UIColor whiteColor];
-        _textLabel.textAlignment = NSTextAlignmentCenter;
-        _textLabel.font = [UIFont systemFontOfSize:[UIFont systemFontSize]];
+        _dayLabel.textColor = [UIColor whiteColor];
+        _dayLabel.textAlignment = NSTextAlignmentCenter;
+        _dayLabel.font = [UIFont systemFontOfSize:[UIFont systemFontSize]];
     }
     
     {
@@ -94,19 +94,32 @@
 - (void)layoutSubviews {
     _photoView.frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height);
     
-    [_textLabel sizeToFit];
-    _textLabel.frame = CGRectMake((self.frame.size.width - _textLabel.frame.size.width) / 2., 4, _textLabel.frame.size.width, _textLabel.frame.size.height);
-    
-    CGFloat sizeDot = MAX(_textLabel.frame.size.width, _textLabel.frame.size.height) + 4;
-    
-    sizeDot = roundf(sizeDot);
-    
-    _dotView.frame = CGRectMake(0, 0, sizeDot, sizeDot);
-    _dotView.center = CGPointMake(self.frame.size.width / 2., 4 + (_textLabel.frame.size.height / 2.));
-    _dotView.layer.cornerRadius = sizeDot / 2.;
+    [self setDayLabelStatus:!_photo];
     
     _markerView.frame = CGRectMake(0, 0, 24, 24);
     _markerView.center = CGPointMake(self.frame.size.width - 12, self.frame.size.height - 12);
+}
+
+- (void)setDayLabelStatus:(BOOL)empty {
+    if (empty) {
+        _dayLabel.font = [UIFont systemFontOfSize:self.frame.size.width - 16 weight:UIFontWeightThin];
+        [_dayLabel sizeToFit];
+        _dayLabel.frame = CGRectMake((self.frame.size.width - _dayLabel.frame.size.width) / 2., (self.frame.size.height - _dayLabel.frame.size.height) / 2., _dayLabel.frame.size.width, _dayLabel.frame.size.height);
+
+        _dayLabelBG.frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height);
+        _dayLabelBG.center = CGPointMake(self.frame.size.width / 2., (self.frame.size.height / 2.));
+        _dayLabelBG.layer.cornerRadius = 0;
+    } else {
+        _dayLabel.font = [UIFont systemFontOfSize:[UIFont systemFontSize]];
+        [_dayLabel sizeToFit];
+        _dayLabel.frame = CGRectMake((self.frame.size.width - _dayLabel.frame.size.width) / 2., 4, _dayLabel.frame.size.width, _dayLabel.frame.size.height);
+
+        CGFloat sizeDot = MAX(_dayLabel.frame.size.width, _dayLabel.frame.size.height) + 4;
+        sizeDot = roundf(sizeDot);
+        _dayLabelBG.frame = CGRectMake(0, 0, sizeDot, sizeDot);
+        _dayLabelBG.center = CGPointMake(self.frame.size.width / 2., 4 + (_dayLabel.frame.size.height / 2.));
+        _dayLabelBG.layer.cornerRadius = sizeDot / 2.;
+    }
 }
 
 - (void)setDate:(NSDate *)date {
@@ -130,11 +143,12 @@
         _photo = nil;
         [_photoView setImage:nil];
     }
+    [self setDayLabelStatus:!_photo];
 }
 
 - (void)reload {
-    _textLabel.text = [NSString stringWithFormat:@"%ld", (long)[GlobalUtils dayOfMonth:_date]];
-    [_textLabel sizeToFit];
+    _dayLabel.text = [NSString stringWithFormat:@"%ld", (long)[GlobalUtils dayOfMonth:_date]];
+    [_dayLabel sizeToFit];
 
 //    NSCalendar *calendar = [NSCalendar currentCalendar];
 //    NSRange weekdayRange = [calendar maximumRangeOfUnit:NSCalendarUnitWeekday];
@@ -142,9 +156,9 @@
 //    NSUInteger weekdayOfDate = [components weekday];
 //    
 //    if (weekdayOfDate == weekdayRange.location || weekdayOfDate == weekdayRange.length) {
-//        _textLabel.textColor = [UIColor whiteColor];
+//        _dayLabel.textColor = [UIColor whiteColor];
 //    } else {
-//        _textLabel.textColor = [UIColor whiteColor];
+//        _dayLabel.textColor = [UIColor whiteColor];
 //    }
     
     NSString *dateString = [[GlobalUtils dateFormatter] stringFromDate:_date];

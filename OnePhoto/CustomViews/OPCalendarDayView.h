@@ -23,8 +23,8 @@ typedef NS_ENUM(NSInteger, OP_DAY_TOUCH_EVENT) {
 @property (nonatomic) NSDate *date;
 @property (nonatomic, strong) UIImageView *photoView;
 
-@property (nonatomic, readonly) UIView *dotView;
-@property (nonatomic, readonly) UILabel *textLabel;
+@property (nonatomic, readonly) UIView *dayLabelBG;
+@property (nonatomic, readonly) UILabel *dayLabel;
 
 @property (nonatomic, strong) UIView *markerView;
 

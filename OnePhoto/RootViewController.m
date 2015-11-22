@@ -488,7 +488,7 @@
                 MWPhotoBrowser *browser = [[MWPhotoBrowser alloc] initWithDelegate:self];
                 browser.displayActionButton = YES;
                 browser.displayNavArrows = YES;
-                browser.alwaysShowControls = YES;
+                browser.alwaysShowControls = NO;
                 browser.zoomPhotosToFill = YES;
                 
                 [browser showNextPhotoAnimated:YES];

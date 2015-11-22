@@ -187,7 +187,7 @@
                 [GlobalUtils alertMessage:@"1 Photo的通知已被禁用，请于iOS设置中打开"];
             }
         } else if ([key isEqualToString:DEFAULTS_KEY_START_DATE]) {
-            
+            [self performSegueWithIdentifier:@"StartDateSegue" sender:nil];
         }
     }
     [tableView deselectRowAtIndexPath:indexPath animated:YES];

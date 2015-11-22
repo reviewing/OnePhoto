@@ -42,6 +42,7 @@
 		188387BC1BEE60F300207775 /* SettingBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 188387BB1BEE60F300207775 /* SettingBaseViewController.m */; };
 		1886BD761BDF59BA006FCDD5 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1886BD781BDF59BA006FCDD5 /* Localizable.strings */; };
 		189C558C1BF2F0E800279C3F /* OPMarkerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 189C558B1BF2F0E800279C3F /* OPMarkerView.m */; };
+		18AA967C1C01BA7200D9792E /* DatePickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18AA967B1C01BA7200D9792E /* DatePickerViewController.m */; };
 		18E894421BD4EF6200AA460A /* OPPhotoCloud.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E894411BD4EF6200AA460A /* OPPhotoCloud.m */; };
 		18F405621B93683700E97458 /* OPCalendarDayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F405611B93683700E97458 /* OPCalendarDayView.m */; };
 		18F406341B94414C00E97458 /* UIColor+Remix.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F406331B94414C00E97458 /* UIColor+Remix.m */; };
@@ -149,6 +150,8 @@
 		1886BD771BDF59BA006FCDD5 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		189C558A1BF2F0E800279C3F /* OPMarkerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPMarkerView.h; sourceTree = "<group>"; };
 		189C558B1BF2F0E800279C3F /* OPMarkerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPMarkerView.m; sourceTree = "<group>"; };
+		18AA967A1C01BA7200D9792E /* DatePickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DatePickerViewController.h; sourceTree = "<group>"; };
+		18AA967B1C01BA7200D9792E /* DatePickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DatePickerViewController.m; sourceTree = "<group>"; };
 		18E894401BD4EF6200AA460A /* OPPhotoCloud.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPPhotoCloud.h; sourceTree = "<group>"; };
 		18E894411BD4EF6200AA460A /* OPPhotoCloud.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPPhotoCloud.m; sourceTree = "<group>"; };
 		18F405601B93683700E97458 /* OPCalendarDayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPCalendarDayView.h; sourceTree = "<group>"; };
@@ -230,6 +233,8 @@
 				183C69FB1BDE0DDB008E93AB /* ReminderViewController.m */,
 				1850F6E61BD8DB0900818142 /* EditTextViewController.h */,
 				1850F6E71BD8DB0900818142 /* EditTextViewController.m */,
+				18AA967A1C01BA7200D9792E /* DatePickerViewController.h */,
+				18AA967B1C01BA7200D9792E /* DatePickerViewController.m */,
 			);
 			path = SettingViews;
 			sourceTree = "<group>";
@@ -718,6 +723,7 @@
 				183C69FC1BDE0DDB008E93AB /* ReminderViewController.m in Sources */,
 				187412F81B9BE3BB0089CEFF /* CoreDataHelper.m in Sources */,
 				18F405621B93683700E97458 /* OPCalendarDayView.m in Sources */,
+				18AA967C1C01BA7200D9792E /* DatePickerViewController.m in Sources */,
 				187412F01B96D3790089CEFF /* OPCalendarPageView.m in Sources */,
 				1867EB6F1B8F5E6400C10219 /* main.m in Sources */,
 				188387B91BEC8DEE00207775 /* LoadingViewController.m in Sources */,

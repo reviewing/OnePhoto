@@ -64,6 +64,10 @@
     self.datePicker.hidden = !self.datePicker.hidden;
 }
 
+-(NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section {
+    return [NSString stringWithFormat:@"您在1 Photo里的第一张照片拍摄于%@，因此起始年月只能设置到该张照片的年月之前。", [[GlobalUtils chineseFormatter] stringFromDate:self.datePicker.maximumDate]];
+}
+
 /*
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {

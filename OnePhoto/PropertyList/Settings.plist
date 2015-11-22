@@ -131,6 +131,10 @@
 				<false/>
 			</dict>
 		</array>
+		<key>footer.NO</key>
+		<string>在1 Photo中拍摄的照片*不会保存*到系统相册</string>
+		<key>footer.YES</key>
+		<string>在1 Photo中拍摄的照片*将同时保存*到系统相册</string>
 	</dict>
 </array>
 </plist>

@@ -11,6 +11,7 @@
 #import "ValueSelectorViewController.h"
 #import <VENTouchLock/VENTouchLock.h>
 #import "CoreDataHelper.h"
+#import <AssetsLibrary/AssetsLibrary.h>
 
 @interface SettingsViewController () {
     NSArray *_settingsDefaultArray;
@@ -89,6 +90,13 @@
     return [[_settings objectAtIndex:section] objectForKey:@"groupname"];
 }
 
+-(NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section {
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:section];
+    NSString *key = [self objectForKey:@"key" atIndexPath:indexPath];
+    BOOL value = [[NSUserDefaults standardUserDefaults] boolForKey:key];
+    return [[_settings objectAtIndex:section] objectForKey:value ? @"footer.YES" : @"footer.NO"];
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *boolCellIdentifier = @"BOOLCell";
     static NSString *constantCellIdentifier = @"ConstantCell";
@@ -123,7 +131,16 @@
 
     if ([type isEqualToString:@"BOOL"]) {
         UISwitch *switchView = [[UISwitch alloc] initWithFrame:CGRectZero];
-        switchView.on = [[NSUserDefaults standardUserDefaults] boolForKey:[self objectForKey:@"key" atIndexPath:indexPath]];
+        NSString *key = [self objectForKey:@"key" atIndexPath:indexPath];
+        BOOL value = [[NSUserDefaults standardUserDefaults] boolForKey:key];
+        if ([key isEqualToString:DEFAULTS_KEY_SAVE_TO_LIBRARY]) {
+            ALAuthorizationStatus status = [ALAssetsLibrary authorizationStatus];
+            if (status != ALAuthorizationStatusAuthorized) {
+                value = NO;
+                [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:NO] forKey:key];
+            }
+        }
+        switchView.on = value;
         [switchView addTarget:self action:@selector(switchP:) forControlEvents:UIControlEventValueChanged];
         cell.accessoryView = switchView;
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -240,7 +257,7 @@
     
     if ([key isEqualToString:@"write.data.to.file"]) {
         [DHLogger setWriteDataToFile:sender.on];
-    } else if ([key isEqualToString:@"enable.reminder"]) {
+    } else if ([key isEqualToString:DEFAULTS_KEY_ENABLE_REMINDER]) {
         if (sender.on) {
             if ([[UIApplication sharedApplication] currentUserNotificationSettings].types == UIUserNotificationTypeNone) {
                 sender.on = NO;
@@ -257,7 +274,7 @@
         } else {
             [GlobalUtils setDailyNotification:nil];
         }
-    } else if ([key isEqualToString:@"enable.passcode"]) {
+    } else if ([key isEqualToString:DEFAULTS_KEY_ENABLE_PASSCODE]) {
         if (sender.on) {
             VENTouchLockCreatePasscodeViewController *createPasscodeVC = [[VENTouchLockCreatePasscodeViewController alloc] init];
             __weak __typeof__(self) weakSelf = self;
@@ -278,9 +295,9 @@
                 [[VENTouchLock sharedInstance] deletePasscode];
             }
             [VENTouchLock setShouldUseTouchID:NO];
-            [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:NO] forKey:@"enable.touchID"];
+            [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:NO] forKey:DEFAULTS_KEY_ENABLE_TOUCH_ID];
         }
-    } else if ([key isEqualToString:@"enable.touchID"]) {
+    } else if ([key isEqualToString:DEFAULTS_KEY_ENABLE_TOUCH_ID]) {
         if (sender.on) {
             if (![VENTouchLock canUseTouchID]) {
                 sender.on = NO;
@@ -299,6 +316,22 @@
         } else {
             [VENTouchLock setShouldUseTouchID:NO];
         }
+    } else if ([key isEqualToString:DEFAULTS_KEY_SAVE_TO_LIBRARY]) {
+        if (sender.on) {
+            ALAuthorizationStatus status = [ALAssetsLibrary authorizationStatus];
+            if (status != ALAuthorizationStatusAuthorized) {
+                sender.on = NO;
+                UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"无法访问系统相册"
+                                                                               message:@"1 Photo的“照片”权限被关闭\n请到“设置”->“隐私”->“照片”中开启"
+                                                                        preferredStyle:UIAlertControllerStyleAlert];
+                UIAlertAction* confirmAction = [UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleCancel
+                                                                      handler:^(UIAlertAction * action) {}];
+                
+                [alert addAction:confirmAction];
+                [self presentViewController:alert animated:YES completion:nil];
+                return;
+            }
+        }
     }
     
     [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:sender.on] forKey:key];
@@ -309,6 +342,10 @@
             _settings = [self stretchSettings:_settingsDefaultArray];
             [self.tableView reloadData];
         });
+    }
+    
+    if ([key isEqualToString:DEFAULTS_KEY_SAVE_TO_LIBRARY]) {
+        [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:indexPath.section] withRowAnimation:UITableViewRowAnimationAutomatic];
     }
 }
 

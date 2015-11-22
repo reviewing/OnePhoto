@@ -10,8 +10,10 @@
 #import <UIKit/UIKit.h>
 
 #define DEFAULTS_KEY_START_DATE @"start.date"
+#define DEFAULTS_KEY_ENABLE_REMINDER @"enable.reminder"
 #define DEFAULTS_KEY_REMINDER_TIME @"reminder.time"
 #define DEFAULTS_KEY_ENABLE_PASSCODE @"enable.passcode"
+#define DEFAULTS_KEY_ENABLE_TOUCH_ID @"enable.touchID"
 #define DEFAULTS_KEY_PASSCODE_TIME @"passcode.time"
 #define DEFAULTS_KEY_LAST_BACKGROUND_TIME @"last.background.time"
 #define DEFAULTS_KEY_SAVE_TO_LIBRARY @"save.to.library"

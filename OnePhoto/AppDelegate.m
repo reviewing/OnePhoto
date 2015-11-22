@@ -109,7 +109,7 @@
         }
     }
     
-    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:[[VENTouchLock sharedInstance] isPasscodeSet]] forKey:@"enable.passcode"];
+    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:[[VENTouchLock sharedInstance] isPasscodeSet]] forKey:DEFAULTS_KEY_ENABLE_PASSCODE];
     [[NSUserDefaults standardUserDefaults] registerDefaults:defaults];
     
     UIUserNotificationType types = UIUserNotificationTypeBadge | UIUserNotificationTypeSound | UIUserNotificationTypeAlert;

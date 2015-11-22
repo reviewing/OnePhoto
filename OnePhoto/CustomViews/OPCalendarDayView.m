@@ -134,7 +134,7 @@
     if ([photo isEqual:_photo] || (_photo == nil && [photo isEqual:[NSNull null]])) {
         return;
     }
-    __block NSString *date = [[GlobalUtils dateFormatter] stringFromDate:_date];
+    NSString *date = [[GlobalUtils dateFormatter] stringFromDate:_date];
     if (photo && ![photo isEqual:[NSNull null]]) {
         _photo = photo;
         [[FICImageCache sharedImageCache] asynchronouslyRetrieveImageForEntity:photo withFormatName:OPPhotoSquareImage32BitBGRFormatName completionBlock:^(id<FICEntity> entity, NSString *formatName, UIImage *image) {
@@ -165,12 +165,18 @@
 //    }
     
     NSString *dateString = [[GlobalUtils dateFormatter] stringFromDate:_date];
-    if ([[[CoreDataHelper sharedHelper] getPhotosAt:dateString] count] > 1 || [[[iCloudAccessor shareAccessor] urlsAt:dateString] count] > 1
-        || ([[[CoreDataHelper sharedHelper] getPhotosAt:dateString] count] == 0 && [[[iCloudAccessor shareAccessor] urlsAt:dateString] count] > 0)) {
-        self.markerView.hidden = NO;
-    } else {
-        self.markerView.hidden = YES;
-    }
+    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(){
+        BOOL hasMultiPhotos = [[[CoreDataHelper sharedHelper] getPhotosAt:dateString] count] > 1 || [[[iCloudAccessor shareAccessor] urlsAt:dateString] count] > 1
+        || ([[[CoreDataHelper sharedHelper] getPhotosAt:dateString] count] == 0 && [[[iCloudAccessor shareAccessor] urlsAt:dateString] count] > 0);
+        dispatch_async(dispatch_get_main_queue(), ^() {
+            if (hasMultiPhotos && [dateString isEqualToString:[[GlobalUtils dateFormatter] stringFromDate:_date]]) {
+                self.markerView.hidden = NO;
+            } else {
+                self.markerView.hidden = YES;
+            }
+        });
+    });
     
     [_manager.delegateManager prepareDayView:self];
 }

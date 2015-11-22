@@ -211,6 +211,7 @@
 }
 
 - (IBAction)takePhoto:(id)sender {
+    _selectedDate = [NSDate date];
     [self newPhotoAction];
 }
 

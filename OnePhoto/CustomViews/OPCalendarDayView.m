@@ -102,7 +102,7 @@
 
 - (void)setDayLabelStatus:(BOOL)empty {
     if (empty) {
-        _dayLabel.font = [UIFont systemFontOfSize:self.frame.size.width - 16 weight:UIFontWeightThin];
+        _dayLabel.font = [UIFont systemFontOfSize:self.frame.size.width - 16 weight:UIFontWeightUltraLight];
         [_dayLabel sizeToFit];
         _dayLabel.frame = CGRectMake((self.frame.size.width - _dayLabel.frame.size.width) / 2., (self.frame.size.height - _dayLabel.frame.size.height) / 2., _dayLabel.frame.size.width, _dayLabel.frame.size.height);
 

@@ -82,6 +82,8 @@
         [fileURL getResourceValue:&aBool forKey:NSURLIsHiddenKey error:nil];
         if (aBool && ![aBool boolValue]) {
             [_iCloudURLs addObject:fileURL];
+        } else {
+            [[NSFileManager defaultManager] startDownloadingUbiquitousItemAtURL:fileURL error:nil];
         }
     }
     

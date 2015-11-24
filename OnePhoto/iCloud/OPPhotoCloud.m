@@ -8,15 +8,75 @@
 
 #import "OPPhotoCloud.h"
 
+#define METADATA_FILENAME   @"photo.metadata"
+#define PHOTO_FILENAME      @"photo.jpg"
+
+@interface OPPhotoCloud ()
+
+@property (nonatomic, strong) NSFileWrapper *fileWrapper;
+
+@end
+
 @implementation OPPhotoCloud
 
+- (void)encodeObject:(id<NSCoding>)object toWrappers:(NSMutableDictionary *)wrappers filename:(NSString *)preferredFilename {
+    @autoreleasepool {
+        NSMutableData * data = [NSMutableData data];
+        NSKeyedArchiver * archiver = [[NSKeyedArchiver alloc] initForWritingWithMutableData:data];
+        [archiver encodeObject:object forKey:@"data"];
+        [archiver finishEncoding];
+        NSFileWrapper * wrapper = [[NSFileWrapper alloc] initRegularFileWithContents:data];
+        [wrappers setObject:wrapper forKey:preferredFilename];
+    }
+}
+
+- (id)decodeObjectFromWrapperWithFilename:(NSString *)filename {
+    NSFileWrapper * fileWrapper = [self.fileWrapper.fileWrappers objectForKey:filename];
+    if (!fileWrapper) {
+        DHLogError(@"Unexpected error: Couldn't find %@ in file wrapper!", filename);
+        return nil;
+    }
+    
+    NSData * data = [fileWrapper regularFileContents];
+    NSKeyedUnarchiver * unarchiver = [[NSKeyedUnarchiver alloc] initForReadingWithData:data];
+    return [unarchiver decodeObjectForKey:@"data"];
+}
+
+- (NSData *)imageData {
+    if (_imageData == nil) {
+        if (self.fileWrapper != nil) {
+            self.imageData = [self decodeObjectFromWrapperWithFilename:PHOTO_FILENAME];
+        }
+    }
+    return _imageData;
+}
+
+- (NSData *)metaData {
+    if (_metaData == nil) {
+        if (self.fileWrapper != nil) {
+            self.metaData = [self decodeObjectFromWrapperWithFilename:METADATA_FILENAME];
+        }
+    }
+    return _metaData;
+}
+
 - (BOOL)loadFromContents:(id)contents ofType:(NSString *)typeName error:(NSError **)outError {
-    self.imageData = contents;
+    self.fileWrapper = contents;
+    self.imageData = nil;
+    self.metaData = nil;
     return YES;
 }
 
 - (id)contentsForType:(NSString *)typeName error:(NSError **)outError {
-    return self.imageData;
+    if (self.imageData == nil || self.metaData == nil) {
+        return nil;
+    }
+    
+    NSMutableDictionary * wrappers = [NSMutableDictionary dictionary];
+    [self encodeObject:self.imageData toWrappers:wrappers filename:PHOTO_FILENAME];
+    [self encodeObject:self.metaData toWrappers:wrappers filename:METADATA_FILENAME];
+    NSFileWrapper *fileWrapper = [[NSFileWrapper alloc] initDirectoryWithFileWrappers:wrappers];
+    return fileWrapper;
 }
 
 @end

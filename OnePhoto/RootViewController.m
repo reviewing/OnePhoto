@@ -359,7 +359,7 @@
 
 - (BOOL)saveImage:(UIImage *)image shouldSaveToLibrary:(BOOL)saveToLibrary {
     NSString *dateString = [GlobalUtils stringFromDate:_specifiedDate ? _specifiedDate : [NSDate date]];
-    NSString *photoPath = [@"photos" stringByAppendingPathComponent:[[dateString stringByAppendingString:[[[NSUUID UUID] UUIDString] substringToIndex:8]] stringByAppendingPathExtension:@"jpg"]];
+    NSString *photoPath = [@"photos" stringByAppendingPathComponent:[[dateString stringByAppendingString:[[[NSUUID UUID] UUIDString] substringToIndex:8]] stringByAppendingPathExtension:ONE_PHOTO_EXTENSION]];
     
     NSURL *ubiq = [[NSFileManager defaultManager] URLForUbiquityContainerIdentifier:nil];
     NSURL *ubiquitousURL = [[ubiq URLByAppendingPathComponent:@"Documents"] URLByAppendingPathComponent:photoPath];
@@ -370,6 +370,7 @@
     
     OPPhotoCloud *photoCloud = [[OPPhotoCloud alloc] initWithFileURL:ubiquitousURL];
     photoCloud.imageData = UIImageJPEGRepresentation(image, 0.8);
+    photoCloud.metaData = [@"xxxxx" dataUsingEncoding:NSUTF8StringEncoding];
     
     if (saveToLibrary && BOOL_FOR_KEY(DEFAULTS_KEY_SAVE_TO_LIBRARY)) {
         UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil);

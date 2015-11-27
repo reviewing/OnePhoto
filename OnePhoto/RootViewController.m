@@ -374,7 +374,6 @@
     
     OPPhotoCloud *photoCloud = [[OPPhotoCloud alloc] initWithFileURL:ubiquitousURL];
     photoCloud.imageData = UIImageJPEGRepresentation(image, 0.8);
-    photoCloud.metaData = [@"xxxxx" dataUsingEncoding:NSUTF8StringEncoding];
     
     if (saveToLibrary && BOOL_FOR_KEY(DEFAULTS_KEY_SAVE_TO_LIBRARY)) {
         UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil);
@@ -631,7 +630,6 @@
                             [photoBrowser reloadData];
                         } else {
                             MWPhoto *tempMWPhoto = [MWPhoto photoWithImage:image];
-                            tempMWPhoto.caption = @"1 Photo";
                             [photoBrowser replaceObjectAtIndex:index withObject:tempMWPhoto];
                         }
                     } else {
@@ -640,7 +638,6 @@
                 }];
             } else {
                 mwPhoto = [MWPhoto photoWithImage:image];
-                mwPhoto.caption = @"1 Photo";
             }
         }
         

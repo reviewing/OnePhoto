@@ -608,7 +608,7 @@
         
         MWPhoto *mwPhoto = [MWPhoto photoWithURL:photoURL];
         if (![[photoURL lastPathComponent] hasSuffix:@".jpg"]) {
-            UIImage *image = [_imageCache objectForKey:photo.source_image_url];
+            UIImage *image = [_imageCache objectForKey:[photoURL lastPathComponent]];
             if (!image) {
                 OPPhotoCloud *photoCloud = [[OPPhotoCloud alloc] initWithFileURL:photoURL];
                 [photoCloud openWithCompletionHandler:^(BOOL success) {
@@ -618,19 +618,21 @@
                         if ([_imageCache count] > 3) {
                             [_imageCache removeAllObjects];
                         }
-                        [_imageCache setObject:image forKey:photo.source_image_url];
-                        [photoCloud closeWithCompletionHandler:^(BOOL success) {
-                            if (success) {
-                                DHLogDebug(@"iCloud document closed");
+                        if (image) {
+                            [_imageCache setObject:image forKey:[photoURL lastPathComponent]];
+                            [photoCloud closeWithCompletionHandler:^(BOOL success) {
+                                if (success) {
+                                    DHLogDebug(@"iCloud document closed");
+                                } else {
+                                    DHLogDebug(@"failed closing document from iCloud");
+                                }
+                            }];
+                            if (_displayingIndex == index) {
+                                [photoBrowser reloadData];
                             } else {
-                                DHLogDebug(@"failed closing document from iCloud");
+                                MWPhoto *tempMWPhoto = [MWPhoto photoWithImage:image];
+                                [photoBrowser replaceObjectAtIndex:index withObject:tempMWPhoto];
                             }
-                        }];
-                        if (_displayingIndex == index) {
-                            [photoBrowser reloadData];
-                        } else {
-                            MWPhoto *tempMWPhoto = [MWPhoto photoWithImage:image];
-                            [photoBrowser replaceObjectAtIndex:index withObject:tempMWPhoto];
                         }
                     } else {
                         DHLogDebug(@"failed opening document from iCloud");

@@ -95,20 +95,21 @@
                         if ([_imageCache count] > 3) {
                             [_imageCache removeAllObjects];
                         }
-                        [_imageCache setObject:image forKey:[photoURL lastPathComponent]];
-                        [photoCloud closeWithCompletionHandler:^(BOOL success) {
-                            if (success) {
-                                DHLogDebug(@"iCloud document closed");
+                        if (image) {
+                            [_imageCache setObject:image forKey:[photoURL lastPathComponent]];
+                            [photoCloud closeWithCompletionHandler:^(BOOL success) {
+                                if (success) {
+                                    DHLogDebug(@"iCloud document closed");
+                                } else {
+                                    DHLogDebug(@"failed closing document from iCloud");
+                                }
+                            }];
+                            if (_displayingIndex == index) {
+                                [photoBrowser reloadData];
                             } else {
-                                DHLogDebug(@"failed closing document from iCloud");
+                                MWPhoto *tempMWPhoto = [MWPhoto photoWithImage:image];
+                                [photoBrowser replaceObjectAtIndex:index withObject:tempMWPhoto];
                             }
-                        }];
-                        if (_displayingIndex == index) {
-                            [photoBrowser reloadData];
-                        } else {
-                            MWPhoto *tempMWPhoto = [MWPhoto photoWithImage:image];
-                            tempMWPhoto.caption = @"1 Photo";
-                            [photoBrowser replaceObjectAtIndex:index withObject:tempMWPhoto];
                         }
                     } else {
                         DHLogDebug(@"failed opening document from iCloud");

@@ -73,28 +73,32 @@
 
 - (void)processiCloudFiles:(NSNotification *)notification {
     [_query disableUpdates];
-    [_iCloudURLs removeAllObjects];
-    
-    NSArray * queryResults = [_query results];
-    for (NSMetadataItem * result in queryResults) {
-        NSURL * fileURL = [result valueForAttribute:NSMetadataItemURLKey];
-        NSNumber * aBool = nil;
+    @synchronized(_iCloudURLs) {
+        [_iCloudURLs removeAllObjects];
         
-        [fileURL getResourceValue:&aBool forKey:NSURLIsHiddenKey error:nil];
-        if (aBool && ![aBool boolValue]) {
-            [_iCloudURLs addObject:fileURL];
-        } else {
-            [[NSFileManager defaultManager] startDownloadingUbiquitousItemAtURL:fileURL error:nil];
+        NSArray * queryResults = [_query results];
+        for (NSMetadataItem * result in queryResults) {
+            NSURL * fileURL = [result valueForAttribute:NSMetadataItemURLKey];
+            NSNumber * aBool = nil;
+            
+            [fileURL getResourceValue:&aBool forKey:NSURLIsHiddenKey error:nil];
+            if (aBool && ![aBool boolValue]) {
+                [_iCloudURLs addObject:fileURL];
+            } else {
+                [[NSFileManager defaultManager] startDownloadingUbiquitousItemAtURL:fileURL error:nil];
+            }
         }
+        
+        DHLogDebug(@"Found %lu iCloud files.", (unsigned long)_iCloudURLs.count);
     }
-    
-    DHLogDebug(@"Found %lu iCloud files.", (unsigned long)_iCloudURLs.count);
     [_query enableUpdates];
     [[NSNotificationCenter defaultCenter] postNotificationName:OPiCloudPhotosMetadataUpdatedNotification object:nil];
 }
 
 - (NSArray *)urls {
-    return [self cleanURLs:_iCloudURLs cleanDeletingQueue:YES];
+    @synchronized(_iCloudURLs) {
+        return [self cleanURLs:_iCloudURLs cleanDeletingQueue:YES];
+    }
 }
 
 - (BOOL)relativelyPathExists:(NSString *)path {
@@ -104,7 +108,9 @@
 }
 
 - (BOOL)urlExists:(NSURL *)url {
-    return [_iCloudURLs containsObject:url];
+    @synchronized(_iCloudURLs) {
+        return [_iCloudURLs containsObject:url];
+    }
 }
 
 - (NSArray *)urlsAt:(NSString *)date {
@@ -113,8 +119,10 @@
     }
     
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"lastPathComponent BEGINSWITH[c] %@", date];
-    NSArray *urls = [_iCloudURLs filteredArrayUsingPredicate:predicate];
-    return [self cleanURLs:urls cleanDeletingQueue:NO];
+    @synchronized(_iCloudURLs) {
+        NSArray *urls = [_iCloudURLs filteredArrayUsingPredicate:predicate];
+        return [self cleanURLs:urls cleanDeletingQueue:NO];
+    }
 }
 
 - (NSArray *)cleanURLs:(NSArray *)rawURLs cleanDeletingQueue:(BOOL)cleanDQ {

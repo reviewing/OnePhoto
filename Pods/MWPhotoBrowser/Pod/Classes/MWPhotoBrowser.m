@@ -641,6 +641,10 @@ static void * MWVideoPlayerObservation = &MWVideoPlayerObservation;
     return _photoCount;
 }
 
+- (void)replaceObjectAtIndex:(NSUInteger)index withObject:(id<MWPhoto>)photo {
+    if (photo) [_photos replaceObjectAtIndex:index withObject:photo];
+}
+
 - (id<MWPhoto>)photoAtIndex:(NSUInteger)index {
     id <MWPhoto> photo = nil;
     if (index < _photos.count) {

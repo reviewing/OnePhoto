@@ -39,6 +39,9 @@
     NSDate *_selectedDate;
     
     MultiPhotoViewer *_multiPhotoView;
+    
+    NSMutableDictionary *_imageCache;
+    NSInteger _displayingIndex;
 }
 
 @property (weak, nonatomic) IBOutlet OPCalendarWeekDayView *weekDayView;
@@ -110,7 +113,8 @@
                                                  UIViewAutoresizingFlexibleBottomMargin);
     
     self.navigationItem.titleView = _headerTitleSubtitleView;
-    [self setHeaderTitle:MAIN_TITLE andSubtitle:nil];    
+    [self setHeaderTitle:MAIN_TITLE andSubtitle:nil];
+    _displayingIndex = -1;
 }
 
 - (void)setHeaderTitle:(NSString *)headerTitle andSubtitle:(NSString *)headerSubtitle {
@@ -486,10 +490,11 @@
             if (photo) {
                 _photos = [[CoreDataHelper sharedHelper] allPhotosSorted];
                 
+                _imageCache = [NSMutableDictionary dictionary];
                 MWPhotoBrowser *browser = [[MWPhotoBrowser alloc] initWithDelegate:self];
                 browser.displayActionButton = YES;
                 browser.displayNavArrows = YES;
-                browser.alwaysShowControls = NO;
+                browser.alwaysShowControls = YES;
                 browser.zoomPhotosToFill = YES;
                 
                 [browser showNextPhotoAnimated:YES];
@@ -600,8 +605,45 @@
     if (index < _photos.count) {
         OPPhoto *photo = [_photos objectAtIndex:index];
         NSURL *ubiq = [[NSFileManager defaultManager] URLForUbiquityContainerIdentifier:nil];
-        NSURL *ubiquitousURL = [[ubiq URLByAppendingPathComponent:@"Documents"] URLByAppendingPathComponent:photo.source_image_url];
-        MWPhoto *mwPhoto = [MWPhoto photoWithURL:ubiquitousURL];
+        NSURL *photoURL = [[ubiq URLByAppendingPathComponent:@"Documents"] URLByAppendingPathComponent:photo.source_image_url];
+        
+        MWPhoto *mwPhoto = [MWPhoto photoWithURL:photoURL];
+        if (![[photoURL lastPathComponent] hasSuffix:@".jpg"]) {
+            UIImage *image = [_imageCache objectForKey:photo.source_image_url];
+            if (!image) {
+                OPPhotoCloud *photoCloud = [[OPPhotoCloud alloc] initWithFileURL:photoURL];
+                [photoCloud openWithCompletionHandler:^(BOOL success) {
+                    if (success) {
+                        DHLogDebug(@"iCloud document opened");
+                        UIImage *image = [UIImage imageWithData:photoCloud.imageData];
+                        if ([_imageCache count] > 3) {
+                            [_imageCache removeAllObjects];
+                        }
+                        [_imageCache setObject:image forKey:photo.source_image_url];
+                        [photoCloud closeWithCompletionHandler:^(BOOL success) {
+                            if (success) {
+                                DHLogDebug(@"iCloud document closed");
+                            } else {
+                                DHLogDebug(@"failed closing document from iCloud");
+                            }
+                        }];
+                        if (_displayingIndex == index) {
+                            [photoBrowser reloadData];
+                        } else {
+                            MWPhoto *tempMWPhoto = [MWPhoto photoWithImage:image];
+                            tempMWPhoto.caption = @"1 Photo";
+                            [photoBrowser replaceObjectAtIndex:index withObject:tempMWPhoto];
+                        }
+                    } else {
+                        DHLogDebug(@"failed opening document from iCloud");
+                    }
+                }];
+            } else {
+                mwPhoto = [MWPhoto photoWithImage:image];
+                mwPhoto.caption = @"1 Photo";
+            }
+        }
+        
         return mwPhoto;
     }
     return nil;
@@ -618,6 +660,7 @@
 - (void)photoBrowser:(MWPhotoBrowser *)photoBrowser didDisplayPhotoAtIndex:(NSUInteger)index {
     OPPhoto *displayedPhoto = [_photos objectAtIndex:index];
     _selectedDate = [[GlobalUtils dateFormatter] dateFromString:displayedPhoto.dateString];
+    _displayingIndex = index;
 }
 
 - (void)photoBrowser:(MWPhotoBrowser *)photoBrowser trashButtonPressedForPhotoAtIndex:(NSUInteger)index {
@@ -642,6 +685,8 @@
 
 - (void)photoBrowserDidFinishModalPresentation:(MWPhotoBrowser *)photoBrowser {
     [self dismissViewControllerAnimated:YES completion:nil];
+    [_imageCache removeAllObjects];
+    _imageCache = nil;
 }
 
 @end

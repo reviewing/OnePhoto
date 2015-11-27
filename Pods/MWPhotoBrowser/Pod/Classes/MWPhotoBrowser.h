@@ -63,6 +63,8 @@
 - (id)initWithPhotos:(NSArray *)photosArray;
 - (id)initWithDelegate:(id <MWPhotoBrowserDelegate>)delegate;
 
+- (void)replaceObjectAtIndex:(NSUInteger)index withObject:(id<MWPhoto>)photo;
+
 // Reloads the photo browser and refetches data
 - (void)reloadData;
 

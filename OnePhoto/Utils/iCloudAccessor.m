@@ -7,6 +7,7 @@
 //
 
 #import "iCloudAccessor.h"
+#import "OPPhotoCloud.h"
 
 @interface iCloudAccessor () {
     NSMetadataQuery * _query;
@@ -37,7 +38,7 @@
     NSMetadataQuery * query = [[NSMetadataQuery alloc] init];
     if (query) {
         [query setSearchScopes:[NSArray arrayWithObject:NSMetadataQueryUbiquitousDocumentsScope]];
-        [query setPredicate:[NSPredicate predicateWithFormat:@"%K CONTAINS[c] %@ AND %K ENDSWITH %@", NSMetadataItemPathKey, @"/iCloud~top~defaults~OnePhoto/Documents/photos/", NSMetadataItemPathKey, @".jpg"]];
+        [query setPredicate:[NSPredicate predicateWithFormat:@"%K CONTAINS[c] %@ AND (%K ENDSWITH %@ OR (%K ENDSWITH %@ AND !(%K CONTAINS[c] %@)))", NSMetadataItemPathKey, @"/iCloud~top~defaults~OnePhoto/Documents/photos/", NSMetadataItemPathKey, ONE_PHOTO_EXTENSION, NSMetadataItemPathKey, @".jpg", NSMetadataItemPathKey, ONE_PHOTO_EXTENSION]];
     }
     return query;
 }

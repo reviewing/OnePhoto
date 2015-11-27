@@ -8,6 +8,7 @@
 
 #import "MultiPhotoViewer.h"
 #import "OPPhoto.h"
+#import "OPPhotoCloud.h"
 #import "WXApi.h"
 
 @interface MultiPhotoViewer () {
@@ -18,6 +19,9 @@
     NSArray *_photoRelativelyPathsInCoreData;
     NSArray *_photoAbsolutelyUrlsIniCloud;
     NSMutableArray *_mergedPhotos;
+    
+    NSMutableDictionary *_imageCache;
+    NSInteger _displayingIndex;
 }
 
 @end
@@ -37,6 +41,8 @@
         _photoRelativelyPathsInCoreData = [self photoRelativelyPathsInCoreData];
         _photoAbsolutelyUrlsIniCloud = iCloudPhotos;
         _mergedPhotos = [self mergePhotos];
+        _imageCache = [NSMutableDictionary dictionary];
+        _displayingIndex = -1;
     }
     return self;
 }
@@ -78,6 +84,41 @@
             photoURL = (NSURL *)photoObj;
         }
         MWPhoto *mwPhoto = [MWPhoto photoWithURL:photoURL];
+        if (![[photoURL lastPathComponent] hasSuffix:@".jpg"]) {
+            UIImage *image = [_imageCache objectForKey:[photoURL lastPathComponent]];
+            if (!image) {
+                OPPhotoCloud *photoCloud = [[OPPhotoCloud alloc] initWithFileURL:photoURL];
+                [photoCloud openWithCompletionHandler:^(BOOL success) {
+                    if (success) {
+                        DHLogDebug(@"iCloud document opened");
+                        UIImage *image = [UIImage imageWithData:photoCloud.imageData];
+                        if ([_imageCache count] > 3) {
+                            [_imageCache removeAllObjects];
+                        }
+                        [_imageCache setObject:image forKey:[photoURL lastPathComponent]];
+                        [photoCloud closeWithCompletionHandler:^(BOOL success) {
+                            if (success) {
+                                DHLogDebug(@"iCloud document closed");
+                            } else {
+                                DHLogDebug(@"failed closing document from iCloud");
+                            }
+                        }];
+                        if (_displayingIndex == index) {
+                            [photoBrowser reloadData];
+                        } else {
+                            MWPhoto *tempMWPhoto = [MWPhoto photoWithImage:image];
+                            tempMWPhoto.caption = @"1 Photo";
+                            [photoBrowser replaceObjectAtIndex:index withObject:tempMWPhoto];
+                        }
+                    } else {
+                        DHLogDebug(@"failed opening document from iCloud");
+                    }
+                }];
+            } else {
+                mwPhoto = [MWPhoto photoWithImage:image];
+                mwPhoto.caption = @"1 Photo";
+            }
+        }
         return mwPhoto;
     }
     return nil;
@@ -88,7 +129,7 @@
 }
 
 - (void)photoBrowser:(MWPhotoBrowser *)photoBrowser didDisplayPhotoAtIndex:(NSUInteger)index {
-
+    _displayingIndex = index;
 }
 
 typedef void (^completionBlock)(void);
@@ -126,6 +167,8 @@ typedef void (^completionBlock)(void);
 
 - (void)photoBrowserDidFinishModalPresentation:(MWPhotoBrowser *)photoBrowser {
     [_hostViewController dismissViewControllerAnimated:YES completion:nil];
+    [_imageCache removeAllObjects];
+    _imageCache = nil;
 }
 
 @end

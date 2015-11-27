@@ -32,6 +32,9 @@ CGSize const OPPhotoPixelImageSize = {1, 1};
 - (UIImage *)sourceImage {
     NSURL *ubiq = [[NSFileManager defaultManager] URLForUbiquityContainerIdentifier:nil];
     NSURL *ubiquitousURL = [[ubiq URLByAppendingPathComponent:@"Documents"] URLByAppendingPathComponent:self.source_image_url];
+    if ([[ubiquitousURL path] hasSuffix:@".jpg"]) {
+        return [UIImage imageWithContentsOfFile:[ubiquitousURL path]];
+    }
     OPPhotoCloud *photoCloud = [[OPPhotoCloud alloc] initWithFileURL:ubiquitousURL];
     dispatch_semaphore_t waitForICloud = dispatch_semaphore_create(0);
     [photoCloud openWithCompletionHandler:^(BOOL success) {

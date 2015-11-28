@@ -68,13 +68,13 @@
 }
 
 - (id)contentsForType:(NSString *)typeName error:(NSError **)outError {
-    if (self.imageData == nil || self.metaData == nil) {
-        return nil;
-    }
-    
     NSMutableDictionary * wrappers = [NSMutableDictionary dictionary];
-    [self encodeObject:self.imageData toWrappers:wrappers filename:PHOTO_FILENAME];
-    [self encodeObject:self.metaData toWrappers:wrappers filename:METADATA_FILENAME];
+    if (self.imageData) {
+        [self encodeObject:self.imageData toWrappers:wrappers filename:PHOTO_FILENAME];        
+    }
+    if (self.metaData) {
+        [self encodeObject:self.metaData toWrappers:wrappers filename:METADATA_FILENAME];
+    }
     NSFileWrapper *fileWrapper = [[NSFileWrapper alloc] initDirectoryWithFileWrappers:wrappers];
     return fileWrapper;
 }

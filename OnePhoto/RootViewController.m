@@ -603,8 +603,7 @@
 - (id <MWPhoto>)photoBrowser:(MWPhotoBrowser *)photoBrowser photoAtIndex:(NSUInteger)index {
     if (index < _photos.count) {
         OPPhoto *photo = [_photos objectAtIndex:index];
-        NSURL *ubiq = [[NSFileManager defaultManager] URLForUbiquityContainerIdentifier:nil];
-        NSURL *photoURL = [[ubiq URLByAppendingPathComponent:@"Documents"] URLByAppendingPathComponent:photo.source_image_url];
+        NSURL *photoURL = [GlobalUtils ubiqURLforPath:photo.source_image_url];
         
         MWPhoto *mwPhoto = [MWPhoto photoWithURL:photoURL];
         if (![[photoURL lastPathComponent] hasSuffix:@".jpg"]) {
@@ -679,7 +678,13 @@
     if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"8")) {
         anchor = [photoBrowser valueForKey:@"_actionButton"];
     }
-    [GlobalUtils sharePhotoAction:photoBrowser anchor:anchor photo:photo];
+
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        NSData *photoData = UIImageJPEGRepresentation([photo sourceImage], 0.8);
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [GlobalUtils sharePhotoAction:photoBrowser anchor:anchor photo:photoData];
+        });
+    });
 }
 
 - (void)photoBrowserDidFinishModalPresentation:(MWPhotoBrowser *)photoBrowser {

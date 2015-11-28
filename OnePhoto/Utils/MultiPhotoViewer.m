@@ -9,6 +9,7 @@
 #import "MultiPhotoViewer.h"
 #import "OPPhoto.h"
 #import "OPPhotoCloud.h"
+#import "iCloudAccessor.h"
 #import "WXApi.h"
 
 @interface MultiPhotoViewer () {
@@ -159,11 +160,19 @@ typedef void (^completionBlock)(void);
     if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"8")) {
         anchor = [photoBrowser valueForKey:@"_actionButton"];
     }
-    if ([[_mergedPhotos objectAtIndex:index] isKindOfClass:[OPPhoto class]]) {
-        [GlobalUtils sharePhotoAction:photoBrowser anchor:anchor photo:[_mergedPhotos objectAtIndex:index]];
-    } else if ([[_mergedPhotos objectAtIndex:index] isKindOfClass:[NSURL class]]) {
-        [GlobalUtils sharePhotoAction:photoBrowser anchor:anchor photoUrl:[_mergedPhotos objectAtIndex:index]];
-    }
+    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        NSData *photoData;
+        if ([[_mergedPhotos objectAtIndex:index] isKindOfClass:[OPPhoto class]]) {
+            photoData = UIImageJPEGRepresentation([((OPPhoto *)[_mergedPhotos objectAtIndex:index]) sourceImage], 0.8);
+        } else if ([[_mergedPhotos objectAtIndex:index] isKindOfClass:[NSURL class]]) {
+            photoData = [[iCloudAccessor shareAccessor] photoDataOfRelativelyPath:[_mergedPhotos objectAtIndex:index]];
+        }
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [GlobalUtils sharePhotoAction:photoBrowser anchor:anchor photo:photoData];
+        });
+    });
 }
 
 - (void)photoBrowserDidFinishModalPresentation:(MWPhotoBrowser *)photoBrowser {

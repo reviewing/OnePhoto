@@ -28,4 +28,6 @@
 
 - (void)deleteFileWithAbsolutelyURL:(NSURL *)url;
 
+- (NSData *)photoDataOfRelativelyPath:(NSString *)path;
+
 @end

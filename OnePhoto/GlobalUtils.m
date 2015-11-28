@@ -346,21 +346,15 @@ static NSCalendar *_calendar = nil;
     [self presentActionSheetFrom:viewController title:@"删除照片" message:@"警告：删除后不可恢复" actions:[NSArray arrayWithObjects:deleteAction, cancelAction, nil] anchor:anchor];
 }
 
-+ (void)sharePhotoAction:(UIViewController *)viewController anchor:(NSObject *)anchor photo:(OPPhoto *)photo {
-    NSURL *ubiq = [[NSFileManager defaultManager] URLForUbiquityContainerIdentifier:nil];
-    NSURL *ubiquitousURL = [[ubiq URLByAppendingPathComponent:@"Documents"] URLByAppendingPathComponent:photo.source_image_url];
-    [self sharePhotoAction:viewController anchor:anchor photoUrl:ubiquitousURL];
-}
-
-+ (void)sharePhotoAction:(UIViewController *)viewController anchor:(NSObject *)anchor photoUrl:(NSURL *)url {
++ (void)sharePhotoAction:(UIViewController *)viewController anchor:(NSObject *)anchor photo:(NSData *)data {
     UIAlertAction* weixinAction = [UIAlertAction actionWithTitle:@"分享给微信朋友" style:UIAlertActionStyleDefault
                                                          handler:^(UIAlertAction * action) {
                                                              if ([WXApi isWXAppInstalled]) {
-                                                                 [self sendImageData:[NSData dataWithContentsOfURL:url]
+                                                                 [self sendImageData:data
                                                                              TagName:@"WECHAT_TAG_JUMP_APP"
                                                                           MessageExt:@"1 Photo"
                                                                               Action:@"<action>open</action>"
-                                                                          ThumbImage:[GlobalUtils squareAndSmall:[UIImage imageWithContentsOfFile:url.path]]
+                                                                          ThumbImage:[GlobalUtils squareAndSmall:[UIImage imageWithData:data]]
                                                                              InScene:WXSceneSession];
                                                              } else {
                                                                  UIAlertAction* cancelAction = [UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleCancel
@@ -371,11 +365,11 @@ static NSCalendar *_calendar = nil;
     UIAlertAction* weixinFCAction = [UIAlertAction actionWithTitle:@"分享到微信朋友圈" style:UIAlertActionStyleDefault
                                                            handler:^(UIAlertAction * action) {
                                                                if ([WXApi isWXAppInstalled]) {
-                                                                   [self sendImageData:[NSData dataWithContentsOfURL:url]
+                                                                   [self sendImageData:data
                                                                                TagName:@"WECHAT_TAG_JUMP_APP"
                                                                             MessageExt:@"1 Photo"
                                                                                 Action:@"<action>open</action>"
-                                                                            ThumbImage:[GlobalUtils squareAndSmall:[UIImage imageWithContentsOfFile:url.path]]
+                                                                            ThumbImage:[GlobalUtils squareAndSmall:[UIImage imageWithData:data]]
                                                                                InScene:WXSceneTimeline];
                                                                } else {
                                                                    UIAlertAction* cancelAction = [UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleCancel
@@ -388,7 +382,7 @@ static NSCalendar *_calendar = nil;
                                                              if ([viewController respondsToSelector:@selector(showProgressHUDWithMessage:)]) {
                                                                  [viewController performSelector:@selector(showProgressHUDWithMessage:) withObject:nil];
                                                              }
-                                                             NSMutableArray *items = [NSMutableArray arrayWithObject:[UIImage imageWithContentsOfFile:url.path]];
+                                                             NSMutableArray *items = [NSMutableArray arrayWithObject:[UIImage imageWithData:data]];
                                                              __block UIActivityViewController *activityViewController = [[UIActivityViewController alloc] initWithActivityItems:items applicationActivities:nil];
                                                              
                                                              activityViewController.completionWithItemsHandler = ^(NSString *activityType, BOOL completed, NSArray *returnedItems, NSError *activityError) {
@@ -489,6 +483,12 @@ static NSCalendar *_calendar = nil;
     NSString *last = [url lastPathComponent];
     NSString *secondLast = [[url URLByDeletingLastPathComponent] lastPathComponent];
     return [secondLast stringByAppendingPathComponent:last];
+}
+
++ (NSURL *)ubiqURLforPath:(NSString *)path {
+    NSURL *ubiq = [[NSFileManager defaultManager] URLForUbiquityContainerIdentifier:nil];
+    NSURL *ubiqURL = [[ubiq URLByAppendingPathComponent:@"Documents"] URLByAppendingPathComponent:path];
+    return ubiqURL;
 }
 
 @end

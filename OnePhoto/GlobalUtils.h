@@ -95,9 +95,7 @@ FOUNDATION_EXPORT NSString * const OPUbiquitousKeyValueStoreHasPhotoKey;
 
 + (void)deletePhotoActionFrom:(UIViewController *)viewController anchor:(NSObject *)anchor photoUrl:(NSURL *)url completion:(void (^)(void))completion;
 
-+ (void)sharePhotoAction:(UIViewController *)viewController anchor:(NSObject *)anchor photo:(OPPhoto *)photo;
-
-+ (void)sharePhotoAction:(UIViewController *)viewController anchor:(NSObject *)anchor photoUrl:(NSURL *)url;
++ (void)sharePhotoAction:(UIViewController *)viewController anchor:(NSObject *)anchor photo:(NSData *)data;
 
 + (void)presentAlertFrom:(UIViewController *)viewController title:(NSString *)title message:(NSString *)message actions:(NSArray *)actions;
 
@@ -108,5 +106,7 @@ FOUNDATION_EXPORT NSString * const OPUbiquitousKeyValueStoreHasPhotoKey;
 #pragma mark - Others
 
 + (NSString *)last2PathComponentsOf:(NSURL *)url;
+
++ (NSURL *)ubiqURLforPath:(NSString *)path;
 
 @end

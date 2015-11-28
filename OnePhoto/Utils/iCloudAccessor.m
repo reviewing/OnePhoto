@@ -172,4 +172,33 @@
     });
 }
 
+- (NSData *)photoDataOfRelativelyPath:(NSString *)path {
+    NSURL *photoURL = [GlobalUtils ubiqURLforPath:path];
+    if ([[photoURL path] hasSuffix:@".jpg"]) {
+        return [NSData dataWithContentsOfURL:photoURL];
+    }
+
+    OPPhotoCloud *photoCloud = [[OPPhotoCloud alloc] initWithFileURL:photoURL];
+    dispatch_semaphore_t waitForICloud = dispatch_semaphore_create(0);
+    [photoCloud openWithCompletionHandler:^(BOOL success) {
+        if (success) {
+            DHLogDebug(@"iCloud document opened");
+        } else {
+            DHLogDebug(@"failed opening document from iCloud");
+        }
+        dispatch_semaphore_signal(waitForICloud);
+    }];
+    
+    dispatch_semaphore_wait(waitForICloud, DISPATCH_TIME_FOREVER);
+    NSData *photoData = [photoCloud.imageData copy];
+    [photoCloud closeWithCompletionHandler:^(BOOL success) {
+        if (success) {
+            DHLogDebug(@"iCloud document closed");
+        } else {
+            DHLogDebug(@"failed closing document from iCloud");
+        }
+    }];
+    return photoData;
+}
+
 @end

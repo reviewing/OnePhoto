@@ -27,6 +27,7 @@
 #import <MobileCoreServices/MobileCoreServices.h>
 
 #import "WXApi.h"
+#import "AddNoteViewController.h"
 
 #define MAIN_TITLE @"1 Photo"
 
@@ -41,6 +42,7 @@
     MultiPhotoViewer *_multiPhotoView;
     
     NSMutableDictionary *_imageCache;
+    NSMutableDictionary *_noteCache;
     NSInteger _displayingIndex;
 }
 
@@ -210,6 +212,18 @@
     [self buildFastImageCache];
 }
 
+- (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender {
+    return YES;
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:@"AddNoteSegue"]) {
+        UINavigationController *nc = segue.destinationViewController;
+        AddNoteViewController *anvc = [nc.viewControllers objectAtIndex:0];
+        anvc.photoRelativelyPath = sender;
+    }
+}
+
 #pragma mark - Actions
 - (IBAction)setting:(id)sender {
 }
@@ -365,8 +379,7 @@
     NSString *dateString = [GlobalUtils stringFromDate:_specifiedDate ? _specifiedDate : [NSDate date]];
     NSString *photoPath = [@"photos" stringByAppendingPathComponent:[[dateString stringByAppendingString:[[[NSUUID UUID] UUIDString] substringToIndex:8]] stringByAppendingPathExtension:ONE_PHOTO_EXTENSION]];
     
-    NSURL *ubiq = [[NSFileManager defaultManager] URLForUbiquityContainerIdentifier:nil];
-    NSURL *ubiquitousURL = [[ubiq URLByAppendingPathComponent:@"Documents"] URLByAppendingPathComponent:photoPath];
+    NSURL *ubiquitousURL = [GlobalUtils ubiqURLforPath:photoPath];
     
     if (ubiquitousURL == nil) {
         return NO;
@@ -392,6 +405,7 @@
             }
             [GlobalUtils renewPhotoCounts];
             DHLogDebug(@"document saved successfully");
+            [self performSegueWithIdentifier:@"AddNoteSegue" sender:photoPath];
         } else {
             [GlobalUtils alertMessage:@"保存图片失败，请检查iCloud账户设置后重试"];
         }
@@ -490,6 +504,7 @@
                 _photos = [[CoreDataHelper sharedHelper] allPhotosSorted];
                 
                 _imageCache = [NSMutableDictionary dictionary];
+                _noteCache = [NSMutableDictionary dictionary];
                 MWPhotoBrowser *browser = [[MWPhotoBrowser alloc] initWithDelegate:self];
                 browser.displayActionButton = YES;
                 browser.displayNavArrows = YES;
@@ -616,9 +631,19 @@
                         UIImage *image = [UIImage imageWithData:photoCloud.imageData];
                         if ([_imageCache count] > 3) {
                             [_imageCache removeAllObjects];
+                            [_noteCache removeAllObjects];
                         }
                         if (image) {
                             [_imageCache setObject:image forKey:[photoURL lastPathComponent]];
+                            
+                            NSString *note;
+                            if (photoCloud.metaData) {
+                                NSDictionary *metaData = (NSDictionary*) [NSKeyedUnarchiver unarchiveObjectWithData:photoCloud.metaData];
+                                note = [metaData objectForKey:ONE_PHOTO_KEY_NOTE];
+                                if (note) {
+                                    [_noteCache setObject:note forKey:[photoURL lastPathComponent]];
+                                }
+                            }
                             [photoCloud closeWithCompletionHandler:^(BOOL success) {
                                 if (success) {
                                     DHLogDebug(@"iCloud document closed");
@@ -630,6 +655,7 @@
                                 [photoBrowser reloadData];
                             } else {
                                 MWPhoto *tempMWPhoto = [MWPhoto photoWithImage:image];
+                                tempMWPhoto.caption = note;
                                 [photoBrowser replaceObjectAtIndex:index withObject:tempMWPhoto];
                             }
                         }
@@ -639,6 +665,7 @@
                 }];
             } else {
                 mwPhoto = [MWPhoto photoWithImage:image];
+                mwPhoto.caption = [_noteCache objectForKey:[photoURL lastPathComponent]];
             }
         }
         

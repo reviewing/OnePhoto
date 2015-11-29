@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 #define ONE_PHOTO_EXTENSION @"1photopkg"
+#define ONE_PHOTO_KEY_NOTE @"1photo.note"
 
 @interface OPPhotoCloud : UIDocument
 

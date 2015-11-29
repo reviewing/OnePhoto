@@ -173,6 +173,9 @@
 }
 
 - (NSData *)photoDataOfRelativelyPath:(NSString *)path {
+    if (!path) {
+        return nil;
+    }
     NSURL *photoURL = [GlobalUtils ubiqURLforPath:path];
     if ([[photoURL path] hasSuffix:@".jpg"]) {
         return [NSData dataWithContentsOfURL:photoURL];

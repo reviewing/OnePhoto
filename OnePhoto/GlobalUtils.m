@@ -486,6 +486,9 @@ static NSCalendar *_calendar = nil;
 }
 
 + (NSURL *)ubiqURLforPath:(NSString *)path {
+    if (!path) {
+        return nil;
+    }
     NSURL *ubiq = [[NSFileManager defaultManager] URLForUbiquityContainerIdentifier:nil];
     NSURL *ubiqURL = [[ubiq URLByAppendingPathComponent:@"Documents"] URLByAppendingPathComponent:path];
     return ubiqURL;

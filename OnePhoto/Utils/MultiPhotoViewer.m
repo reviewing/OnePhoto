@@ -22,6 +22,7 @@
     NSMutableArray *_mergedPhotos;
     
     NSMutableDictionary *_imageCache;
+    NSMutableDictionary *_noteCache;
     NSInteger _displayingIndex;
 }
 
@@ -43,6 +44,7 @@
         _photoAbsolutelyUrlsIniCloud = iCloudPhotos;
         _mergedPhotos = [self mergePhotos];
         _imageCache = [NSMutableDictionary dictionary];
+        _noteCache = [NSMutableDictionary dictionary];
         _displayingIndex = -1;
     }
     return self;
@@ -95,9 +97,19 @@
                         UIImage *image = [UIImage imageWithData:photoCloud.imageData];
                         if ([_imageCache count] > 3) {
                             [_imageCache removeAllObjects];
+                            [_noteCache removeAllObjects];
                         }
                         if (image) {
                             [_imageCache setObject:image forKey:[photoURL lastPathComponent]];
+                            
+                            NSString *note;
+                            if (photoCloud.metaData) {
+                                NSDictionary *metaData = (NSDictionary*) [NSKeyedUnarchiver unarchiveObjectWithData:photoCloud.metaData];
+                                note = [metaData objectForKey:ONE_PHOTO_KEY_NOTE];
+                                if (note) {
+                                    [_noteCache setObject:note forKey:[photoURL lastPathComponent]];
+                                }
+                            }
                             [photoCloud closeWithCompletionHandler:^(BOOL success) {
                                 if (success) {
                                     DHLogDebug(@"iCloud document closed");
@@ -109,6 +121,7 @@
                                 [photoBrowser reloadData];
                             } else {
                                 MWPhoto *tempMWPhoto = [MWPhoto photoWithImage:image];
+                                tempMWPhoto.caption = note;
                                 [photoBrowser replaceObjectAtIndex:index withObject:tempMWPhoto];
                             }
                         }
@@ -118,9 +131,10 @@
                 }];
             } else {
                 mwPhoto = [MWPhoto photoWithImage:image];
-                mwPhoto.caption = @"1 Photo";
+                mwPhoto.caption = [_noteCache objectForKey:[photoURL lastPathComponent]];
             }
         }
+        
         return mwPhoto;
     }
     return nil;

@@ -33,7 +33,6 @@
 - (id)decodeObjectFromWrapperWithFilename:(NSString *)filename {
     NSFileWrapper * fileWrapper = [self.fileWrapper.fileWrappers objectForKey:filename];
     if (!fileWrapper) {
-        DHLogError(@"Unexpected error: Couldn't find %@ in file wrapper!", filename);
         return nil;
     }
     

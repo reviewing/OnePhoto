@@ -8,11 +8,14 @@
 
 #import "AddNoteViewController.h"
 #import "iCloudAccessor.h"
+#import <UITextView+Placeholder.h>
 
 @interface AddNoteViewController ()
+@property (weak, nonatomic) IBOutlet UIView *contentView;
 @property (weak, nonatomic) IBOutlet UITextView *noteTextView;
 @property (weak, nonatomic) IBOutlet UIImageView *photoImageView;
 
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *contentViewHeightConstraint;
 @end
 
 @implementation AddNoteViewController
@@ -25,6 +28,19 @@
             [self.photoImageView setImage:image];
         });
     });
+    self.noteTextView.placeholder = @"写点什么...";
+    [self.noteTextView becomeFirstResponder];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    self.contentViewHeightConstraint.constant = self.noteTextView.frame.size.height + self.photoImageView.frame.size.height + 8;
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [self.noteTextView resignFirstResponder];
 }
 
 - (void)didReceiveMemoryWarning {

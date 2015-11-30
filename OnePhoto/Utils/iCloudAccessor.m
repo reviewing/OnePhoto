@@ -121,7 +121,7 @@
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"lastPathComponent BEGINSWITH[c] %@", date];
     @synchronized(_iCloudURLs) {
         NSArray *urls = [_iCloudURLs filteredArrayUsingPredicate:predicate];
-        return [self cleanURLs:urls cleanDeletingQueue:NO];
+        return [[NSSet setWithArray:[self cleanURLs:urls cleanDeletingQueue:NO]] allObjects];
     }
 }
 

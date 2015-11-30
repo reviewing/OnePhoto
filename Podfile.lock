@@ -17,6 +17,7 @@ PODS:
     - SDWebImage/Core (= 3.7.3)
   - SDWebImage/Core (3.7.3)
   - SSKeychain (1.2.3)
+  - UITextView+Placeholder (1.1.0)
   - UMengAnalytics-NO-IDFA (3.6.5)
   - VENTouchLock (1.11.0):
     - SSKeychain (~> 1.0)
@@ -27,6 +28,7 @@ DEPENDENCIES:
   - JTCalendar (~> 2.1.4)
   - MMWormhole (~> 2.0.0)
   - MWPhotoBrowser
+  - UITextView+Placeholder
   - UMengAnalytics-NO-IDFA
   - VENTouchLock (~> 1.0)
 
@@ -41,6 +43,7 @@ SPEC CHECKSUMS:
   MWPhotoBrowser: ba0d0c09ffda3a7ea10093518738c502c1c7141c
   SDWebImage: 1d2b1a1efda1ade1b00b6f8498865f8ddedc8a84
   SSKeychain: 3f42991739c6c60a9cf1bbd4dff6c0d3694bcf3d
+  UITextView+Placeholder: 672ce543356b5b5787f354415bc3b132d47f0362
   UMengAnalytics-NO-IDFA: 279e28990a08efb56cff1821d2954bb00aa6975a
   VENTouchLock: f3145d6fbff243d6692dfb1107b88db06dc216c9
 

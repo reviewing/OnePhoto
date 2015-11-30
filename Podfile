@@ -8,6 +8,7 @@ target 'OnePhoto' do
     pod 'MMWormhole', '~> 2.0.0'
     pod 'VENTouchLock', '~> 1.0'
     pod 'DBCamera', '~> 2.4'
+	pod 'UITextView+Placeholder'
     
 end
 

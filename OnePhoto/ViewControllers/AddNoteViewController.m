@@ -10,7 +10,8 @@
 #import "iCloudAccessor.h"
 #import <UITextView+Placeholder.h>
 
-@interface AddNoteViewController ()
+@interface AddNoteViewController () <UIScrollViewDelegate>
+@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UIView *contentView;
 @property (weak, nonatomic) IBOutlet UITextView *noteTextView;
 @property (weak, nonatomic) IBOutlet UIImageView *photoImageView;
@@ -28,6 +29,8 @@
             [self.photoImageView setImage:image];
         });
     });
+    
+    self.scrollView.delegate = self;
     self.noteTextView.placeholder = @"写点什么...";
     [self.noteTextView becomeFirstResponder];
 }
@@ -136,6 +139,12 @@
             }
         }];
     }
+}
+
+#pragma mark - UIScrollView Delegate
+
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
+    [self.noteTextView resignFirstResponder];
 }
 
 @end

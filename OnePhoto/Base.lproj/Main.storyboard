@@ -344,6 +344,7 @@
                         <outlet property="contentViewHeightConstraint" destination="Vae-Jc-Xax" id="sVX-D5-ywk"/>
                         <outlet property="noteTextView" destination="bUG-Jq-dYA" id="Oq7-Tm-YaT"/>
                         <outlet property="photoImageView" destination="Yn0-YO-tG9" id="vwl-I4-C7j"/>
+                        <outlet property="scrollView" destination="r6l-h0-hnY" id="mh2-IG-8yj"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vrm-8K-ELz" userLabel="First Responder" sceneMemberID="firstResponder"/>
